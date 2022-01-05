@@ -1,0 +1,272 @@
+<form [formGroup]="myForm" novalidate>
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="sales-content-wrapper" style="margin-left: 0px">
+        <!-- Content -->
+        <section class="animated fadeIn">
+            <div class="row pos-main">
+                <div class="col-xl-12 mt5">
+                    <div class="payment-screen">
+                        <div class="row">
+                            <!-- <div class="topbar-right mt5">
+                                <a href="javascript:void(0)" 
+                                    (click) = "goto1_pos()"
+                                    class="btn btn-back btn-sm ml10" title="New">
+                                    <span class="fa fa-arrow-left pr5"></span>Back
+                                </a>
+                            </div> -->
+                            <!-- <div class="col-md-2">
+                                <div class="pmnt-title">
+                                    <h4><i class="fa fa-money"></i> Payments</h4>
+                                </div>
+                            </div> -->
+                            <div class="col-sm-6 col-12 col-md-4 col-lg-3 col-xl-3">
+                                <div class="pay-due-first">
+                                    <p><i class="fa fa-money"></i> Total Due :
+                                        <span>{{ currency_code + ' ' + total_due.toFixed(decimal_places) }}</span></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-12 col-md-4 col-lg-3 col-xl-3">
+                                <div class="pay-due-second">
+                                    <p><i class="fa fa-money"></i> Balance :
+                                        <span>{{ currency_code + ' ' + balance.toFixed(decimal_places) }}</span></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-12 col-md-4 col-lg-3 col-xl-3">
+                                <div class="pay-due-third">
+                                    <p><i class="fa fa-money"></i> Change :
+                                        <span>{{ currency_code + ' ' + change.toFixed(decimal_places) }}</span></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-12 col-md-12 col-lg-3 col-xl-3">
+                                <div class="payment-invoice">
+                                    <p><i class="fa fa-check-circle"></i> Invoice#: <span>
+                                            {{ payment_invoice != null && payment_invoice.invoiceNo != null ? payment_invoice.invoiceNo : '' }}
+                                        </span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pmnt-types mt10">
+                        <div class="row">
+                            <div class="col-sm-12 col-12 col-md-12 col-xl-8 col-lg-7">
+                                <div class="choose-pay text-center payment-tabs payment-screen-first">
+                                <div class="user-tabs main-pay main-pay-scroll">
+                                    <mat-tab-group [(selectedIndex)]="active">
+                                        <!-- <mat-tab label="CASH"> 
+                                            <div class="chpay row">
+                                                <div class="item col-md-4">
+                                                    <input type="radio" name="payment" id="cash" [checked]="cashChecked">
+                                                    <label (click)="payment_mode_changed('cash', null)" for="cash">
+                                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                                        <img src="assets/img/cash-one.png" class="cash-image img-responsive">
+                                                        <span class="cash-text">Cash</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </mat-tab> -->
+                                        <mat-tab  *ngFor="let mode of payment_mode; let i = index" >   
+                                           <ng-template mat-tab-label>
+                                              <a href="{{ '#pa_' + (i + 2).toString() }}" data-toggle="tab"><i
+                                                  class="fa fa-credit-card"></i>
+                                              {{ mode }} </a>
+                                            </ng-template>
+                                            <ng-template matTabContent class="main-pay-scroll"> 
+                                                <div class="row">
+                                                <nav class="chpay col-xl-3 col-lg-3 col-md-6 col-sm-4 col-6 " mat-tab-nav-bar *ngFor="let typ of get_payment_types_of_payment_mode(mode); let j = index">
+                                                    <input type="radio" name="payment" id="{{ 'pt' + ( j + 1 ).toString() }}" (click)="payment_mode_changed('other', typ)" >
+                                                                <label  for="{{ 'pt' + ( j + 1 ).toString() }}">
+                                                                    <img src="{{ typ.paymentImage }}">
+                                                                   <span>{{ typ.paymentName }} </span>
+                                                    </label>
+                                                </nav>  
+                                                </div>  
+                                              </ng-template>                            
+                                          </mat-tab>
+                                        <mat-tab *ngIf="ishide" label="Exchange Rates">
+                                        <div class="table-responsive " style="padding: 15px;">
+                                          <table class="table tabs-table">
+                                            <thead>
+                                             <tr class="bg-light">
+                                              <th>Exchange Date</th>
+                                              <th>Base Currency</th>
+                                              <th>Target Currency</th>
+                                              <th>Exchange Amount</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="main-pay main-pay-scroll">
+                                                <tr *ngFor="let item of exchange_List">
+                                                    <td>{{item.exchangeRateDate | date: 'dd-MMM-yy'}}</td>
+                                                    <td>{{item.baseCurrency}}</td>
+                                                    <td>{{item.targetCurrency}}</td>
+                                                    <td>{{item.exchangeAmount}}</td>
+                                                </tr>
+                                            </tbody>
+                                          </table>
+                                            </div>
+                                          </mat-tab>
+                                      </mat-tab-group>
+                                </div>
+                                
+                             
+
+                               </div>
+
+                               <div class="row payment-first-btn ">
+                                <div class="offset-xl-4 offset-md-2 col-sm-6 col-6 col-md-4 col-lg-4 col-xl-2">
+                                    <a href="javascript:void(0)" 
+                                    (click) = "goto1_pos()"
+                                    class="btn btn-payment-back btn-sm ml10" title="">
+                                    <span class="fa fa-arrow-left pr5"></span> Back
+                                    </a>
+                                </div>
+                                <div class="col-sm-6 col-6 col-md-4  col-lg-4 col-xl-2">
+                                    <button type="button" 
+                                    (click) = "goto_pos()"
+                                    class="btn logoff pos-button  btn-sales-height">
+                                    <i class="fa fa-remove"></i>
+                                    Cancel</button>
+                                </div>
+                              </div>
+
+                            </div>
+                            <div class="col-sm-12 col-12 col-md-12 col-xl-4 col-lg-5 allcp-form theme-info">
+                                <!-- cash -->
+                                <div class="main-payscreen">
+                                    <div class="row allcp-form theme-info">
+                                        <div class="col-md-12">
+                                            <div class="text-center easy-get">
+                                                <p>Amount Tendered</p>
+                                                <!-- <label class="field prepend-icon"> -->
+                                                    <div class="offset-md-2 col-md-8 select-pay-forms default-forms" [hidden]="cash_mode == false">
+                                                        <label>Payment Currency</label>
+                                                        <select class="gui-input" formControlName='PaymentCurrency' #PaymentCurrency (change)="exchangeratechange(PaymentCurrency.value)" >
+                                                            <option *ngFor="let item of exchange_List" value="{{item.targetCurrencyID}}">
+                                                                {{item.targetCurrency}}</option>
+                                                        </select>  
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </div>
+                                                
+                                                    <div>
+                                                        <input type="text" id="amount_received" name="amount_received"
+                                                        autocomplete="off" formControlName="amount_received" #amount_received 
+                                                        class="easy-put amount-tender-form gui-input" placeholder="" >
+                                                    </div>
+
+                                                    
+                                                    <div class="offset-md-2 col-md-8 select-pay-forms default-forms" [hidden]="cash_mode == false">
+                                                            <label>Change Currency</label>
+                                                            <select class="gui-input" formControlName='changecurrency' #changecurrency (change)="exchangeratechange(changecurrency.value)" disabled>
+                                                                <option *ngFor="let item of exchange_List" value="{{item.targetCurrencyID}}">
+                                                                    {{item.targetCurrency}}</option>
+                                                            </select>  
+                                                            <i class="fa fa-angle-down"></i>
+                                                    </div>
+                                                     
+                                                    <!-- <span class="field-icon">
+                                                        <i class="fa fa-calculator"></i>
+                                                    </span> -->
+                                                <!-- </label> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- card details -->
+                                    <hr>
+                                    <div [hidden]="cash_mode == true"
+                                        class="row  mt20 payment-steps allcp-form theme-info" style="padding: 0">
+                                        <!-- <div class="col-md-12">
+                                            <label class="field select prepend-icon">
+                                                <input type="text" class="gui-input" autocomplete="off"
+                                                    name="card_number" formControlName="card_number" #card_number 
+                                                    placeholder="Card Number" (keypress)="allowNumbers($event)">
+                                                <span class="field-icon">
+                                                    <i class="fa fa-credit-card"></i>
+                                                </span>
+                                            </label>
+                                        </div> -->
+                                        <div class="col-md-12 floating-form floating-label" style="margin-bottom: 0;">
+                                            
+                                                <input type="text" class="gui-input floating-input" autocomplete="off"
+                                                    name="voucher_number" formControlName="voucher_number" #voucher_number 
+                                                    placeholder="Voucher Number" (keypress)="restrictSpecialChars($event)" pattern='[A-Za-z0-9]{10}' maxlength=10>
+                                                <!-- <span class="field-icon">
+                                                    <i class="fa fa-list"></i>
+                                                </span> -->
+                                                <label class="">Approval Number</label>
+                                        </div>
+                                        <div class="col-md-12 floating-form floating-label" style="margin-bottom: 0;">
+                                            
+                                                <input type="text" class="gui-input floating-input" autocomplete="off"
+                                                    name="card_holder" formControlName="card_holder" #card_holder 
+                                                    placeholder="Card Holder">
+                                                <!-- <span class="field-icon">
+                                                    <i class="fa fa-user"></i>
+                                                </span> -->
+                                                <label class="">Card Holder</label>
+                                            
+                                        </div>
+                                    </div>
+                                    <!-- add -->
+                                    <div class="row mt20">
+                                        <div class="col-md-6 col-xl-6 col-lg-6 col-6 col-xm-6">
+                                            <button type="button" (click)="add_payment()"
+                                                class="btn payment pos-button btn-sales-height">
+                                                <i class="fa fa-check-circle"></i> Pay
+                                            </button>
+                                        </div>
+                                        <div class="col-md-6 col-xl-6 col-lg-6 col-6 col-sm-6 ">
+                                            <button type="button" (click)="clear_payment()"
+                                                class="btn hold pos-button btn-sales-height" style="font-size: 12px;">
+                                                <i class="fa fa-remove"></i> Clear
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="payment-all-details mt10">
+                                    <div class="table-responsive payment-grid">
+                                        <table class="table allcp-form theme-warning">
+                                            <thead>
+                                                <tr class="main-tr">
+                                                <tr *ngFor="let details of payment_details; let k = index">
+                                                    <td class="pg1"><i class="fa fa-check-circle"
+                                                            style="color: green "></i>
+                                                        {{ details.cardType2 }} </td>
+                                                    <td class="pg2">
+                                                      <!--  {{ currency_code1 + ' ' + details.receivedamount.toFixed(decimal_places) }}-->
+                                                        {{ details.payCurrency + ' ' + details.receivedamount.toFixed(decimal_places) }}
+                                                    </td>
+                                                    <td class="pg2">
+                                                        {{ details.approveNo }} 
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:void(0);" (click)="remove_payment(details)">
+                                                            <i class="fa fa-remove">
+                                                            </i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                          
+                                        </table>
+                                    </div>
+                                  
+                                  
+                                </div>
+                                <div  *ngIf="isShown" class="col-md-12 col-xl-12 col-sm-12 col-12 make-pay">
+                                    <button type="button" (click)="Make_payment()" 
+                                        class="btn payment pos-button btn-sales-height">
+                                        <i class="fa fa-check-circle"></i> Make Payment
+                                    </button>                              
+
+                            </div>
+                            </div>
+                            <hr>
+                            <!-- buttons -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </section>
+</form>

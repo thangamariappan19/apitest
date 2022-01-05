@@ -1,0 +1,215 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../style-segmentation">{{ 'STYLE_SEGMENTATION.STYLE_SEGMENTATION_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+    <!-- <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <ul class="nav nav-list nav-list-topbar pull-left">
+                <li>Create Style Segmentation
+                </li>
+            </ul>
+        </div>
+    </header> -->
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'STYLE_SEGMENTATION.CREATE_STYLE_SEGMENTATION' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4 mb20 floating-form floating-label">                                    
+                                                                        
+                                        
+                                        <input type="text" name="styleSegmentCode" autocomplete="off"
+                                        formControlName="styleSegmentCode" #styleSegmentCode
+                                        placeholder="Style Segment Code" maxlength="8"
+                                        [ngClass]="{'red-border': myForm.controls['styleSegmentCode'].invalid}"
+                                        class="gui-input floating-input" 
+                                        (keypress)="allowNumbers($event)" spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'STYLE_SEGMENTATION.STYLE_SEGMENTATION_STATUS_CODE' | translate }}</label>
+                                   
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="styleSegmentName" autocomplete="off"
+                                            formControlName="styleSegmentName" #styleSegmentName class="gui-input floating-input"
+                                            placeholder="Style Segment Name"
+                                            [ngClass]="{'red-border': myForm.controls['styleSegmentName'].invalid}"
+                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'STYLE_SEGMENTATION.STYLE_SEGMENTATION_STATUS_NAME' | translate }}</label>
+                                    
+                                </div>
+                                
+                                <div class="col-md-4 mb20 select-forms">
+                                    <div class="section">
+                                        <label>{{ 'STYLE_SEGMENTATION.USE_SEPERATOR' | translate }}</label>
+                                       
+                                            <select id="useSeperator" name="useSeperator" formControlName="useSeperator"
+                                                #useSeperator class="gui-input">
+                                                <option value="">--Use Seperator--</option>
+                                                <option value="-">-</option>
+                                                <option value=".">.</option>
+                                                <option value="/">/</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label" >
+                                                                        
+                                        <input type="text" name="codeLength" autocomplete="off"
+                                            formControlName="codeLength" #codeLength readonly class="gui-input floating-input"
+                                            placeholder="Code Length" spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'STYLE_SEGMENTATION.CODE_LENGTH' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="remarks" autocomplete="off" formControlName="remarks"
+                                            #remarks class="gui-input floating-input" placeholder="Remarks" spellcheck="false"
+                                            trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-4">
+                                   
+                                   
+                                        <div class="section">
+                                            <div class="bs-component mt10">
+                                                <div class="round fill mb10">
+                                                    <input type="checkbox" checked="" id="active" name="active" #active
+                                                        formControlName="active">
+                                                    <label for="active"></label>
+                                                    <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">{{ 'STYLE_SEGMENTATION.SELECT' | translate }}</th>
+                                            <th class="">{{ 'STYLE_SEGMENTATION.SEGMENT_NAME' | translate }}</th>
+                                            <th class="">{{ 'STYLE_SEGMENTATION.MAX_LENGTH' | translate }}</th>
+                                            <th class="">{{ 'STYLE_SEGMENTATION.DEFAULT_DESCRIPTION' | translate }}</th>
+                                            <!--<th class="">Default Description</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <tr *ngFor = "let item of json; let i = index"> -->
+                                        <tr *ngFor="let item of segmentationTypeList;">
+                                            <td>
+                                                <!-- <input type="checkbox" checked="{{item.isUsed == true}}" (change)="checkValue(item.id)" id="{{item.id}}" name="{{item.id}}">
+                                                <label for="{{item.id}}"></label> -->
+                                                <input type="checkbox" [(ngModel)]="item.isUsed"
+                                                    [ngModelOptions]="{standalone: true}" (change)="checkValue(item)">
+                                            </td>
+                                            <td>{{item.segmentName}}</td>
+                                            <td>
+                                                <!-- <input type="text" [(ngModel)]="item.maxLength"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    (keypress)="allowNumbers($event)" spellcheck="false"
+                                                    style="text-align:center;" (change)="checkValue(item)"
+                                                    class="gui-input"> -->
+                                                    <input type="number" [(ngModel)]="item.maxLength"
+                                                        oninput="this.value = Math.abs(this.value)" 
+                                                        name="maxLength" (keypress)="allowNumbers($event)" 
+                                                        (change)="checkValue(item)" 
+                                                        [ngModelOptions]="{standalone: true}" 
+                                                        style="text-align:center;"
+                                                        class="gui-input" autocomplete="off" style="width: 30%;">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" [(ngModel)]="item.defaultDescription"
+                                                    [ngModelOptions]="{standalone: true}" (change)="description_checked(item)">
+                                            </td>
+                                            <!--<td><input type="checkbox" checked="" id="{{item.id}}" name="{{item.id}}">
+                                                <label for="{{item.id}}"></label></td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="clearfix"></div>
+                <hr> -->
+                <div class="row default-forms">
+                    <div class="offset-md-3">
+                    </div>
+
+                    <div class="col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                            [disabled]="myForm.pristine || myForm.invalid" (click)="addstyleSegmentation()"><i
+                                class="fa fa-check-circle-o"></i> Save
+
+                        </button>
+                    </div>
+                   
+                    <div class="col-md-2 mt10">
+                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"
+                            (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+
+                   
+                    
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

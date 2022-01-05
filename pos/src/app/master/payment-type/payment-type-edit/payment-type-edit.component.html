@@ -1,0 +1,240 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a href="#!home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a href="home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a href="payment-type">{{ 'PAYMENT_TYPE.PAYMENT_TYPE_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+       
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'PAYMENT_TYPE.EDIT_PAYMENT_TYPE' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="paymentTypeCode" autocomplete="off" readonly
+                                                formControlName="paymentTypeCode" #paymentTypeCode
+                                                [ngClass]="{'red-border': myForm.controls['paymentTypeCode'].invalid}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                                class="gui-input floating-input" placeholder="{{ 'PAYMENT_TYPE.PAYMENT_TYPE_CODE' | translate }}">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'PAYMENT_TYPE.PAYMENT_TYPE_CODE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="paymentTypeName" autocomplete="off"
+                                                formControlName="paymentTypeName" #paymentTypeName
+                                                [ngClass]="{'red-border': myForm.controls['paymentTypeName'].invalid}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                                class="gui-input floating-input" placeholder="{{ 'PAYMENT_TYPE.PAYMENT_TYPE_NAME' | translate }}">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'PAYMENT_TYPE.PAYMENT_TYPE_NAME' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'PAYMENT_TYPE.PAYMENT_MODE' | translate }}</label>
+                                       
+                                            <select name="paymentType" formControlName="paymentType" #paymentType
+                                                class="gui-input">
+                                                <option value="">Select Payment Mode</option>
+                                                <option *ngFor="let item of paymentModeList" value="{{item.paymentModeName}}">{{item.paymentModeName}}</option>                                       
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="common" name="common" #common formControlName="common" (change)="getCommon()">
+                                                        <label for="common"></label>
+                                                        <p class="label-text">{{ 'PAYMENT_TYPE.COMMON_FOR_ALL_COUNTRIES' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'PAYMENT_TYPE.COUNTRY' | translate }}</label>
+                                       
+                                            <select name="countryID" formControlName="countryID" #countryID (change)="countrycode_changed()"
+                                                class="gui-input">
+                                                <option value="0">Select Country</option>
+                                                <option *ngFor="let item of country_list" value="{{item.id}}">{{item.countryName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="remarks" autocomplete="off"
+                                                formControlName="remarks" #remarks
+                                                [ngClass]="{'red-border': myForm.controls['remarks'].invalid}"
+                                                class="gui-input floating-input" placeholder="{{ 'COMMON.REMARKS' | translate }}">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="order" autocomplete="off"
+                                                formControlName="order" #order
+                                                [ngClass]="{'red-border': myForm.controls['order'].invalid}"
+                                                (keypress)="restrictIntegers($event)" spellcheck="false" trim="blur"
+                                                class="gui-input floating-input" placeholder="{{ 'PAYMENT_TYPE.SORT_ORDER' | translate }}">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'PAYMENT_TYPE.SORT_ORDER' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'PAYMENT_TYPE.PAYMENT_RECEIVED_TYPE' | translate }}</label>
+                                       
+                                            <select name="paymentReceivedType" formControlName="paymentReceivedType" #paymentReceivedType
+                                                class="gui-input">
+                                                <option value="">Select Payment Received Type</option>
+                                               <!-- <option *ngFor="let item of json" value="{{item.id}}">{{item.countryName}}</option> -->
+                                                <option value="ECR">ECR</option>
+                                                <option value="XML">XML</option>                                             
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>Transaction Type</label>
+                                       
+                                            <select name="TransactionType" formControlName="TransactionType" #TransactionType
+                                                [ngClass]="{'red-border': myForm.controls['TransactionType'].invalid}"
+                                                class="gui-input" >
+                                                <option value="">Select Transaction Type</option>
+                                               <!-- <option *ngFor="let item of json" value="{{item.id}}">{{item.countryName}}</option> -->
+                                                <option value="Sales">Sales</option>
+                                                <option value="SalesReturn">Sales Return</option>  
+                                                <option value="OnAccount">On Account</option>  
+
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                      
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="paymentProcessor" name="paymentProcessor" #paymentProcessor formControlName="paymentProcessor" (change)="getPaymentProcessor()">
+                                                        <label for="paymentProcessor"></label>
+                                                        <p class="label-text">{{ 'PAYMENT_TYPE.ENABLE_MADA_PAYMENT_INTEGRATION' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-xl-3 col-lg-4 col-md-12 mb20 style-picture">
+                                        <div class="avatar-upload">
+                                            <!-- <div class="avatar-edit">
+                                                <input type='file' #fileInput formControlName="fileInput" id="imageUpload" name="imageUpload"
+                                                (change)="picked($event, null)" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload"></label>
+                                            </div> -->
+                                            <div class="avatar-preview">
+                                                <div id="imagePreview">
+                                                <img src="{{current_image}}">
+                                                </div>
+                                            </div>
+                                            <div class="avatar-edit upload-btn-wrapper-cust">
+                                                <label for="imageUpload" class="input-file">UPLOAD 
+                                                    <input type='file' #fileInput formControlName="fileInput" id="imageUpload" name="imageUpload"
+                                                      (change)="picked($event, null)" accept=".png, .jpg, .jpeg" />
+                                                      </label>
+                                            </div>
+                                            <div class="image-clear" (click)= "delImage()"><button class="btn btn danger">CLEAR</button></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row default-forms">
+                                    
+                                   
+                                    <div class="offset-md-4 col-md-2 mt10">
+                                        <button type="submit" (click)="update_paymenttype()" class="btn btn-lg btn-success btn-block common-button"
+                                        [disabled]="myForm.invalid"><i
+                                                class="fa fa-refresh"></i> Update                                                
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" (click)="Close()" class="btn btn-lg btn-cancel btn-block common-button"><i
+                                            class="fa fa-remove"></i> Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

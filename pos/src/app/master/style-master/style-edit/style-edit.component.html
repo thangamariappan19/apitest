@@ -1,0 +1,874 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../style">{{ 'STYLE.STYLE_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'STYLE.EDIT_STYLE' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+
+        <section id="content" class="animated fadeIn title-bottom-section">
+
+            <div class="profile-sec-first allcp-form theme-info">
+    
+                <div class="row"> 
+                    
+                    <div class="col-xl-3 col-lg-4 col-md-12 mb20">
+                        <div class="style-picture">
+                        <div class="avatar-upload">
+                            <div class="avatar-preview style-preview">
+                                <div id="imagePreview">
+                                    <img src="{{ current_store_image}}">
+                                </div>
+                            </div>
+                            <div class="avatar-edit upload-btn-wrapper-cust">
+                                <label for="imageUpload" class="input-file">UPLOAD
+                                <input type='file' id="imageUpload"
+                                    (change)="picked1($event, null)"
+                                    accept=".png, .jpg, .jpeg" />
+                                </label>
+                            </div>
+                            <div _ngcontent-xlu-c291="" class="image-clear"><button _ngcontent-xlu-c291="" class="btn btn danger" >CLEAR</button></div>
+
+                        </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-8 mb20">
+
+                        <div class="row mt30">
+                            <div class="col-xl-6 col-lg-6 col-md-6 mb20 select-forms">
+                                <label>{{ 'STYLE.DESIGN_CODE' | translate }}</label>
+                               
+                                    <select name="designCode" formControlName="designCode"
+                                        #designCode class="gui-input"  disabled
+                                        [ngClass]="{'red-border': myForm.controls['designCode'].invalid}">
+                                        <option value="">Select designCode</option>
+                                        <option *ngFor="let item of designList"
+                                            value="{{item.id}}">
+                                            {{item.designCode}}</option>
+                                    </select>
+                                    <i class="fa fa-angle-down"></i>
+                                
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 mb20 floating-form floating-label">
+                                                               
+                                    <input type="text" name="designName" autocomplete="off"
+                                        readonly formControlName="designName" #designName
+                                        [ngClass]="{'red-border': myForm.controls['designName'].invalid}"
+                                        class="gui-input floating-input" placeholder="Design Name"
+                                        (keypress)="restrictSpecialChars($event)"
+                                        spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                            <label>{{ 'STYLE.DESIGN_NAME' | translate }}</label>
+                                
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 mb20 floating-form floating-label">
+                                                                
+                                    <input type="text" name="styleCode" autocomplete="off"
+                                        readonly formControlName="styleCode" #styleCode
+                                        [ngClass]="{'red-border': myForm.controls['styleCode'].invalid}"
+                                        class="gui-input floating-input" placeholder="Style Code">
+                                        <span class="highlight"></span>
+                            <label>{{ 'STYLE.STYLE_CODE' | translate }}</label>
+                               
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 mb20 floating-form floating-label">
+                                                                
+                                    <input type="text" name="styleName" autocomplete="off"
+                                        readonly formControlName="styleName" #styleName
+                                        [ngClass]="{'red-border': myForm.controls['styleName'].invalid}"
+                                        class="gui-input floating-input" placeholder="style Name">
+                                        <span class="highlight"></span>
+                            <label>{{ 'STYLE.STYLE_NAME' | translate }}</label>
+                               
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 mb20 select-forms">
+                                <label>{{ 'STYLE.SEASON' | translate }}</label>
+                               
+                                    <select name="season" formControlName="season" #season
+                                        disabled class="gui-input"
+                                        [ngClass]="{'red-border': myForm.controls['season'].invalid}">
+                                        <option value="">Select Season</option>
+                                        <option *ngFor="let item of seasonList"
+                                            value="{{item.id}}">
+                                            {{item.seasonName}}</option>
+                                    </select>
+                                    <i class="fa fa-angle-down"></i>
+                               
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 mb20 select-forms">
+                                <label>{{ 'STYLE.YEAR' | translate }}</label>
+                               
+                                    <select name="year" formControlName="year" #year
+                                        disabled class="gui-input"
+                                        [ngClass]="{'red-border': myForm.controls['year'].invalid}">
+                                        <option value="">Select Year</option>
+                                        <option *ngFor="let item of yearList"
+                                            value="{{item.id}}">
+                                            {{item.yearCode}}</option>
+                                    </select>
+                                    <i class="fa fa-angle-down"></i>
+                               
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+ 
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section style-tabs">
+            <div>
+                <div class="profile-sec-first">
+                    <div class="col-xl-12 user-tabs">
+                        <div class="tab-block mb25">
+
+                            <mat-tab-group>
+                                <mat-tab label="{{ 'STYLE.STYLE' | translate }}">
+
+                                    <div id="style" class="tab-pane active">
+                                        <!-- choose grid -->
+                                        <div class="allcp-form theme-info">
+                                            <div class="panel">
+                                                <div class="panel-body mt30">
+                                                    <div class="row">
+                                                        <!-- <div class="col-md-6 mb20">
+                                                            <label>Design Code</label>
+                                                            <label class="field select">
+                                                                <select name="designCode" formControlName="designCode"
+                                                                    #designCode class="gui-input"  disabled
+                                                                    [ngClass]="{'red-border': myForm.controls['designCode'].invalid}">
+                                                                    <option value="">Select designCode</option>
+                                                                    <option *ngFor="let item of designList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.designCode}}</option>
+                                                                </select>
+                                                                <i class="arrow"></i>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6 mb20">
+                                                            <label>Design Name</label>
+                                                            <label class="field">
+                                                                <input type="text" name="designName" autocomplete="off"
+                                                                    readonly formControlName="designName" #designName
+                                                                    [ngClass]="{'red-border': myForm.controls['designName'].invalid}"
+                                                                    class="gui-input" placeholder="Design Name">
+                                                            </label>
+                                                        </div> -->
+                                                        <!-- <div class="col-md-6 mb20">
+                                                            <label>Style Code</label>
+                                                            <label class="field">
+                                                                <input type="text" name="styleCode" autocomplete="off"
+                                                                    readonly formControlName="styleCode" #styleCode
+                                                                    [ngClass]="{'red-border': myForm.controls['styleCode'].invalid}"
+                                                                    class="gui-input" placeholder="Style Code">
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6 mb20">
+                                                            <label>Style Name</label>
+                                                            <label class="field">
+                                                                <input type="text" name="styleName" autocomplete="off"
+                                                                    readonly formControlName="styleName" #styleName
+                                                                    [ngClass]="{'red-border': myForm.controls['styleName'].invalid}"
+                                                                    class="gui-input" placeholder="style Name">
+                                                            </label>
+                                                        </div> -->
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.STYLE_SEGMENTATION' | translate }}</label>
+                                                            
+                                                                <select name="styleSegmentation"
+                                                                    formControlName="styleSegmentation"
+                                                                    #styleSegmentation class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['styleSegmentation'].invalid}">
+                                                                    <option value="">Select Style Segmentation</option>
+                                                                    <option *ngFor="let item of styleSegmentList"
+                                                                        value="{{item.id}}">{{item.afSegamationName}}
+                                                                    </option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                        
+                                                                <input type="text" name="productDeptCode"
+                                                                    autocomplete="off" readonly
+                                                                    formControlName="productDeptCode" #productDeptCode
+                                                                    [ngClass]="{'red-border': myForm.controls['productDeptCode'].invalid}"
+                                                                    class="gui-input floating-input" placeholder="Product Dept Code">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.PRODUCT_DEPT_CODE' | translate }}</label>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                        
+                                                                <input type="text" name="shortDesignCode"
+                                                                    autocomplete="off" readonly
+                                                                    formControlName="shortDesignCode" #shortDesignCode
+                                                                    [ngClass]="{'red-border': myForm.controls['shortDesignCode'].invalid}"
+                                                                    class="gui-input floating-input" placeholder="Short Design Code">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.SHORT_DESIGN_CODE' | translate }}</label>
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.BRAND' | translate }}</label>
+                                                            
+                                                                <select name="brand" formControlName="brand" #brand
+                                                                    disabled class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['brand'].invalid}">
+                                                                    <option value="">Select Brand</option>
+                                                                    <option *ngFor="let item of brandList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.brandName}}</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.SUB_BRAND' | translate }}</label>
+                                                           
+                                                                <select name="subBrand" formControlName="subBrand"
+                                                                    #subBrand class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['subBrand'].invalid}">
+                                                                    <option value="">Select Sub Brand</option>
+                                                                    <option *ngFor="let item of subBrandList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.subBrandName}}</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                           
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.COLLECTION' | translate }}</label>
+                                                           
+                                                                <select name="collection" formControlName="collection"
+                                                                    disabled #collection class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['collection'].invalid}">
+                                                                    <option value="">Select Collection</option>
+                                                                    <option *ngFor="let item of collectionList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.collectionName}}</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                           
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.ARMADA_COLLECTION' | translate }}</label>
+                                                           
+                                                                <select name="armadaCollection"
+                                                                    formControlName="armadaCollection" #armadaCollection
+                                                                    disabled class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['armadaCollection'].invalid}">
+                                                                    <option *ngFor="let item of armadaCollectionList"
+                                                                        value="{{item.armadaCollectionCode}}">
+                                                                        {{item.armadaCollectionName}}</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.STATUS' | translate }}</label>
+                                                            
+                                                                <select name="status" formControlName="status" #status
+                                                                    disabled class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['status'].invalid}">
+                                                                    <option value="">Select Status</option>
+                                                                    <option *ngFor="let item of statusList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.statusName}}</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                        
+                                                                <input type="text" name="exchangeRate" (keypress)="keyPress($event)"
+                                                                    autocomplete="off" readonly
+                                                                    formControlName="exchangeRate" #exchangeRate
+                                                                    value="1"
+                                                                    [ngClass]="{'red-border': myForm.controls['exchangeRate'].invalid}"
+                                                                    class="gui-input floating-input" placeholder="Exchange Rate">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.EXCHANGE_RATE' | translate }}</label>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.DESIGNER' | translate }}</label>
+                                                            
+                                                                <select name="designer" formControlName="designer"
+                                                                    #designer disabled class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['designer'].invalid}">
+                                                                    <option value="">Select Designer</option>
+                                                                    <option *ngFor="let item of employeeList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.employeeName}}</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.PURCHASE_PRICE_LIST' | translate }}</label>
+                                                            
+                                                                <select name="purchasePriceList"
+                                                                    formControlName="purchasePriceList"
+                                                                    #purchasePriceList class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['purchasePriceList'].invalid}">
+                                                                    <option value="">Select Purchase Price List</option>
+                                                                    <option *ngFor="let item of priceList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.priceListName}}</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                        
+                                                                <input type="text" name="purchasePrice"
+                                                                    autocomplete="off" formControlName="purchasePrice" (keypress)="keyPress($event)"
+                                                                    #purchasePrice
+                                                                    [ngClass]="{'red-border': myForm.controls['purchasePrice'].invalid}"
+                                                                    class="gui-input floating-input" placeholder="Purchase Price">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.PURCHASE_PRICE' | translate }}</label>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.PURCHASE_CURRENCY' | translate }}</label>
+                                                            
+                                                                <select name="purchaseCurrency"
+                                                                    formControlName="purchaseCurrency" #purchaseCurrency
+                                                                    class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['purchaseCurrency'].invalid}">
+                                                                    <option value="">Select Purchase Currency</option>
+                                                                    <option *ngFor="let item of pricecurrencyList"
+                                                                        value="{{item.id}}">{{item.currencyName}}
+                                                                    </option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                        
+                                                                <input type="text" name="composition" autocomplete="off"
+                                                                    formControlName="composition" #composition
+                                                                    [ngClass]="{'red-border': myForm.controls['composition'].invalid}"
+                                                                    class="gui-input floating-input" placeholder="Composition">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.COMPOSITION' | translate }}</label>
+                                                           
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                       
+                                                                <input type="text" name="symbolGroup" autocomplete="off"
+                                                                    formControlName="symbolGroup" #symbolGroup
+                                                                    [ngClass]="{'red-border': myForm.controls['symbolGroup'].invalid}"
+                                                                    class="gui-input floating-input" placeholder="Symbol Group">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.SYMBOL_GROUP' | translate }}</label>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                       
+                                                                <input type="text" name="owner" autocomplete="off"
+                                                                    formControlName="owner" #owner
+                                                                    [ngClass]="{'red-border': myForm.controls['owner'].invalid}"
+                                                                    class="gui-input floating-input" placeholder="Owner">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.OWNER' | translate }}</label>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                       
+                                                                <input type="text" name="countryOfOrigin"
+                                                                    autocomplete="off" formControlName="countryOfOrigin"
+                                                                    #countryOfOrigin
+                                                                    [ngClass]="{'red-border': myForm.controls['countryOfOrigin'].invalid}"
+                                                                    class="gui-input floating-input" placeholder="Country Of Origin">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.COUNTRY_OF_ORIGIN' | translate }}</label>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                       
+                                                                <input type="text" name="shortDescription"
+                                                                    autocomplete="off"
+                                                                    formControlName="shortDescription" #shortDescription
+                                                                    [ngClass]="{'red-border': myForm.controls['shortDescription'].invalid}"
+                                                                    class="gui-input floating-input" placeholder="Short Description">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.SHORT_DESCRIPTION' | translate }}</label>
+                                                           
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.PRODUCT_GROUP' | translate }}</label>
+                                                           
+                                                                <select name="productGroup"
+                                                                    formControlName="productGroup" disabled
+                                                                    #productGroup class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['productGroup'].invalid}">
+                                                                    <option value="">Select Product Group</option>
+                                                                    <option *ngFor="let item of productGroupList"
+                                                                        value="{{item.id}}">{{item.productGroupName}}
+                                                                    </option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                           
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.PRODUCT_SUB_GROUP' | translate }}</label>
+                                                            
+                                                                <select name="productSubGroup"
+                                                                    formControlName="productSubGroup" #productSubGroup
+                                                                    class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['productSubGroup'].invalid}">
+                                                                    <option value="">Select Product Sub Group</option>
+                                                                    <option *ngFor="let item of productSubGroupList"
+                                                                        value="{{item.id}}">{{item.productSubGroupName}}
+                                                                    </option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <!-- <div class="col-md-6 mb20">
+                                                            <label>season</label>
+                                                            <label class="field select">
+                                                                <select name="season" formControlName="season" #season
+                                                                    disabled class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['season'].invalid}">
+                                                                    <option value="">Select Season</option>
+                                                                    <option *ngFor="let item of seasonList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.seasonName}}</option>
+                                                                </select>
+                                                                <i class="arrow"></i>
+                                                            </label>
+                                                        </div> -->
+                                                        <!-- <div class="col-md-6 mb20">
+                                                            <label>Year</label>
+                                                            <label class="field select">
+                                                                <select name="year" formControlName="year" #year
+                                                                    disabled class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['year'].invalid}">
+                                                                    <option value="">Select Year</option>
+                                                                    <option *ngFor="let item of yearList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.yearCode}}</option>
+                                                                </select>
+                                                                <i class="arrow"></i>
+                                                            </label>
+                                                        </div> -->
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.DIVISION' | translate }}</label>
+                                                            
+                                                                <select name="division" formControlName="division"
+                                                                    #division disabled class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['division'].invalid}">
+                                                                    <option value="">Select Division</option>
+                                                                    <option *ngFor="let item of divisionList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.divisionName}}</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.PRODUCT_LINE' | translate }}</label>
+                                                           
+                                                                <select name="productLine" formControlName="productLine"
+                                                                    disabled #productLine class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['productLine'].invalid}">
+                                                                    <option value="">Select Product Line</option>
+                                                                    <option *ngFor="let item of productLineList"
+                                                                        value="{{item.id}}">{{item.productLineName}}
+                                                                    </option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.RRP_CURRENCY' | translate }}</label>
+                                                           
+                                                                <select name="rrpCurrency" formControlName="rrpCurrency"
+                                                                    #rrpCurrency class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['rrpCurrency'].invalid}">
+                                                                    <option value="">Select RRP Currency</option>
+                                                                    <option *ngFor="let item of pricecurrencyList"
+                                                                        value="{{item.id}}">{{item.currencyName}}
+                                                                    </option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                           
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                        
+                                                                <input type="text" name="rrpPrice" autocomplete="off" (keypress)="keyPress($event)"
+                                                                    formControlName="rrpPrice" #rrpPrice
+                                                                    [ngClass]="{'red-border': myForm.controls['rrpPrice'].invalid}"
+                                                                    class="gui-input floating-input" placeholder="RRP Price">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.RRP_PRICE' | translate }}</label>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.SALES_TYPE' | translate }}</label>
+                                                            
+                                                                <select name="salesType" formControlName="salesType"
+                                                                    disabled #salesType class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['salesType'].invalid}">
+                                                                    <option value="">Select Development Office</option>
+                                                                    <option value="Full Price" selected>Full Price
+                                                                    </option>
+                                                                    <option value="Marked Down">Marked Down</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.DROP' | translate }}</label>
+                                                           
+                                                                <select name="drop" formControlName="drop" #drop
+                                                                    class="gui-input" disabled
+                                                                    [ngClass]="{'red-border': myForm.controls['drop'].invalid}">
+                                                                    <option value="">Select Drop</option>
+                                                                    <option *ngFor="let item of dropList"
+                                                                        value="{{item.id}}">
+                                                                        {{item.dropName}}</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                           
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.GRADE' | translate }}</label>
+                                                           
+                                                                <select name="grade" formControlName="grade" #grade
+                                                                    class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['grade'].invalid}">
+                                                                    <option value="">Select Grade</option>
+                                                                    <option value="NA">NA</option>
+                                                                    <option value="GA">GA</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 select-forms">
+                                                            <label>{{ 'STYLE.DEVELOPMENT_OFFICE' | translate }}</label>
+                                                           
+                                                                <select name="developmentOffice"
+                                                                    formControlName="developmentOffice"
+                                                                    #developmentOffice class="gui-input"
+                                                                    [ngClass]="{'red-border': myForm.controls['developmentOffice'].invalid}">
+                                                                    <option value="">Select Development Office</option>
+                                                                    <option value="0">Armada</option>
+                                                                </select>
+                                                                <i class="fa fa-angle-down"></i>
+                                                            
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6 mb20 floating-form floating-label">
+                                                                                                                        
+                                                                <input type="text" name="arabicStyleDescription"
+                                                                    autocomplete="off"
+                                                                    formControlName="arabicStyleDescription" style="text-align: right;"
+                                                                    #arabicStyleDescription
+                                                                    [ngClass]="{'red-border': myForm.controls['arabicStyleDescription'].invalid}"
+                                                                    class="gui-input floating-input"
+                                                                    placeholder="Arabic Style Description">
+                                                                    <span class="highlight"></span>
+                                                                    <label>{{ 'STYLE.ARABIC_STYLE_DESCRIPTION' | translate }}</label>
+                                                           
+                                                        </div>
+                                                        <!-- <div class="col-md-6 mb20">
+                                                            <label>Item Image</label>
+                                                            <div class="avatar-upload">
+                                                                <div class="avatar-edit">
+                                                                    <input type='file' id="imageUpload"
+                                                                        (change)="picked1($event, null)"
+                                                                        accept=".png, .jpg, .jpeg" />
+                                                                    <label for="imageUpload"></label>
+                                                                </div>
+                                                                <div class="avatar-preview">
+                                                                    <div id="imagePreview">
+                                                                        <img src="{{ current_store_image}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="clearfix"></div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6">
+                                                            
+                                                                <div class="section">
+                                                                    <div class="bs-component mt10">
+
+                                                                        <div class="round fill mb10">
+                                                                            <input type="checkbox" checked=""
+                                                                                id="active" name="active" #active
+                                                                                formControlName="active">
+                                                                            <label for="active"></label>
+                                                                            <p class="label-text-sub">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                                        </div>
+                                                                        <div id="source-button"
+                                                                            class="btn btn-system btn-xs"
+                                                                            style="display: none;">&lt; &gt;</div>
+
+                                                                    </div>
+                                                                </div>
+                                                           
+                                                        </div>
+                                                        <div class="col-xl-4 col-lg-4 col-md-6">
+                                                            
+                                                                <div class="section">
+                                                                    <div class="bs-component mt10">
+
+                                                                        <div class="round fill mb10">
+                                                                            <input type="checkbox" checked=""
+                                                                                id="franchise" name="franchise"
+                                                                                #applyToAll formControlName="franchise">
+                                                                            <label for="applyToAll"></label>
+                                                                            <p class="label-text-sub">{{ 'STYLE.FRANCHISE' | translate }}</p>
+                                                                        </div>
+                                                                        <div id="source-button"
+                                                                            class="btn btn-system btn-xs"
+                                                                            style="display: none;">&lt; &gt;</div>
+
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- choose grid -->
+                                    </div>
+
+                                </mat-tab>
+                                <mat-tab label="{{ 'STYLE.SCALE' | translate }}">
+
+                                    <div id="scale" class="tab-pane inner-tabs">
+                                        <div class="row">
+                                            <div class="offset-md-4 col-md-4 mb20 select-forms">
+                                                
+                                                
+                                                    <select name="scaleID" formControlName="scaleID" #scaleID
+                                                        (change)="scaleDetails()" class="select-tab gui-input"  disabled
+                                                        [ngClass]="{'red-border': myForm.controls['scaleID'].invalid}">
+                                                        <option value="">Select Scale</option>
+                                                        <option *ngFor="let item of scaleMasterList"
+                                                            value="{{item.id}}">
+                                                            {{item.scaleName}}</option>
+                                                    </select>
+                                                    <i class="arrow"></i>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive tabs-table color-table-responsive" id="ctr">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr class="bg-light">
+                                                        <th>{{ 'STYLE.SELECT' | translate }}</th>
+                                                        <th>{{ 'STYLE.SIZE_CODE' | translate }}</th>
+                                                        <th>{{ 'STYLE.DESCRIPTION' | translate }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let scale of scaleDetailList;">
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="scale.active"
+                                                                [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{scale.id}}"></label>
+                                                        </td>
+                                                        <td>{{scale.sizeCode}}</td>
+                                                        <td>{{scale.description}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </mat-tab>
+                                <mat-tab label="{{ 'STYLE.COLOR' | translate }}">
+
+                                    <div id="color" class="tab-pane inner-tabs">
+                                        <div class="table-responsive tabs-table color-table-responsive" id="ctr">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr class="bg-light">
+                                                        <th>{{ 'STYLE.SELECT' | translate }}</th>
+                                                        <th>{{ 'STYLE.COLOR_CODE' | translate }}</th>
+                                                        <th>{{ 'STYLE.COLOR_NAME' | translate }}</th>
+                                                        <th>{{ 'STYLE.COLOR' | translate }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let color of colorList;">
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="color.active"
+                                                                [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{color.id}}"></label>
+                                                        </td>
+                                                        <td>{{color.colorCode}}</td>
+                                                        <td>{{color.description}}</td>
+                                                        <td>
+                                                            <span class="green-circle list-color" style="background-color: #dd99b2;"></span>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </mat-tab>
+                                <mat-tab label="{{ 'STYLE.STOCK' | translate }}">
+
+                                    <div id="stock" class="tab-pane inner-tabs">
+                                        <div class="table-responsive tabs-table mt10 color-table-responsive" id="ctr">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr class="bg-light">
+                                                        <th>{{ 'STYLE.SKU_CODE' | translate }}</th>
+                                                        <th>{{ 'STYLE.SKU_NAME' | translate }}</th>
+                                                        <th>{{ 'STYLE.STOCK_QTY' | translate }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!--<tr *ngFor = "let brand of brandList;">
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="brand.active" [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{brand.id}}"></label>
+                                                        </td>
+                                                        <td>{{brand.brandCode}}</td>
+                                                        <td>{{brand.brandName}}</td>
+                                                    </tr>-->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </mat-tab>
+                                <mat-tab label="{{ 'STYLE.OPTION_MASTER' | translate }}">
+
+                                    <div id="option" class="tab-pane inner-tabs">
+                                        <div class="table-responsive tabs-table mt10 color-table-responsive" id="ctr">
+
+                                            <table class="table">
+                                                <thead>
+                                                    <tr class="bg-light">
+                                                        <th>{{ 'STYLE.COLOR_CODE' | translate }}</th>
+                                                        <th>{{ 'STYLE.COLOR_NAME' | translate }}</th>                                                        
+                                                        <th>{{ 'STYLE.STOCK_QTY' | translate }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!--<tr *ngFor = "let brand of brandList;">
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="brand.active" [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{brand.id}}"></label>
+                                                        </td>
+                                                        <td>{{brand.brandCode}}</td>
+                                                        <td>{{brand.brandName}}</td>
+                                                    </tr>-->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </mat-tab>
+                                <mat-tab label="{{ 'STYLE.SKU_MASTER' | translate }}">
+
+                                    <div id="sku" class="tab-pane inner-tabs">
+                                        <div class="table-responsive tabs-table mt10 color-table-responsive" id="ctr">
+
+                                            <table class="table">
+                                                <thead>
+                                                    <tr class="bg-light">
+                                                        <th>{{ 'STYLE.SKU_CODE' | translate }}</th>
+                                                        <th>{{ 'STYLE.SKU_NAME' | translate }}</th>
+                                                        <th>{{ 'STYLE.COLOR_CODE' | translate }}</th>
+                                                        <th>{{ 'STYLE.COLOR_NAME' | translate }}</th>
+                                                        <th>{{ 'STYLE.SCALE_CODE' | translate }}</th>
+                                                        <th>{{ 'STYLE.SIZE_NAME' | translate }}</th>
+                                                        <th>{{ 'STYLE.BARCODE' | translate }}</th>
+                                                        <th>{{ 'STYLE.TOTAL_QTY' | translate }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!--<tr *ngFor = "let brand of brandList;">
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="brand.active" [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{brand.id}}"></label>
+                                                        </td>
+                                                        <td>{{brand.brandCode}}</td>
+                                                        <td>{{brand.brandName}}</td>
+                                                    </tr>-->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </mat-tab>
+                            </mat-tab-group>
+
+
+
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </section>
+        <div class="row default-forms">
+          
+            <div class="offset-md-4 col-md-2 mt10">
+                <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                    (click)="addStyleCode()" [disabled]="myForm.invalid"><i
+                        class="fa fa-save"></i> Update
+
+                </button>
+            </div>
+            <!--<div class="col-md-2 mt10">
+                <button type="clear" class="btn btn-lg btn-primary btn-block common-button"><i
+                        class="fa fa-refresh"></i> Clear</button>
+
+            </div>-->
+            <div class="col-md-2 mt10">
+                <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                        class="fa fa-remove"></i> Close</button>
+
+            </div>
+          
+        </div>
+        <!-- /Content -->
+    </form>
+</section>

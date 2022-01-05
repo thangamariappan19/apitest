@@ -1,0 +1,294 @@
+<form [formGroup]="myForm" validate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../document-numbering">{{ 'DOCUMENT_NUMBERING.DOCUMENT_NUMBERING_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'DOCUMENT_NUMBERING.CREATE_DOCUMENT_NUMBERING' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DOCUMENT_NUMBERING.COUNTRY' | translate }}</label>
+                                        
+                                            <select name="countryID" formControlName="countryID" #countryID class="gui-input" (change)="countrycode()"
+                                             [ngClass]="{'red-border': myForm.controls['countryID'].invalid}">
+                                                <option value="">Select Country</option>
+                                                <option *ngFor="let item of countryList" value="{{item.id}}">{{item.countryName}}</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DOCUMENT_NUMBERING.STATE' | translate }}</label>
+                                        
+                                            <select name="stateID" formControlName="stateID" #stateID class="gui-input" (change)="statecode()"
+                                            [ngClass]="{'red-border': myForm.controls['stateID'].invalid}">
+                                                <option value="">Select State</option>
+                                                <option *ngFor="let item of stateList" value="{{item.id}}">{{item.stateName}}</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DOCUMENT_NUMBERING.STORE' | translate }}</label>
+                                        
+                                            <select name="storeID" formControlName="storeID" #storeID class="gui-input" (change)="storecode()"
+                                            [ngClass]="{'red-border': myForm.controls['storeID'].invalid}">
+                                                <option value="">Select Store</option>
+                                                <option *ngFor="let item of storeList" value="{{item.id}}">{{item.storeName}}</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DOCUMENT_NUMBERING.DOCUMENT_TYPE' | translate }}</label>
+                                        
+                                            <select name="documentType" formControlName="documentType" #documentType class="gui-input" (change)="documentTypecode()"
+                                            [ngClass]="{'red-border': myForm.controls['documentType'].invalid}">
+                                                <option value="">Select Document Type</option>
+                                                <option *ngFor="let item of documentTypeList" value="{{item.id}}">{{item.documentName}}</option>                                                
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>                                    
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component">
+
+                                                    <div class="round fill mb10 mt20">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: -30px;">
+                                    
+                                    <div class="col-md-4 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="prefix" autocomplete="off"
+                                                formControlName="prefix" #prefix
+                                                [ngClass]="{'red-border': myForm.controls['prefix'].invalid}"
+                                                class="gui-input floating-input" placeholder="Prefix"
+                                                 spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'DOCUMENT_NUMBERING.PREFIX' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-4 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="suffix" autocomplete="off"
+                                                formControlName="suffix" #suffix
+                                                [ngClass]="{'red-border': myForm.controls['suffix'].invalid}"
+                                                class="gui-input floating-input" placeholder="Suffix" spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'DOCUMENT_NUMBERING.SUFFIX' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-4 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="startNumber" autocomplete="off" (keypress)="keyPress($event)"
+                                                formControlName="startNumber" #startNumber
+                                                [ngClass]="{'red-border': myForm.controls['startNumber'].invalid}"
+                                                class="gui-input floating-input" placeholder="Start Number" spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'DOCUMENT_NUMBERING.START_NUMBER' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-4 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="endNumber" autocomplete="off" (keypress)="keyPress($event)"
+                                                formControlName="endNumber" #endNumber
+                                                [ngClass]="{'red-border': myForm.controls['endNumber'].invalid}"
+                                                class="gui-input floating-input" placeholder="End Number" spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'DOCUMENT_NUMBERING.END_NUMBER' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-4 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="noOfCharacter" autocomplete="off" (keypress)="keyPress($event)"
+                                                formControlName="noOfCharacter" #noOfCharacter
+                                                [ngClass]="{'red-border': myForm.controls['noOfCharacter'].invalid}"
+                                                class="gui-input floating-input" placeholder="No Of Character" spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'DOCUMENT_NUMBERING.NO_OF_CHARACTER' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-4 floating-form floating-label">
+                                                                                
+                                            <input type="date" name="startDate" autocomplete="off"
+                                                formControlName="startDate" #startDate
+                                                [ngClass]="{'red-border': myForm.controls['startDate'].invalid}"
+                                                class="gui-input floating-input" placeholder="Start Date">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'DOCUMENT_NUMBERING.START_DATE' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-4 floating-form floating-label">
+                                                                               
+                                            <input type="date" name="endDate" autocomplete="off"
+                                                formControlName="endDate" #endDate
+                                                [ngClass]="{'red-border': myForm.controls['endDate'].invalid}"
+                                                class="gui-input floating-input" placeholder="End Date">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'DOCUMENT_NUMBERING.END_DATE' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                        
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt10" >
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active1" name="active1" #active1 formControlName="active1">
+                                                        <label for="active1"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                                    
+                                <div class="row mt10 default-forms" style="margin-bottom: 20px;">
+                                <div class="offset-md-4">
+
+                                </div>
+                                  
+    
+                                    <div class="col-md-2">
+                                        <button type="button" class="mt20 btn btn-lg btn-cancel btn-block common-button" (click) = "gridClear()"
+                                            title="Clear"><i class="fa fa-refresh"></i> Clear</button>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <button type="button" class="mt20 btn btn-lg btn-success btn-block common-button"
+                                            title="Add" (click) = "addDocumentDetailsValue()" [disabled]="myForm.pristine || myForm.invalid"><i class="fa fa-plus"></i> Add</button>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row">                                
+                                    <div class="allcp-form theme-info">
+                                        <div class="panel">
+                                            <div class="panel-body country-table">
+                                                <div class="table-responsive">
+                                                    <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                        <thead>
+                                                            <tr class="bg-dark">
+                                                                <th class="">{{ 'DOCUMENT_NUMBERING.PREFIX' | translate }}</th>
+                                                                <th class="">{{ 'DOCUMENT_NUMBERING.SUFFIX' | translate }}</th>
+                                                                <th class="">{{ 'DOCUMENT_NUMBERING.START_NUMBER' | translate }}</th>
+                                                                <th class="">{{ 'DOCUMENT_NUMBERING.END_NUMBER' | translate }}</th>
+                                                                <th class="">{{ 'DOCUMENT_NUMBERING.NO_OF_CHARACTER' | translate }}</th>
+                                                                <th class="">{{ 'DOCUMENT_NUMBERING.START_DATE' | translate }}</th>
+                                                                <th class="">{{ 'DOCUMENT_NUMBERING.END_DATE' | translate }}</th>
+                                                                <th class="">{{ 'COMMON.ACTIVE' | translate }}</th>
+                                                                <th class=""></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor = "let item of documentNumberingDetailsList; let i = index"> 
+                                                                <td>{{item.prefix}}</td>  
+                                                                <td>{{item.suffix}}</td>  
+                                                                <td>{{item.startNumber}}</td>
+                                                                <td>{{item.endNumber}}</td>
+                                                                <td>{{item.numberOfCharacter}}</td>
+                                                                <td>{{item.startDate}}</td>
+                                                                <td>{{item.endDate}}</td> 
+                                                                <td>
+                                                                    <input type="checkbox" [(ngModel)]="item.active" [ngModelOptions]="{standalone: true}">
+                                                                    <!-- <label for="{{item.id}}"></label> -->
+                                                                </td>                                                             
+                                                                <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                                    class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row default-forms">   
+                                    <div class="offset-md-3">
+                                    </div>
+
+                                    <div class="col-md-2 mt10">
+                                        <button type="button" class="btn btn-lg btn-success btn-block common-button" [disabled]="myForm.pristine || myForm.invalid" (click)="addDocumentNumbering()"><i
+                                                class="fa fa-check-circle-o"></i> Save
+                                                
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="col-md-2 mt10">
+                                        <button type="button" class="btn btn-lg btn-primary btn-block common-button" (click)="clear_controls()"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="button" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+                                    </div>
+                                   
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

@@ -1,0 +1,90 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'PROMOTIONSPRIORITY.PROMOTIONSPRIORITY_MASTER' | translate }}</li>
+            </ol>
+        </div>        
+    </header>
+
+  
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'PROMOTIONSPRIORITY.PROMOTIONSPRIORITY_LIST' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- listing table -->
+                <div class="allcp-form theme-info">                   
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">{{ 'PROMOTIONSPRIORITY.PROMOTION_NAME' | translate }}</th>
+                                            <th class="">{{ 'PROMOTIONSPRIORITY.PRIORITY_NUMBER' | translate }}</th>
+                                            <th class=""></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <tr *ngFor = "let item of json; let i = index"> -->
+                                        <tr *ngFor = "let item of promotionspriority_List; let i = index">
+                                            
+                                            <td>{{i + 1}}</td>
+                                            <td>{{item.promotionName}}</td>
+                                            <td><input type="text" [(ngModel)]="item.priorityNo" (change)="prioritynochange(item)" [ngModelOptions]="{standalone: true}" 
+                                                (keypress)="keyPress($event)"  style="text-align:center;"
+                                                class="gui-input"></td>
+                                            <!--<td><input type="text" name="promotionName{{i + 1}}"
+                                                class="gui-input" value="{{item.promotionName}}"></td>
+                                            <td><input type="text" name="priorityNo{{i + 1}}"
+                                                class="gui-input" value="{{item.priorityNo}}"></td>
+                                            <td [ngClass]="(item.active == true)?'active_state':'inactive_state'">{{item.active == true ? 'Yes' : 'No'}}</td>
+                                            <td>
+                                                <a routerLink="{{ '/year-edit/' + item.id.toString() }}"  class="btn btn-edits  btn-sm ml10">
+                                                    <span class="fa fa-edit"></span>
+                                                </a>                                              
+                                            </td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row default-forms">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-lg btn-success btn-block common-button" (click)="UpdatepromotionspriorityList()" ><i
+                    class="fa fa-check-circle-o"></i> Save
+                    </button><br/>
+                </div>  
+                <div class="col-md-4"></div>              
+            </div>
+        
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

@@ -1,0 +1,201 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../non-trading-stock-distribution">{{ 'NON_TRADING_STOCK_DISTRIBUTION.NON_TRADING_STOCK_DISTRIBUTION_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'NON_TRADING_STOCK_DISTRIBUTION.CREATE_NON_TRADING_STOCK_DISTRIBUTION' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="documentNo" autocomplete="off" readonly
+                                            formControlName="documentNo" #documentNo
+                                            [ngClass]="{'red-border': myForm.controls['documentNo'].invalid}"
+                                            class="gui-input floating-input" placeholder="DocumentNo">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'NON_TRADING_STOCK_DISTRIBUTION.DOCUMENTNO' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="documentDate" autocomplete="off" readonly
+                                            formControlName="documentDate" #documentDate
+                                            [ngClass]="{'red-border': myForm.controls['documentDate'].invalid}"
+                                            class="gui-input floating-input" placeholder="DocumentDate">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'NON_TRADING_STOCK_DISTRIBUTION.DOCUMENTDATE' | translate }}</label>
+                                </div>
+                                <div class="col-md-6 mb20">
+                                    <label>{{ 'NON_TRADING_STOCK_DISTRIBUTION.TRANSACTIONTYPE' | translate }}</label><br/><br/>
+                                    <!--<label class="field">
+                                        <input type="text" name="transactionType" autocomplete="off"
+                                            formControlName="transactionType" #transactionType
+                                            [ngClass]="{'red-border': myForm.controls['transactionType'].invalid}"
+                                            class="gui-input" placeholder="TransactionType">
+                                    </label>-->
+                                    <input type="radio"  #ttgroup formControlName="ttgroup" value="Issue" (change)="getTrantype()"> {{ 'NON_TRADING_STOCK_DISTRIBUTION.ISSUE' | translate }}
+                                    <input type="radio"  #ttgroup formControlName="ttgroup" value="Return" (change)="getTrantype()"> {{ 'NON_TRADING_STOCK_DISTRIBUTION.RETURN' | translate }}
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="refDocNo" autocomplete="off" (keyup.enter)="getReturnData()"
+                                            formControlName="refDocNo" #refDocNo (keypress)="restrictSpecialChars($event)"
+                                            class="gui-input floating-input" placeholder="RefDocNo">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'NON_TRADING_STOCK_DISTRIBUTION.REFDOCNO' | translate }}</label>
+                                </div>
+                                <div class="col-md-6 mb20">
+                                    <label>{{ 'NON_TRADING_STOCK_DISTRIBUTION.RECEIVED_TYPE' | translate }}</label><br/><br/>
+                                    <!--<label class="field">
+                                        <input type="text" name="receivedType" autocomplete="off"
+                                            formControlName="receivedType" #receivedType
+                                            [ngClass]="{'red-border': myForm.controls['receivedType'].invalid}"
+                                            class="gui-input" placeholder="Received Type">
+                                    </label>-->
+                                    <input type="radio"  #rtgroup formControlName="rtgroup" value="Store" (change)="getRecdtype()"> {{ 'NON_TRADING_STOCK_DISTRIBUTION.STORE' | translate }}
+                                    <input type="radio"  #rtgroup formControlName="rtgroup" value="Employee" (change)="getRecdtype()"> {{ 'NON_TRADING_STOCK_DISTRIBUTION.EMPLOYEE' | translate }}
+                                </div>
+                                <div class="col-md-6 mb20 select-forms">
+                                    <label>{{ 'NON_TRADING_STOCK_DISTRIBUTION.EMPNAME' | translate }}</label>
+                                    
+                                        <select name="empName" formControlName="empName" #empName
+                                            class="gui-input" (change)="employeecode()"
+                                            [ngClass]="{'red-border': myForm.controls['empName'].invalid}">
+                                            <option value="0">Select Employee</option>
+                                            <option *ngFor="let item of employeeList" value="{{item.id}}">
+                                                {{item.employeeName}}</option>
+                                        </select>
+                                        <i class="fa fa-angle-down"></i>
+                                    
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="barCode" autocomplete="off" (keyup.enter)="getSKUData()"
+                                            formControlName="barCode" #barCode
+                                            [ngClass]="{'red-border': myForm.controls['barCode'].invalid}"
+                                            class="gui-input floating-input" placeholder="SKU/Barcode">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'NON_TRADING_STOCK_DISTRIBUTION.SKU_BARCODE' | translate }}</label>
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="availableStock" autocomplete="off" readonly
+                                            formControlName="availableStock" #availableStock
+                                            [ngClass]="{'red-border': myForm.controls['availableStock'].invalid}"
+                                            class="gui-input floating-input" placeholder="Available Stock">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'NON_TRADING_STOCK_DISTRIBUTION.AVAILABLE_STOCK' | translate }}</label>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">{{ 'NON_TRADING_STOCK_DISTRIBUTION.SKU_CODE' | translate }}</th>
+                                            <th class="">{{ 'NON_TRADING_STOCK_DISTRIBUTION.BARCODE' | translate }}</th>
+                                            <th class="">{{ 'NON_TRADING_STOCK_DISTRIBUTION.DATE' | translate }}</th>
+                                            <th class="">{{ 'NON_TRADING_STOCK_DISTRIBUTION.QUANTITY' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of nontradingstocklist; let i = index;">
+                                            <td>{{i+1}}</td>
+                                            <td>{{item.sKUCode}}</td>
+                                            <td>{{item.barCode}}</td>
+                                            <td>{{item.date}}</td>
+                                            <td><input type="number" (keypress)="keyPress($event)" id="receivedQty" min="1" name="receivedQty" oninput="this.value = Math.abs(this.value)" value={{item.receivedQty}} [(ngModel)]="item.receivedQty" [ngModelOptions]="{standalone: true}" style="text-align:center;"
+                                                class="gui-input" autocomplete="off" (change)="addQTY()"></td>
+                                            <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                    class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb20">
+                       
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-2">
+                        
+                    </div>
+                    <div class="col-sm-2">
+                        <label></label>
+                                    
+                                    <input type="text" name="totqty" autocomplete="off" readonly
+                                        formControlName="totqty" #totqty style="text-align:right;"
+                                        class="gui-input" placeholder="">
+                                    
+                    </div>
+                </div>
+                <div class="row default-forms">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-success btn-block common-button" (click)="addNonTradingStockDetails()"
+                            [disabled]="myForm.pristine || myForm.invalid"><i
+                                class="fa fa-check-circle-o"></i> Save
+
+                        </button>
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-primary btn-block common-button" (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

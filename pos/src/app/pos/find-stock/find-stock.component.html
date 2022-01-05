@@ -1,0 +1,159 @@
+<form [formGroup]="myForm" novalidate>
+    <section id="content_wrapper" class="sales-content-wrapper" style="margin-left: 0px">
+        <!-- Content -->
+        <section class="animated fadeIn">
+            <header id="topbar" class="ph10 second-top">
+                <div class="topbar-left">
+                    <ul class="nav nav-list nav-list-topbar pull-left">
+                        <li>
+                            <i class="fa fa-exchange"></i> Find Stock
+                        </li>
+                    </ul>
+                </div>
+                <div class="topbar-right mt5">
+                    <a (click)="btn_back_click()" href="javascript:void(0);" class="btn btn-back btn-sm ml10"
+                        title="New">
+                        <span class="fa fa-arrow-left pr5"></span>Back
+                    </a>
+                </div>
+            </header>
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xl-12 mt5">
+                    <div class="sales-first-form">
+                        <div class="allcp-form theme-info">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12 col-xl-8">
+                                    <label class="field">
+                                        <input (keyup.enter)="sku_changed()" matInput type="text" name="sku_code"
+                                            class="gui-input sff" [matAutocomplete]="auto"
+                                            [formControl]="searchfindStockCtrl" formControlName="sku_code" #sku_code
+                                            placeholder="Search SKU code / Barcode">
+                                        <mat-autocomplete id="pms" #auto="matAutocomplete"
+                                            class="pos filtered-search pos-full-search">
+                                            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                            <ng-container *ngIf="!isLoading">
+
+                                                <mat-option *ngFor="let findstock of filteredfindstock"
+                                                    [value]="findstock.code">
+
+                                                    <div class="col-md-3 pos-search-div"><b><i class="fa fa-list"></i>
+                                                            {{findstock.code}}</b></div>
+                                                    <div class="col-md-3 pos-search-div"><b><i
+                                                                class="fa fa-check-circle"></i> {{findstock.number}}</b>
+                                                    </div>
+                                                    <div class="col-md-6 pos-search-div"><b><i class="fa fa-square"></i>
+                                                            {{findstock.name}}</b></div>
+
+                                                </mat-option>
+
+                                            </ng-container>
+                                        </mat-autocomplete>
+                                    </label>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-6 col-xl-2">
+                                    <button type="button" (click)="sku_changed()"
+                                        class="btn btn-lg btn-primary btn-block pos-button"><i class="fa fa-search"></i>
+                                        Search</button>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-6 col-xl-2">
+                                    <button (click)="refresh()" type="button" class="btn btn-clear"
+                                        style="width: 100%"><i class="fa fa-refresh"></i> Clear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="details allcp-form theme-info m10 mb10">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-12 col-12 col-xl-3 floating-form floating-label">
+
+                                <input type="text" name="sku" formControlName="sku" #sku
+                                    class="floating-input gui-input sff" readonly placeholder="">
+                                <span class="highlight"></span>
+                                <label>SKU / Barcode</label>
+
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-12 col-xl-2 floating-form floating-label">
+
+                                <input type="text" name="style" formControlName="style" #style
+                                    class="floating-input gui-input sff" readonly placeholder="">
+                                <span class="highlight"></span>
+                                <label>Style</label>
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 select-forms">
+
+                                <label>Color</label>
+                                <select name="color" formControlName="color" #color class="gui-input"
+                                    (change)="colorname()" [ngClass]="{'red-border': myForm.controls['color'].invalid}">
+                                    <!-- <option value="" selected="selected">Select color</option> -->
+                                    <option *ngFor="let item of CurrentColorList" value="{{item.colorCode}}">
+                                        {{item.colorCode}}</option>
+
+                                </select>
+                                <i class="fa fa-angle-down"></i>
+
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12 select-forms">
+
+                                <label>Size</label>
+                                <select name="size" formControlName="size" #size class="gui-input" (change)="sizename()"
+                                    [ngClass]="{'red-border': myForm.controls['size'].invalid}">
+                                    <!-- <option value="" selected="selected">Select size</option> -->
+                                    <option *ngFor="let item of CurrentSizeList" value="{{item.colorCode}}">
+                                        {{item.colorCode}}</option>
+
+                                </select>
+                                <i class="fa fa-angle-down"></i>
+
+                            </div>
+                            <!-- <div class="col-lg-2 col-md-2 col-sm-12 col-12 col-xl-2">
+                                <label class="field">
+                                    <p>Color</p>
+                                    <input type="text" name="color" formControlName="color" #color class="gui-input sff" readonly
+                                    placeholder="" >
+                                </label>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-12 col-xl-2">
+                                <label class="field">
+                                    <p>Size</p>
+                                    <input type="text" name="size" formControlName="size" #size class="gui-input sff" readonly
+                                        placeholder="" >
+                                </label>
+                            </div> -->
+                            <div class="col-xl-3 col-lg-3  col-md-3 col-sm-12 col-12 floating-form floating-label">
+
+                                <input type="text" name="price" formControlName="price" #price
+                                    class="gui-input floating-input sff" readonly placeholder="">
+                                <span class="highlight"></span>
+                                <label>Price</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive sales-second-section2 return-table" id="res">
+                        <table class="table allcp-form theme-warning">
+                            <thead>
+                                <tr class="main-tr">
+                                    <th>S.No</th>
+                                    <th>Store Code</th>
+                                    <th>Store Name</th>
+                                    <th>Stock Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor = "let item of json; let i = index"> -->
+                                <tr *ngFor="let item of json; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{item.storeCode}}</td>
+                                    <td>{{item.storeName}}</td>
+                                    <td>{{item.stockQty}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </section>
+</form>

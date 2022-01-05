@@ -1,0 +1,19 @@
+<label class="col-sm-4 col-md-8 text-right control-label vertical-label" for="inputPassword3"> Select Customer Name</label>  
+<div class="col-sm-8 col-md-4 text-right">  
+    <div class="form-group">  
+        <div class="input-group">  
+            <input class="form-control" *ngIf="flag" type="text" [(ngModel)]="CustomerName" (keyup)="searchClient(CustomerName)" />  
+            <input class="form-control" [(ngModel)]="CustomerName" disabled *ngIf="!flag" type="text" />  
+              
+        </div>          
+    </div>  
+    <div class="search-result" *ngIf="flag">  
+        <ul>  
+            <li *ngFor="let client of clients | async">  
+                <a (click)="onselectClient(client)">{{client.customerName}}</a>  
+            </li>             
+        </ul>  
+    </div>  
+  
+  
+</div>  

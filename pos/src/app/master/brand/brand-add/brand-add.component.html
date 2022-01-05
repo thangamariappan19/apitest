@@ -1,0 +1,179 @@
+<form [formGroup]="myForm" novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../brand">{{ 'BRAND.BRAND_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'BRAND.CREATE_BRAND' | translate }}</h4>         
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="brandCode" autocomplete="off"
+                                                formControlName="brandCode" #brandCode maxlength="5"
+                                                [ngClass]="{'red-border': myForm.controls['brandCode'].invalid}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                                class="gui-input floating-input" placeholder="{{ 'BRAND.BRAND_CODE' | translate }}">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'BRAND.BRAND_CODE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="brandName" autocomplete="off"
+                                                formControlName="brandName" #brandName
+                                                [ngClass]="{'red-border': myForm.controls['brandName'].invalid}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                                class="gui-input floating-input" placeholder="{{ 'BRAND.BRAND_NAME' | translate }}">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'BRAND.BRAND_NAME' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                           
+                                            <input type="text" name="shortBrandName" autocomplete="off"
+                                                formControlName="shortBrandName" #shortBrandName
+                                                class="gui-input floating-input" placeholder="{{ 'BRAND.SHORT_BRAND_NAME' | translate }}">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'BRAND.SHORT_BRAND_NAME' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="arabicName" autocomplete="off" style="text-align:right;"
+                                                formControlName="arabicName" #arabicName
+                                                [ngClass]="{'red-border': myForm.controls['arabicName'].invalid}"
+                                                class="gui-input floating-input" placeholder="{{ 'BRAND.ARABIC_NAME' | translate }}">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'BRAND.ARABIC_NAME' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'BRAND.BRAND_TYPE' | translate }}</label>
+                                       
+                                            <select name="brandTypeID" formControlName="brandTypeID" #brandTypeID 
+                                            [ngClass]="{'red-border': myForm.controls['brandTypeID'].invalid}" class="gui-input" >
+                                                <option value="">Select Brand Type</option>                                            
+                                                <option value="OwnBrand">OwnBrand</option>
+                                                <option value="Franchise Brand">Franchise Brand</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="remarks" autocomplete="off"
+                                                formControlName="remarks" #remarks
+                                                class="gui-input floating-input" placeholder="{{ 'COMMON.REMARKS' | translate }}">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                       
+                                    </div>                                    
+                                    <div class="col-md-6 av-down">
+                                        <label class="av-image">{{ 'BRAND.BRAND_LOGO' | translate }}</label>
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input type='file'  #fileInput formControlName="fileInput" id="imageUpload" name="imageUpload"
+                                                 (change)="picked($event, null)" accept=".png, .jpg, .jpeg" />
+                                            
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <!-- <div id="imagePreview"
+                                                    style="background-image: url(../../../../assets/img/preview-image.png);">
+                                                </div> -->
+                                                <div id="imagePreview">
+                                                    <img src="{{ image}}">
+                                                </div>
+                                            </div>
+                                            <label for="imageUpload" class="store-master-upload "><i class="fa fa-upload"></i></label>
+                                            <div class="image-delete">
+                                                <button (click)="delImage()" class="btn btn danger"><i class="fa fa-window-close"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt30 m310">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                                    
+                                
+                                   <div class="row default-forms">
+                                   
+                                    <div class="offset-md-3  col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button" 
+                                        [disabled]="myForm.pristine || myForm.invalid" (click)="addBrand()"><i
+                                                class="fa fa-check-circle-o"></i> Save
+                                                
+                                        </button>
+                                    </div>
+                                  
+                                    <div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button" (click)="clear_controls()"><i
+                                            class="fa fa-refresh"></i> Clear</button>                                        
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+
+                                    </div>
+                                   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

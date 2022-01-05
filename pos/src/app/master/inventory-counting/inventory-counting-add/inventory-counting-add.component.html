@@ -1,0 +1,154 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">Home</a>
+                </li>
+                <li class="">
+                    <a routerLink="../inventory-counting">Inventory Counting Master</a>
+                </li>
+                <li class="breadcrumb-current-item">Create</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>CREATE INVENTORY COUNTING</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info default-forms">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6 mb20">
+                                    <label>DocumentNo</label>
+                                    
+                                        <input type="text" name="documentNo" autocomplete="off" 
+                                            formControlName="documentNo" #documentNo
+                                            [ngClass]="{'red-border': myForm.controls['documentNo'].invalid}"
+                                            class="gui-input" placeholder="DocumentNo">
+                                    
+                                </div>
+                                <div class="col-md-6 mb20">
+                                    <label>DocumentDate</label>
+                                    
+                                        <input type="text" name="documentDate" autocomplete="off" 
+                                            formControlName="documentDate" #documentDate
+                                            [ngClass]="{'red-border': myForm.controls['documentDate'].invalid}"
+                                            class="gui-input" placeholder="DocumentDate">
+                                    
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body country-table" style="height: 200px; overflow-y: scroll">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">SKU Code</th>
+                                            <th class="">Bar Code</th>
+                                            <th class="">Supplier Bar Code</th>
+                                            <th class="">Style Code</th>
+                                            <th class="">Brand Code</th>
+                                            <th class="">Color Code</th>
+                                            <th class="">Size Code</th>
+                                            <th class="">Stock Qty</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of inventorySystemStockList; let i = index;">
+                                            <td>{{i+1}}</td>
+                                            <td>{{item.skuCode}}</td>
+                                            <td>{{item.barCode}}</td>
+                                            <td>{{item.supplierBarCode}}</td>
+                                            <td>{{item.styleCode}}</td>
+                                            <td>{{item.brandCode}}</td>
+                                            <td>{{item.colorCode}}</td>
+                                            <td>{{item.sizeCode}}</td>
+                                            <td>{{item.stockQty}}</td>
+                                            <!--<td><input type="text" name="receivedQty" value={{item.receivedQty}} [(ngModel)]="item.receivedQty" [ngModelOptions]="{standalone: true}" style="text-align:center;"
+                                                class="gui-input" autocomplete="off" (change)="addQTY()"></td>
+                                            <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                    class="cash-remove"><i class="fa fa-remove"></i></a>
+                                                </td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                                  
+                    <div class="offset-md-9 col-md-3">
+                        <label></label>
+                                    
+                                    <input type="text" name="totqty" autocomplete="off" readonly
+                                        formControlName="totqty" #totqty style="text-align:right;"
+                                        class="gui-input inventory-form" placeholder="">
+                                   
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-md-12 mb20">
+                        <label>Remarks</label>
+                                    
+                                    <input type="text" name="remarks" autocomplete="off" readonly
+                                        formControlName="remarks" #remarks style="text-align:right;"
+                                        class="gui-input inventory-form-two" placeholder="">
+                                        <i class="arrow"></i>
+                                    
+                    </div>
+                </div>
+                <div class="row default-forms">
+                    <div class="offset-md-3 col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-success btn-block common-button"
+                        (click)="getStoctList()" ><i
+                                class="fa fa-save"></i> Inventory Initialize
+
+                        </button>
+                    </div>
+                    
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-primary btn-block common-button" [disabled]="Freezebtn" (click)="Freeze_Stock()">
+                            <i class="fa fa-check-circle-o"></i> Freeze Stock</button>
+
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-cancel btn-block common-button" (click)="Close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+                   
+                   
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

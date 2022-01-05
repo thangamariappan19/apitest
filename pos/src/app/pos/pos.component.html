@@ -1,0 +1,769 @@
+
+
+<form [formGroup]="myForm" novalidate>
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="mainpos-section" style="margin-left: 0px">
+             
+        <div class="mainpos-common-details-title">
+            <!-- initial title row -->
+            <div class="row">
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                  
+                    
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                 
+                    
+                  </div>
+
+                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+                 
+                  
+                 </div>
+
+            </div>
+           <!-- initial title row -->
+            </div>
+
+
+
+
+          <!-- grid and side menu -->
+
+          <div class="pos-grid-sidemenu-section">
+
+          <div class="row">
+
+
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 tab-second medium-second enlarge-second" id="second">
+
+          
+          <!-- new billing -->
+ 
+       
+           <div class="mainpos-common-details-dummy">
+
+            
+               <div class="mainpos-employee-content mec"  style="margin-top: 0px;">
+
+
+               <div class="row">
+
+                   <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+
+                        <!-- <div class="mainpos-first-div">
+                            <img src="assets/img/p-icon1.png" alt>
+                        </div>
+                        <div class="mainpos-sales-employee">
+                        <p>Sales Employee</p>
+                        </div> -->
+
+
+                            <div class="">
+
+                                <p style="margin-left: 15px;">Sales Employee</p>
+
+                                <p style="margin-left: 15px;" class="emp-img"><img src="assets/img/pemp-icon.png" alt="">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Number</mat-label>
+                                        <input type="text"
+                                            placeholder="Sale EmployeeName"
+                                            aria-label="Number"
+                                            matInput
+                                            [formControl]="myControl"
+                                            name="myControl"
+                                            [matAutocomplete]="auto1">
+                                            <button  type="button" mat-button mat-icon-button  matSuffix (click)="Saleemployeeclear_search()">
+                                                <mat-icon style="color: #2d6e8c; position: absolute;
+                                                margin-left: -55px;
+                                                top: 0;">close</mat-icon>
+                                                </button>  
+                                            <i _ngcontent-ddt-c295="" class="fa fa-angle-down" style="position: absolute;
+                                            left: 90%; color: #1fa5e0;"></i>
+                                        <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onEmpSelectionChange($event)" [displayWith]="displaysaleEmployeeName">
+                                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                            {{option.employeeName}}
+                                        </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                
+                                    <!-- <ng-multiselect-dropdown [placeholder]="'Select salesemployee'"
+                                                [settings]="sales_employee" [data]="employee_details"
+                                                [(ngModel)]="selectedsales_employee" 
+                                                [ngModelOptions]="{standalone: true}">
+                                            </ng-multiselect-dropdown> -->
+                                    <!-- <select  class="gui-input" >
+                                    <option *ngFor="let item of employee_details" value="{{item.id}}">{{item.employeeName}}</option>
+                                </select> -->
+                                </p>
+
+                            </div>
+
+                    </div>
+
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+
+                          
+                                <!-- {{ current_employee != null && current_employee.employeeName != null ? current_employee.employeeName : '' }}</p> -->
+                               <!-- <div class="emp-border-one"></div> -->
+                               <!-- <div class="emp-border-two"></div> -->
+
+                               <div class="send-invoice mainpos-invoicebg">
+                                   
+                                        
+
+                                            <div>
+                                                <p>Send Invoice by </p>
+                                                <!-- <span class="send-invoice-text">Send Invoice By :</span> -->
+                                            </div>
+
+                                            <div class="button-group-pills share-invoice" data-toggle="buttons" style="margin-left: 0px;
+                                            margin-top: -9px;">
+                                                    
+                                                    <label class="btn btn-default active">
+                                                        <input type="radio" name="options" checked="">
+                                                        <div><i class="fa fa-envelope"></i></div>
+                                                    </label>
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="options">
+                                                        <div><i class="fa fa-whatsapp"></i></div>
+                                                    </label>
+                                                    <label class="btn btn-default">
+                                                        <input type="radio" name="options">
+                                                        <div><i class="fa fa-comment"></i></div>
+                                                    </label>
+                                            </div>
+                                             
+
+                                        
+
+                               </div>
+                        
+
+                   </div>
+
+                   </div>
+
+                   </div>
+
+
+                   <div class="row">
+
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 first-section-top">
+
+                                    <div class="mainpos-second-div">
+                                        <img src="assets/img/p-icon2.png" alt>
+                                    </div>
+                                    <div class="mainpos-billing-details">
+                                    <p> Billing Details</p>
+                                    </div>
+
+                                <div class="mainpos-billing-content">
+
+                                    <div classs="mainpos-billing-content-grid">
+                                        <p><span class="p-title">POS</span> <span class="p-detail">{{pos_Name}}</span></p>
+
+                                        <p><span class="p-title">Date</span> <span class="p-detail">{{ invoice.businessDate | date: 'dd-MM-yyyy' }}</span></p>
+                                        <p><span class="p-title">Invoice Number</span> <span class="p-detail">{{ invoice.invoiceNo }}</span></p>
+                                        <p><span class="p -title">Shop Name</span> <span class="p-detail">{{ storeName }}</span></p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 first-section-top">
+
+                                    <div class="mainpos-second-div">
+                                        <img src="assets/img/p-icon3.png" alt>
+                                    </div>
+                                    <div class="mainpos-customer-details">
+                                    <p> Customer Details <span class="maincustomer-edit"><a (click) = "edit_customer()"><i class="fa fa-edit"></i></a></span></p>
+                                    </div>
+
+                                <div class="mainpos-customer-content">
+
+                                    <div classs="mainpos-customer-content-grid">
+                                        <p><span class="p-title">Name</span> <span class="p-detail">{{ customer_info != null && customer_info.customerName != null ? customer_info.customerName : '' }}</span></p>
+                                        <p><span class="p-title">Phone</span> <span class="p-detail">{{ customer_info != null && customer_info.phoneNumber != null ? customer_info.phoneNumber : '' }}</span></p>
+                                        <p><span class="p-title">Loyalty Point</span> <span class="p-detail">{{ loyaltyPoint }}</span></p>
+                                        <p><span class="p-title">Loyalty Plan</span><span class="p-detail">{{ loyaltyPlan }}</span></p>
+
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+
+
+                    </div>
+
+           </div>
+
+            
+            <!-- new billing -->
+
+
+                          
+            <!-- pos menus -->
+
+
+           <div class="mainpos-menu-section">
+
+                    <div class="row">
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);">
+                            <div class="mainpos-menu-layout">
+                            <span><i class="fa fa-edit"></i></span>
+                            <p>ORDER</p>
+                            </div>
+                            </a>
+
+                        </div>
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);" (click)="goto_invoice()">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-file"></i></span>
+                                <p>INVOICE</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);" (click) = "goto_return()">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-refresh"></i></span>
+                                <p>RETURN</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);"  (click) ="goto_exchange()">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-exchange"></i></span>
+                                <p>EXCHANGE</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);" (click) = "openCouponDialog()" >
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-gift"></i></span>
+                                <p>COUPON</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);" (click) = "goto_stock()">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-database"></i></span>
+                                <p>STOCK</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);" (click) = "goto_findStock()">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-edit"></i></span>
+                                <p>FIND STOCK</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);" (click) = "goto_productsearch()">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-circle"></i></span>
+                                <p>PRODUCT</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);" (click) = "goto_cashinsearch()">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-money"></i></span>
+                                <p>CASH IN</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+                    
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);"  (click) = "goto_cashoutsearch()">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-money"></i></span>
+                                <p>CASH OUT</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+
+                
+                     
+
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);" (click) ="goto_shiftOut()">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-mail-reply"></i></span>
+                                <p>LOG OFF</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+
+                 
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);" (click) = "clear_controls()">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-square"></i></span>
+                                <p>VOID SALE</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+          </div>
+
+          <!-- pos menus -->
+          <!-- product image -->
+
+
+          <div class="row">
+
+                <div class="col-xl-6">
+                    
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-square"></i></span>
+                                <p>BUTTON</p>
+                                </div>
+                            </a>
+
+                        </div>
+                        <!-- <a _ngcontent-lmm-c160="" href="javascript:void(0);" (click) = "openDiscountDialog()" class="discount-link"></a> -->
+                        <div class="col-xl-6 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-square"></i></span>
+                                <p>BUTTON</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+                
+                        <div class="col-xl-6 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-square"></i></span>
+                                <p>BUTTON</p>
+                                </div>
+                            </a>
+
+                        </div>
+                        <div class="col-xl-6 col-lg-3 col-md-2 col-sm-3 col-4">
+
+                            <a href="javascript:void(0);">
+                                <div class="mainpos-menu-layout">
+                                <span><i class="fa fa-square"></i></span>
+                                <p>BUTTON</p>
+                                </div>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-xl-6">
+
+
+
+                        <!-- pos menus -->
+                        <!-- product image -->
+                        <div class="mainpos-product-image">
+
+                            <div class="mainpos-product-image-pic-details">
+                                <p>Color</p>
+                                <mat-nav-list id="scr" class="pos-sc-scroll">
+                                    <mat-list-item *ngFor="let item of CurrentColorList"  >
+                                        <a [ngClass] = "{'highlighter' : item.colorCode == selectedColorName}" matLine >{{ item.colorCode }}</a>
+                                       
+                                    </mat-list-item>
+                                </mat-nav-list>
+                            </div>
+
+                            <div class="mainpos-product-image-pic">
+                                <img src="{{ current_image}}" alt="">
+                            </div>
+                            
+                            <div class="mainpos-product-image-pic-details">
+                                <p>Size</p>
+                                <mat-nav-list id="scr" class="pos-sc-scroll">
+                                    <mat-list-item *ngFor="let item of CurrentSizeList" >
+                                        <a [ngClass] = "{'highlighter' : item.colorCode == selectedSize}" matLine>{{ item.colorCode }}</a>
+                                     
+                                    </mat-list-item>
+                                  </mat-nav-list>
+                                <!-- <p>SKU Name</p>
+                                <span>{{temp_SkuName}}</span> -->
+                               
+
+                            </div>
+
+
+                            
+    
+                        </div>
+                         <!-- product image -->
+
+
+                
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 tab-first medium-first" id="first">
+
+                        <!-- search form -->
+
+                        <div class="allcp-form theme-info mainpos-search">
+                            <div class="row">
+                              
+                                <div class="col-xl-10 col-lg-10 col-md-9 col-sm-10 col-9 floating-form floating-label" style="margin-bottom: 0;">
+                                   
+                                    <input (keyup.enter)="sku_changed()" matInput type="text" name="sku_code"  class="gui-input floating-input" [matAutocomplete]="auto2" [formControl]="searchCustomerCtrl" formControlName="sku_code" #sku_code 
+                                    autocomplete="off" placeholder="Search Customer / Item / Stock">
+                                    <mat-autocomplete  id="pms" #auto2="matAutocomplete" class="pos filtered-search pos-full-search">
+                                        <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                        <ng-container *ngIf="!isLoading">
+                                          <mat-optgroup   *ngFor="let group of filteredCustomers" [label]="group.type">
+                                          <mat-option *ngFor="let customer of group.values" [value]="customer.code">
+
+                                            <div class="col-md-3 pos-search-div"><b><i class="fa fa-list"></i> {{customer.code}}</b></div>  <div class="col-md-6 pos-search-div"><b><i class="fa fa-square"></i> {{customer.name}}</b></div> <div class="col-md-3 pos-search-div"><b><i class="fa fa-check-circle"></i> {{customer.number}}</b></div> 
+                                          
+                                        </mat-option>
+                                        </mat-optgroup>
+                                        </ng-container>
+                                      </mat-autocomplete>
+                                   
+                                    <span class="highlight"></span> 
+                                    <label class="field">Search Customer / Item </label>
+                                 </div>
+                                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-2 col-3">
+                                 <button type="button" id="btn_new_customer"
+                                    (click) = "create_customer()"
+                                        class="btn btn-lg btn-primary btn-block pos-button searchposbt" title="Add Customer">
+                                        <i class="fa fa-user-plus "></i>
+
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <!-- search form -->
+
+                        <!-- grid -->
+
+                        <div id="pms" class="table-responsive pos-sales-section pos-grid-scroll">
+                            <table class="table allcp-form theme-warning">
+                                <thead >
+                                    <tr  class="pos-main-tr">
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Qty</th>
+                                        <th></th>
+                                        <th>Price</th>
+                                        <th>Discount</th>
+                
+                                      <th>Line Total</th>
+                                      <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <ng-container *ngFor="let item of item_details">                                    
+                                        <tr [ngStyle]="item.temp_color != null && item.temp_color != '' ?{'background-color':item.temp_color} : {'background-color': '#fff'}">
+                                            <td>{{item.serialNo}}</td>
+                                            <td>
+                                                {{ get_temp_item_info(item.skuCode, 'name') }} 
+                                                <span>
+                                                    <p class="pos-sku">{{ item.skuCode + ' / '}} <span>{{ get_temp_item_info(item.skuCode, 'barcode') }}</span></p>
+                                                </span>
+                                            
+                                            </td>
+
+                                            <td><a id="qty" href="javascript:void(0)" class="quantity-link">{{ item.qty }}</a></td>
+                                            <td>x</td>
+                                            <td class="pos-amount">{{ item.price.toFixed(decimalPlaces) }}</td>
+                                            <td class="pos-amount">{{ item.discountAmount.toFixed(decimalPlaces) }}</td>
+                                            <!--<td class="pos-amount">{{ item.sellingLineTotal.toFixed(decimalPlaces) }}</td>-->
+                                            <td class="pos-amount">{{ item.sellingPrice.toFixed(decimalPlaces) }}</td>
+                                            <td><a href="javascript:void(0);" (click) = "void_item(item)"><i class="fa fa-remove"></i></a></td> 
+                                        
+                                        </tr>
+                                        <tr class="pos-promotion-name" *ngIf="(item.appliedPromotionID != null && item.appliedPromotionID != 0 && item.appliedPromotionID != '') || (item.discountRemarks != null && item.discountRemarks != '')">
+                                            <td colspan="8" class="promo-notify-class"> 
+                                                <div class="row promo-notify-row">
+                                                    <span class="col-xs-6 pos-promotion-main" *ngIf="item.appliedPromotionID != null && item.appliedPromotionID != 0 && item.appliedPromotionID != ''">
+                                                        <i class="fa fa-check-circle"></i> Promotion {{ item.appliedPromotionID }} Applied
+                                                    </span>
+                                                    <span class="col-xs-6 pos-promotion-main" *ngIf="item.discountRemarks != null && item.discountRemarks != ''">
+                                                        <i class="fa fa-money"></i> {{item.discountRemarks}}
+                                                    </span>
+                                                    <!-- <span class="col-xs-6 pos-promotion-pro">
+                                                        <i class="fa fa-line-chart"></i> Promotion Roundoff - 0.25
+                                                    </span>
+                                                    <span class="col-xs-6 pos-promotion-adj">
+                                                        <i class="fa fa-exchange"></i> Adjustment - 0.5
+                                                    </span> -->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div _ngcontent-lmm-c160="" style="clear: both;"></div>
+                        <div _ngcontent-wsy-c160="" class="table-responsive pos-sales-total-section">
+                        <table _ngcontent-lmm-c160="" class="table allcp-form theme-warning">
+                                <thead _ngcontent-lmm-c160="">
+                                    <tr _ngcontent-lmm-c160="">
+                                        <td _ngcontent-lmm-c160="">Total Items :</td>
+                                        <td _ngcontent-lmm-c160="">{{ invoice.totalQty }}</td>
+                                        <td _ngcontent-lmm-c160="">Tax <span _ngcontent-lmm-c160="" class="pos-td">{{ '(' + taxPercentage.toFixed(2) + '%)' }}</span></td>
+                                        <td _ngcontent-lmm-c160="">{{ invoice.taxAmount.toFixed(decimalPlaces) }}</td>
+                                        <td _ngcontent-lmm-c160=""><a _ngcontent-lmm-c160="" href="javascript:void(0);" (click) = "openDiscountDialog()" class="discount-link">Discount <span _ngcontent-lmm-c160="" class="pos-td"> :</span><span class="pos-disctd">{{ invoice.totalDiscountType == 'Percentage' ? invoice.totalDiscountPercentage.toFixed(2) + '%' : '' }} </span></a></td>
+                                        <td _ngcontent-lmm-c160="">{{ invoice.totalDiscountAmount.toFixed(decimalPlaces) }}</td>
+                                        <!-- <td _ngcontent-lmm-c160=""><a _ngcontent-lmm-c160="" href="javascript:void(0);" (click) = "openDiscountDialog()" class="discount-link">Discount <span _ngcontent-lmm-c160="" class="pos-td"> :</span><span class="pos-td">{{ invoice.totalDiscountType == 'Percentage' ? invoice.totalDiscountPercentage.toFixed(2) + '%' : '' }} </span></a></td>
+                                        <td _ngcontent-lmm-c160="">{{ invoice.totalDiscountAmount.toFixed(decimalPlaces) }}</td> -->
+                                    </tr>
+                                    <tr _ngcontent-lmm-c160=""><td _ngcontent-lmm-c160="">Sub Total :</td>
+                                        <td _ngcontent-lmm-c160="" class="pos-tamount">{{ invoice.subTotalAmount.toFixed(decimalPlaces) }}</td>
+                                        <td _ngcontent-lmm-c160="">Before Round Off :</td>
+                                        <td _ngcontent-lmm-c160="" class="pos-tamount">{{ invoice.beforeRoundOffAmount.toFixed(decimalPlaces) }}</td>
+                                        <td _ngcontent-lmm-c160="">Round Off :</td>
+                                        <td _ngcontent-lmm-c160="" class="pos-tamount">{{ invoice.roundOffAmount.toFixed(decimalPlaces) }}</td>
+                                    </tr>
+                                    <tr _ngcontent-lmm-c160="">
+                                        <td _ngcontent-lmm-c160="" colspan="3">Invoice Total :</td>
+                                        <td _ngcontent-lmm-c160="" colspan="3" class="pos-tamount" style="text-align: right;">{{ currency_code + ' ' + invoice.netAmount.toFixed(decimalPlaces) }}</td>
+                                    </tr>
+                                </thead>
+                        </table>
+                       </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    <!-- mainpos-buttons section -->
+           
+    <div class="mainpos-button-section">
+
+               <div class="row">
+
+
+                   <div class="col">
+
+                    <button type="button"  (click) = "goto_recall()" class="btn mainpos-recall"><i class="fa fa-mail-reply"></i> RECALL</button>
+
+                   </div>
+
+                
+
+                    <div class="col">
+
+                        <button type="button"  class="btn mainpos-cancel"><i class="fa fa-close"></i> CANCEL</button>
+
+                    </div>
+
+                    <div class="col">
+
+                        <button type="button" (click) ="hold_invoice()" class="btn mainpos-hold"><i class="fa fa-pause"></i> HOLD</button>
+
+                    </div>
+
+                    <div class="col button-top">
+
+                        <button type="button" (click) = "openDialog('payment')" class="btn mainpos-payment"><i class="fa fa-money"></i> PAYMENT</button>
+
+                    </div>
+
+
+                    <div class="col button-top button-tops">
+
+                        <button type="button" (click) = "openDialog('quick')" class="btn mainpos-quickpay"><i class="fa fa-check-circle"></i> QUICK PAY</button>
+ 
+                    </div>
+
+                
+
+                   <!-- <div class="col ">
+
+                        <button type="button" (click) ="goto_shiftOut()" class="btn mainpos-logoff"><i class="fa fa-sign-out"></i> LOG OFF</button>
+
+                    </div> -->
+
+
+               </div>
+
+
+
+           </div>
+
+           <div id="maindisc" style="display:none">
+            <div class="allcp-form theme-info">
+                <div class="text-center">
+                    <div class="switchs-disc">
+                        
+                        <input type="radio" 
+                            class="switch-inputs-disc" 
+                            name="current_discount_type" 
+                            value="Amount" 
+                            id="disc-cash" 
+                            [checked] = "current_discount_type == 'Amount' ? true : false">
+                            <!-- class="switch-labels-disc switch-label-off" -->
+                        <label for="disc-cash" 
+                            (click) = "discount_type_changed('Amount')"
+                            class="switch-labels-disc"
+                            [ngClass] = "{ 'switch-label-off': current_discount_type == 'Amount', 'switch-label-on': current_discount_type == 'Percentage' }">
+                                {{ currency_code }}
+                        </label>
+                        <input type="radio"
+                            class="switch-inputs-disc" 
+                            name="current_discount_type" 
+                            value="Percentage" 
+                            id="disc-percent" 
+                            [checked] = "current_discount_type == 'Percentage' ? true : false">
+                        <label for="disc-percent" 
+                            (click) = "discount_type_changed('Percentage')"
+                            class="switch-labels-disc"
+                            [ngClass] = "{ 'switch-label-off': current_discount_type == 'Percentage', 'switch-label-on': current_discount_type == 'Amount' }">
+                                %
+                        </label>
+                        <span class="switch-selection-disc"></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mt5">
+                    <div class="col-md-12">
+                        {{ current_discount_type }}
+                    </div>
+                    <div class="col-md-6">
+                        <input type="number" 
+                            name="discount_value" 
+                            class="gui-input " 
+                            autocomplete="off"
+                            formControlName="discount_value" #discount_value
+                            placeholder="">
+                    </div>
+                    <div class="col-md-3">
+                        <button 
+                            (click) = "apply_discount()"
+                            class="btn btn-pops close">
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button 
+                            (click) = "cancel_discount()"
+                            class="btn btn-popd close">
+                            <i class="fa fa-remove"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="maintax" style="display:none">
+            <div class="allcp-form theme-info">
+                <div class="text-center">
+                    <div class="switchs-tax">
+                        <input type="radio" class="switch-inputs-tax" name="view" id="tax-cash">
+                        <label for="tax-cash" class="switch-labels-tax switch-label-off">$</label>
+                        <input type="radio" class="switch-inputs-tax" name="view" id="tax-percent">
+                        <label for="tax-percent" class="switch-labels-tax switch-label-on">%</label>
+                        <span class="switch-selection-tax"></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mt5">
+                    <div class="col-md-6">
+                        <input type="text" name="qty" class="gui-input" placeholder="">
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-pops"><i class="fa fa-check"></i></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-popd"><i class="fa fa-remove"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+           <!-- grid and side menu -->
+
+
+     </section>   
+    
+    
+</form>

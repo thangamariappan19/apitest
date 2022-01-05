@@ -1,0 +1,383 @@
+<form [formGroup]="myForm" novalidate>
+
+    <!-- Main Wrapper -->
+    <section id="content_wrapper">
+
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../Country">{{ 'COUNTRY.COUNTRY_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <header id="topbar" class="ph10">
+            <div class="topbar-left">
+                <ul class="nav nav-list nav-list-topbar pull-left">
+                    <li>{{ 'COUNTRY.CREATE_COUNTRY' | translate }}
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <!-- /Topbar -->
+
+        <section class="grids-search grid-search-row allcp-form">
+            <div class="row title-section-row">
+                <h4>{{ 'COUNTRY.CREATE_COUNTRY' | translate }}</h4>             
+            </div>
+       </section>
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+
+            <div class="chute chute-center">
+                <div class="center-block">
+
+                    <!-- Spec Form -->
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+
+                            <div class="panel-body">
+                                <!-- Basic -->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="section floating-form floating-label">
+                                            
+                                                <input type="text" name="countryCode" id="countryCode"
+                                                    class="gui-input" placeholder="{{ 'COUNTRY.COUNTRY_CODE' | translate }}"
+                                                    formControlName="countryCode" #countryCode
+                                                    [ngClass]="{'red-border': myForm.controls['countryCode'].invalid}"
+                                                    class="gui-input floating-input" autocomplete="off"
+                                                    (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COUNTRY.COUNTRY_CODE' | translate }}</label>
+                                           
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="section floating-form floating-label">
+                                            
+                                                <input type="text" name="countryName" id="countryName" 
+                                                    formControlName="countryName" #countryName
+                                                    [ngClass]="{'red-border': myForm.controls['countryName'].invalid}"
+                                                    class="gui-input floating-input" placeholder="{{ 'COUNTRY.COUNTRY_NAME' | translate }}" autocomplete="off"
+                                                    (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COUNTRY.COUNTRY_NAME' | translate }}</label>
+                                           
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <div class="section select-forms">
+                                            <label>{{ 'COUNTRY.LANGUAGE' | translate }}</label>
+                                            
+                                                <select name="languageName" id="languageName"
+                                                    formControlName="languageName" #languageName class="gui-input"
+                                                    [ngClass]="{'red-border': myForm.controls['languageName'].invalid}">
+                                                    <option value="" selected="selected">Select Language</option>
+                                                    <option *ngFor="let item of LanguageMasterList"
+                                                        value="{{item.languageName}}">{{item.languageName}}</option>
+                                                </select>
+                                                <i class="fa fa-angle-down"></i>
+                                            
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="section floating-form floating-label">
+                                            
+                                                <input type="email" name="emailID" id="emailID" class="gui-input floating-input" pattern ="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                    [ngClass]="{'red-border': myForm.controls['emailID'].invalid}"
+                                                    formControlName="emailID" #emailID placeholder="{{ 'COUNTRY.EMAIL' | translate }}" autocomplete="off"
+                                                    spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COUNTRY.EMAIL' | translate }}</label>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="section select-forms">
+                                            <label>{{ 'COUNTRY.CURRENCY' | translate }}</label>
+                                            
+                                                <select name="currency" formControlName="currency" #currency
+                                                    (change)="currencyCode()" class="gui-input"
+                                                    [ngClass]="{'red-border': myForm.controls['currency'].invalid}">
+                                                    <option value="" selected="selected">Select Currency</option>
+                                                    <option *ngFor="let item of CurrencyMasterList" value="{{item.id}}">
+                                                        {{item.internationalCode}}</option>
+                                                </select>
+                                                <i class="fa fa-angle-down"></i>
+                                            
+                                        </div>
+                                    </div>
+
+
+
+                                <div class="col-md-4">
+                                    <div class="section select-forms">
+                                        <label>{{ 'COUNTRY.CURRENCY_SEPARATOR' | translate }}</label>
+                                        
+                                            <select id="currencySeparator" class="gui-input" name="currencySeparator"
+                                                formControlName="currencySeparator" #currencySeparator>
+                                                <option value="">--Currency Seperator--</option>
+                                                <option value="-">-</option>
+                                                <option value=".">.</option>
+                                                <option value="/">/</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="section select-forms">
+                                            <label>{{ 'COUNTRY.DATE_FORMAT' | translate }}</label>
+                                            
+                                                <select id="dateFormat" class="dateFormat gui-input" formControlName="dateFormat"
+                                                    #dateFormat>
+                                                    <option value="">--Date Format--</option>
+                                                    <option value="dd-mm-yyyy">dd-mm-yyyy</option>
+                                                    <option value="yyyy-mm-dd">yyyy-mm-dd</option>
+                                                </select>
+                                                <i class="fa fa-angle-down"></i>
+                                           
+                                        </div>
+                                    </div>
+
+
+                              
+                                    <div class="col-md-6">
+                                        <div class="section select-forms">
+                                            <label>{{ 'COUNTRY.DATE_SEPARATOR' | translate }}</label>
+                                            
+                                                <select id="dateSeparator"  class="gui-input" name="dateSeparator"
+                                                    formControlName="dateSeparator" #dateSeparator>
+                                                    <option value="">--Date Seperator--</option>
+                                                    <option value="-">-</option>
+                                                    <option value=".">.</option>
+                                                    <option value="/">/</option>
+                                                </select>
+                                                <i class="fa fa-angle-down"></i>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+
+                                  
+                                <div class="row">
+                                <div class="col-md-6">
+                                        <div class="section floating-form floating-label">
+                                            
+                                            
+                                                <input type="text" name="decimalPlaces" id="decimalPlaces"
+                                                    formControlName="decimalPlaces" class="gui-input floating-input" #decimalPlaces
+                                                    (keypress)="restrictExceptNos($event)" 
+                                                    placeholder="{{ 'COUNTRY.DECIMAL_PLACES' | translate }}" autocomplete="off"
+                                                    maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COUNTRY.DECIMAL_PLACES' | translate }}</label>
+                                            
+                                        </div>
+                                    </div>
+                               
+
+
+                                    <div class="col-md-6">
+                                        <div class="section select-forms">
+                                            <label>{{ 'COUNTRY.NEGATIVE_SIGN' | translate }}</label>
+                                            
+                                                <select id="negativeSign"  class="gui-input" name="negativeSign"
+                                                    formControlName="negativeSign" #negativeSign>
+                                                    <option value="">--Negative Sign--</option>
+                                                    <option value="-">-</option>
+                                                    <option value="--">--</option>
+                                                </select>
+                                                <i class="fa fa-angle-down"></i>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <div class="row"> 
+                                <div class="col-md-6">
+                                        <div class="section floating-form floating-label">
+                                            
+                                            
+                                                <input type="number" name="nearByRoundOff" 
+                                                    formControlName="nearByRoundOff" id="nearByRoundOff"
+                                                    class="gui-input floating-input" placeholder="{{ 'COUNTRY.NEARBY_ROUND_OFF' | translate }}" #nearByRoundOf                
+                                                    onKeyPress="if(this.value.length==4) return false;" numbersOnly autocomplete="off" />
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COUNTRY.NEARBY_ROUND_OFF' | translate }}</label>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="section floating-form floating-label">
+                                            
+                                                <input type="number" name="promotionRoundOff"
+                                                    formControlName="promotionRoundOff" id="promotionRoundOff"
+                                                    class="gui-input floating-input" placeholder="{{ 'COUNTRY.PROMOTION_ROUND_OFF' | translate }}"
+                                                    onKeyPress="if(this.value.length==4) return false;"
+                                                    #promotionRoundOff autocomplete="off">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COUNTRY.PROMOTION_ROUND_OFF' | translate }}</label>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="clearfix"></div>-->
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="section select-forms">
+                                            <label>{{ 'COUNTRY.TAX' | translate }}</label>
+                                            <select name="taxID" formControlName="taxID" #taxID class="gui-input"
+                                                (change)="taxCode()"
+                                                [ngClass]="{'red-border': myForm.controls['taxID'].invalid}">
+                                                <option value="" selected="selected">Select Tax</option>
+                                                <option *ngFor="let item of TaxList" value="{{item.id}}">
+                                                    {{item.taxCode}}</option>
+                                                <!-- <option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option> -->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="section floating-form floating-label">
+                                            
+                                                <input type="text" name="posTitle" id="posTitle"
+                                                    formControlName="posTitle" #posTitle class="gui-input floating-input"
+                                                    placeholder="{{ 'COUNTRY.POS_TITLE' | translate }}" autocomplete="off"
+                                                    spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COUNTRY.POS_TITLE' | translate }}</label>
+                                            
+                                            
+                                        </div>
+                                    </div>
+
+                                  
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="section">
+                                            <label></label>
+                                            <div class="bs-component">
+                                                <div class="round fill mt10">
+                                                    <input type="checkbox" checked="" formControlName="orginCountry"
+                                                        id="orginCountry" name="orginCountry" #orginCountry >
+                                                    <label for="orginCountry"></label>
+                                                    <p class="label-text leftp">{{ 'COUNTRY.ORIGIN_COUNTRY' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="section">
+                                            <div class="bs-component">
+                                                <div class="round fill mt10">
+                                                    <input type="checkbox" checked="checked"
+                                                        formControlName="creditLimitCheck" id="creditLimitCheck"
+                                                        name="creditLimitCheck" #creditLimitCheck>
+                                                    <label for="creditLimitCheck"></label>
+                                                    <p class="label-text leftp">{{ 'COUNTRY.CREDIT_LIMIT_CHECK' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="section">
+                                            <div class="bs-component">
+                                                <div class="round fill mt10">
+                                                    <input type="checkbox" checked=""
+                                                        formControlName="allowSaleAndRedemption"
+                                                        id="allowSaleAndRedemption" name="allowSaleAndRedemption"
+                                                        #allowSaleAndRedemption>
+                                                    <label for="allowSaleAndRedemption"></label>
+                                                    <p class="label-text leftp">{{ 'COUNTRY.ALLOW_SALE_REDEMPTION' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="section">
+                                            <div class="bs-component">
+                                                <div class="round fill mt10">
+                                                    <input type="checkbox" checked="" id="active"
+                                                        formControlName="active" name="active" #active>
+                                                    <label for="active"></label>
+                                                    <p class="label-text leftp">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="clearfix"></div>
+                                <div class="row default-forms">
+                                    <div class="offset-md-3"></div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                            (click)="addCountry()" [disabled]="myForm.pristine || myForm.invalid"><i
+                                                class="fa fa-check-circle-o"></i> Save</button>
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"
+                                            (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                                            (click)="close()"><i class="fa fa-remove"></i> Close</button>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /Content -->
+    </section>
+    </section>
+</form>

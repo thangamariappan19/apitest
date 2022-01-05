@@ -1,0 +1,248 @@
+<section id="content_wrapper">
+  <!-- Topbar -->
+  <header id="topbar" class="alt">
+    <div class="topbar-left">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-icon">
+          <a routerLink="../home">
+            <span class="fa fa-home"></span>
+          </a>
+        </li>
+        <li class="breadcrumb-link">
+          <a routerLink="../home">Home</a>
+        </li>
+        <li class="breadcrumb-current-item">Style Master</li>
+      </ol>
+    </div>
+  </header>
+
+  <!-- <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <ul class="nav nav-list nav-list-topbar pull-left">
+                <li>Style List
+                </li>
+            </ul>
+        </div>
+        <div class="topbar-right hidden-xs hidden-sm mt5 mr35">
+            <a routerLink="../style-add" class="btn btn-primary add-c btn-sm ml10" title="New Style">
+                <span class="fa fa-plus pr5"></span> Create New</a>
+        </div>
+    </header> -->
+  <!-- /Topbar -->
+
+  <section class="grids-search grid-search-row allcp-form">
+
+
+    <div class="row search-section-row">
+
+      <div class="col-xl-2 col-lg-2 col-md-8 col-sm-8 col-8" style="padding-right: 0px; position: relative;
+            left: -2px; margin-top: 10px;">
+
+        <mat-form-field appearance="outline">
+          <input [(ngModel)]="searchString" matInput id="globalSearch" (keyup.enter)="search_click()"
+            autocomplete="off">
+          <button mat-button mat-icon-button matSuffix (click)="clear_search()" *ngIf="searchString">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4  mt10" style="padding-left: 0px;
+            padding-right: 0px;">
+        <a class="btn btn-primary  add-search btn-sm ml10" title="Search" (click)="search_click()">
+          Search Product</a>
+      </div>
+
+      <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-3  mt10" style="padding-right: 0px;">
+        <a class="btn btn-primary  filter-style add-search btn-sm ml10" title="Refresh"
+        (click)="refresh_click()">
+          <span class="fa fa-refresh pr5"></span> REFRESH</a>
+      </div>
+
+
+      <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-3  m-action mt10">
+
+        <a routerLink="../style-add" class="btn btn-primary add-c btn-sm ml10" style="width: 100%;" title="New Style">
+          <span class="fa fa-plus pr5"></span> STYLE</a>
+
+      </div>
+
+      <!-- <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-3 mt10">
+
+        <a class="btn btn-primary add-c btn-sm ml10 filter-style" style="width: 100%;" title="Filter">
+          SORT BY <span class="fa fa-filter pr5"></span> </a>
+
+      </div> -->
+
+      <div class="col-xl-1 col-lg-no col-md-1 col-sm-no col-none col-md-1">
+
+        <p class="view-text">View</p>
+
+      </div>
+
+      <div class="col-xl-1 col-lg-2 col-md-2 col-sm-3 col-3 mt10" style="padding-left: 0px;">
+        <div class="view-field">
+          <input type="radio" id="radio-one" name="switch-one" value="yes" (change)="GridDisplay($event)" checked />
+          <label for="radio-one"><i class="fa fa-th-large"></i></label>
+          <input type="radio" id="radio-two" name="switch-one" value="no" (change)="GridDisplay($event)" />
+          <label for="radio-two"><i class="fa fa-list-ul"></i></label>
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+  </section>
+
+  <section id="content" class="animated fadeIn">
+    <div>
+      <div class="center-block">
+        <div class="allcp-form theme-info">
+          <div class="panel">
+            <div class="panel-body">
+              <div class="row" [hidden]="isShow">
+                <div class="offset-xl-8 col-xl-1 offset-lg-6 col-lg-1 offset-md-4 col-md-2 offset-sm-3 col-sm-2">
+                  <p class="abs show-text">Show</p>
+                </div>
+                <div class="col-xl-3 col-lg-5 col-md-6 col-sm-7">
+
+                  <mat-paginator [length]=recordCount [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50, 100]"
+                    (page)="CardVieweventEmitted($event)">
+                    <!--onPageChange($event)-->
+                  </mat-paginator>
+                </div>
+              </div>
+              <div class="row list-type-row" [hidden]="isShowList" style="margin-bottom: 25px;">
+
+                <div class="offset-sm-6 col-sm-3 offset-xl-10 col-xl-1 offset-lg-9 col-lg-1 offset-md-5 col-md-4">
+                  <p class="show-text abs">Show</p>
+
+                </div>
+              </div>
+
+              <div class="row style-row mt20" [hidden]="isShow">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" style="margin-bottom: 20px;"
+                  *ngFor="let slide of tblData; let i = index">
+                  <!--<div class="clearfix"></div>-->
+                  <div class="style-item">
+
+
+                    <div class="style-size" id="sz">
+                      <p class="side-text">SIZE</p>
+                      <div class="sizes" *ngFor="let size of slide.scaleDetailMasterList; let j = index">
+
+                        <p *ngIf="j<3"><span>{{size.sizeCode}}</span></p>
+                        <!--<p><span>M</span></p>
+                        <p><span>XL</span></p>
+                        <p><span>S</span></p>-->
+                      </div>
+                      <div class="sizes">
+                        <p style="border: none;"><span>...</span></p>
+                      </div>
+                    </div>
+
+                    <div class="style-image">
+                      <!-- <img src="assets/img/ST4.jpg" alt="Photo of a Shiba Inu"> -->
+
+                      <mat-carousel timings="200ms ease-in" [autoplay]="true" interval="6000" color="white"
+                        [hideIndicators]="false">
+                        <mat-carousel-slide *ngFor="let imgs of slide.itemImageMasterList; let i = index"
+                          [image]="imgs.skuImage" [hideOverlay]="false"></mat-carousel-slide>
+                      </mat-carousel>
+
+
+                      <div class="style-image-content">
+                        <p class="style-title">{{slide.styleCode}} </p>
+                        <p>{{slide.styleName}}</p>
+                      </div>
+
+                      <div class="style-buttons">
+                        <!--<button class="btn btn-style-add"><i class="fa fa-plus"></i></button>-->
+                        <a routerLink="{{ '/style-edit/' + slide.id.toString() }}" class="btn btn-style-edit">
+                          <i class="fa fa-edit"></i> </a>
+                        <a routerLink="{{ '/style-view/' + slide.id.toString() }}" class="btn btn-style-view">
+                          <i class="fa fa-eye"></i> </a>
+                        <!--<button class="btn btn-style-edit"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-style-view"><i class="fa fa-eye"></i></button>-->
+
+                      </div>
+
+                    </div>
+
+                    <div class="style-color">
+                      <p class="side-text">COLOR</p>
+
+                      <!-- colors -->
+                      <div class="" *ngFor="let imgs of slide.colorMasterList; let k = index">
+                        <div class="green-circle" *ngIf="k<3"
+                          [ngStyle]="imgs.shade != null && imgs.shade != '' ? {'background-color': imgs.shade} : {'background-color': 'white'}">
+                        </div>
+                        <!-- <div class="red-circle"></div>
+                        <div class="yellow-circle"></div>
+                        <div class="blck-circle"></div>-->
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row mt20 style-ngx" [hidden]="isShowList">
+                <ngx-table [configuration]="configuration" [data]="tblData" [columns]="columns" #dataTable
+                  [noResultsTemplate]="noResultsTemplate" [pagination]="pagination" (event)="eventEmitted($event)">
+                  <ng-template let-item>
+                    <td>
+                      <div class="font-small"><img src="{{item.itemImageMasterList[0].skuImage}}" style="width: 70px;">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="font-small">{{item.styleCode}}</div>
+                    </td>
+                    <td>
+                      <span class="font-small" style="color: #00aaff; font-weight: 600;">{{item.seasonName}}</span>
+                    </td>
+
+                    <td>
+                      <p class="font-small list-size list-color" *ngFor="let size of item.scaleDetailMasterList">
+                        {{size.sizeCode}}</p>
+                    </td>
+
+                    <!-- <td>
+                      <span class="font-small">3</span>
+                    </td>-->
+
+                    <td align="center">
+                      <!--<span class="green-circle list-color"></span>
+                      <span class="red-circle list-color"></span>
+                      <span class="yellow-circle list-color"></span>
+                      <span class="blck-circle list-color"></span>-->
+                      <span class="green-circle list-color" *ngFor="let imgs of item.colorMasterList; let i = index"
+                        [ngStyle]="imgs.shade != null && imgs.shade != '' ? {'background-color': imgs.shade} : {'background-color': 'white'}"></span>
+                    </td>
+
+                    <td>
+                      <a routerLink="{{'/style-edit/' + item.id.toString() }}" class="btn style-btn-edit  btn-sm ml10">
+                        EDIT </a><br>
+                      <!--<a routerLink="{{ '/style-edit/' + item.id.toString() }}" class="btn style-btn-add  btn-sm ml10">
+                        ADD </a><br>-->
+                      <a routerLink="{{ '/style-view/' + item.id.toString() }}" class="btn style-btn-view  btn-sm ml10">
+                        VIEW </a><br>
+                    </td>
+                  </ng-template>
+                </ngx-table>
+                <ng-template #noResultsTemplate>
+                  <td [attr.colspan]="5" class="no-results">
+                    No data found :(
+                  </td>
+                </ng-template>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

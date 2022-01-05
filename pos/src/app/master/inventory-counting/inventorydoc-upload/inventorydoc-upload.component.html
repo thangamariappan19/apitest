@@ -1,0 +1,165 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">Home</a>
+                </li>
+                <li class="">
+                    <a routerLink="../inventory-counting">Inventory Counting Master</a>
+                </li>
+                <li class="breadcrumb-current-item">Create</li>
+            </ol>
+        </div>
+    </header>
+
+<section id="content" class="animated fadeIn oap-title-bottom-section">
+    <form [formGroup]="myForm" novalidate>
+    <div class="allcp-form theme-info default-forms oap-div">
+       
+            <div class="row">
+                <div class="col-md-4">
+                    <label>DocumentDate</label>
+                    
+                        <input type="date" name="documentDate" autocomplete="off"
+                         class="gui-input" [valueAsDate]="dateObj" (change)="Onchangedate($event.target.valueAsDate)"
+                         formControlName="documentDate" #documentDate
+                         [ngClass]="{'red-border': myForm.controls['documentDate'].invalid}"
+                         placeholder="Code">
+                    
+                </div>
+                <div class="col-md-4">
+                    <label>DocumentNo</label>
+                        <input type="text" name="documentNo" autocomplete="off" 
+                        formControlName="documentNo" #documentNo
+                       [ngClass]="{'red-border': myForm.controls['documentNo'].invalid}"
+                        class="gui-input" placeholder="DocumentNo">
+                          
+                    
+                </div>
+                <div class="col-md-4 counting-type-label">
+                    <p>Counting Type</p>
+                    <mat-radio-group aria-label="Counting Type" formControlName="countingType" #countingType>
+                        <mat-radio-button value="RFID">RFID</mat-radio-button>
+                        <mat-radio-button value="Barcode">Barcode</mat-radio-button>
+                      </mat-radio-group>
+                        <!-- <input type="text" name="CountingType" autocomplete="off" 
+                            class="gui-input" placeholder="CountingType" readonly> -->
+                    
+                </div>                                   
+            </div> 
+     </div>
+     <div class="allcp-form theme-info oap-div-two">
+
+        <div class="row">
+               
+               <div class="offset-md-4 col-md-4 inv-upload-choose">
+                <div class="style-picture">
+                    <div class="avatar-upload inv-upload">
+                       
+                        <label for="myfile" style="margin-top: -15px;"></label>
+                        <input type="file" #inputFile id="inputFile" name="inputFile" (change)="addfile($event)" accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                       
+
+                    </div>
+                </div> 
+               </div>
+
+        </div>
+
+     
+       
+        <div class="row panel-body">
+                
+                <div class="col-md-6 inv-counting-table " style="margin-top: 20px; margin-bottom: 20px;">
+                    <div class="table-responsive inv-table">
+                        
+                            <div style="text-align: -webkit-center; position: relative;
+                            top: 40%;">
+                                <mat-progress-spinner diameter=40 
+                                                      mode="indeterminate" 
+                                                      color="accent" *ngIf="showSpinner">
+                                </mat-progress-spinner> 
+                            </div>
+                    
+                        <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                            <thead>
+                                <tr class="bg-dark">
+                                    <th class="">Barcode</th>
+                                    <th class="">StockQty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of filelist; let i = index">
+                                <td>{{item.BARCODE}}</td>
+                                <td>{{item.STOCKQTY}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6 inv-counting-table " style="margin-top: 20px; margin-bottom: 20px;">
+                    <div class="table-responsive inv-table">
+                        <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                            <thead>
+                                <tr class="bg-dark">
+                                    <th class="">Barcode</th>
+                                    <th class="">StockQty</th>
+                                    <th class="">SKUCode</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of SummaryStockList; let i = index">
+                                <td>{{item.barCode}}</td>
+                                <td>{{item.stockQty}}</td>
+                                <td>{{item.skuCode}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+        </div>
+
+    </div>
+    <div class="row default-forms inv-upload">
+       
+       
+        <div class="offset-md-2 col-md-3 mt10">
+            <button type="button" class="btn btn-lg btn-success btn-block common-button" [disabled]="btnAddstck" (click)="Add_Stock_Summary()" ><i
+                    class="fa fa-plus"></i> Add Stock Summary </button>
+
+        </div>    
+        <div class="col-md-2 mt10">
+            <button type="button" class="btn btn-lg btn-success btn-block common-button" [disabled]="btnSumstck" (click)="Stock_Summary()" ><i
+                    class="fa fa-database" ></i> Stock Summary </button>
+
+        </div>
+        <div class="col-md-2 mt10">
+            <button type="button" class="btn btn-lg btn-success btn-block common-button" [disabled]="btnSave" (click)="Save_Click()" ><i
+                class="fa fa-check-circle-o"></i> Save Stock </button>
+        </div>
+        <div class="col-md-2 mt10">
+            <button type="button" class="btn btn-lg btn-primary btn-block common-button" [disabled]="btnApprove" (click)="Approval_Click()" ><i
+                class="fa fa-chevron-right"></i> Send to Approvel</button>
+        </div>
+        <div class="col-md-2 mt10">
+            <button type="button" class="btn btn-lg btn-cancel btn-block common-button"  (click)="Reset_Click()" ><i
+                class="fa  fa-check-circle-o"></i>Reset</button>
+        </div>
+        <div class="col-md-2 mt10">
+            <button type="button" class="btn btn-lg btn-cancel btn-block common-button"  (click)="close_Click()" ><i
+                class="fa  fa-remove"></i>Close</button>
+        </div>
+    
+     </div>
+    </form>
+</section>
+</section>

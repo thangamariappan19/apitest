@@ -1,0 +1,195 @@
+<form [formGroup]="myForm" novalidate>
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="sales-content-wrapper" style="margin-left: 0px">
+        <!-- Content -->
+        <section class="animated fadeIn">
+            <header id="topbar" class="ph10 second-top">
+                <div class="topbar-left">
+                    <ul class="nav nav-list nav-list-topbar pull-left">
+                        <li>
+                            <i class="fa fa-refresh"></i> Sales Return
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="topbar-right mt5">
+                    <a href="javascript:void(0)" (click)="goto_pos()" class="btn btn-back btn-sm ml10" title="New">
+                        <span class="fa fa-arrow-left pr5"></span>Back
+                    </a>
+                </div>
+            </header>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-8 col-lg-9 col-xl-9 mt5">
+                    <!--<div class="e-title">
+                        <h4><i class="fa fa-refresh"></i> Sales Return</h4>
+                    </div>-->
+                    <div class="sales-first-form">
+                        <div class="allcp-form theme-info">
+                            <div class="row">
+                                <div
+                                    class="col-8 col-sm-8 col-md-8 col-lg-9 col-xl-9 floating-form floating-label return-input-margin">
+
+                                    <input (keyup.enter)="invoice_no_changed()" matInput type="text" name="invoice_no"
+                                        class="gui-input floating-input" [matAutocomplete]="auto"
+                                        [formControl]="searchSaleReturnCtrl" formControlName="invoice_no" #invoice_no
+                                        placeholder="Search Invoice / SKU Code / Barcode" trim="blur">
+                                    <mat-autocomplete id="pms" #auto="matAutocomplete"
+                                        class="pos filtered-search pos-full-search">
+                                        <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                        <ng-container *ngIf="!isLoading">
+                                            <mat-optgroup *ngFor="let group of filteredSalesReturn"
+                                                [label]="group.type">
+                                                <mat-option *ngFor="let salesreturn of group.values"
+                                                    [value]="salesreturn.code">
+
+                                                    <div class="col-md-3 pos-search-div"><b><i class="fa fa-list"></i>
+                                                            {{salesreturn.code}}</b></div>
+                                                    <div class="col-md-3 pos-search-div"><b><i
+                                                                class="fa fa-check-circle"></i> {{salesreturn.date}}</b>
+                                                    </div>
+                                                    <div class="col-md-6 pos-search-div"><b><i class="fa fa-square"></i>
+                                                            {{salesreturn.name}}</b></div>
+
+                                                </mat-option>
+                                            </mat-optgroup>
+                                        </ng-container>
+                                    </mat-autocomplete>
+                                    <span class="highlight"></span>
+                                    <label>Search Invoice / SKU Code / Barcode</label>
+
+                                </div>
+                                <div class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                                    <button type="button" class="btn btn-lg btn-primary btn-block pos-button"
+                                        (click)="invoice_no_changed()">
+                                        <i class="fa fa-search"></i> Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- table -->
+                    <div class="table-responsive sales-second-section2 return-table" id="res">
+                        <table class="table allcp-form theme-warning">
+                            <thead>
+                                <tr class="main-tr">
+                                    <th></th>
+                                    <th>#</th>
+                                    <th>SKU Code</th>
+                                    <th>Exchanged SKU</th>
+                                    <th>Price</th>
+                                    <th>Discount</th>
+                                    <th>Line Total</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of invoice_details; let i = index">
+                                    <td align="center">
+                                        <input type="checkbox" (change)="return_checked_changed(item)"
+                                            [disabled]="item.oldReturnQty != null && item.oldReturnQty > 0"
+                                            [checked]="item.isReturned">
+                                    </td>
+                                    <td> {{ i + 1 }} </td>
+                                    <td> {{ item.skuCode }} </td>
+                                    <td> {{ item.exchangedSKU }} </td>
+                                    <td> {{ item.price.toFixed(decimal_places) }} </td>
+                                    <td> {{ item.discountAmount.toFixed(decimal_places) }} </td>
+                                    <td> {{ item.lineTotal.toFixed(decimal_places) }} </td>
+                                    <td> {{ item.returnRemarks }} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive sales-total-section">
+                        <table class="table allcp-form theme-warning">
+                            <thead>
+                                <tr>
+                                    <td>Sub Total</td>
+                                    <td> {{ sub_total.toFixed(decimal_places) }} </td>
+                                    <td> {{ 'Tax (' + taxPercentage.toFixed(2) + '%)' }} </td>
+                                    <td> {{ sales_return_header.totalTaxAmount.toFixed(decimal_places) }} </td>
+                                    <td>Return Amount</td>
+                                    <td>{{ currency_code + ' ' +
+                                        sales_return_header.totalReturnAmount.toFixed(decimal_places) }}</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="payment-final mt10">
+                        <div class="row">
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <button type="button" (click)="clear_controls()"
+                                    class="btn qpay pos-button btn-sales-height">
+                                    <i class="fa fa-refresh"></i> Reset</button>
+                            </div>
+                            <!--goto_payment()-->
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <button type="button" (click)="openDialog()"
+                                    class="btn payment pos-button btn-sales-height">
+                                    <i class="fa fa-money"></i>
+                                    Payment
+                                </button>
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <button type="button" (click)="goto_pos()" class="btn hold pos-button btn-sales-height">
+                                    <i class="fa fa-trash"></i> Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
+                    <div class="pos-billing-details">
+                        <h4><i class="fa fa-file"></i> Billing Details</h4>
+                        <div class="customer-details">
+                            <p>
+                                <span class="span-bold">Date:</span>
+                                <span>{{ sales_return_header.documentDate | date: 'dd-MM-yyyy' }}</span>
+                            </p>
+                            <p>
+                                <span class="span-bold">Document Number</span>
+                                <span>{{ sales_return_header.documentNo }}</span>
+                            </p>
+                            <p>
+                                <span class="span-bold">Shop Name:</span>
+                                <span>{{ user_details.storeName }}</span>
+                            </p>
+                            <p>
+                                <span class="span-bold">Invoice Number:</span>
+                                <span>{{ invoice_header != null && invoice_header.invoiceNo != null ?
+                                    invoice_header.invoiceNo : '' }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pos-customer-details">
+                        <h4><i class="fa fa-user"></i> Customer Details </h4>
+                        <div class="customer-details">
+                            <p>
+                                <span class="span-bold">Name:</span>
+                                <span>{{ invoice_header != null && invoice_header.customerName != null ?
+                                    invoice_header.customerName : '' }}</span>
+                            </p>
+                            <p>
+                                <span class="span-bold">Phone:</span>
+                                <span>{{ invoice_header != null && invoice_header.phoneNumber != null ?
+                                    invoice_header.phoneNumber : '' }}</span>
+                            </p>
+                            <p>
+                                <span class="span-bold">Loyalty Point:</span>
+                                <span></span>
+                            </p>
+                            <p>
+                                <span class="span-bold">Loyalty Plan:</span>
+                                <span></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mainpos-product-image mainpos-product-image-pic return-image-pic">
+                        <img src="{{ current_image}}" alt="">
+                    </div>
+                    <!-- images -->
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </section>
+</form>

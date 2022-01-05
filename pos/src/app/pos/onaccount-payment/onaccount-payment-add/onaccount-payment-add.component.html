@@ -1,0 +1,721 @@
+<!-- <section id="content_wrapper">
+    <form [formGroup]="myForm" novalidate>
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="allcp-form theme-info default-forms">
+                <mat-card>
+                    <mat-card-header>
+                    Search
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-4 mb20">
+                                <label>Customer Name/Code/Phone</label>
+                                
+                                    <input type="text" name="CustomerCode" autocomplete="off"
+                                    formControlName="CustomerCode" #CustomerCode
+                                    [ngClass]="{'red-border': myForm.controls['CustomerCode'].invalid}"
+                                    (keydown)="txtSrchCustomer_KeyDown($event)"   class="gui-input" placeholder="Code">
+                                
+                            </div>
+                            <div class="col-md-4 mb20">
+                                <label>Invoice No</label>
+                                
+                                    <input type="text" name="InvoiceNo" autocomplete="off" 
+                                    formControlName="InvoiceNo" #InvoiceNo
+                                    [ngClass]="{'red-border': myForm.controls['InvoiceNo'].invalid}"
+                                    (keydown)="txtSrchInvoiceNo_KeyDown($event)"  class="gui-input" placeholder="InvoiceNo">
+                                
+                            </div>
+                            <div class="col-md-4 mb20">
+                                <label>Total BillBalance Amount</label>
+                                
+                                    <input type="text" name="BillAmount" autocomplete="off" 
+                                    formControlName="BillAmount" #BillAmount
+                                        class="gui-input" placeholder="BillBalanceAmount" readonly> 
+                            </div>                                   
+                        </div> 
+                    </mat-card-content>
+                </mat-card>
+            </div>
+                <div class="allcp-form theme-info">
+                    <mat-card>
+                        <mat-card-header>
+                            Pending Payment List
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="panel-body country-table">
+                                    <div class="table-responsive">
+                                        <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                            <thead>
+                                                <tr class="bg-dark">
+                                                    <th class="">S.No</th>
+                                                    <th class="">Business Date</th>
+                                                    <th class="">Store Code</th>
+                                                    <th class="">Invoice Number</th>
+                                                    <th class="">Bill Amount</th>
+                                                    <th class="">Cash Paid</th>
+                                                    <th class="">Card Paid</th>
+                                                    <th class="">Total Paid</th>
+                                                    <th class="">Pending Amount</th>
+                                                    <th class="">Discount Amount</th>
+                                                    <th class="">Payment Amount</th>
+                                                    <th class="">Select</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let item of OnAccountpaymentpendingList; let i = index;">
+                                                <tr>
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{item.businessDate | date: 'dd-MMM-yy'}}</td>
+                                                    <td>{{item.purchaseStoreCode}}</td>
+                                                    <td>{{item.invoiceNo}}</td>
+                                                    <td>{{item.billAmount.toFixed(decimal_places)}}</td>
+                                                    <td>{{item.cashPaid}}</td>
+                                                    <td>{{item.cardPaid}}</td>
+                                                    <td>{{item.totalPaid.toFixed(decimal_places)}}</td>
+                                                    <td>{{item.pendingAmount.toFixed(decimal_places)}}</td> 
+                                                    <td>{{item.discountAmount}}</td>
+                                                    <td>{{item.paidAmount.toFixed(decimal_places)}}</td>
+                                                    <td align="center">
+                                                        <input type="checkbox" 
+                                                            (change) = "SelectItem_checkedChanged(item)"
+                                                            [checked]="item.isSelect">
+                                                    </td>
+                                                    
+                                                   
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+                    </mat-card>
+                </div>
+                    <mat-card>
+                        <mat-card-header>Paid Details</mat-card-header>
+                        <mat-card-content>
+                            <div class="allcp-form theme-info default-forms">
+                            <div class="row">
+                                <div class="col-md-4 mb20">
+                                    <label>Paying Bill Amount</label>
+                                    
+                                        <input type="text" name="PayingBillAmount" autocomplete="off"
+                                        formControlName="PayingBillAmount" #PayingBillAmount
+                                            class="gui-input" placeholder="PayingBillAmount" readonly>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20">
+                                    <label>Balence to Pay</label>
+                                    
+                                        <input type="text" name="BalencetoPay" autocomplete="off" 
+                                        formControlName="BalencetoPay" #BalencetoPay
+                                            class="gui-input" placeholder="BalencetoPay" readonly>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20">
+                                    <label>Return  Amount</label>
+                                    
+                                        <input type="text" name="ReturnAmount" autocomplete="off" 
+                                        formControlName="ReturnAmount" #ReturnAmount
+                                            class="gui-input" placeholder="Return Amount" readonly>
+                                    
+                                </div>                                   
+                            </div>
+                        </div>
+                        </mat-card-content>
+                    </mat-card>
+                
+               
+                <div class="allcp-form theme-info default-forms">
+                    <div class="panel">
+                        <div class="row">
+                        <div class="panel-body col-md-4 mb20">
+                            <mat-tab-group (selectedTabChange)="onTabClick($event)">
+                                <mat-tab label="Cash">  
+                                    <div class="col-md-8 mb20">
+                
+                                        <div class="section">
+                                            <label>PaymentCurrency</label>
+                                                <select name="PaymentCurrency" formControlName="PaymentCurrency" #PaymentCurrency 
+                                                        class="gui-input" (change)="OnPaymentCurrency($event)">
+                                                
+                                                    <option *ngFor="let item of CurrencyList" value="{{item.id}}">{{item.internationalCode}}</option>
+            
+                                             </select>
+                                                <i class="fa fa-angle-down"></i>
+                                           
+                                        </div>
+      
+                                    </div>
+                                    <div class="col-md-8 mb20">
+                                        <label>Paid Amount</label>
+                                        
+                                            <input type="text" name="CashReceivedAmount" autocomplete="off" 
+                                                 formControlName="CashReceivedAmount" #ReceivedAmount
+                                                class="gui-input" placeholder="CashReceivedAmount">
+                                        
+                                    </div>
+                                    <div class="col-md-8 mb20">
+                                        <div class="section">
+                                            <label>Change Currency</label>
+                                                <select name="ChangeCurrency" formControlName="ChangeCurrency" #ChangeCurrency 
+                                                        class="gui-input" (change)="OnChangeCurrency($event)">
+                                                   
+                                                    <option *ngFor="let item of CurrencyList" value="{{item.id}}">{{item.internationalCode}}</option>
+            
+                                             </select>
+                                                <i class="fa fa-angle-down"></i>
+                                           
+                                        </div>
+                                    
+                                        
+                                    </div>                   
+                                </mat-tab>
+                                <mat-tab label="Card">  
+                                    <div class="col-md-8 mb20">
+                                       
+                                        <div class="section">
+                                            <label>CardType</label>
+                                                <select name="CardType" formControlName="CardType" #CardType 
+                                                        class="gui-input">
+                                                    <option  value="Visa">Visa</option>
+                                                    <option  value="Master">Master</option>
+                                                    <option  value="Maestro">Maestro</option>
+                                                    <option  value="AMEX">AMEX</option>
+                                                    <option  value="K-Net">K-Net</option>
+            
+                                             </select>
+                                                <i class="fa fa-angle-down"></i>
+                                           
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-8 mb20">
+                                        <div class="section">
+                                            <label>PaymentCurrency</label>
+                                                <select name="CardPaymentCurrency" formControlName="CardPaymentCurrency" #CardPaymentCurrency 
+                                                        class="gui-input">
+                                                        <option *ngFor="let item of CurrencyList" value="{{item.id}}">{{item.internationalCode}}</option>
+            
+                                             </select>
+                                                <i class="fa fa-angle-down"></i>
+                                           
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-8 mb20">
+                                        <label>CardRecievedAmount</label>
+                                        
+                                            <input type="text" name="CardRecievedAmount" autocomplete="off" 
+                                            formControlName="CardRecievedAmount" #CardRecievedAmount
+                                                class="gui-input" placeholder="CardRecievedAmount">
+                                        
+                                    </div>     
+                                    <div class="col-md-8 mb20">
+                                        <label>CardNumber</label>
+                                        
+                                            <input type="text" name="CardNumber" autocomplete="off" 
+                                            formControlName="CardNumber" #CardNumber
+                                                class="gui-input" placeholder="CardNumber">
+                                        
+                                    </div>   
+                                    <div class="col-md-8 mb20">
+                                        <label>CardHolderName</label>
+                                        
+                                            <input type="text" name="CardHolderName" autocomplete="off" 
+                                            formControlName="CardHolderName" #CardHolderName
+                                                class="gui-input" placeholder="CardHolderName">
+                                        
+                                    </div>    
+                                    <div class="col-md-8 mb20">
+                                        <label>ApprovalNo</label>
+                                        
+                                            <input type="text" name="ApprovalNo" autocomplete="off" 
+                                            formControlName="ApprovalNo" #ApprovalNo
+                                                class="gui-input" placeholder="ApprovalNo">
+                                        
+                                    </div> 
+                                                    
+                                </mat-tab>
+                               
+                              </mat-tab-group>
+                                                              
+                            </div>
+                            <div class="panel-body col-md-8 mb20 ">
+                                <div class="table-responsive country-table">
+                                    <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                        <thead>
+                                            <tr class="bg-dark">
+                                                <th class="">Payment Type</th>
+                                                <th class="">Payment Currency</th>
+                                                <th class="">Change  Currency</th>
+                                                <th class="">Received Amount</th>
+                                                <th class="">Card Type</th>
+                                                <th class="">Card No</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let item of OnAccountPaymentDetailsList; let i = index;">
+                                            <tr>
+                                                
+                                                <td>{{item.paymentType}}</td>
+                                                <td>{{item.paymentCurrency}}</td>
+                                                <td>{{item.changeCurrency}}</td>
+                                                <td>{{item.receivedAmount}}</td>
+                                                <td>{{item.cardType}}</td>
+                                                <td>{{item.cardNumber}}</td>
+                                                <td>  
+                                                    <a href="javascript:void(0);" (click)="remove_payment(OnAccountPaymentDetailsList)"  class="btn btn-edits  btn-sm ml10">
+                                                   Remove
+                                                </a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>                        
+                            </div>
+                         
+                        </div>
+                   
+                    </div>
+                </div>
+                <div class="row default-forms">
+                    <div class="offset-md-1 col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-success btn-block common-button"  (click)="addPayment()"><i
+                                class="fa fa-check-circle-o"></i> Add Payment
+                                
+                        </button>
+                    </div>    
+                             
+                    <div class="offset-md-1 col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-success btn-block common-button"  (click)="SavePayment()"><i
+                                class="fa fa-check-circle-o"></i> Complete
+                                
+                        </button>
+                    </div>      
+                    <div class="col-md-2 mt10">
+                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button" (click)="ResetAll()"><i
+                                class="fa fa-refresh"></i> Clear</button>
+
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-cancel btn-block common-button"(click)="close()"><i
+                            class="fa fa-remove"></i> Close</button>
+                    </div>
+
+                   
+                
+                 </div>
+            </div>
+           
+        </section>
+    
+    </form>
+</section> -->
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <!-- <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">Home</a>
+                </li>
+                <li class="">
+                    <a routerLink="../onaccount-payment">On Account Payment</a>
+                </li>
+                <li class="breadcrumb-current-item">Create</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>CREATE On Account Payment</h4>             
+        </div>
+
+
+   </section> -->
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        
+        <section id="content" class="animated fadeIn oap-title-bottom-section">
+            <header id="topbar" class="alt">
+                <div class="topbar-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-icon">
+                            <a routerLink="../home">
+                                <span class="fa fa-home"></span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-link">
+                            <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                        </li>
+                        <li class="">
+                            <a routerLink="../onaccount-payment">{{ 'ONACCOUNT_PAYMENT.ONACCOUNT_PAYMENT_MASTER' | translate }}</a>
+                        </li>
+                        <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+    
+                    </ol>
+                </div>
+            </header>
+            <div class="row title-section-row">
+                <h4>{{ 'ONACCOUNT_PAYMENT.CREATE_ONACCOUNT_PAYMENT_MASTER' | translate }}</h4>             
+            </div>
+            <div class="allcp-form theme-info default-forms oap-div-three">
+                            
+                <!-- <div class="oap-title">
+                    <h4>Paid Details</h4>
+                </div> -->
+
+                <div class="row">
+                    <div class="col-md-4 oap-amnt">
+                       <div class="oap-paying">
+                           <span>Paying Bill Amount</span>
+                           <p>{{paymentAmountbillAmount}}</p>
+                       </div>
+                    </div>
+                    <div class="col-md-4 oap-amnt">
+                       <div class="oap-balance">
+                            <span>Balance to Pay</span>
+                            <p>{{ balanceAmount }}</p>
+                       </div>
+                    </div>
+                    <div class="col-md-4 oap-amnt">
+                       <div class="oap-return">
+                            <span>Return Amount</span>
+                            <p>{{ returnAmount}}</p>
+                       </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-4">
+                        <label>Paying Bill Amount</label>
+                        
+                            <input type="text" name="PayingBillAmount" autocomplete="off"
+                            formControlName="PayingBillAmount" #PayingBillAmount
+                                class="gui-input" placeholder="PayingBillAmount">
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <label>Balence to Pay</label>
+                        
+                            <input type="text" name="BalencetoPay" autocomplete="off" 
+                            formControlName="BalencetoPay" #BalencetoPay
+                                class="gui-input" placeholder="BalencetoPay">
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <label>Return  Amount</label>
+                        
+                            <input type="text" name="ReturnAmount" autocomplete="off" 
+                            formControlName="ReturnAmount" #ReturnAmount
+                                class="gui-input" placeholder="Return Amount">
+                        
+                    </div>                                    -->
+                </div>
+            
+        </section>
+
+
+
+        <section id="content" class="animated fadeIn oap-title-bottom-section">
+            <div>
+                <div class="allcp-form theme-info default-forms oap-div">
+                    <div class="oap-title">
+                        <h4>Search</h4>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Customer Name/Code/Phone</label>
+                                
+                                    <input type="text" name="CustomerCode" autocomplete="off"
+                                    formControlName="CustomerCode" #CustomerCode
+                                    [ngClass]="{'red-border': myForm.controls['CustomerCode'].invalid}"
+                                    (keydown)="txtSrchCustomer_KeyDown($event)"   class="gui-input" placeholder="Code">
+                                
+                            </div>
+                            <div class="col-md-4">
+                                <label>Invoice No</label>
+                                
+                                    <input type="text" name="InvoiceNo" autocomplete="off" 
+                                    formControlName="InvoiceNo" #InvoiceNo
+                                    [ngClass]="{'red-border': myForm.controls['InvoiceNo'].invalid}"
+                                    (keydown)="txtSrchInvoiceNo_KeyDown($event)"  class="gui-input" placeholder="InvoiceNo">
+                                
+                            </div>
+                            <div class="col-md-4">
+                                <label>Total BillBalance Amount</label>
+                                
+                                    <input type="text" name="BillAmount" autocomplete="off" 
+                                    formControlName="BillAmount" #BillAmount
+                                        class="gui-input" placeholder="BillBalanceAmount" readonly>
+                                
+                            </div>                                   
+                        </div> 
+                 </div>
+          
+                <!-- choose grid -->
+                <div class="allcp-form theme-info oap-div-two">
+                   
+                        <div class="oap-title">
+                            <h4>Pending Payment List</h4>
+                        </div>
+                        
+                                <div class="panel-body country-table" style="margin-top: 20px;">
+                                    <div class="table-responsive">
+                                        <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                            <thead>
+                                                <tr class="bg-dark">
+                                                    <th class="">S.No</th>
+                                                    <th class="">Business Date</th>
+                                                    <th class="">Store Code</th>
+                                                    <th class="">Invoice Number</th>
+                                                    <th class="">Bill Amount</th>
+                                                    <th class="">Cash Paid</th>
+                                                    <th class="">Card Paid</th>
+                                                    <th class="">Total Paid</th>
+                                                    <th class="">Pending Amount</th>
+                                                    <th class="">Discount Amount</th>
+                                                    <th class="">Payment Amount</th>
+                                                    <th class="">Select</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let item of OnAccountpaymentpendingList; let i = index;">
+                                                <tr>
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{item.businessDate | date: 'dd-MMM-yy'}}</td>
+                                                    <td>{{item.purchaseStoreCode}}</td>
+                                                    <td>{{item.invoiceNo}}</td>
+                                                    <td>{{item.billAmount.toFixed(decimal_places)}}</td>
+                                                    <td>{{item.cashPaid}}</td>
+                                                    <td>{{item.cardPaid}}</td>
+                                                    <td>{{item.totalPaid.toFixed(decimal_places)}}</td>
+                                                    <td>{{item.pendingAmount.toFixed(decimal_places)}}</td> 
+                                                    <td>{{item.discountAmount}}</td>
+                                                    <td>{{item.paidAmount.toFixed(decimal_places)}}</td>
+                                                    <td align="center">
+                                                        <input type="checkbox" 
+                                                            (change) = "SelectItem_checkedChanged(item)"
+                                                            [checked]="item.isSelect">
+                                                    </td>
+                                                    
+                                                   
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            
+                   
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+             
+            
+                <div class="allcp-form tab-form theme-info style-tabs oap-div">
+                    <div class="panel">
+                        <div class="row">
+                        <div class="panel-body col-md-4 mb20 user-tabs sku-tabs">
+                            <mat-tab-group (selectedTabChange)="onTabClick($event)">
+                                <mat-tab label="Cash">  
+                                    <div class="col-md-12 mt20 select-forms">
+                                    
+                                            <label>PaymentCurrency</label>
+                                                <select name="PaymentCurrency" formControlName="PaymentCurrency" #PaymentCurrency 
+                                                        class="gui-input" (change)="OnPaymentCurrency($event)">
+                                                
+                                                    <option *ngFor="let item of CurrencyList" value="{{item.id}}">{{item.internationalCode}}</option>
+            
+                                             </select>
+                                            <i class="fa fa-angle-down"></i>
+                                           
+                                    
+      
+                                    </div>
+
+                                    <div class="col-md-12 mt20 floating-form floating-label">
+                                        
+                                            <input type="text" name="CashReceivedAmount" autocomplete="off" 
+                                                 formControlName="CashReceivedAmount" #ReceivedAmount
+                                                class="gui-input floating-input" placeholder="CashReceivedAmount">
+                                            <span class="highlight"></span>
+                                            <label>Paid Amount</label>
+                                        
+                                    </div>
+                                    <div class="col-md-12 mt20 select-forms">
+                                    
+                                            <label>Change Currency</label>
+                                                <select name="ChangeCurrency" formControlName="ChangeCurrency" #ChangeCurrency 
+                                                        class="gui-input" (change)="OnChangeCurrency($event)">
+                                                   
+                                                    <option *ngFor="let item of CurrencyList" value="{{item.id}}">{{item.internationalCode}}</option>
+            
+                                             </select>
+                                            <i class="fa fa-angle-down"></i>
+                                           
+                                        
+                                    
+                                        
+                                    </div>                   
+                                </mat-tab>
+                                <mat-tab label="Card">  
+                                    <div class="col-md-12 mt20 select-forms">
+                                       
+                                            <label>CardType</label>
+                                                <select name="CardType" formControlName="CardType" #CardType 
+                                                        class="gui-input">
+                                                    <option  value="Visa">Visa</option>
+                                                    <option  value="Master">Master</option>
+                                                    <option  value="Maestro">Maestro</option>
+                                                    <option  value="AMEX">AMEX</option>
+                                                    <option  value="K-Net">K-Net</option>
+            
+                                             </select>
+                                            <i class="fa fa-angle-down"></i>
+                                           
+                                    
+                                        
+                                    </div>
+                                    <div class="col-md-12 mt20 select-forms">
+                                            <label>PaymentCurrency</label>
+                                                <select name="CardPaymentCurrency" formControlName="CardPaymentCurrency" #CardPaymentCurrency 
+                                                        class="gui-input">
+                                                        <option *ngFor="let item of CurrencyList" value="{{item.id}}">{{item.internationalCode}}</option>
+            
+                                             </select>
+                                                <i class="fa fa-angle-down"></i>
+                                           
+                                        
+                                        
+                                    </div>
+                                    <div class="col-md-12 mt20 floating-form floating-label">
+                                        
+                                            <input type="text" name="CardRecievedAmount" autocomplete="off" 
+                                            formControlName="CardRecievedAmount" #CardRecievedAmount
+                                                class="gui-input floating-input" placeholder="CardRecievedAmount">
+                                            <span class="highlight"></span>
+                                            <label>CardRecievedAmount</label>
+
+                                        
+                                    </div>     
+                                    <div class="col-md-12 mt20 floating-form floating-label">
+                                        
+                                        
+                                            <input type="text" name="CardNumber" autocomplete="off" 
+                                            formControlName="CardNumber" #CardNumber
+                                                class="gui-input floating-input" placeholder="CardNumber">
+                                            <span class="highlight"></span>
+                                            <label>CardNumber</label>
+
+
+                                        
+                                    </div>   
+                                    <div class="col-md-12 mt20 floating-form floating-label">
+                                        
+                                            <input type="text" name="CardHolderName" autocomplete="off" 
+                                            formControlName="CardHolderName" #CardHolderName
+                                            class="gui-input floating-input" placeholder="CardHolderName">
+                                            <span class="highlight"></span>
+                                            <label>CardHolderName</label>
+
+
+                                        
+                                    </div>    
+                                    <div class="col-md-12 mt20 floating-form floating-label">
+                                        
+                                            <input type="text" name="ApprovalNo" autocomplete="off" 
+                                            formControlName="ApprovalNo" #ApprovalNo
+                                                class="gui-input floating-input" placeholder="ApprovalNo">
+                                            <span class="highlight"></span>
+                                            <label>ApprovalNo</label>
+                                        
+                                    </div> 
+                                                    
+                                </mat-tab>
+                               
+                              </mat-tab-group>
+
+                              <div class="default-forms mt10">
+                                <button type="button" class="btn btn-lg btn-success btn-block common-button oaddp" (click)="addPayment()"><i
+                                        class="fa fa-check-circle-o"></i> Add Payment
+                                </button>
+                              </div>    
+                                                              
+                            </div>
+                            <div class="panel-body col-md-8 mb20 ">
+                                <div class="table-responsive country-table">
+                                    <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                        <thead>
+                                            <tr class="bg-dark">
+                                                <th class="">Payment Type</th>
+                                                <th class="">Payment Currency</th>
+                                                <th class="">Change  Currency</th>
+                                                <th class="">Received Amount</th>
+                                                <th class="">Card Type</th>
+                                                <th class="">Card No</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let item of OnAccountPaymentDetailsList; let i = index;">
+                                            <tr>
+                                                
+                                                <td>{{item.paymentType}}</td>
+                                                <td>{{item.paymentCurrency}}</td>
+                                                <td>{{item.changeCurrency}}</td>
+                                                <td>{{item.receivedAmount}}</td>
+                                                <td>{{item.cardType}}</td>
+                                                <td>{{item.cardNumber}}</td>
+                                                <td>  
+                                                    <a href="javascript:void(0);" (click)="remove_payment(OnAccountPaymentDetailsList)"  class="btn btn-edits  btn-sm ml10">
+                                                   Remove
+                                                </a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>                        
+                            </div>
+                         
+                        </div>
+                   
+                    </div>
+                </div>
+                <div class="row default-forms">
+                    <!-- <div class="offset-md-1 col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-success btn-block common-button oaddp" (click)="addPayment()"><i
+                                class="fa fa-check-circle-o"></i> Add Payment
+                                
+                        </button>
+                    </div>     -->
+                             
+                    <div class="offset-md-3 col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-success btn-block common-button" (click)="SavePayment()"><i
+                                class="fa fa-check-circle-o"></i> Complete
+                                
+                        </button>
+                    </div>      
+                    <div class="col-md-2 mt10">
+                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button" (click)="ResetAll()"><i
+                                class="fa fa-refresh"></i> Clear</button>
+
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                            class="fa fa-remove"></i> Close</button>
+                    </div>
+
+                   
+                
+                 </div>
+            </div>
+           
+        </section>
+    
+    </form>
+</section>

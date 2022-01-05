@@ -1,0 +1,139 @@
+<form [formGroup]="myForm"novalidate>
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="sales-content-wrapper" style="margin-left: 0px">
+        <!-- Content -->
+        <section class="animated fadeIn">
+            <header id="topbar" class="ph10 second-top">
+                <div class="topbar-left">
+                    <ul class="nav nav-list nav-list-topbar pull-left">
+                        <li>
+                            <i class="fa fa-file-o"></i> Sales Order
+                        </li>
+                    </ul>
+                </div>
+                <div class="topbar-right mt5">
+                    <a href="" class="btn btn-back btn-sm ml10" title="New">
+                        <span class="fa fa-arrow-left pr5"></span>Back</a>
+                </div>
+            </header>
+        </section>
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="return-filter allcp-form theme-info">
+                    <div class="sales-order row mt10">
+                        <div class="col-md-12">
+                            <label class="field field prepend-icon">
+                                <input type="text" name="sku_code" autocomplete="off"
+                                formControlName="sku_code" #sku_code 
+                                (keyup.enter)="get_sku_data()" class="gui-input" placeholder="Item Search / Barcode Search">
+                                    <span class="field-icon">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive sales-second-section2 sales-order-table" id="sot">
+                    <table class="table allcp-form theme-warning">
+                        <thead>
+                            <tr class="main-sales-tr">
+                                <th>S.No</th>
+                                <th>Store Code</th>
+                                <th>style Code</th>
+                                <th>Item</th>
+                                <th>Item Price</th>
+                                <th>Ordered Qty</th>
+                                <th>Picked Qty</th>
+                                <th>Selling Total</th> 
+                                <th></th>                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor = "let item of sales_order_details; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{item.storeCode}}</td>
+                                <td>{{item.styleCode}}</td>
+                                <td>{{item.skuCode}}</td>
+                                <td>{{item.price}} </td>
+                                <td>{{item.qty}}</td>
+                                <td>{{item.pickedQty}}</td>
+                                <td>{{item.sellingLineTotal}}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="payment-final sales-order-payment mt10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button type="button" class="btn qpay pos-button btn-sales-height"><i class="fa fa-save"></i> Mark as Pending</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn qpay pos-button btn-sales-height"><i class="fa fa-save"></i> Mark as Paid</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn payment pos-button btn-sales-height"><i class="fa fa-money"></i> Pay Now</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn delete pos-button btn-sales-height"><i class="fa fa-remove"></i> Remove Item</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="return-filter allcp-form theme-info">
+                    <div class="sales-order row mt10">
+                        <div class="col-md-12">
+                            <label class="field field prepend-icon">
+                                <input type="text" name="customer" 
+                                autocomplete="off"
+                                formControlName="customer" #customer 
+                                (keyup.enter)="customer_search()" class="gui-input" placeholder="Customer Search">
+                                <span class="field-icon">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="salesorder-customer-details">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="sales-customer-img">
+                                <img src="assets/img/avatars/profile_avatar.png">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4>John Abraham</h4>
+                            <p>john332@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="address-details">
+                    <div>
+                        <h4><i class="fa fa-home"></i> Shipping Address</h4>
+                        <p>No 456<br>
+                        main complex , 3rd street<br>
+                        Bangalore<br>
+                        India - 621 788</p>
+                    </div>
+                </div>
+                <div class="address-details">
+                    <div>
+                        <h4><i class="fa fa-home"></i> Billing Address</h4>
+                        <p>As same as Shipping address</p>
+                    </div>
+                </div>
+                <div class="sales-ship-details">
+                    <div>
+                        <h4><i class="fa fa-truck"></i> Shipping Method</h4>
+                        <p>FedEx Ground</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Content -->
+    </section>
+</form>

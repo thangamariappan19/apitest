@@ -1,0 +1,246 @@
+<form [formGroup]="myForm" novalidate>
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="sales-content-wrapper pos-forms" style="margin-left: 0px">
+        <!-- Content -->
+        <section class="animated fadeIn">
+
+            <header id="topbar" class="ph10 second-top">
+                <div class="topbar-left">
+                    <ul class="nav nav-list nav-list-topbar pull-left">
+                        <li>
+                            <i class="fa fa-exchange"></i> Exchange
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="topbar-right mt5">
+                    <a href="javascript:void(0)" (click)="goto_pos()" class="btn btn-back btn-sm ml10" title="New">
+                        <span class="fa fa-arrow-left pr5"></span>Back
+                    </a>
+                </div>
+            </header>
+            <div class="clearfix"></div>
+
+
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12 col-12 col-xl-8 mt5">
+                    <div class="sales-return">
+                        <div class="e-title">
+                            <h4><i class="fa fa-refresh"></i> Sales Exchange - Return Items</h4>
+                        </div>
+                        <div class="return-filter allcp-form theme-info">
+                            <div class="sales-first-form">
+                                <div class="allcp-form theme-info">
+                                    <div class="row " style="margin-top: 8px;">
+                                        <div
+                                            class="col-lg-8 col-md-8 col-sm-8 col-8 col-xl-9 floating-form floating-label">
+
+                                            <input (keyup.enter)="invoice_no_changed()" matInput type="text"
+                                                name="invoice_no" class="gui-input floating-input"
+                                                [matAutocomplete]="auto" [formControl]="searchExchangeCtrl"
+                                                formControlName="invoice_no" #invoice_no
+                                                placeholder="Search Invoice / SKU Code / Barcode" trim="blur">
+                                            <mat-autocomplete id="pms" #auto="matAutocomplete"
+                                                class="pos filtered-search pos-full-search">
+                                                <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                                <ng-container *ngIf="!isLoading">
+                                                    <mat-optgroup *ngFor="let group of filteredExchange"
+                                                        [label]="group.type">
+                                                        <mat-option *ngFor="let exchange of group.values"
+                                                            [value]="exchange.code">
+
+                                                            <div class="col-md-3 pos-search-div"><b><i
+                                                                        class="fa fa-list"></i> {{exchange.code}}</b>
+                                                            </div>
+                                                            <div class="col-md-3 pos-search-div"><b><i
+                                                                        class="fa fa-check-circle"></i>
+                                                                    {{exchange.date}}</b></div>
+                                                            <div class="col-md-6 pos-search-div"><b><i
+                                                                        class="fa fa-square"></i> {{exchange.name}}</b>
+                                                            </div>
+
+                                                        </mat-option>
+                                                    </mat-optgroup>
+                                                </ng-container>
+                                            </mat-autocomplete>
+                                            <span class="highlight"></span>
+                                            <label>Search Invoice / SKU Code / Barcode</label>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 col-xl-3">
+                                            <button type="button" (click)="invoice_no_changed()"
+                                                class="btn btn-lg btn-primary btn-block pos-button">
+                                                <i class="fa fa-search"></i> Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive sales-second-section2 mt5 exchange-table" id="exc">
+                            <table class="table allcp-form theme-warning">
+                                <thead>
+                                    <tr class="main-tr">
+                                        <th></th>
+                                        <th>#</th>
+                                        <th>SKU Code</th>
+                                        <th>Exchanged SKU</th>
+                                        <th>Style Code</th>
+                                        <th>Price</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- [disabled] = "item.oldExchangeQty != null && item.oldExchangeQty > 0" -->
+                                    <tr *ngFor="let item of invoice_details; let i = index">
+                                        <td align="center">
+                                            <input type="checkbox"
+                                                [disabled]="(item.oldReturnQty != null && item.oldReturnQty > 0) || (item.isAlreadyExchanges == true)"
+                                                (change)="returnItem_checkedChanged(item)" [checked]="item.isExchanged">
+                                        </td>
+                                        <td> {{ i + 1 }} </td>
+                                        <td> {{ item.skuCode }} </td>
+                                        <td> {{ item.exchangedSKU }} </td>
+                                        <td> {{ item.styleCode }} </td>
+                                        <td> {{ item.price.toFixed(decimal_places) }} </td>
+                                        <td> {{ item.returnRemarks }} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="sales-return">
+                        <div class="e-title">
+                            <h4><i class="fa fa-exchange"></i> Sales Exchange - Exchange Items</h4>
+                        </div>
+                        <div class="sales-first-form">
+                            <div class="allcp-form theme-info">
+                                <div class="row" style="margin-top: 8px;">
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-8 col-xl-9 floating-form floating-label">
+
+                                        <input (keyup.enter)="skuCode_changed()" matInput type="text" name="sku_code"
+                                            class="gui-input floating-input" [matAutocomplete]="auto1"
+                                            [formControl]="searchExchangeCtrl1" formControlName="sku_code" #sku_code
+                                            placeholder="Search SKU Code / Barcode">
+                                        <mat-autocomplete id="pms" #auto1="matAutocomplete"
+                                            class="pos filtered-search pos-full-search">
+                                            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                            <ng-container *ngIf="!isLoading">
+                                                <mat-optgroup *ngFor="let group of filteredExchange2"
+                                                    [label]="group.type">
+                                                    <mat-option *ngFor="let exchange of group.values"
+                                                        [value]="exchange.code">
+
+                                                        <div class="col-md-3 pos-search-div"><b><i
+                                                                    class="fa fa-list"></i> {{exchange.code}}</b></div>
+                                                        <div class="col-md-3 pos-search-div"><b><i
+                                                                    class="fa fa-check-circle"></i>
+                                                                {{exchange.date}}</b></div>
+                                                        <div class="col-md-6 pos-search-div"><b><i
+                                                                    class="fa fa-square"></i> {{exchange.name}}</b>
+                                                        </div>
+
+                                                    </mat-option>
+                                                </mat-optgroup>
+                                            </ng-container>
+                                        </mat-autocomplete>
+                                        <span class="highlight"></span>
+                                        <label>Search SKU Code / Barcode</label>
+
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-4 col-xl-3">
+                                        <button type="button" (click)="skuCode_changed()"
+                                            class="btn btn-lg btn-primary btn-block pos-button">
+                                            <i class="fa fa-search"></i>
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive sales-second-section2 mt5 exchange-table" id="exc">
+                            <table class="table allcp-form theme-warning">
+                                <thead>
+                                    <tr class="main-tr">
+                                        <th>#</th>
+                                        <th>SKU Code</th>
+                                        <th>Style Code</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of exchange_details_list; let i = index">
+                                        <td> {{ i + 1 }} </td>
+                                        <td> {{ item.skuCode }} </td>
+                                        <td> {{ item.styleCode }} </td>
+                                        <td> {{ item.sellingPricePerQty.toFixed(decimal_places) }} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="payment-final mt10">
+                        <div class="row">
+                            <div class="offset-xl-3 col-lg-6 col-md-6 col-sm-6 col-6 col-xl-3">
+                                <button type="button" (click)="clear_controls()"
+                                    class="btn qpay pos-button btn-sales-height">
+                                    <i class="fa fa-refresh"></i>
+                                    Reset
+                                </button>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6 col-xl-3">
+                                <button type="button" (click)="save()" class="btn payment pos-button btn-sales-height">
+                                    <i class="fa fa-money"></i>
+                                    Save
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- table -->
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 col-12 col-xl-4 mt5">
+                    <div class="pos-billing-details">
+                        <h4><i class="fa fa-file"></i> Billing Details</h4>
+                        <div class="customer-details">
+                            <p>Date:
+                                <span>{{ sales_exchange_header.documentDate | date: 'dd-MM-yyyy' }}</span>
+                            </p>
+                            <p>Document Number:
+                                <span>{{ sales_exchange_header.documentNo }}</span>
+                            </p>
+                            <p>Shop Name:
+                                <span>{{ user_details.storeName }}</span>
+                            </p>
+                            <p>Invoice Number:
+                                <span>{{ invoice_header != null && invoice_header.invoiceNo != null ?
+                                    invoice_header.invoiceNo : '' }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pos-customer-details">
+                        <h4><i class="fa fa-user"></i> Customer Details </h4>
+                        <div class="customer-details">
+                            <p>Name:
+                                <span>{{ invoice_header != null && invoice_header.customerName != null ?
+                                    invoice_header.customerName : '' }}</span>
+                            </p>
+                            <p>Phone:
+                                <span>{{ invoice_header != null && invoice_header.phoneNumber != null ?
+                                    invoice_header.phoneNumber : '' }}</span>
+                            </p>
+                            <p>Loyalty Point:
+                                <span></span>
+                            </p>
+                            <p>Loyalty Plan:
+                                <span></span>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- images -->
+                </div>
+
+            </div>
+        </section>
+        <!-- /Content -->
+    </section>
+</form>

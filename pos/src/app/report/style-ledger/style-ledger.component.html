@@ -1,0 +1,141 @@
+<form [formGroup]="myForm" novalidate>
+
+    <section id="content_wrapper">
+    
+        <section class="grids-search grid-search-row allcp-form" style="margin-bottom: 10px;">
+    
+    
+            <div class="row title-section-row">
+                <h4>Style Ledger</h4>             
+            </div>
+        
+        
+        </section>
+      
+           
+      
+            <section id="content_wrapper report-forms" class="sales-content-wrapper" style="margin-left: 0px">
+            <div class="row allcp-form theme-info " style="padding-top: 30px;">
+                <div class="col-lg-2 col-md-4 col-sm-12 col-12 col-xl-3 floating-form floating-label">
+                <input type="text"  name="skucode"
+                formControlName="skucode" #skucode class="gui-input floating-input" [ngClass]="{'red-border': myForm.controls['skucode'].invalid}"
+                placeholder="skucode" autocomplete="off">
+                <span class="highlight"></span>
+                <label>SKUCode/Style/Supplier Barcode</label>
+                </div>
+        
+            <div class="col-lg-2 col-md-4 col-sm-12 col-12 col-xl-3 floating-form floating-label">
+                
+                    <input type="date"  name="FromDate"
+                    formControlName="FromDate" #FromDate class="gui-input floating-input" [ngClass]="{'red-border': myForm.controls['FromDate'].invalid}"
+                    placeholder="FromDate" autocomplete="off">
+                    <span class="highlight"></span>
+                    <label>FromDate</label>
+                
+            </div>
+      
+            <div class="col-lg-2 col-md-4 col-sm-12 col-12 col-xl-3 floating-form floating-label">
+                
+                    <input type="date"  name="ToDate"
+                    formControlName="ToDate" #ToDate class="gui-input floating-input" 
+                    [ngClass]="{'red-border': myForm.controls['ToDate'].invalid}"
+                    placeholder="ToDate" autocomplete="off">
+                    <span class="highlight"></span>
+                    <label>ToDate</label>
+                   
+            </div>
+        
+        
+        <div class="col-lg-2 col-md-2 col-sm-12 col-12 col-xl-2 report-get default-forms">
+        
+            <button type="button" (click)="Get_click()"
+            [disabled]="myForm.pristine || myForm.invalid"  
+            class="btn btn-lg btn-success btn-block common-button"> 
+            <i class="fa fa-check-circle-o"></i> Get</button>
+             
+            </div>
+        
+            </div>
+           
+        
+           </section>
+      
+
+        <div class="row mt0">
+            <div class="col-md-12">
+       
+             <div class="table-responsive country-table">
+            
+            <table class="table allcp-form theme-warning tc-checkbox-1 table-scroll fs13">
+                <thead>
+                    <tr class="bg-dark">
+                        <th class="">Date</th>
+                        <th class="">Doc No</th>
+                        <th class="">Type</th>
+                        <th class="">Qty In</th>
+                        <th class="">Qty Out</th>
+                        <th class="">Location</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody style="height: 200px;">
+                    <tr *ngFor="let item of mCardexLocationDetails">
+                        
+                        <td>{{item.transactionDate}}</td>
+                        <td>{{item.documentNumber}}</td>
+                        <td>{{item.transactionType}}</td>
+                        <td>{{item.quantityIn}}</td>
+                        <td>{{item.quantityOut}}</td>
+                        <td>{{item.locationCode}}</td>
+                        <td>{{item.balance}}</td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+    </div>
+        </div>
+    
+        <section id="content_wrapper report-forms mt30" class="sales-content-wrapper" style="margin-left: 0px">
+        <div class="row allcp-form theme-info " style="padding-top: 30px;">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12 col-xl-4 floating-form floating-label">
+           
+            <input type="text"  name="totalInQty"
+            formControlName="totalInQty" #totalInQty class="gui-input floating-input"
+            placeholder="TotalInQty" autocomplete="off" readonly>
+            <span class="highlight"></span>
+            <label>TotalInQty</label>
+        
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-12 col-xl-4 floating-form floating-label">
+        
+            <input type="text"  name="totalOutQty"
+            formControlName="totalOutQty" #totalOutQty class="gui-input floating-input"
+            placeholder="totalOutQty" autocomplete="off" readonly>
+            <span class="highlight"></span>
+            <label>TotalOutQty</label>
+        
+    </div>
+  
+    <div class="col-lg-4 col-md-4 col-sm-12 col-12 col-xl-4 floating-form floating-label">
+        
+            <input type="text"  name="balance"
+            formControlName="balance" #balance class="gui-input floating-input"
+            placeholder="balance" autocomplete="off" readonly>
+            <span class="highlight"></span>
+            <label>Balance</label>
+          
+    </div>
+     </div>
+        <div class="row payment-final default-forms">
+            
+            <div class="offset-md-5 col-md-2">
+                <button (click) = "clear_controls()" class="btn btn-lg btn-primary btn-block common-button" type="button"><i class="fa fa-refresh"></i>
+                     Refresh</button>
+            </div>
+        </div>
+    
+       </section>
+   
+    </section>
+    </form>

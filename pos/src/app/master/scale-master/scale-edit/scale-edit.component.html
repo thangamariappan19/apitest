@@ -1,0 +1,332 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../scale">{{ 'SCALE.SCALE_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+    
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'SCALE.EDIT_SCALE' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="scaleCode" autocomplete="off"
+                                            formControlName="scaleCode" #scaleCode readonly
+                                            [ngClass]="{'red-border': myForm.controls['scaleCode'].invalid}"
+                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                            class="gui-input floating-input" placeholder="Scale Code">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'SCALE.SCALE_CODE' | translate }}</label>
+                                   
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="scaleName" autocomplete="off"
+                                            formControlName="scaleName" #scaleName
+                                            [ngClass]="{'red-border': myForm.controls['scaleName'].invalid}"
+                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                            class="gui-input floating-input" placeholder="Scale Name">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'SCALE.SCALE_NAME' | translate }}</label>
+                                   
+                                </div>
+                                <div class="col-md-6 mb20" style="margin-top: -15px;">
+                                   
+                                        <div class="section">
+                                            <div class="bs-component mt10">
+
+                                                <div class="round fill mb10">
+                                                    <input type="checkbox" checked="" id="active" name="active" #active
+                                                        formControlName="active">
+                                                    <label for="active"></label>
+                                                    <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                                <div class="col-md-6 mb20" style="margin-top: -15px;">
+                                   
+                                        <div class="section">
+                                            <div class="bs-component mt10">
+
+                                                <div class="round fill mb10">
+                                                    <input type="checkbox" checked="" id="applyToAll" name="applyToAll"
+                                                        #applyToAll formControlName="applyToAll" (change)="eventCheck()">
+                                                    <label for="applyToAll"></label>
+                                                    <p class="label-text">{{ 'SCALE.APPLY_TO_ALL' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+
+                                            </div>
+                                        </div>
+                                  
+                                </div>
+                                <div class="col-md-3 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="sizeCode" autocomplete="off" formControlName="sizeCode"
+                                            #sizeCode [ngClass]="{'red-border': myForm.controls['sizeCode'].invalid}"
+                                            class="gui-input floating-input" placeholder="Size Code">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'SCALE.SIZE_CODE' | translate }}</label>
+                                   
+                                </div>
+                                <div class="col-md-3 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="description" autocomplete="off"
+                                            formControlName="description" #description
+                                            class="gui-input floating-input" placeholder="Description">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'SCALE.DESCRIPTION' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-3 floating-form floating-label">
+                                                                        
+                                        <input type="number" name="visualOrder" autocomplete="off"
+                                            formControlName="visualOrder" #visualOrder (keypress)="keyPress($event)"
+                                            [ngClass]="{'red-border': myForm.controls['visualOrder'].invalid}"
+                                            class="gui-input floating-input" placeholder="Visual Order">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'SCALE.VISUAL_ORDER' | translate }}</label>
+                                   
+                                </div>
+                                <div class="col-md-3">
+                                   
+                                        <div class="section">
+                                            <div class="bs-component mt10">
+
+                                                <div class="round fill mb10">
+                                                    <input type="checkbox" checked="" id="active1" name="active1"
+                                                        #active1 formControlName="active1">
+                                                    <label for="active1"></label>
+                                                    <p class="label-textc">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="offset-md-5 col-md-1 mt20 default-forms">
+                                    <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                        (click)="addSubBrandList()" [disabled]="myForm.pristine || myForm.invalid"
+                                        title="Add"><i class="fa fa-plus"></i> </button>
+                                </div>
+                                <div class="col-md-1 mt20 default-forms">
+                                    <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                                        title="Clear" (click)="listClear()"><i class="fa fa-refresh"></i> </button>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="profile-sec-first">
+                    <div class="col-md-12 style-tabs">
+                        <div class="tab-block mb25">
+
+                            <mat-tab-group>
+                                <mat-tab label="{{ 'SCALE.SCALE' | translate }}">
+                                    <div id="scaleList" class="tabs-table tab-pane active">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr class="bg-light">
+                                                        <th>{{ 'SCALE.SIZE_CODE' | translate }}</th>
+                                                        <th>{{ 'SCALE.DESCRIPTION' | translate }}</th>
+                                                        <th>{{ 'SCALE.VISUAL_ORDER' | translate }}</th>
+                                                        <th>{{ 'COMMON.ACTIVE' | translate }}</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor = "let item of scaleDetails;">
+                                                       <!-- <td>{{item.sizeCode}}</td>-->
+                                                        <td><input type="text" [(ngModel)]="item.sizeCode" (change)="prioritynochange(item)" [ngModelOptions]="{standalone: true}" 
+                                                             style="text-align:center;"
+                                                            class="gui-input"></td>
+                                                      
+                                                            <td><input type="text" [(ngModel)]="item.description" [ngModelOptions]="{standalone: true}" 
+                                                                style="text-align:center;"
+                                                               class="gui-input"></td>
+                                                         <!--<td>{{item.visualOrder}}</td>-->
+                                                         <td><input type="text" [(ngModel)]="item.visualOrder" (change)="visualOrderchange(item)" [ngModelOptions]="{standalone: true}" 
+                                                            style="text-align:center;"
+                                                           class="gui-input"></td>
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="item.active" [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{item.id}}"></label>
+                                                        </td>
+                                                        <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                            class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab label="{{ 'SCALE.BRAND' | translate }}">
+                                    <div class="form-group row">
+                                        <label for="Search" class="col-sm-2 col-form-label" style="text-align:right;">Search</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" [(ngModel)]="SearchValue" [ngModelOptions]="{standalone: true}" class="form-control" id="search" />
+                                        </div>
+                                    </div>
+                                    <div id="brandList" class="tabs-table tab-pane">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr class="bg-light">
+                                                        <th>{{ 'SCALE.SELECT' | translate }}</th>
+                                                        <th>{{ 'SCALE.BRAND_CODE' | translate }}</th>
+                                                        <th>{{ 'SCALE.BRAND_NAME' | translate }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor = "let brand of brandList | searchfilter:SearchValue;;">
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="brand.active"
+                                                            [disabled]="isReadonly" [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{brand.id}}"></label>
+                                                        </td>
+                                                        <td>{{brand.brandCode}}</td>
+                                                        <td>{{brand.brandName}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                            </mat-tab-group>
+
+
+                            <!-- <ul class="nav nav-tabs tabs-border nav-justified" style="width: 30%">
+                                <li class="active">
+                                    <a href="#scaleList" data-toggle="tab">Scale</a>
+                                </li>
+                                <li>
+                                    <a href="#brandList" data-toggle="tab">Brand</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="scaleList" class="tab-pane active">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr class="bg-light">
+                                                    <th>Size Code</th>
+                                                    <th>Description</th>
+                                                    <th>Visual Order</th>
+                                                    <th>Active</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor = "let item of scaleDetails;">
+                                                    <td>{{item.sizeCode}}</td>
+                                                    <td>{{item.description}}</td>
+                                                    <td>{{item.visualOrder}}</td>
+                                                    <td>{{item.active}}</td>
+                                                    <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                        class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="brandList" class="tab-pane">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr class="bg-light">
+                                                    <th>Select</th>
+                                                    <th>Brand Code</th>
+                                                    <th>Brand Name</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor = "let brand of brandList;">
+                                                    <td>
+                                                        <input type="checkbox" [(ngModel)]="brand.active" [ngModelOptions]="{standalone: true}">
+                                                        <label for="{{brand.id}}"></label>
+                                                    </td>
+                                                    <td>{{brand.brandCode}}</td>
+                                                    <td>{{brand.brandName}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row default-forms">
+                  
+          
+                    <!--<div class="col-md-2 mt10">
+                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"
+                            (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+
+                    </div>-->
+                    <div class="offset-md-4 col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                            [disabled]="myForm.invalid" (click)="addSubBrand()"><i
+                                class="fa fa-clear"></i> Update
+
+                        </button>
+                    </div>
+                    
+                    <div class="col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+
+                  
+                   
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

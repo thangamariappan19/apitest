@@ -1,0 +1,213 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../stockadjustment">{{ 'STOCK_ADJUSTMENT.STOCK_ADJUSTMENT_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'STOCK_ADJUSTMENT.CREATE_STOCK_ADJUSTMENT' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="documentNo" autocomplete="off" readonly
+                                            formControlName="documentNo" #documentNo
+                                            class="gui-input floating-input" placeholder="Document Number">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_ADJUSTMENT.DOCUMENT_NUMBER' | translate }}</label>
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="style" autocomplete="off" (keyup.enter)="getSKUData()"
+                                            formControlName="style" #style
+                                            [ngClass]="{'red-border': myForm.controls['style'].invalid}"
+                                            class="gui-input floating-input" placeholder="Style">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_ADJUSTMENT.STYLE' | translate }}</label>
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="documentDate" autocomplete="off" readonly
+                                            formControlName="documentDate" #documentDate
+                                            class="gui-input floating-input" placeholder="Document Date"
+                                            spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_ADJUSTMENT.DOCUMENT_DATE' | translate }}</label>
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="totqty" autocomplete="off" readonly
+                                            formControlName="totqty" #totqty
+                                               class="gui-input floating-input" placeholder="Total Quantity">
+                                               <span class="highlight"></span>
+                                               <label>{{ 'STOCK_ADJUSTMENT.TOTAL_QUANTITY' | translate }}</label>
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                      
+                                        <input type="text" name="totnewqty" autocomplete="off" readonly
+                                            formControlName="totnewqty" #totnewqty
+                                               class="gui-input floating-input" placeholder="Total New Quantity">
+                                               <span class="highlight"></span>
+                                               <label>{{ 'STOCK_ADJUSTMENT.TOTAL_NEW_QUANTITY' | translate }}</label>
+                                </div>                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="binShow">
+                    <div class="allcp-form theme-info" >
+                        <div class="panel">
+                            <div class="panel-body st-adjustment-table">
+                                <div class="table-responsive" >
+                                    <table class="table allcp-form theme-warning tc-checkbox-1 fs13 " style="margin-bottom: 5px;" *ngFor = "let item of binList;">
+                                        <thead>                                            
+                                            <tr class="bg-dark">
+                                                <!-- <th>BIN ID</th> -->
+                                                <th>BINCODE</th>
+                                                <th>BIN BARCODE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <!-- <td>{{item.id}}</td> -->
+                                                <td>{{item.autoGeneratedCode}}</td>
+                                                <td>{{item.binBarcode}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+
+                                                
+                                                <table class="table allcp-form theme-warning  tc-checkbox-1 fs13">
+                                                    <thead>
+                                                        <!--<tr class="bg-dark">
+                                                            <th class="" colspan="4"></th>
+                                                            <th class="">Sizes</th>
+                                                        </tr>-->
+                                                        <tr class="bg-dark">
+                                                            <th class="">{{ 'STOCK_ADJUSTMENT.ID' | translate }}</th>                                            
+                                                            <th class="">{{ 'STOCK_ADJUSTMENT.COLOR' | translate }}</th>
+                                                            <th class="" *ngFor = "let size of styleWithScaleDetailsList">
+                                                                {{size.sizeCode}}
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor = "let col of styleWithColorDetailsList;">
+                                                            <td>0</td>                                            
+                                                            <td>{{col.colorCode}}</td>
+                                                            <td *ngFor = "let size of styleWithScaleDetailsList">
+                                                                <input type="text" (keypress)="keyPress($event)" value="{{getSizeDetails1(item.id,col.colorCode, size.sizeCode)}}" #siz
+                                                                 (change)="setStock1(item.id,col.colorCode, size.sizeCode,$event.target.value,$event)" style="width: 60px;">
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="height: 10px;background-color:red;"></tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>                                
+                                </div>  
+                                                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                
+            <div *ngIf="binNotShow">
+                <div class="allcp-form theme-info" >
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive" >
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <!--<tr class="bg-dark">
+                                            <th class="" colspan="4"></th>
+                                            <th class="">Sizes</th>
+                                        </tr>-->
+                                        <tr class="bg-dark">
+                                            <th class="">{{ 'STOCK_ADJUSTMENT.ID' | translate }}</th>
+                                            <th class="">{{ 'STOCK_ADJUSTMENT.COLOR' | translate }}</th>
+                                            <th class="" *ngFor = "let size of styleWithScaleDetailsList">
+                                                {{size.sizeCode}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor = "let col of styleWithColorDetailsList;">
+                                            <td>0</td>
+                                            <td>{{col.colorCode}}</td>
+                                            <td *ngFor = "let size of styleWithScaleDetailsList">
+                                                <input type="text" (keypress)="keyPress($event)" value="{{getSizeDetails(col.colorCode, size.sizeCode)}}" #siz
+                                                 (change)="setStock(col.colorCode, size.sizeCode,$event.target.value,$event)" style="width: 60px;">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>                                
+                            </div>  
+                                                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+                               
+                <div class="row default-forms">
+                    <div class="offset-md-3 col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-success btn-block common-button"
+                        [disabled]="myForm.pristine || myForm.invalid" (click)="addStockAdjustment()"><i
+                                class="fa fa-check-circle-o"></i> Save
+
+                        </button>
+                    </div>
+                  
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-primary btn-block common-button"
+                            (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+                   
+                    
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

@@ -1,0 +1,164 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../openingstock">{{ 'OPENING_STOCK.OPENING_STOCK_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'OPENING_STOCK.CREATE_OPENING_STOCK' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="barCode" autocomplete="off" (keyup.enter)="getSKUData()"
+                                            formControlName="barCode" #barCode spellcheck="false" trim="blur"
+                                            [ngClass]="{'red-border': myForm.controls['barCode'].invalid}"
+                                            class="gui-input floating-input" placeholder="SKU/BarCode">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'OPENING_STOCK.SKU_BARCODE' | translate }}</label>
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="storeid" autocomplete="off" readonly
+                                            formControlName="storeid" #storeid
+                                               class="gui-input floating-input" placeholder="Store">
+                                               <span class="highlight"></span>
+                                               <label>{{ 'OPENING_STOCK.STORE' | translate }}</label>
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="documentDate" autocomplete="off" readonly
+                                            formControlName="documentDate" #documentDate
+                                            class="gui-input floating-input" placeholder="Document Date">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'OPENING_STOCK.DOCUMENT_DATE' | translate }}</label>
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="documentNo" autocomplete="off" readonly
+                                            formControlName="documentNo" #documentNo
+                                            class="gui-input floating-input" placeholder="Document Number">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'OPENING_STOCK.DOCUMENT_NUMBER' | translate }}</label>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">{{ 'OPENING_STOCK.BARCODE' | translate }}</th>
+                                            <th class="">{{ 'OPENING_STOCK.SKU_NAME' | translate }}</th>
+                                            <th class="">{{ 'OPENING_STOCK.SKU_CODE' | translate }}</th>
+                                            <th class="">{{ 'OPENING_STOCK.BRAND' | translate }}</th>
+                                            <th class="">{{ 'OPENING_STOCK.COLOR' | translate }}</th>
+                                            <th class="">{{ 'OPENING_STOCK.SIZE' | translate }}</th>
+                                            <th class="">{{ 'OPENING_STOCK.QUANTITY' | translate }}</th>
+                                            <th class="">{{ 'COMMON.REMARKS' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of openingstocklist; let i = index;">
+                                            <td>{{i+1}}</td>
+                                            <td>{{item.barCode}}</td>
+                                            <td>{{item.sKUName}}</td>
+                                            <td>{{item.sKUCode}}</td>
+                                            <td>{{item.brand}}</td>
+                                            <td>{{item.color}}</td>
+                                            <td>{{item.size}}</td>
+                                            <td><input type="number" min="1" (keyup.enter)="keyPress($event)" oninput="this.value = Math.abs(this.value)" name="quantity" value={{item.quantity}} [(ngModel)]="item.quantity" [ngModelOptions]="{standalone: true}" style="text-align:center;"
+                                                class="gui-input" autocomplete="off" (change)="addQTY()"></td>
+                                            <td>{{item.remarks}}</td>
+                                            <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                    class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>                                
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb20 floating-form floating-label">
+                                                
+                            <input type="text" name="rem" autocomplete="off"  spellcheck="false" trim="blur"
+                                formControlName="rem" #rem class="gui-input floating-input" placeholder="Remarks">
+                                <span class="highlight"></span>
+                                <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                    </div>
+                    <div class="col-md-3 mb20"></div>
+                    <div class="col-md-3 mb20"></div>
+                    <div class="col-md-3 mb20">
+                        <label>{{ 'OPENING_STOCK.TOTAL' | translate }}: </label>
+                                    
+                                    <input type="text" name="totalqty" autocomplete="off" readonly
+                                        formControlName="totalqty" #totalqty
+                                        class="gui-input" placeholder="">
+                                    
+                    </div>
+                </div>
+                <div class="row default-forms">
+                    
+                    <div class="offset-md-3  col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-success btn-block common-button"
+                        [disabled]="myForm.pristine || myForm.invalid"
+                        (click)="addOpeningStockDetails()"><i
+                                class="fa fa-check-circle-o"></i> Save
+
+                        </button>
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-primary btn-block common-button" (click)="clear_controls()"
+                            ><i class="fa fa-refresh"></i> Clear</button>
+
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+                  
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

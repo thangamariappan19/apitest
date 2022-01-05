@@ -1,0 +1,147 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">Home</a>
+                </li>
+                <li class="">
+                    <a routerLink="../sub-collection">Bin Configuration Master</a>
+                </li>
+                <li class="breadcrumb-current-item">Create</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>BIN CONFIGURATION</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info default-forms">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <!--<div class="col-md-3 mb20">
+                                    <label>Collection</label>
+                                   
+                                        <select name="storeID" formControlName="storeID" #storeID
+                                            class="gui-input" 
+                                            [ngClass]="{'red-border': myForm.controls['storeID'].invalid}">
+                                            <option value="">Select Store</option>
+                                            <!--<option *ngFor="let item of collectionList" value="{{item.id}}">
+                                                {{item.collectionName}}</option>-->
+                                        <!--</select>                                       
+                                        <i class="fa fa-angle-down"></i>
+                                    
+                                </div>-->
+                                <div class="col-md-4">                                    
+                                    <div class="section">
+                                        <div class="bs-component mt30">
+
+                                            <div class="round fill mb10">
+                                                <input type="checkbox" checked="" id="enableBin" name="enableBin" #enableBin
+                                                    formControlName="enableBin">
+                                                <label for="enableBin"></label>
+                                                <p class="label-text-sub">Enable Bin</p>
+                                            </div>
+                                            <div id="source-button" class="btn btn-system btn-xs"
+                                                style="display: none;">&lt; &gt;</div>
+
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                                <div class="col-md-4 mb20">
+                                    <label>No Of Levels</label>
+                                    
+                                        <input type="text" name="noOfLevels" autocomplete="off"
+                                            formControlName="noOfLevels" #noOfLevels
+                                            [ngClass]="{'red-border': myForm.controls['noOfLevels'].invalid}"
+                                            class="gui-input" placeholder="No Of Levels"
+                                            maxlength = "4" (change)="gridBind()"
+                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                    
+                                </div>                                
+                                
+                                <div class="col-md-3 mt30">
+                                    <button type="submit" class="btn btn-lg btn-success btn-block common-button"  (click)="gridBind()"                                      
+                                        title="Add"><i class="fa fa-plus"></i> </button>
+                                </div>                                
+                            </div>
+
+                          
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info ">
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">Level No</th>
+                                            <th class="">Level Name</th>
+                                            <th class="">Store Code</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of binConfig; let i = index;">
+                                            <td>
+                                                {{item.levelNo}}
+                                            </td>
+                                            <td>
+                                                <input type="text" [(ngModel)]="item.levelName" [ngModelOptions]="{standalone: true}"
+                                                spellcheck="false" maxlength="4"
+                                               class="gui-input">
+                                            </td>
+                                            <td>
+                                                {{item.storeCode}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row default-forms">
+                   
+                    <div class="offset-md-3 col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-success btn-block common-button" (click)="addBin()">
+                            <i class="fa fa-check-circle-o"></i> Save </button>
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button" (click)="clear()">
+                            <i class="fa fa-refresh"></i> Clear </button>
+                    </div>
+                    <!--<div class="col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button">
+                            <i class="fa fa-remove"></i> Close </button>
+                    </div>-->
+                </div>            
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

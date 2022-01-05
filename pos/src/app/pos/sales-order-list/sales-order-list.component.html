@@ -1,0 +1,65 @@
+<form [formGroup]="myForm"novalidate>
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="sales-content-wrapper" style="margin-left: 0px">
+        <!-- Content -->
+        <section class="animated fadeIn">
+            <header id="topbar" class="ph10 second-top">
+                <div class="topbar-left">
+                    <ul class="nav nav-list nav-list-topbar pull-left">
+                        <li>
+                            <i class="fa fa-file-o"></i> Sales Order List
+                        </li>
+                    </ul>
+                </div>
+                <div class="topbar-right mt5">
+                    <a href="" class="btn btn-back btn-sm ml10" title="New">
+                        <span class="fa fa-arrow-left pr5"></span>Back</a>
+                </div>
+            </header> 
+        </section>
+        <div class="row">
+            <div class="col-md-12">
+                <!--<div class="return-filter allcp-form theme-info">
+                    <div class="sales-order row mt10">
+                        <div class="col-md-12">
+                            <label class="field field prepend-icon">
+                                <input type="text" name="from2" id="from2" class="gui-input" placeholder="Item Search / Barcode Search">
+                                <span class="field-icon">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="table-responsive sales-second-section2 sales-order-table" id="sot">
+                    <table class="table allcp-form theme-warning">
+                        <thead>
+                            <tr class="main-sales-tr">
+                                <th>S.No</th>
+                                <th>Document Number</th>
+                                <th>Ordered Date</th>
+                                <th>Delivery Date</th>
+                                <th>Order Status</th>
+                                <th>Payment Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor = "let item of json; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{item.documentNo}}</td>
+                                <td>{{item.documentDate | date:'yyyy-MM-dd'}}</td>
+                                <td>{{item.deliveryDate | date:'yyyy-MM-dd'}}</td>
+                                <td>{{item.orderStatus}}</td>
+                                <td>{{item.paymentStatus}}</td>
+                                <td><a routerLink="{{ '/sales-order-pick/' + item.id.toString() }}"  class="btn btn-edits  btn-sm ml10">
+                                    <span class="fa fa-edit"></span></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <!-- /Content -->
+    </section>
+</form>

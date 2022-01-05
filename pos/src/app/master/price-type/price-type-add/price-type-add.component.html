@@ -1,0 +1,124 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../price-type">{{ 'PRICE_TYPE.PRICE_TYPE_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'PRICE_TYPE.CREATE_PRICE_TYPE' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="priceTypeCode" autocomplete="off"
+                                                formControlName="priceTypeCode" #designationCode maxlength="8"
+                                                [ngClass]="{'red-border': myForm.controls['priceTypeCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="Price Type Code"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'PRICE_TYPE.PRICE_CODE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="priceTypeName" autocomplete="off"
+                                                formControlName="priceTypeName" #priceTypeName
+                                                [ngClass]="{'red-border': myForm.controls['priceTypeName'].invalid}"
+                                                class="gui-input floating-input" placeholder="Price Type Name"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'PRICE_TYPE.PRICE_NAME' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="remarks" autocomplete="off"
+                                                formControlName="remarks" #remarks
+                                                [ngClass]="{'red-border': myForm.controls['remarks'].invalid}"
+                                                class="gui-input floating-input" placeholder="Remarks" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text"><label>{{ 'COMMON.ACTIVE' | translate }}</label></p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                                <div class="row default-forms">
+                                    
+                                    <div class="offset-md-3 col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button" 
+                                        [disabled]="myForm.pristine || myForm.invalid" (click) = "addPriceTypes()"><i
+                                                class="fa fa-check-circle-o"></i> Save
+                                                
+                                        </button>
+                                    </div>
+                                   
+                                    <div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button" (click) = "clear_controls()"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click) = "close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+
+                                    </div>
+                                    
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

@@ -1,0 +1,148 @@
+<html>	
+	<div style="width: 95mm;">
+		<div style="width: 60%; text-align: center;margin-left:45px">
+			<img src="{{storeImage}}" style="height: 50px;width:50%;margin-left:45px;"/>
+		</div>	   
+	  <div style="width: 100%; text-align: center;font-weight:900">
+		  <h4 style="margin: 2mm 0mm;font-weight:900">*&nbsp;EXCHANGE RECEIPT&nbsp;*</h4>
+	  </div>
+	  <table style="width: 100%;">
+		  <tr>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">Cashier: </h5>
+			  </td>
+			  <td style="width: 50%;text-align:left;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{cashier}} </h5>
+			  </td>
+			   <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">Shop: </h5>
+			  </td>
+			  <td style="width: 50%;text-align:left;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{shopName}} </h5>
+			  </td>
+		  </tr>
+		  <tr>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">Invoice#: </h5>
+			  </td>
+			  <td style="width: 50%;text-align:left;">
+				  <h5 style="margin: 2mm 0mm; font-weight: 100"> {{invoiceNo}} </h5>
+			  </td>
+			   <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">S-Invoice# </h5>
+			  </td>
+			  <td style="width: 50%;text-align: left;font-weight: 100">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{salesinvoiceNo}} </h5>
+			  </td>
+		  </tr>
+		  <tr>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">Date: </h5>
+			  </td>
+			  <td style="width: 50%;text-align: left;font-weight: 100">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{date | date: 'dd-MMM-yy'}} </h5>
+			  </td>
+			   <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">Time: </h5>
+			  </td>
+			  <td style="width: 50%;text-align:left;font-weight:100">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{time | date:'hh:mm a'}} </h5>
+			  </td>
+		  </tr>
+		  <tr>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">POS: </h5>
+			  </td>
+			  <td style="width: 50%;text-align:left;font-weight:100">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{posName}} </h5>
+			  </td>
+			   <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">Customer: </h5>
+			  </td>
+			  <td style="width: 50%;text-align:left;font-weight:100">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{customerName}} </h5>
+			  </td>
+		  </tr>
+	  </table>
+		<table style="width: 100%;height:5px">
+		  <tr>  
+		  </tr>
+	  </table>
+	  <table style="width:100%; border-collapse: collapse;">
+          <thead>
+			<tr style="border-top: 1px solid #000; border-bottom: 2px solid #000;">
+                 <th style="width: 10%;">Sl#</th>
+                 <th style="width: 40%">Item Code</th>
+                 <th style="width: 10%;">Quantity</th>
+              </tr>
+           </thead>
+           <tbody>
+			<tr *ngFor="let item of ExchangeDetailsList; let i = index;">
+                <td style="text-align: center;font-weight: 100"><h5>{{i+1}}</h5></td>
+                <td style="text-align: left;font-weight: 100"><h5>{{item.skuCode}}</h5></td>
+				<td style="text-align: center;font-weight: 100"><h5>{{item.quantity}}</h5></td>
+			</tr>              
+           </tbody>
+		  <tfoot>
+			<tr style="border-top: 2px solid #000;border-bottom: 1px solid #000;">
+                  <td></td>
+				  <td style="text-align: left;width:40%;font-weight:550"><h5>Total Quantity</h5></td>
+				  <td style="text-align: center;"><h5>{{totalQty}}</h5></td>				  
+              </tr>				  
+		  </tfoot>
+	   </table>
+		<table style="width: 100%;">
+		  <tr>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm"></h5>
+			  </td>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;"></h5>
+			  </td>
+		  </tr>
+	  </table>
+		<table style="width: 100%;height:40px">
+		  <tr>  
+		  </tr>
+	  </table>
+		<table style="width: 100%;">
+		  <tr>
+			  <td style="width: 50%;text-align:center">
+				  <h5 style="margin: 2mm 0mm;font-weight:550"><u>Customer Name</u></h5>
+			  </td>
+			  <td style="width: 50%;text-align:center">
+				  <h5 style="margin: 2mm 0mm;font-weight:550"><u>Customer Signature</u></h5>
+			  </td>
+		  </tr>
+	  </table>
+		<table style="width: 100%;height: 50px;">
+		  <tr>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm"></h5>
+			  </td>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;"></h5>
+			  </td>
+		  </tr>
+	  </table>
+		<div style="width: 100%; text-align: center;">
+		  <h4 style="margin: 2mm 0mm;font-weight:100;">This is not a sales invoice.</h4>
+		</div>
+		<table style="width: 100%;height: 15px;">
+			<tr>
+				<td style="width: 50%;">
+					<h5 style="margin: 2mm 0mm"></h5>
+				</td>
+				<td style="width: 50%;">
+					<h5 style="margin: 2mm 0mm;"></h5>
+				</td>
+			</tr>
+		</table>
+		<div style="width: 100%; text-align: center;font-weight:100">
+		  <h4 style="margin: 2mm 0mm;font-weight:100;">{{footer}}</h4>
+		</div>
+		<div style="width: 100%; text-align: center;height:50px">
+		  <h4 style="margin: 2mm 0mm;font-weight:700">* &nbsp; {{invoiceNo}} &nbsp; *</h4>
+		</div>
+   </div>
+</html>

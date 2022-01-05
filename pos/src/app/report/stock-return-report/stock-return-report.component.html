@@ -1,0 +1,126 @@
+<form [formGroup]="myForm" novalidate>
+
+    <section id="content_wrapper">
+
+        <section class="grids-search grid-search-row allcp-form" style="margin-bottom: 10px;">
+
+
+            <div class="row title-section-row">
+                <h4>Stock Return Report</h4>             
+            </div>
+        
+        
+        </section>
+
+<mat-card>
+   	
+    <mat-card-content class="report-card-content">
+<section id="content_wrapper report-forms" class="sales-content-wrapper" style="margin-left: 0px">
+ <div class="row allcp-form theme-info ">
+        <div class="col-lg-3 col-md-4 col-sm-12 col-12 col-xl-3 floating-form floating-label">
+       
+        <input type="date"  name="fromdate"
+        formControlName="fromdate" #fromdate class="gui-input floating-input"
+        placeholder="FromDate" autocomplete="off">
+        <span class="highlight"></span>
+        <label>FromDate</label>
+  
+</div>
+    <div class="col-lg-3 col-md-4 col-sm-12 col-12 col-xl-3 floating-form floating-label">
+    
+    <input type="date"  name="todate"
+    formControlName="todate" #todate class="gui-input floating-input"
+    placeholder="ToDate" autocomplete="off">
+    <span class="highlight"></span>
+    <label>ToDate</label>
+</div>
+
+
+<div class="col-lg-3 col-md-4 col-sm-12 col-12 col-xl-3 select-forms">
+       <label>Report</label>
+             <select class="gui-input" name="reportID" formControlName="reportID"  #reportID>
+                <option>--Report--</option>
+                <option   value="Stock Return Header">
+                    Stock Return Header</option>
+                    <option  value="Stock Return Details">
+                        Stock Return Details</option>
+            </select>
+            <i class="fa fa-angle-down report-select"></i>
+           
+    
+    </div>
+
+
+<div class="col-lg-3 col-md-4 col-sm-12 col-12 col-xl-3  default-forms">
+
+    <button type="submit" (click)="viewXreport()"
+                class="btn btn-lg btn-success btn-block common-button"> <i class="fa fa-check-circle-o"></i> Get</button>
+     
+    </div>
+
+</div>
+
+</section>
+
+
+</mat-card-content>
+<!-- <div class="container">
+    <div class="header">
+        <div class="header__content-wrapper">
+          <div class="header__filename">
+            <span>{{ fileName }}</span>
+          </div>
+          <div class="header__page-indicator">
+            <span class="header__page-indicator-current">{{ currentPage }}</span>
+            <span class="header__page-indicator-separator">/</span>
+            <span class="header__page-indicator-total">{{ totalPages }}</span>
+          </div>
+          <div class="header__pdf-controls">
+            <button
+              class="header__btn"
+              (click)="zoomfuction('increment')"
+              [disabled]="zoomAmt >= zoomMax"
+ >
+              zoom in
+            </button>
+            <button
+              class="header__btn"
+              (click)="zoomfuction('decrement')"
+              [disabled]="zoomMin <= zoomAmt"
+            >
+              zoom out
+            </button>
+          
+          </div>
+        </div>
+      </div>
+  
+
+  
+
+  </div> -->
+
+  <div>
+
+  </div>
+  
+  <div class="output-pdf-viewer">
+    <pdf-viewer
+    [src]="pdfSrc"
+    [(page)]="pageVariable"
+    [show-all]="true"
+    [stick-to-page]="true"
+    [render-text]="true"
+    [original-size]="false"
+    [fit-to-page]="true"
+    [autoresize]="true"
+    [show-borders]="true"
+    [zoom-scale]="zoomScale"
+    [zoom]="zoom"
+    (after-load-complete)="afterLoadComplete($event)"
+    #pdfViewer
+    ></pdf-viewer>
+  </div>
+</mat-card>
+</section>
+</form>

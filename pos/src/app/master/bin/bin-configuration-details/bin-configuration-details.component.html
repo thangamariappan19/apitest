@@ -1,0 +1,374 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">Home</a>
+                </li>
+                <li class="">
+                    <a routerLink="../bin-config-detail">Bin Configuration Details</a>
+                </li>
+                <li class="breadcrumb-current-item">Create</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>CREATE BIN CONFIGURATION DETAILS</h4>
+        </div>
+
+
+    </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info default-forms">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6 mb20">
+                                    <label>Store Code</label>
+                                    <input type="text" name="storeCode" autocomplete="off" readonly
+                                        formControlName="storeCode" #storeCode
+                                        class="gui-input" placeholder="Store Code"
+                                        spellcheck="false" trim="blur">
+                                </div>
+                                <div class="col-md-6 mb20">
+                                    <label>Level Type</label>
+                                    <select name="levelID" formControlName="levelID" #levelID
+                                        class="gui-input"
+                                        [ngClass]="{'red-border': myForm.controls['levelID'].invalid}" (change)="GetLevel()">
+                                        <option value="">Select Level</option>
+                                        <option *ngFor="let item of binConfig" value="{{item.levelNo}}">
+                                            {{item.levelName}}</option>
+                                            <!--<option>Area</option>
+                                            <option>Room</option>
+                                            <option>Bin</option>-->
+                                    </select>
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                            </div>
+
+                            <!-- BIN START -->
+                            <div class="row" *ngIf="binShow">
+                                <div class="col-md-2 mb20">
+                                    <label>Bin No</label>
+
+                                    <input type="text" name="binNo" autocomplete="off"
+                                        formControlName="binNo" #binNo
+                                        [ngClass]="{'red-border': myForm.controls['binNo'].invalid}"
+                                        class="gui-input" placeholder="Bin No" maxlength="4"
+                                        spellcheck="false" trim="blur">
+
+                                </div>
+                                <div class="col-md-2 mb20">
+                                    <label>Max Capacity</label>
+
+                                    <input type="text" name="maxCapacity" autocomplete="off"
+                                        formControlName="maxCapacity" #maxCapacity
+                                        [ngClass]="{'red-border': myForm.controls['maxCapacity'].invalid}"
+                                        class="gui-input" placeholder="Max Capacity"
+                                        spellcheck="false" trim="blur">
+
+                                </div>
+                                <div class="col-md-3 mb20">
+                                    <label>Head Container Code</label>
+                                    <select name="headContainerID1" formControlName="headContainerID1" #headContainerID1
+                                        class="gui-input"
+                                        [ngClass]="{'red-border': myForm.controls['headContainerID1'].invalid}" (change)="GetExisting()">
+                                        <option value="">Select Sub Level</option>
+                                        <option *ngFor="let item of tempBinConfigDetails" value="{{item.subLevelCode}}">
+                                            {{item.subLevelCode}}</option>
+                                    </select>
+                                    <i class="fa fa-angle-down"></i>
+                                </div> 
+                                <div class="col-md-2 mb20">
+                                    <label>Bin Barcode</label>
+
+                                    <input type="text" name="binBarcode" autocomplete="off"
+                                        formControlName="binBarcode" #binBarcode
+                                        [ngClass]="{'red-border': myForm.controls['binBarcode'].invalid}"
+                                        class="gui-input" placeholder="Bin No" maxlength="4"
+                                        spellcheck="false" trim="blur">
+
+                                </div>                               
+                                <div class="col-md-2 mt30">
+                                    <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                        title="Add" (click) = "BindData()"><i class="fa fa-plus"></i> </button>
+                                </div>
+                                <div class="col-md-3"  *ngIf="stockShow">                                    
+                                    <div class="section">
+                                        <div class="bs-component mt30">
+
+                                            <div class="round fill mb10">
+                                                <input type="checkbox" checked="" id="defaultReceiveBin" name="defaultReceiveBin" #defaultReceiveBin
+                                                    formControlName="defaultReceiveBin" (change)="GetDefaultBin()">
+                                                <label for="defaultReceiveBin"></label>
+                                                <p class="label-text-sub"> Stock Area Receiving Bin</p>
+                                            </div>
+                                            <div id="source-button" class="btn btn-system btn-xs"
+                                                style="display: none;">&lt; &gt;</div>
+                                        </div>
+                                    </div>                                
+                                </div> 
+                                <div class="col-md-3" *ngIf="salesShow">                                    
+                                    <div class="section">
+                                        <div class="bs-component mt30">
+
+                                            <div class="round fill mb10">
+                                                <input type="checkbox" checked="" id="sadefaultReceiveBin" name="sadefaultReceiveBin" #sadefaultReceiveBin
+                                                    formControlName="sadefaultReceiveBin" (change)="GetDefaultBin()">
+                                                <label for="sadefaultReceiveBin"></label>
+                                                <p class="label-text-sub"> Sales Area Receiving Bin</p>
+                                            </div>
+                                            <div id="source-button" class="btn btn-system btn-xs"
+                                                style="display: none;">&lt; &gt;</div>
+                                        </div>
+                                    </div>                                
+                                </div>  
+                                <div class="col-md-3" *ngIf="sellingShow">                                    
+                                    <div class="section">
+                                        <div class="bs-component mt30">
+
+                                            <div class="round fill mb10">
+                                                <input type="checkbox" checked="" id="defaultSellingBin" name="defaultSellingBin" #defaultSellingBin
+                                                    formControlName="defaultSellingBin" (change)="GetDefaultBin()">
+                                                <label for="defaultSellingBin"></label>
+                                                <p class="label-text-sub"> Default Selling Bin</p>
+                                            </div>
+                                            <div id="source-button" class="btn btn-system btn-xs"
+                                                style="display: none;">&lt; &gt;</div>
+                                        </div>
+                                    </div>                                
+                                </div>
+                                <div class="col-md-3">                                    
+                                    <div class="section">
+                                        <div class="bs-component mt30">
+
+                                            <div class="round fill mb10">
+                                                <input type="checkbox" checked="" id="active1" name="active1" #active1
+                                                    formControlName="active1">
+                                                <label for="active1"></label>
+                                                <p class="label-text-sub">Active</p>
+                                            </div>
+                                            <div id="source-button" class="btn btn-system btn-xs"
+                                                style="display: none;">&lt; &gt;</div>
+                                        </div>
+                                    </div>                                
+                                </div>  
+                            </div>
+                            <!-- BIN END -->
+
+                            <div class="row" *ngIf="notBinShow">
+                                <div class="col-md-2 mb20">
+                                    <label>{{lblCode}}</label>
+
+                                    <input type="text" name="subLevelCode" autocomplete="off"
+                                        formControlName="subLevelCode" #subLevelCode
+                                        [ngClass]="{'red-border': myForm.controls['subLevelCode'].invalid}"
+                                        class="gui-input" placeholder="Sub Level Code" maxlength="5"
+                                        spellcheck="false" trim="blur">
+
+                                </div>
+                                <div class="col-md-2 mb20">
+                                    <label>{{lblName}}</label>
+
+                                    <input type="text" name="subLevelName" autocomplete="off"
+                                        formControlName="subLevelName" #subLevelName
+                                        [ngClass]="{'red-border': myForm.controls['subLevelName'].invalid}"
+                                        class="gui-input" placeholder="Sub Level Name"
+                                        spellcheck="false" trim="blur">
+
+                                </div>
+                                <div id="headContainerID" class="col-md-3 mb20" *ngIf="areanotShow">
+                                    <label>Head Container Code</label>
+                                    <select name="headContainerID" formControlName="headContainerID" #headContainerID
+                                        class="gui-input"
+                                        [ngClass]="{'red-border': myForm.controls['headContainerID'].invalid}" (change)="GetExisting()">
+                                        <option value="">Select Sub Level</option>
+                                        <option *ngFor="let item of tempBinConfigDetails" value="{{item.subLevelCode}}">
+                                            {{item.subLevelCode}}</option>
+                                    </select>
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                                <div id="purchase" class="col-md-3 mb20" *ngIf="areaShow">
+                                    <label>Purpose</label>
+                                    <select name="purchase" formControlName="purchase" #purchase
+                                        class="gui-input"
+                                        [ngClass]="{'red-border': myForm.controls['purchase'].invalid}">
+                                        <option value="">Select Purpose</option>
+                                        <option>STOCK</option>
+                                        <option>SALES</option>
+                                    </select>
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                                <div class="col-md-3">                                    
+                                    <div class="section">
+                                        <div class="bs-component mt30">
+
+                                            <div class="round fill mb10">
+                                                <input type="checkbox" checked="" id="active" name="active" #active
+                                                    formControlName="active">
+                                                <label for="active"></label>
+                                                <p class="label-text-sub">Active</p>
+                                            </div>
+                                            <div id="source-button" class="btn btn-system btn-xs"
+                                                style="display: none;">&lt; &gt;</div>
+                                        </div>
+                                    </div>                                
+                                </div>
+                                <div class="col-md-2 mt30">
+                                    <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                        title="Add" (click) = "BindData()"><i class="fa fa-plus"></i> </button>
+                                </div>     
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- choose grid -->
+            <!-- listing table -->
+            <div class="allcp-form theme-info" *ngIf="notBinShow">
+                <div class="panel">
+                    <div class="panel-body country-table">
+                        <div class="table-responsive">
+                            <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                <thead>
+                                    <tr class="bg-dark">
+                                        <th class="">#</th>
+                                        <th class="">{{lblCode}}</th>
+                                        <th class="">{{lblName}}</th>
+                                        <th class="">Head Container</th>
+                                        <th class="">Active</th>
+                                        <th class=""></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of binConfigDetails; let i = index;">
+                                        <td>
+                                            {{i+1}}
+                                        </td>
+                                        <td>
+                                            {{item.subLevelCode}}
+                                        </td>
+                                        <td>
+                                            {{item.subLevelName}}
+                                        </td>
+                                        <td>
+                                            {{item.headerCode}}
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" [(ngModel)]="item.active"
+                                                [ngModelOptions]="{standalone: true}" style="text-align:center;">
+                                        </td>
+                                        <!--<td>
+                                            <a href="javascript:void(0);" (click)="void_item(item)"
+                                                class="cash-remove"><i class="fa fa-remove"></i></a>
+                                        </td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--BIN TABLE-->
+            <div class="allcp-form theme-info" *ngIf="binShow">
+                <div class="panel">
+                    <div class="panel-body country-table">
+                        <div class="table-responsive">
+                            <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                <thead>
+                                    <tr class="bg-dark">
+                                        <th class="">Bin Code</th>
+                                        <th class="">Bin No</th>
+                                        <th class="">Max Capacity</th>
+                                        <th class="">Stock Area Receiving Bin</th>
+                                        <th class="">Sales Area Receiving Bin</th>
+                                        <th class="">Default Selling Bin</th>
+                                        <th class="">Head Container</th>
+                                        <th class="">Purchase</th>
+                                        <th class="">Active</th>
+                                        <th class=""></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of binConfigDetails; let i = index;">
+                                        <td>
+                                            {{item.autoGeneratedCode}}
+                                        </td>
+                                        <td>
+                                            {{item.subLevelCode}}
+                                        </td>
+                                        <td>
+                                            {{item.maxCapacity}}
+                                        </td>
+                                        <td>
+                                            {{item.defaultReceivingBin}}
+                                        </td>
+                                        <td>
+                                            {{item.defaultSalesReceivingBin}}
+                                        </td>
+                                        <td>
+                                            {{item.defaultSellingBin}}
+                                        </td>
+                                        <td>
+                                            {{item.headerCode}}
+                                        </td>
+                                        <td>
+                                            {{item.purchase}}
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" [(ngModel)]="item.active"
+                                                [ngModelOptions]="{standalone: true}" style="text-align:center;">
+                                        </td>
+                                        <!--<td>
+                                            <a href="javascript:void(0);" (click)="void_item(item)"
+                                                class="cash-remove"><i class="fa fa-remove"></i></a>
+                                        </td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row default-forms">
+
+                <div class="offset-md-3 col-md-2 mt10">
+                    <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                        [disabled]="myForm.pristine || myForm.invalid" (click) = "addSubBinDetails()"><i
+                            class="fa fa-check-circle-o"></i> Save
+
+                    </button>
+                </div>
+                <div class="col-md-2 mt10">
+                    <button type="clear" class="btn btn-lg btn-primary btn-block common-button" (click)="clearControls()"
+                        ><i class="fa fa-refresh"></i> Clear</button>
+
+                </div>
+                <div class="col-md-2 mt10">
+                    <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                            class="fa fa-remove"></i> Close</button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

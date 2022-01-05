@@ -1,0 +1,414 @@
+.p-t-b-100 {
+    padding: 90px 0!important;
+}
+
+
+/* logins */
+
+#main:before
+{
+
+}
+
+.log-div
+{
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 40px;
+  
+    
+
+}
+
+.log-bg
+{
+    background-image:url('../img/bg1.png');
+    height: 102vh;
+}
+
+.log-img {
+    border: 1px solid #eaeaea;
+    border-radius: 40px;
+    box-shadow: 1px 1px 1px 1px #ececec;
+}
+
+.forget-password {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.log-div .form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+
+  .log-div .form-control
+{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border: 1px solid #e1e8ee;
+    padding: 6px 8px 4px 6px;
+    border-radius: 0px;
+    height: 40px;
+
+
+}
+
+.log-div .form-control:focus {
+    border: 2px solid #3567f5
+  }
+
+.btn-login
+{
+    background: -webkit-linear-gradient(right, #2f1eaa, #3567f5) !important;
+    color: #fff;
+    font-weight: bold;
+    height: 45px;
+    margin-top: 3px;
+}
+.btn-login:hover
+{
+background: -webkit-linear-gradient(right, #2f1eaa, #3567f5) !important;
+color: #fff;
+font-weight: bold;
+}
+
+ .has-float-label label::after, .has-float-label>span::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    background: #fff;
+    height: 2px;
+    top: 50%;
+    left: -.2em;
+    right: -.2em;
+    z-index: -1;
+}
+
+.red-border {
+    border: 1px solid red !important;
+    
+}
+
+
+.has-float-label {
+    display: block;
+    position: relative;
+}
+
+.has-float-label .form-control:placeholder-shown:not(:focus)+label {
+    font-size: 12px;
+    opacity: 1;
+    top: 15px;
+}
+.has-float-label label {
+    position: absolute;
+    cursor: text;
+    font-size: 75%;
+    opacity: 1;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+    top: -.5em;
+    left: .75rem;
+    z-index: 3;
+    line-height: 1;
+    padding: 0 1px;
+    color: #000 !important;
+} 
+
+.has-float-label>span {
+    position: absolute;
+    cursor: text;
+    font-size: 75%;
+    opacity: 1;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+    top: -.5em;
+    left: .75rem;
+    z-index: 3;
+    line-height: 1;
+    padding: 0 1px;
+} 
+
+
+.pure-material-textfield-outlined {
+    --pure-material-safari-helper1: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+    position: relative;
+    display: inline-block;
+    padding-top: 6px;
+    font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+    font-size: 12px;
+    line-height: 1.5;
+    overflow: hidden;
+   width: 100%;
+}
+
+/* Input, Textarea */
+.pure-material-textfield-outlined > input,
+.pure-material-textfield-outlined > textarea {
+    box-sizing: border-box;
+    margin: 0;
+    border: solid 1px; /* Safari */
+    border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+    border-top-color: transparent;
+    border-radius: 4px;
+    padding: 15px 13px 15px;
+    width: 100%;
+    height: inherit;
+    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
+    background-color: transparent;
+    box-shadow: none; /* Firefox */
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    caret-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+/* Span */
+.pure-material-textfield-outlined > input + span,
+.pure-material-textfield-outlined > textarea + span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+    width: 100%;
+    max-height: 100%;
+    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+    font-size: 75%;
+    line-height: 15px;
+    cursor: text;
+    transition: color 0.2s, font-size 0.2s, line-height 0.2s;
+}
+
+/* Corners */
+.pure-material-textfield-outlined > input + span::before,
+.pure-material-textfield-outlined > input + span::after,
+.pure-material-textfield-outlined > textarea + span::before,
+.pure-material-textfield-outlined > textarea + span::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    margin-top: 6px;
+    /* border-top: solid 1px; */
+    border-top-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+    min-width: 10px;
+    height: 8px;
+    pointer-events: none;
+    box-shadow: inset 0 1px transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pure-material-textfield-outlined > input + span::before,
+.pure-material-textfield-outlined > textarea + span::before {
+    margin-right: 4px;
+    border-left: solid 1px transparent;
+    border-radius: 4px 0;
+}
+
+.pure-material-textfield-outlined > input + span::after,
+.pure-material-textfield-outlined > textarea + span::after {
+    flex-grow: 1;
+    margin-left: 4px;
+    border-right: solid 1px transparent;
+    border-radius: 0 4px;
+}
+
+/* Hover */
+.pure-material-textfield-outlined:hover > input,
+.pure-material-textfield-outlined:hover > textarea {
+    border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
+    border-top-color: transparent;
+}
+
+.pure-material-textfield-outlined:hover > input + span::before,
+.pure-material-textfield-outlined:hover > textarea + span::before,
+.pure-material-textfield-outlined:hover > input + span::after,
+.pure-material-textfield-outlined:hover > textarea + span::after {
+    border-top-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.87);
+}
+
+.pure-material-textfield-outlined:hover > input:not(:focus):placeholder-shown,
+.pure-material-textfield-outlined:hover > textarea:not(:focus):placeholder-shown {
+    border-color: #e1e8ee;
+}
+
+/* Placeholder-shown */
+.pure-material-textfield-outlined > input:not(:focus):placeholder-shown,
+.pure-material-textfield-outlined > textarea:not(:focus):placeholder-shown {
+/*    border-top-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.6);
+*/}
+
+.pure-material-textfield-outlined > input:not(:focus):placeholder-shown + span,
+.pure-material-textfield-outlined > textarea:not(:focus):placeholder-shown + span {
+    font-size: inherit !important;
+    line-height: 53px !important;
+}
+
+.pure-material-textfield-outlined > input:not(:focus):placeholder-shown + span::before,
+.pure-material-textfield-outlined > textarea:not(:focus):placeholder-shown + span::before,
+.pure-material-textfield-outlined > input:not(:focus):placeholder-shown + span::after,
+.pure-material-textfield-outlined > textarea:not(:focus):placeholder-shown + span::after {
+    border-top-color: transparent;
+}
+
+/* Focus */
+.pure-material-textfield-outlined > input:focus,
+.pure-material-textfield-outlined > textarea:focus {
+    border-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+    border-top-color: transparent;
+    box-shadow: inset 1px 0 var(--pure-material-safari-helper1), inset -1px 0 var(--pure-material-safari-helper1), inset 0 -1px var(--pure-material-safari-helper1);
+    outline: none;
+}
+
+.pure-material-textfield-outlined > input:focus + span,
+.pure-material-textfield-outlined > textarea:focus + span {
+    color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+}
+
+.pure-material-textfield-outlined > input:focus + span::before,
+.pure-material-textfield-outlined > input:focus + span::after,
+.pure-material-textfield-outlined > textarea:focus + span::before,
+.pure-material-textfield-outlined > textarea:focus + span::after {
+    border-top-color: var(--pure-material-safari-helper1) !important;
+    box-shadow: inset 0 1px var(--pure-material-safari-helper1);
+}
+
+/* Disabled */
+.pure-material-textfield-outlined > input:disabled,
+.pure-material-textfield-outlined > input:disabled + span,
+.pure-material-textfield-outlined > textarea:disabled,
+.pure-material-textfield-outlined > textarea:disabled + span {
+    border-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38) !important;
+    border-top-color: transparent !important;
+    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+    pointer-events: none;
+}
+
+.pure-material-textfield-outlined > input:disabled + span::before,
+.pure-material-textfield-outlined > input:disabled + span::after,
+.pure-material-textfield-outlined > textarea:disabled + span::before,
+.pure-material-textfield-outlined > textarea:disabled + span::after {
+    border-top-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38) !important;
+}
+
+.pure-material-textfield-outlined > input:disabled:placeholder-shown,
+.pure-material-textfield-outlined > input:disabled:placeholder-shown + span,
+.pure-material-textfield-outlined > textarea:disabled:placeholder-shown,
+.pure-material-textfield-outlined > textarea:disabled:placeholder-shown + span {
+    border-top-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38) !important;
+}
+
+.pure-material-textfield-outlined > input:disabled:placeholder-shown + span::before,
+.pure-material-textfield-outlined > input:disabled:placeholder-shown + span::after,
+.pure-material-textfield-outlined > textarea:disabled:placeholder-shown + span::before,
+.pure-material-textfield-outlined > textarea:disabled:placeholder-shown + span::after {
+    border-top-color: transparent !important;
+}
+
+/* Faster transition in Safari for less noticable fractional font-size issue */
+@media not all and (min-resolution:.001dpcm) {
+    @supports (-webkit-appearance:none) {
+        .pure-material-textfield-outlined > input,
+        .pure-material-textfield-outlined > input + span,
+        .pure-material-textfield-outlined > textarea,
+        .pure-material-textfield-outlined > textarea + span,
+        .pure-material-textfield-outlined > input + span::before,
+        .pure-material-textfield-outlined > input + span::after,
+        .pure-material-textfield-outlined > textarea + span::before,
+        .pure-material-textfield-outlined > textarea + span::after {
+            transition-duration: 0.1s;
+        }
+    }
+}
+.topbar-right
+{
+    float: right;
+    position: relative;
+    top: 60px;
+    left: -55px;
+}
+
+.mat-expansion-panel-body
+{
+    padding: 0px !important;
+}
+.grid-search-row .mat-form-field
+{
+    width: 100% !important;
+}
+.btn-delete {
+    background-color: #bb0906;
+    color: #fff;
+}
+.btn-delete:hover {
+    background-color: #bb0906;
+    color: #fff;
+}
+
+.btn-refresh
+{
+    margin-right: 5px;
+    background-color: #3f51b5 !important;
+    color: #fff !important;
+    padding: 10px 20px 10px 20px !important;
+    border-radius: 6px !important;
+}
+.btn-refresh:hover
+{
+    margin-right: 5px;
+    background-color: #3f51b5 !important;
+    color: #fff !important;
+}
+.m-action .mat-menu-content
+{
+    background-color: #fff !important;
+}
+.m-action .mat-menu-panel
+{
+    left: -125px !important;
+    position: relative !important;
+}
+
+.example-card .mat-card-content
+{
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 0px !important;
+    font-size: 13px;
+    border-radius: 5px;
+    border-left: 2px solid #00aaff;
+}
+    .user-example-card .mat-card-content {
+        background-color: none;
+}
+.example-card .mat-card-header
+{
+    border-bottom: 1px dotted #00aaff;
+}
+.highlighter {
+    background-image: linear-gradient(#13a0e6 , #4db9c7) !important;
+    color: #ffffff !important;
+}
+@media print {
+    #printContainer>div {
+        display: inline;  /* must be flex since version 9.0.0 */
+    }
+}
+pdf-viewer {
+    display: block;
+    height: 56vh;
+}
+textarea {
+    margin-top: 15px; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}

@@ -1,0 +1,162 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../state">{{ 'STATE.STATE_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <header id="topbar" class="ph10">
+            <div class="topbar-left">
+                <ul class="nav nav-list nav-list-topbar pull-left">
+                    <li>{{ 'STATE.CREATE_STATE' | translate }}
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <!-- /Topbar -->
+        
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'STATE.CREATE_STATE' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">                                        
+                                        
+                                            <input type="text" name="stateCode" autocomplete="off"
+                                                formControlName="stateCode" #stateCode
+                                                [ngClass]="{'red-border': myForm.controls['stateCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="State Code"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STATE.STATE_CODE' | translate }}</label>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="stateName" autocomplete="off"
+                                                formControlName="stateName" #stateName
+                                                [ngClass]="{'red-border': myForm.controls['stateName'].invalid}"
+                                                class="gui-input floating-input" placeholder="State Name"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">  
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STATE.STATE_NAME' | translate }}</label>                                              
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'STATE.COUNTRY' | translate }}</label>
+                                       
+                                            <select name="countryID" formControlName="countryID" #countryID (change)="countrycode()"
+                                                class="gui-input" [ngClass]="{'red-border': myForm.controls['countryID'].invalid}">
+                                                <option value="">Select Country</option>
+                                                <option *ngFor="let item of countryList" value="{{item.id}}">{{item.countryName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">                                        
+                                        
+                                            <input type="text" name="remarks" autocomplete="off"
+                                                formControlName="remarks" #remarks
+                                                class="gui-input floating-input" placeholder="Remarks" spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                 
+                                </div>
+
+                                <div class="row default-forms">
+                                    <div class="offset-md-3">
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                            [disabled]="myForm.pristine || myForm.invalid" (click) = "addState()" ><i
+                                                class="fa fa-check-circle-o"></i> Save
+                                                
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button" 
+                                        (click) = "clear_controls()"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>
+                                    
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                                        (click) = "close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+
+                                    </div>
+                                 
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

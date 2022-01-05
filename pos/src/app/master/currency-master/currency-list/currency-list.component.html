@@ -1,0 +1,155 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">Home</a>
+                </li>
+                <li class="breadcrumb-current-item">Currency Master</li>
+            </ol>
+        </div>        
+    </header>
+
+    <!-- <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <ul class="nav nav-list nav-list-topbar pull-left">
+                <li>Currency Master List
+                </li>
+            </ul>
+        </div>
+        <div class="topbar-right hidden-xs hidden-sm mt5 mr35">
+            <a routerLink="../currency-add" class="btn btn-primary add-c btn-sm ml10" title="New Currency">
+                <span class="fa fa-plus pr5"></span> Create New</a>
+        </div>
+    </header> -->
+    <!-- /Topbar -->
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row search-section-row">
+                            
+            <div class="col-xl-4 col-lg-3 col-md-4 col-sm-8 col-8" style="padding-right: 0px; position: relative;
+           left: 10px; margin-top: 6px;">
+            <mat-form-field  appearance="outline">
+                <input [(ngModel)]="searchString" matInput   id="globalSearch" (keyup.enter)="search_click()"
+                     autocomplete="off">
+                    <button mat-button mat-icon-button matSuffix (click)="clear_search()" *ngIf="searchString">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+          <!-- <input type="text" class="form-control" style="height: 40px;" id="globalSearch"
+                (input)="onChange($event.target.value)" placeholder="Search"> -->
+        </div>
+        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 mt10" style="padding-left: 14px;
+        padding-right: 0px;">
+       
+            <!-- <a  class="btn btn-primary  add-search btn-sm ml10" title="Search">
+                  Search</a> -->
+            <button type="button" (click) = "search_click()" class="btn btn-primary add-search btn-sm ml10" >
+                    Search</button>
+        </div>
+    
+        <div class="col-xl-2 col-lg-3 col-md-3 col-sm-8 col-6  mt10" style="padding-right: 0px;">
+                <div class="switch-field">
+                    <input type="radio" id="radio-one" name="switch-one" value="yes" checked (change)="status_changed($event)"/>
+                    <label for="radio-one">ACTIVE</label>
+                    <input type="radio" id="radio-two" name="switch-one" value="no" (change)="status_changed($event)"/>
+                    <label for="radio-two">INACTIVE</label>
+                </div>
+            </div>
+            
+            
+            
+            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6  m-action mt10">
+            
+                <a routerLink="../currency-add" class="btn btn-primary add-c btn-sm ml10" style="width: 100%;" title="New Currency">
+                    <span class="fa fa-plus pr5"></span>  Create New</a>
+    
+            </div>
+    
+            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-2 medium-first md-hide sm-hide">
+             
+                <p class="show-text">Show</p>
+    
+            </div>
+            
+        </div>
+    
+    
+    
+    </section>
+    
+    <section id="content" class="animated fadeIn">
+        <div>
+            <div class="center-block">
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <!-- <div class="row">
+                                
+                                <div class="col-md-6">
+                                    <label class="field">
+                                        <input type="text" class="gui-input" id="globalSearch"
+                                            (input)="onChange($event.target.value)" placeholder="Search">
+                                    </label>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <ngx-table [configuration]="configuration" [data]="tblData" [columns]="columns"
+                                    #dataTable [noResultsTemplate]="noResultsTemplate" [pagination]="pagination"
+                                    (event)="eventEmitted($event)">
+                                    <ng-template let-item>
+                                        <td>
+                                            <div class="font-small">{{item.currencyCode}}</div>
+                                        </td>
+                                        <td>
+                                            <span class="font-small">{{item.currencyName}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="font-small">{{item.currencySymbol}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="font-small">{{item.interDescription}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="font-small">{{item.decimalPlaces}}</span>
+                                        </td>
+                                        <td>
+                                            <span class="font-small">{{item.currencyType}}</span>
+                                        </td>
+                                        <td align="center">
+                                            <div class="circle"
+                                                [ngStyle]="item.active ? {'background-image': 'linear-gradient(#68be7f 5%, #019531 )'} : {'background-image': 'linear-gradient(#ec756c 5%, #c31103 )'}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a routerLink="{{ '/currency-edit/' + item.id.toString() }}"
+                                                class="btn btn-edits  btn-sm ml10">
+                                                EDIT
+                                            </a>
+                                        </td>
+                                    </ng-template>
+                                </ngx-table>
+                                <ng-template #noResultsTemplate>
+                                    <td [attr.colspan]="5" class="no-results">
+                                        No data found :(
+                                    </td>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+

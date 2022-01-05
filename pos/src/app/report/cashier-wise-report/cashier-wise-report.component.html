@@ -1,0 +1,104 @@
+<form [formGroup]="myForm" novalidate>
+
+  <section id="content_wrapper">
+
+      <section class="grids-search grid-search-row allcp-form" style="margin-bottom: 10px;">
+
+
+          <div class="row title-section-row">
+              <h4>Cashier wise Report</h4>
+          </div>
+
+
+      </section>
+      <mat-card>
+
+
+      <section id="content_wrapper report-forms" class="sales-content-wrapper" style="margin-left: 0px">
+       <div class="row allcp-form theme-info ">
+              <div class="col-lg-3 col-md-3 col-sm-12 col-12 col-xl-3 floating-form floating-label">
+
+              <input type="date"  name="businessdate"
+              formControlName="businessdate" #businessdate class="gui-input floating-input"
+              placeholder="BusinessDate" autocomplete="off" [ngClass]="{'red-border': myForm.controls['businessdate'].invalid}">
+              <span class="highlight"></span>
+             <label>BusinessDate</label>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-12 col-12 col-xl-3 floating-form floating-label">
+                <input type="text"  class="floating-input gui-input sff" value="{{current_storeName}}" readonly  placeholder="" >
+                <span class="highlight"></span>
+                <label>Store</label>
+
+             </div>
+
+
+
+      <div class="col-lg-2 col-md-2 col-sm-12 col-12 col-xl-2 default-forms report-get">
+
+          <button type="submit" (click)="viewreport()"
+          [disabled]="myForm.pristine || myForm.invalid"   class="btn btn-lg btn-success btn-block common-button"> <i class="fa fa-check-circle-o"></i> Get</button>
+
+          </div>
+
+      </div>
+
+      </section>
+
+
+
+      <div class="" style="margin-top: -40px;">
+          <div class="header">
+              <div class="header__content-wrapper">
+                <div class="header__filename">
+                  <span>Cashier wise Report</span>
+                </div>
+                <div class="header__page-indicator">
+                  <span class="header__page-indicator-current">{{ currentPage }}</span>
+                  <span class="header__page-indicator-separator">/</span>
+                  <span class="header__page-indicator-total">{{ totalPages }}</span>
+                </div>
+                <div class="header__pdf-controls">
+                  <button
+                    class="header__btn"
+                    (click)="zoomfuction('increment')"
+                    [disabled]="zoomAmt >= zoomMax"
+       >
+                    <i class="fa fa-plus"></i>
+                  </button>
+                  <button
+                    class="header__btn"
+                    (click)="zoomfuction('decrement')"
+                    [disabled]="zoomMin <= zoomAmt"
+                  >
+                  <i class="fa fa-minus"></i>
+                  </button>
+                  <!-- <button class="header__btn" (click)="onPrint($event)"><i class="fa fa-print"></i></button> -->
+                  <button class="header__btn" (click)="onDownload($event)"><i class="fa fa-download"></i></button>
+                </div>
+              </div>
+            </div>
+
+        <!-- pdf-viewer section -->
+        <div class="output-pdf-viewer">
+          <pdf-viewer
+          [src]="pdfSrc"
+          [(page)]="pageVariable"
+          [show-all]="true"
+          [stick-to-page]="true"
+          [render-text]="true"
+          [original-size]="false"
+          [fit-to-page]="true"
+          [autoresize]="true"
+          [show-borders]="true"
+          [zoom-scale]="zoomScale"
+          [zoom]="zoom"
+          (after-load-complete)="afterLoadComplete($event)"
+          #pdfViewer
+          ></pdf-viewer>
+        </div>
+
+
+        </div>
+      </mat-card>
+  </section>
+  </form>

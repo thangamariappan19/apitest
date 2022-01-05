@@ -1,0 +1,534 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../style">{{ 'STYLE.STYLE_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.VIEW' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+
+    <form [formGroup]="myForm" novalidate>
+
+    <section id="content" class="animated fadeIn title-bottom-section style-tabs style-view-first">
+
+
+            <div class="row">
+
+
+                <div class="col-sm-12 col-12 col-md-12 col-xl-5 col-lg-5">
+
+                    <!-- <mat-carousel timings="200ms ease-in" [autoplay]="false" interval="6000" color="white"
+                        [hideIndicators]="false">
+                        <mat-carousel-slide
+                        *ngFor="let slide of slides; let i = index"
+                        [image]="slide.image"
+                        overlayColor="#ffffff"
+                        [hideOverlay]="false"
+                      ></mat-carousel-slide>
+                    </mat-carousel> -->
+
+                    <div class="style-view-image">
+                        <!-- <img src="assets/img/ST4.jpg"> -->
+                        <img src="{{ itemImage}}">
+                    </div>
+
+                </div>
+
+
+                <div class="col-sm-12 col-12 col-md-12 col-xl-7 col-lg-7">
+
+                    <div class="style-view-title">
+                   <!-- <h3>MAC:MS1180002069:DRESS FLUID BEADS</h3>  -->
+                    <h3>
+                        <input type="text" id="styleHead" style="border: none;background: transparent;outline: none;" readonly formControlName="styleHead" #styleHead>
+                    </h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2">
+                            <div class="style-count">
+                            <img src="assets/img/sv1.png" class="img-responsive">
+                           </div>
+                        </div>
+                        <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                            <div class="style-stats">
+                             <h3>35</h3>
+                             <p>{{ 'STYLE.IN_QUANTITY' | translate }}</p>
+                            </div>
+                         </div>
+                         <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2">
+                            <div class="style-count">
+                                <img src="assets/img/sv2.png" class="img-responsive">
+                            </div>
+                         </div>
+                         <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                            <div class="style-stats">
+                                <h3>25</h3>
+                                <p>{{ 'STYLE.OUT_QUANTITY' | translate }}</p>
+                               </div>
+                         </div>
+                    </div>
+
+
+                    <div class="row mt20">
+                        <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2">
+                            <div class="style-count">
+                            <img src="assets/img/sv3.png" class="img-responsive">
+                           </div>
+                        </div>
+                        <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                            <div class="style-stats">
+                             <h3>KD 25.35</h3>
+                             <p>{{ 'STYLE.TOTAL_SALES' | translate }}</p>
+                            </div>
+                         </div>
+                         <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2">
+                            <div class="style-count">
+                                <img src="assets/img/sv4.png" class="img-responsive">
+                            </div>
+                         </div>
+                         <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                            <div class="style-stats">
+                                <h3>45</h3>
+                                <p>{{ 'STYLE.SALES%' | translate }}</p>
+                               </div>
+                         </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+    </section>
+
+    <!-- section two -->
+
+    <section style="overflow-x: hidden;">
+
+         
+            <div class="row">
+
+
+                <div class="col-sm-12 col-12 col-md-12 col-xl-8 col-lg-8">
+
+                       <div class="style-view-second">
+
+                            <div class="row style-view-second-content">
+                                <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2 text-center">
+                                    <img src="assets/img/sv5.png" class="img-responsive">                                
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                                    <!-- <h4>351101-16017</h4> -->
+                                 <h4><input type="text" id="styleCode" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="styleCode" #styleCode>
+                                 </h4>
+                                 <p>{{ 'STYLE.STYLE_CODE' | translate }}</p>
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2 text-center">
+                                    <img src="assets/img/sv5.png" class="img-responsive"> 
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                                    <!-- <h4>:2E16D1:DRESS</h4> -->
+                                 <h4><input type="text" id="styleName" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="styleName" #styleName>
+                                 </h4>
+                                 <p>{{ 'STYLE.STYLE_NAME' | translate }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row style-view-second-content mt20">
+                                <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2  text-center active">
+                                <i class="fa fa-check-circle"></i>
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                                 <!-- <h4 class="style-active">ACTIVE</h4> -->
+                                 <h4 class="style-active">
+                                 <input type="text" id="active" style="border: none;background: transparent;color: limegreen;font-weight: bold;" readonly formControlName="active" #active>
+                                 </h4>
+                                 <p>{{ 'STYLE.STATUS' | translate }}</p>
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2  text-center">
+                                <img src="assets/img/sv7.png" class="img-responsive">
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                                 <!-- <h4>RIVA</h4> -->
+                                 <h4>
+                                    <input type="text" id="brand" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="brand" #brand>
+                                </h4>
+                                 <p>{{ 'STYLE.BRAND' | translate }}</p>
+                                </div>
+                            </div>
+
+                       </div>
+
+                   </div>
+
+
+                   <div class="col-sm-12 col-12 col-md-12 col-xl-4 col-lg-4">
+   
+                        <div class="style-view-third">
+
+                            <div class="row price-list">
+                                <div class="col-sm-6 col-6 col-md-6 col-xl-6 col-lg-6">
+                                 <p>{{ 'STYLE.PRICE' | translate }}</p>
+                                </div>
+                                <div class="col-sm-6 col-6 col-md-6 col-xl-6 col-lg-6 price-icon">
+                                 <i class="fa fa-money"></i>
+                                </div>
+                            </div>
+
+                            <div class="row price-view" id="pms">                                            
+                                <div class="col-sm-4 col-4 col-md-4 col-xl-4 col-lg-4" *ngFor="let price of priceList;">
+                                    <p><span>{{price.currencyCode}}</span> {{price.price}}</p>
+                                    <span>{{price.countryName}}</span>
+                                </div>
+                            </div>
+
+                            <div class="view">
+                                <button class="btn btn-price-view" (click) = "openPriceDialog()">
+                                    {{ 'STYLE.VIEW_ALL_COUNTRIES' | translate }} 
+                                </button>
+                            </div>
+                        </div>
+                   </div>
+            </div>
+    </section>
+
+
+    <section class="mt30">
+
+
+             <div class="style-tabs mt30">
+
+               
+                <mat-tab-group>
+                    <mat-tab label="{{ 'STYLE.STYLE' | translate }}"> 
+                        <div  class="tab-pane inner-tabs">
+
+                            <div class="row">
+                                <div class="col-md-4 style-main-view">
+                                 <h5>{{ 'STYLE.DESIGN_NAME' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="designName" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="designName" #designName>
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'STYLE.DESIGN_CODE' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="designCode" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="designCode" #designCode>
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'STYLE.SHORT_DESIGN_CODE' | translate }}</h5>
+                                 <p>
+                                     <input type="text" id="shortDesignCode" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="shortDesignCode" #shortDesignCode>
+                                 </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 style-main-view">
+                                 <h5>{{ 'STYLE.STYLE_SEGMENTATION' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="styleSegmentation" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="styleSegmentation" #styleSegmentation> 
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'STYLE.PRODUCT_DEPT_CODE' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="productDeptCode" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="productDeptCode" #productDeptCode> 
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'STYLE.COUNTRY_OF_ORIGIN' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="countryOfOrigin" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="countryOfOrigin" #countryOfOrigin> 
+                                 </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 style-main-view">
+                                 <h5>{{ 'STYLE.SUB_BRAND' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="subBrand" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="subBrand" #subBrand>  
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'STYLE.COLLECTION' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="collection" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="collection" #collection> 
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'STYLE.DESIGNER' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="designer" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="designer" #designer> 
+                                 </p>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4 style-main-view">
+                                 <h5>{{ 'STYLE.SHORT_DESCRIPTION' | translate }}</h5>
+                                 <p style="color: #000; font-weight: 400;">
+                                    <input type="text" id="shortDescription" style="border: none;background: transparent;" readonly formControlName="shortDescription" #shortDescription> 
+                                </p>
+                                </div>
+                              
+                            </div>
+                        
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab label="{{ 'STYLE.SCALE' | translate }}"> 
+
+                        <div  class="tab-pane inner-tabs">
+                            <div class="row">
+                            <div class="offset-md-4 col-md-4 mb20 mt20">
+                            <label class="field select">
+                                <!-- <select name="scaleID" class="select-tab gui-input">
+                                    <option value="">Select Scale</option>                                   
+                                </select> -->
+                                <!-- <select name="scaleID" formControlName="scaleID" #scaleID
+                                (change)="scaleDetails()" class="select-tab gui-input"  disabled>
+                                <option value="">Select Scale</option>
+                                <option *ngFor="let item of scaleMasterList"
+                                    value="{{item.id}}">
+                                    {{item.scaleName}}</option> 
+                            </select>-->
+                            <select name="scaleID" formControlName="scaleID" #scaleID 
+                                            class="gui-input" disabled>
+                                            <option value="">Select Scale</option>
+                                            <option *ngFor="let item of scaleMasterList" value="{{item.id}}">
+                                                {{item.scaleName}}</option>
+                                        </select>
+                                <i class="arrow"></i>
+                            </label>
+                            </div>
+                            </div>
+                            <div class="table-responsive tabs-table color-table-responsive" id="ctr">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th>{{ 'STYLE.SELECT' | translate }}</th>
+                                            <th>{{ 'STYLE.SIZE_CODE' | translate }}</th>
+                                            <th>{{ 'STYLE.DESCRIPTION' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let scale of scaleDetailList;">
+                                            <td>
+                                                <input type="checkbox" [(ngModel)]="scale.active"
+                                                    [ngModelOptions]="{standalone: true}" disabled>
+                                                <label for="{{scale.id}}"></label>
+                                            </td>
+                                            <td>{{scale.sizeCode}}</td>
+                                            <td>{{scale.description}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <table class="table">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th>Select</th>
+                                            <th>Size Code</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                         <td><input type="checkbox"></td>
+                                         <td>0-M</td>
+                                         <td>0-M</td>
+                                        </tr>
+                                    </tbody>
+                                </table> -->
+                            </div>
+                        </div>
+
+                    </mat-tab>
+                    
+                    <mat-tab label="{{ 'STYLE.COLOR' | translate }}"> 
+                            <div  class="tab-pane inner-tabs">
+                                <!-- <div class="row">
+                                <div class="offset-md-4 col-md-4 mb20 mt20">
+                                <label class="field select">
+                                    <select name="scaleID" class="select-tab gui-input"
+                                        >
+                                        <option value="">Select Color Scale</option>
+                                       
+                                    </select>
+                                    <i class="arrow"></i>
+                                </label>
+                                </div>
+                                </div> -->
+                                <div class="table-responsive tabs-table color-table-responsive" id="ctr">
+                                    <!-- <table class="table">
+                                        <thead>
+                                            <tr class="bg-light">
+                                                <th>Select</th>
+                                                <th>Color Code</th>
+                                                <th>Description</th>
+                                                <th>Color</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                             <td>
+                                             <input type="checkbox">
+                                             </td>
+                                             <td>001</td>
+                                             <td>001</td>
+                                             <td>                                                             
+                                              <span class="green-circle list-color" style="background-color: #dd99b2;"></span>
+                                             </td>
+                                            </tr>
+                                            <tr>
+                                               <td>2</td>
+                                                <td>002</td>
+                                                <td>BABY BLUE</td>
+                                                <td>                                                             
+                                                 <span class="green-circle list-color" style="background-color: #dd99b2;"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table> -->
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="bg-light">
+                                                <th>{{ 'STYLE.SELECT' | translate }}</th>
+                                                <th>{{ 'STYLE.COLOR_CODE' | translate }}</th>
+                                                <th>{{ 'STYLE.COLOR_NAME' | translate }}</th>
+                                                <th>{{ 'STYLE.COLOR' | translate }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let color of colorList;">
+                                                <td>
+                                                    <input type="checkbox" [(ngModel)]="color.active"
+                                                        [ngModelOptions]="{standalone: true}" disabled>
+                                                    <label for="{{color.id}}"></label>
+                                                </td>
+                                                <td>{{color.colorCode}}</td>
+                                                <td>{{color.description}}</td>
+                                                <td>
+                                                    <span class="green-circle list-color" style="background-color: #dd99b2;"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                         
+                    </mat-tab>
+                    <mat-tab label="{{ 'STYLE.STOCK' | translate }}"> 
+                        <div  class="tab-pane inner-tabs mt20">
+                            <div class="table-responsive tabs-table color-table-responsive" id="ctr">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th>{{ 'STYLE.SKU_CODE' | translate }}</th>
+                                            <th>{{ 'STYLE.SKU_NAME' | translate }}</th>
+                                            <th>{{ 'STYLE.STOCK_QTY' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--<tr *ngFor = "let brand of brandList;">
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="brand.active" [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{brand.id}}"></label>
+                                                        </td>
+                                                        <td>{{brand.brandCode}}</td>
+                                                        <td>{{brand.brandName}}</td>
+                                                    </tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="{{ 'STYLE.OPTION_MASTER' | translate }}">
+                        <div  class="tab-pane inner-tabs mt20">
+                            <div class="table-responsive tabs-table">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th>{{ 'STYLE.COLOR_CODE' | translate }}</th>
+                                            <th>{{ 'STYLE.COLOR_NAME' | translate }}</th>                                                        
+                                            <th>{{ 'STYLE.STOCK_QTY' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--<tr *ngFor = "let brand of brandList;">
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="brand.active" [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{brand.id}}"></label>
+                                                        </td>
+                                                        <td>{{brand.brandCode}}</td>
+                                                        <td>{{brand.brandName}}</td>
+                                                    </tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="{{ 'STYLE.SKU_MASTER' | translate }}">
+                        <div  class="tab-pane inner-tabs mt20">
+                            <div class="table-responsive tabs-table color-table-responsive" id="ctr">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th>{{ 'STYLE.SKU_CODE' | translate }}</th>
+                                            <th>{{ 'STYLE.SKU_NAME' | translate }}</th>
+                                            <th>{{ 'STYLE.COLOR_CODE' | translate }}</th>
+                                            <th>{{ 'STYLE.COLOR_NAME' | translate }}</th>
+                                            <th>{{ 'STYLE.SCALE_CODE' | translate }}</th>
+                                            <th>{{ 'STYLE.SIZE_NAME' | translate }}</th>
+                                            <th>{{ 'STYLE.BARCODE' | translate }}</th>
+                                            <th>{{ 'STYLE.TOTAL_QTY' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--<tr *ngFor = "let brand of brandList;">
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="brand.active" [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{brand.id}}"></label>
+                                                        </td>
+                                                        <td>{{brand.brandCode}}</td>
+                                                        <td>{{brand.brandName}}</td>
+                                                    </tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+
+
+             </div>
+             <div class="offset-md-5 col-md-2 mt10 default-forms">
+                <button type="button" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                        class="fa fa-remove"></i> Close</button>
+            </div>
+
+    </section>
+
+
+</form>
+
+</section>

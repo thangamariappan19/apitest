@@ -1,0 +1,363 @@
+<section id="content_wrapper">
+  <!-- Topbar -->
+  <header id="topbar" class="alt">
+    <div class="topbar-left">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-icon">
+          <a routerLink="../home">
+            <span class="fa fa-home"></span>
+          </a>
+        </li>
+        <li class="breadcrumb-link">
+          <a routerLink="../home">{{ "COMMON.HOME" | translate }}</a>
+        </li>
+        <li class="">
+          <a routerLink="../coupon-transfer">Coupon-Transfer</a>
+        </li>
+        <li class="breadcrumb-current-item">
+          {{ "COMMON.CREATE" | translate }}
+        </li>
+      </ol>
+    </div>
+  </header>
+
+  <section class="grids-search grid-search-row allcp-form">
+    <div class="row title-section-row">
+      <h4>Coupon Transfer Create</h4>
+    </div>
+  </section>
+
+  <form [formGroup]="myForm" novalidate>
+    <section id="content" class="animated fadeIn title-bottom-section">
+      <div class="profile-sec-first allcp-form theme-info">
+        <div class="center-block">
+          <div class="allcp-form theme-info">
+            <div class="panel">
+              <div class="panel-body">
+                <div class="row mt30">
+                  <div class="col-xl-6 col-lg-6 col-md-6 mb20 select-forms">
+                    <label>Coupon Code</label>
+
+                    <select
+                      name="CouponCode"
+                      formControlName="CouponCode"
+                      #CouponCode
+                      class="gui-input"
+                      (change)="getSelectedOptionText($event)"
+                      [ngClass]="{
+                        'red-border': myForm.controls['CouponCode'].invalid
+                      }"
+                    >
+                      <option value="">Select CouponCode</option>
+                      <option
+                        *ngFor="let item of CouponCodeList"
+                        value="{{ item.id }}"
+                      >
+                        {{ item.couponName }}
+                      </option>
+                    </select>
+                    <i class="fa fa-angle-down"></i>
+                  </div>
+                  <div
+                    class="
+                      col-xl-6 col-lg-6 col-md-6
+                      mb20
+                      floating-form floating-label
+                    "
+                  >
+                    <input
+                      type="text"
+                      name="Fromlocation"
+                      autocomplete="off"
+                      formControlName="Fromlocation"
+                      #Fromlocation
+                      [ngClass]="{
+                        'red-border': myForm.controls['Fromlocation'].invalid
+                      }"
+                      class="gui-input floating-input"
+                      placeholder="Fromlocation"
+                      trim="blur"
+                    />
+                    <span class="highlight"></span>
+                    <label>From location</label>
+                  </div>
+                  <div
+                    class="
+                      col-xl-6 col-lg-6 col-md-6
+                      mb20
+                      floating-form floating-label
+                    "
+                  >
+                    <input
+                      type="text"
+                      name="FromSerialNum"
+                      autocomplete="off"
+                      formControlName="FromSerialNum"
+                      #FromSerialNum
+                      [ngClass]="{
+                        'red-border': myForm.controls['FromSerialNum'].invalid
+                      }"
+                      class="gui-input floating-input"
+                      placeholder="FromSerialNum"
+                      spellcheck="false"
+                      trim="blur"
+                    />
+                    <span class="highlight"></span>
+                    <label>FromSerialNum</label>
+                  </div>
+                  <div
+                    class="
+                      col-xl-6 col-lg-6 col-md-6
+                      mb20
+                      floating-form floating-label
+                    "
+                  >
+                    <input
+                      type="text"
+                      name="ToSerialNum"
+                      autocomplete="off"
+                      formControlName="ToSerialNum"
+                      #ToSerialNum
+                      [ngClass]="{
+                        'red-border': myForm.controls['ToSerialNum'].invalid
+                      }"
+                      class="gui-input floating-input"
+                      placeholder="style Name"
+                      spellcheck="false"
+                      trim="blur"
+                    />
+                    <span class="highlight"></span>
+                    <label>ToSerialNum</label>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 mb20 select-forms">
+                    <label>ToCountry</label>
+
+                    <select
+                      name="ToCountry"
+                      formControlName="ToCountry"
+                      #ToCountry
+                      class="gui-input"
+                      (change)="Onchangecountry(ToCountry.value)"
+                      [ngClass]="{
+                        'red-border': myForm.controls['ToCountry'].invalid
+                      }"
+                    >
+                      <option value="">Select ToCountry</option>
+                      <option
+                        *ngFor="let item of ToCountryList"
+                        value="{{ item.id }}"
+                      >
+                        {{ item.countryName }}
+                      </option>
+                    </select>
+                    <i class="fa fa-angle-down"></i>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 mb20 select-forms">
+                    <label>ToStore</label>
+
+                    <select
+                      name="ToStore"
+                      formControlName="ToStore"
+                      #ToStore
+                      class="gui-input"
+                      (change)="OnchangeStore(ToStore.value)"
+                      [ngClass]="{
+                        'red-border': myForm.controls['ToStore'].invalid
+                      }"
+                    >
+                      <option value="">Select ToStore</option>
+                      <option
+                        *ngFor="let item of ToStoreList"
+                        value="{{ item.id }}"
+                      >
+                        {{ item.storeName }}
+                      </option>
+                    </select>
+                    <i class="fa fa-angle-down"></i>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="section">
+                      <div class="bs-component mt10">
+                        <div class="round fill mb10">
+                          <input
+                            type="checkbox"
+                            checked=""
+                            id="active"
+                            name="active"
+                            #active
+                            formControlName="active"
+                          />
+                          <label for="active"></label>
+                          <p class="label-text">
+                            {{ "COMMON.ACTIVE" | translate }}
+                          </p>
+                        </div>
+                        <div
+                          id="source-button"
+                          class="btn btn-system btn-xs"
+                          style="display: none"
+                        >
+                          &lt; &gt;
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="offset-md-3 col-md-2 col-md-2 mt10">
+                    <button
+                      type="submit"
+                      class="btn btn-lg btn-success btn-block common-button"
+                      (click)="btnGenerate_Click()"
+                      [disabled]="myForm.pristine || myForm.invalid"
+                    >
+                      <i class="fa fa-check-circle-o"></i> Set
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="content" class="animated fadeIn" style="margin-top: 20px">
+      <div>
+        <div class="center-block">
+          <div class="allcp-form theme-info">
+            <div class="panel">
+              <div class="panel-body">
+                <div class="table-responsive tabs-table color-table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Coupon Serial Code</th>
+                        <th>IssuedStatus</th>
+                        <th>PhysicalStore</th>
+                        <th>Redeemed Status</th>
+                        <th>IsSaved</th>
+                        <th>ToStore</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let item of tablelist">
+                      <tr>
+                        <td>{{ item.couponSerialCode }}</td>
+                        <td align="center">
+                          <div
+                            class="circle"
+                            [ngStyle]="
+                              item.issuedStatus
+                                ? {
+                                    'background-image':
+                                      'linear-gradient(#68be7f 5%, #019531 )'
+                                  }
+                                : {
+                                    'background-image':
+                                      'linear-gradient(#ec756c 5%, #c31103 )'
+                                  }
+                            "
+                          ></div>
+                        </td>
+                        <td>{{ item.physicalStore }}</td>
+
+                        <td align="center">
+                          <div
+                            class="circle"
+                            [ngStyle]="
+                              item.redeemedStatus
+                                ? {
+                                    'background-image':
+                                      'linear-gradient(#68be7f 5%, #019531 )'
+                                  }
+                                : {
+                                    'background-image':
+                                      'linear-gradient(#ec756c 5%, #c31103 )'
+                                  }
+                            "
+                          ></div>
+                        </td>
+                        <td align="center">
+                          <div
+                            class="circle"
+                            [ngStyle]="
+                              item.isSaved
+                                ? {
+                                    'background-image':
+                                      'linear-gradient(#68be7f 5%, #019531 )'
+                                  }
+                                : {
+                                    'background-image':
+                                      'linear-gradient(#ec756c 5%, #c31103 )'
+                                  }
+                            "
+                          ></div>
+                        </td>
+                        <td>{{ item.toStore }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+      <div class="row default-forms">
+        <div class="offset-md-3"></div>
+        <div class="col-md-2 mt10">
+          <button
+            type="submit"
+            class="btn btn-lg btn-success btn-block common-button"
+            (click)="btnSave_Click()"
+          >
+            <i class="fa fa-check-circle"></i> Save
+          </button>
+        </div>
+
+        <div class="col-md-2 mt10">
+          <button
+            type="submit"
+            class="btn btn-lg btn-cancel btn-block common-button"
+            (click)="btnReset_Click()"
+          >
+            <i class="fa fa-remove"></i> Reset
+          </button>
+        </div>
+
+        <div class="col-md-2 mt10">
+          <button
+            type="clear"
+            class="btn btn-lg btn-primary btn-block common-button"
+            (click)="btnClose_Click()"
+          >
+            <i class="fa fa-refresh"></i>Close
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- <div class="row default-forms">
+
+            <div class="offset-md-3 col-md-2 col-md-2 mt10">
+                <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                    (click)="addCoupontransfer()" [disabled]="myForm.pristine || myForm.invalid"><i
+                        class="fa fa-check-circle-o"></i> Save
+
+                </button>
+            </div>
+            <div class="col-md-2 mt10">
+                <button type="clear" class="btn btn-lg btn-primary btn-block common-button"  (click)="clear_controls()"><i
+                        class="fa fa-refresh"></i> Reset</button>
+
+            </div>
+            <div class="col-md-2 mt10">
+                <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                        class="fa fa-remove"></i> Close</button>
+
+            </div>
+
+        </div> -->
+    <!-- /Content -->
+  </form>
+</section>

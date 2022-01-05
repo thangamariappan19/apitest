@@ -1,0 +1,121 @@
+<form [formGroup]="myForm" novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">Home</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../agent">Agent Master</a>
+                    </li>
+                    <li class="breadcrumb-current-item">Create</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <header id="topbar" class="ph10">
+            <div class="topbar-left">
+                <ul class="nav nav-list nav-list-topbar pull-left">
+                    <li>Create Agent
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20">
+                                        <label>Agent Code</label>
+                                        <label class="field">
+                                            <input type="text" name="agentCode" autocomplete="off"
+                                                formControlName="agentCode" #agentCode
+                                                [ngClass]="{'red-border': myForm.controls['agentCode'].invalid}"
+                                                class="gui-input" placeholder="Agent Code">
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 mb20">
+                                        <label>Agent Name</label>
+                                        <label class="field">
+                                            <input type="text" name="agentName" autocomplete="off"
+                                                formControlName="agentName" #agentName
+                                                [ngClass]="{'red-border': myForm.controls['agentName'].invalid}"
+                                                class="gui-input" placeholder="Agent Name">
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 mb20">
+                                        <label>Remarks</label>
+                                        <label class="field">
+                                            <input type="text" name="remarks" autocomplete="off"
+                                                formControlName="remarks" #remarks
+                                                [ngClass]="{'red-border': myForm.controls['remarks'].invalid}"
+                                                class="gui-input" placeholder="Remarks">
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label></label>
+                                        <label class="field">
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="checkbox-custom fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active">Is Active?</label>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <div class="col-md-3">
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" [disabled]="myForm.pristine || myForm.invalid"
+                                         (click) = "quickadd_agent()" class="btn btn-lg btn-success btn-block common-button"><i
+                                             class="fa fa-save"></i> Save
+                                                
+                                                
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="clear" (click)="clear_controls()" class="btn btn-lg btn-primary btn-block common-button"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" (click)="close()" class="btn btn-lg btn-cancel btn-block common-button"><i
+                                            class="fa fa-remove"></i> Close</button>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

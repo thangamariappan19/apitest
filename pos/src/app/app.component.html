@@ -1,0 +1,1065 @@
+<!-- Body Wrap -->
+<!-- <div id="main" ng-class="{'main-login' : isAuth == 'false' || isAuth == false}"> -->
+<!-- <div id="main" [ngClass]="{'main-login' : isAuth == 'false'}"> -->
+  <div id="main" [ngClass]="{'main-login' : isAuthenticated() == false}">
+    <!-- Header  -->
+    <!-- <header class="navbar navbar-fixed-top" [hidden]="isAuth == 'false'"> -->
+
+    <!-- /Header  -->
+
+    <!-- Sidebar  -->
+    <!-- <aside id="sidebar_left" class="nano nano-light affix" ng-show="isAuth == true || isAuth == 'true'"> -->
+    <!-- <aside id="sidebar_left" class="nano nano-light affix" [hidden]="isAuth == 'false'"> -->
+    <aside class="main-sidebar fixed offcanvas b-r sidebar-tabs" data-toggle='offcanvas'
+      *ngIf="isAuthenticated() && get_pos_mode() != true">
+      <div class="sidebar">
+        <div class="d-flex  align-items-stretch">
+          <div class="indigo text-white">
+            <div class="nav  flex-column nav-pills" style="padding-top: 8px" id="v-pills-tab" role="tablist"
+              aria-orientation="vertical">
+
+              <a href="#" class="s-logos main-logos lefts ml-2">
+                <!-- <i class="fa fa-opencart" style="color: #fff;
+                          font-size: 27px; margin-left: 15px;
+                          "></i> -->
+              <img src="assets/img/menu-logo.png" alt="" style="position: relative;
+              left: 25px;">
+              <p class="menu-version">{{version}}</p>
+              
+              </a>
+
+              <a class="nav-link" (click)="span_system_click()" id="v-pills-menu-tab" data-toggle="pill"
+                data-target="#v-pills-menu" role="tab" aria-controls="v-pills-menu"
+                [hidden]="system_menu_view == false ? true : false">
+                <!-- <img src="assets/img/menu-logo.png" alt="" style="position: relative;
+              left: 25px;"> -->
+                <i class="fa fa-laptop ibg"></i>
+                <span class="menu-text">System</span>
+              </a>
+              <!-- [hidden]="accessibleMenus != null && accessibleMenus.indexOf('ManagerOverride') > -1 ? false : true" -->
+
+              <a class="nav-link" (click)="posClick()"
+              [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Sales') > -1 ? false : true" style="width: 95px;">
+                <img src="assets/img/pos.png" style="width: 30px">
+                <span class="menu-text">POS</span>
+              </a>
+
+
+              <a class="nav-link" (click)="span_product_click()" id="v-pills-product-tab" data-toggle="pill"
+                data-target="#v-pills-product" role="tab" aria-controls="v-pills-product"
+                [hidden]="products_menu_view == false ? true : false"><i class="fa fa-th-list ibg"></i>
+                <span class="menu-text">Products</span></a>
+
+              <a class="nav-link " (click)="span_business_click()" id="v-pills-home-tab" data-toggle="pill"
+                data-target="#v-pills-home" role="tab" aria-controls="v-pills-home"
+                [hidden]="business_menu_view == false ? true : false"><i class="ibg fa fa-suitcase"></i>
+                <span class="menu-text">Business</span></a>
+
+              <a class="nav-link" (click)="span_partners_click()" id="v-pills-cust-tab" data-toggle="pill"
+                data-target="#v-pills-cust" role="tab" aria-controls="v-pills-cust"
+                [hidden]="partners_menu_view == false ? true : false"> <i class="fa fa-users ibg"></i>
+                <span class="menu-text">Partners</span></a>
+
+
+              <a class="nav-link" (click)="span_pricing_click()" id="v-pills-price-tab" data-toggle="pill"
+                data-target="#v-pills-price" role="tab" aria-controls="v-pills-price"
+                [hidden]="pricing_menu_view == false ? true : false"> <i class="fa  fa-money ibg"></i>
+                <span class="menu-text">Pricing</span></a>
+
+              <a class="nav-link" (click)="span_user_click()" id="v-pills-setup-tab" data-toggle="pill"
+                data-target="#v-pills-setup" role="tab" aria-controls="v-pills-setup"
+                [hidden]="users_menu_view == false ? true : false"> <i class="fa  fa-user-o ibg"></i>
+                <span class="menu-text">User</span></a>
+
+
+              <a class="nav-link" (click)="span_reports_click()" id="v-pills-report-tab" data-toggle="pill"
+                data-target="#v-pills-report" role="tab" aria-controls="v-pills-report"
+                [hidden]="reports_menu_view == false ? true : false"> <i class="fa fa-pie-chart ibg"></i>
+                <span class="menu-text">Reports</span></a>
+            </div>
+          </div>
+          <div class="tab-content flex-grow-1" id="v-pills-tabContent">
+
+            <div class="tab-pane fade show active" id="v-pills-menu" role="tabpanel" aria-labelledby="v-pills-menu-tab">
+
+              <div class="relative brand-wrapper sticky">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                  <div class="text-xs-center d-logo">
+                    <img src="assets/img/login-logos.png">
+                  </div>
+                </div>
+              </div>
+
+              <ul class="sidebar-menus">
+
+                <li class="treeview"><a href="#" class="subs-title">
+                    <i class="fa fa-laptop s-20"></i> <span>System</span>
+                  </a>
+
+                </li>
+              </ul>
+
+              <mat-accordion class="sidebar-menus">
+
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                  [hidden]="config_menu_view == false ? true : false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="treeview">
+                      <p><i class="fa fa-toggle-off s20"></i> Config</p>
+                    </mat-panel-title>
+
+                  </mat-expansion-panel-header>
+                  <ul class="treeview-menu sbm-height" style="display: block;" id="mms">
+
+                    <!-- <li class="treeview"><a href="#">
+                        <i class="fa  fa-th-list  s-20"></i> <span>Configuration
+                        </span>
+                      </a>
+                    </li> -->
+                    <li class="treeview" id="Country"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Country') > -1 ? false : true"><a
+                        routerLink="Country">
+                        <i class="fa fa-globe s-20"></i> <span>Country
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="State"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('State') > -1 ? false : true"><a
+                        routerLink="state">
+                        <i class="fa fa-globe s-20"></i> <span>State
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="City Master"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('City Master') > -1 ? false : true"><a
+                        routerLink="city">
+                        <i class="fa fa-braille s-20"></i> <span>City
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Language Settings"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Language Settings') > -1 ? false : true">
+                      <a routerLink="language">
+                        <i class="fa fa-flag s-20"></i> <span>Language
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Company Settings"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Company Settings') > -1 ? false : true"><a
+                        routerLink="Company">
+                        <i class="fa fa-building s-20"></i> <span>Company
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Warehouse"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Warehouse') > -1 ? false : true"><a
+                        routerLink="warehouse">
+                        <i class="fa fa-bank s-20"></i> <span>Warehouse
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Warehouse Types"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Warehouse Types') > -1 ? false : true"><a
+                        routerLink="warehouse-type">
+                        <i class="fa fa-building s-20"></i> <span>Warehouse Types
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Document Numbering"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Document Numbering') > -1 ? false : true">
+                      <a routerLink="document-numbering">
+                        <i class="fa fa-list s-20"></i> <span>Document Numbering
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Brand Division Mapping"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Brand Division Mapping') > -1 ? false : true">
+                      <a routerLink="brand-division-mapping">
+                        <i class="fa fa-circle s-20"></i> <span>Brand Division Mapping
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Style Status"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Style Status') > -1 ? false : true"><a
+                        routerLink="style-status">
+                        <i class="fa fa-check-circle s-20"></i> <span>Style Status
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Style Segmentation"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Style Segmentation') > -1 ? false : true">
+                      <a routerLink="style-segmentation">
+                        <i class="fa fa-cogs s-20"></i> <span>Style Segmentation
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Segamentation Types"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Segamentation Types') > -1 ? false : true">
+                      <a routerLink="segmentation-type">
+                        <i class="fa fa-crosshairs s-20"></i> <span>Segmentation Type
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Drop Master"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Drop Master') > -1 ? false : true"><a
+                        routerLink="drop-master">
+                        <i class="fa fa-dropbox s-20"></i> <span>Drop Master
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Collection Master"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Collection Master') > -1 ? false : true">
+                      <a routerLink="collection">
+                        <i class="fa fa-clone s-20"></i> <span>Collection
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="SubCollection Master"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('SubCollection Master') > -1 ? false : true">
+                      <a routerLink="sub-collection">
+                        <i class="fa fa-minus-square s-20"></i> <span>Sub Collection
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Agent Master"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Agent Master') > -1 ? false : true"><a
+                        routerLink="agent">
+                        <i class="fa fa-cog s-20"></i> <span>Agent Master
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                  [hidden]="financials_menu_view == false ? true : false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="treeview">
+                      <p><i class="fa fa-money s20"></i> Financials</p>
+                    </mat-panel-title>
+
+                  </mat-expansion-panel-header>
+                  <ul class="treeview-menu" style="display: block;">
+
+                    <li class="treeview" id="Currency"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Currency') > -1 ? false : true"><a
+                        routerLink="currency">
+                        <i class="fa fa-money s-20"></i> <span>Currency
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Exchange Rate"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Exchange Rate') > -1 ? false : true"><a
+                        routerLink="exchange-rate">
+                        <i class="fa fa-exchange s-20"></i> <span>Exchange Rate
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Expense Master"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Expense Master') > -1 ? false : true"><a
+                        routerLink="expense-master">
+                        <i class="fa fa-superpowers s-20"></i> <span>Expense Master
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="On-Account Payment"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('On-Account Payment') > -1 ? false : true">
+                      <a routerLink="onaccount-payment">
+                        <i class="fa fa-drivers-license s-20"></i> <span>On Account Payment
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Payment Mode"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Payment Mode') > -1 ? false : true"><a
+                        routerLink="payment-mode-master">
+                        <i class="fa fa-cc-mastercard s-20"></i> <span>Payment Mode
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Payment Type"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Payment Type') > -1 ? false : true"><a
+                        routerLink="payment-type">
+                        <i class="fa fa-cc-mastercard s-20"></i> <span>Payment Type
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Tax Master"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Tax Master') > -1 ? false : true"><a
+                        routerLink="tax">
+                        <i class="fa fa-percent s-20"></i> <span>Tax
+                        </span>
+                      </a>
+                    </li>
+                    <!-- <li class="treeview"><a href="#">
+                        <i class="fa fa-pause s-20"></i> <span>Tax Setups
+                        </span>
+                      </a>
+                    </li> -->
+                  </ul>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                  [hidden]="retailsetups_menu_view == false ? true : false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="treeview">
+                      <p><i class="fa fa-shopping-cart s20"></i> Retail Setups</p>
+                    </mat-panel-title>
+
+                  </mat-expansion-panel-header>
+                  <ul class="treeview-menu" style="display: block;">
+                    <li id="ManagerOverride" class="treeview"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('ManagerOverride') > -1 ? false : true"><a
+                        routerLink="manager-override">
+                        <i class="fa  fa-id-badge  s-20"></i> <span>Manage Override
+                        </span>
+                      </a>
+                    </li>
+                    <li id="Retail Settings" class="treeview"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Retail Settings') > -1 ? false : true"><a
+                        routerLink="retail-settings">
+                        <i class="fa fa-cart-plus s-20"></i> <span>Retail Settings
+                        </span>
+                      </a>
+                    </li>
+                    <li id="Store" class="treeview"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Store') > -1 ? false : true"><a
+                        routerLink="store">
+                        <i class="fa fa-arrows-alt s-20"></i> <span>Store
+                        </span>
+                      </a>
+                    </li>
+                    <li id="Store Group" class="treeview"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Store Group') > -1 ? false : true"><a
+                        routerLink="store-group">
+                        <i class="fa fa-cog s-20"></i> <span>Store Group
+                        </span>
+                      </a>
+                    </li>
+                    <li id="Franchise" class="treeview"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Franchise') > -1 ? false : true"><a
+                        routerLink="franchise">
+                        <i class="fa fa-circle-thin s-20"></i> <span> Franchise
+                        </span>
+                      </a>
+                    </li>
+                    <li id="Shift" class="treeview"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Shift') > -1 ? false : true"><a
+                        routerLink="shift">
+                        <i class="fa fa-clock-o s-20"></i> <span> Shift Master
+                        </span>
+                      </a>
+                    </li>
+                    <li id="POS" class="treeview"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('POS') > -1 ? false : true"><a
+                        routerLink="pos-list">
+                        <i class="fa fa-address-card s-20"></i> <span> POS Master
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                  [hidden]="product_menu_view == false ? true : false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="treeview">
+                      <p><i class="fa fa-soccer-ball-o  s20"></i> Product</p>
+                    </mat-panel-title>
+
+                  </mat-expansion-panel-header>
+                  <ul class="treeview-menu sbm-height" style="display: block;" id="mms">
+
+                    <li class="treeview" id="Brand"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Brand') > -1 ? false : true"><a
+                        routerLink="brand">
+                        <i class="fa fa-id-badge s-20"></i> <span>Brand
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Sub Brand"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Sub Brand') > -1 ? false : true"><a
+                        routerLink="sub-brand">
+                        <i class="fa fa-tags s-20"></i> <span>Sub Brand
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Scale Master"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Scale Master') > -1 ? false : true"><a
+                        routerLink="scale">
+                        <i class="fa fa-balance-scale s-20"></i> <span>Scale
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Color Master"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Color Master') > -1 ? false : true"><a
+                        routerLink="color">
+                        <i class="fa fa-circle s-20"></i> <span>Color
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Design Master"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Design Master') > -1 ? false : true"><a
+                        routerLink="design">
+                        <i class="fa fa-adjust s-20"></i> <span>Design
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="ProductLine"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('ProductLine') > -1 ? false : true"><a
+                        routerLink="product-line">
+                        <i class="fa fa-ellipsis-h s-20"></i> <span>Product Line
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Product Group"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Product Group') > -1 ? false : true"><a
+                        routerLink="product-group">
+                        <i class="fa fa-columns s-20"></i> <span>Product Group
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Product SubGroup"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Product SubGroup') > -1 ? false : true"><a
+                        routerLink="product-subgroup">
+                        <i class="fa fa-clone s-20"></i> <span>Product Sub Group
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Season"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Season') > -1 ? false : true"><a
+                        routerLink="season">
+                        <i class="fa fa-cloud s-20"></i> <span>Season
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Division"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Division') > -1 ? false : true"><a
+                        routerLink="division">
+                        <i class="fa fa-square s-20"></i> <span>Division
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Reason"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Reason') > -1 ? false : true"><a
+                        routerLink="reason">
+                        <i class="fa fa-question s-20"></i> <span>Reason
+                        </span>
+                      </a>
+                    </li>
+                    <li class="treeview" id="Year"
+                      [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Year') > -1 ? false : true"><a
+                        routerLink="year">
+                        <i class="fa fa-calendar s-20"></i> <span>Year
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+
+            <div class="tab-pane fade show " id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+              <div class="relative brand-wrapper sticky b-b">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                  <div class="text-xs-center d-logo">
+                    <img src="assets/img/login-logos.png">
+                  </div>
+                </div>
+              </div>
+
+              <ul class="sidebar-menus">
+
+                <li class="treeview"><a href="#" class="subs-title">
+                    <i class="fa fa-suitcase s-20"></i> <span>Business</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Stock Request"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Stock Request') > -1 ? false : true"><a
+                    routerLink="stockrequest">
+                    <i class="fa  fa-pencil-square-o s-20"></i> <span>Stock Request</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Stock Receipt"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Stock Receipt') > -1 ? false : true"><a
+                    routerLink="stockreceipt">
+                    <i class="fa  fa-minus-square-o s-20"></i> <span>Stock Receipt</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Stock Return"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Stock Return') > -1 ? false : true"><a
+                    routerLink="stockreturn">
+                    <i class="fa fa-mail-forward  s-20"></i> <span>Stock Return</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Inventory Counting"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Inventory Counting') > -1 ? false : true"><a
+                  routerLink="inventory-counting">
+                    <i class="fa fa-eject s-20"></i> <span>Inventory Counting</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Stock Adjustment"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Stock Adjustment') > -1 ? false : true"><a
+                    routerLink="stockadjustment">
+                    <i class="fa fa-adjust s-20"></i> <span>Stock Adjustment</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Opening Stock"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Opening Stock') > -1 ? false : true"><a
+                    routerLink="openingstock">
+                    <i class="fa fa-sheqel s-20"></i> <span>Opening Stock</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Non Trading Stock Distribution"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Non Trading Stock Distribution') > -1 ? false : true">
+                  <a routerLink="non-trading-stock-distribution">
+                    <i class="fa fa-sticky-note s-20"></i> <span>Non-Trading Stock Distribution</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Tailoring"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Tailoring') > -1 ? false : true"><a
+                    routerLink="tailoring">
+                    <i class="fa fa-plus s-24"></i> <span> Tailoring</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Bin Config"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Bin Config') > -1 ? false : true"><a
+                    routerLink="bin-config-detail">
+                    <i class="fa fa-mail-forward  s-20"></i> <span> Bin Config</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Bin Transfer"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Bin Transfer') > -1 ? false : true"><a
+                    routerLink="bintransfer">
+                    <i class="fa fa-mail-forward  s-20"></i> <span> Bin Transfer</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+
+            <div class="tab-pane fade show" id="v-pills-product" role="tabpanel" aria-labelledby="v-pills-product-tab">
+
+              <div class="relative brand-wrapper sticky b-b">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                  <div class="text-xs-center d-logo">
+                    <img src="assets/img/login-logos.png">
+                  </div>
+                </div>
+              </div>
+
+              <ul class="sidebar-menus">
+
+                <li class="treeview"><a href="#" class="subs-title">
+                    <i class="fa fa-th-list s-20"></i> <span>Products</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Style Master"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Style Master') > -1 ? false : true"><a
+                    routerLink="style">
+                    <i class="fa  fa-ge s-20"></i> <span>Style</span>
+                  </a>
+                </li>
+                <li class="treeview" id="SKU Master"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('SKU Master') > -1 ? false : true"><a
+                    routerLink="sku-master">
+                    <i class="fa  fa-check-circle  s-20"></i> <span>SKU</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Bar Code"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Bar Code') > -1 ? false : true"><a
+                    routerLink="barcode">
+                    <i class="fa fa-barcode  s-20"></i> <span>Barcode List</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="tab-pane fade show" id="v-pills-price" role="tabpanel" aria-labelledby="v-pills-price-tab">
+
+              <div class="relative brand-wrapper sticky b-b">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                  <div class="text-xs-center d-logo">
+                    <img src="assets/img/login-logos.png">
+                  </div>
+                </div>
+              </div>
+
+              <ul class="sidebar-menus">
+
+                <li class="treeview"><a href="#" class="subs-title">
+                    <i class="fa fa-money s-20"></i> <span>Pricing and Promotion</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Price List"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Price List') > -1 ? false : true"><a
+                    routerLink="price-list">
+                    <i class="fa  fa-list-ul s-20"></i> <span>Price List
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Price Point"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Price Point') > -1 ? false : true"><a
+                    routerLink="price-point">
+                    <i class="fa fa-credit-card-alt s-20"></i> <span>Price Point
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Price Type Master"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Price Type Master') > -1 ? false : true"><a
+                    routerLink="price-type">
+                    <i class="fa fa-credit-card s-20"></i> <span>Price Type
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Promotions"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Promotions') > -1 ? false : true"><a
+                    routerLink="promotion">
+                    <i class="fa  fa-line-chart  s-20"></i> <span>Promotions
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="PromotionsPriority"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('PromotionsPriority') > -1 ? false : true"><a
+                    routerLink="promotionspriority">
+                    <i class="fa  fa-long-arrow-up s-20"></i> <span>Promotion Priority
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="WN Promotion"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('WN Promotion') > -1 ? false : true"><a
+                    routerLink="WNPromotions">
+                    <i class="fa fa-eject s-20"></i> <span>WNPromotion</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Promotion Mapping"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Promotion Mapping') > -1 ? false : true"><a
+                    routerLink="promotion-mapping">
+                    <i class="fa fa-angle-double-right s-20"></i> <span>PromotionMapping</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Coupon" hidden="true"><a href="#">
+                    <i class="fa fa-gift s-20"></i> <span>Coupon</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Armada Discount" hidden="true"><a href="#">
+                    <i class="fa fa-gg s-20"></i> <span>Armada Discount</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Price Change"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Price Change') > -1 ? false : true"><a
+                  routerLink="price-change">
+                    <i class="fa fa-money s-20"></i> <span>Price Change</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Coupon Master"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Coupon') > -1 ? false : true"><a
+                  routerLink="coupon-list">
+                  <i class="fa fa-gift s-20"></i> <span>Coupon Master
+                  </span>
+                </a>
+              </li> 
+
+              <!-- <li class="treeview" id="Coupon Master"
+                [hidden]="false"><a
+                  routerLink="coupon-list">
+                  <i class="fa fa-gift s-20"></i> <span>Coupon Master
+                  </span>
+                </a>
+              </li> -->
+              
+              <li class="treeview" id="CouponTransfer" 
+              [hidden]="accessibleMenus != null && accessibleMenus.indexOf('CouponTransfer') > -1 ? false : true"><a 
+              routerLink="coupon-transfer">
+                  <i class="fa fa-refresh s-20"></i> <span>Coupon Transfer</span>
+                </a>
+              </li>
+
+              <li class="treeview" id="CouponReceipt"  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('CouponReceipt') > -1 ? false : true"><a
+                routerLink="coupon-receipt">
+                  <i class="fa fa-percent s-20"></i> <span>Coupon Receipt</span>
+                </a>
+              </li>
+                <li class="treeview" id="Combo Master"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Combo Master') > -1 ? false : true"><a
+                  routerLink="combo-list">
+                  <i class="fa fa-delicious s-20"></i> <span>Combo Master
+                  </span>
+                </a>
+              </li>
+              </ul>
+            </div>
+
+            <div class="tab-pane fade show" id="v-pills-setup" role="tabpanel" aria-labelledby="v-pills-setup">
+
+              <div class="relative brand-wrapper sticky b-b">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                  <div class="text-xs-center d-logo">
+                    <img src="assets/img/login-logos.png">
+                  </div>
+                </div>
+              </div>
+
+              <ul class="sidebar-menus" style="background-color: #fff">
+
+                <li class="treeview"><a href="#" class="subs-title">
+                    <i class="fa fa-user-o s-20"></i> <span>Users</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Designation"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Designation') > -1 ? false : true"><a
+                    routerLink="designation">
+                    <i class="fa fa-id-badge s-20"></i> <span>Designation
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Employees"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Employees') > -1 ? false : true"><a
+                    routerLink="Employee">
+                    <i class="fa fa-user-circle s-20"></i> <span>Employees
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Role Master"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Role Master') > -1 ? false : true"><a
+                    routerLink="role">
+                    <i class="fa fa-dashboard s-20"></i> <span>User Roles
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Login Users"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Login Users') > -1 ? false : true"><a
+                    routerLink="user-master">
+                    <i class="fa fa-arrow-circle-o-right s-20"></i> <span>User Master
+                    </span>
+                  </a>
+                </li>
+                <!-- <li class="treeview"><a routerLink="user-master">
+                    <i class="fa fa-users s-20"></i> <span>User Master
+                    </span>
+                  </a>
+                </li> -->
+                <li class="treeview" id="Users - Previlege"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Users - Previlege') > -1 ? false : true"><a
+                    routerLink="user-previlege">
+                    <i class="fa fa-group s-20"></i> <span>Users Previleges
+                    </span>
+                  </a>
+                </li>
+
+
+              </ul>
+            </div>
+
+            <div class="tab-pane fade show" id="v-pills-cust" role="tabpanel" aria-labelledby="v-pills-cust">
+
+              <div class="relative brand-wrapper sticky b-b">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                  <div class="text-xs-center d-logo">
+                    <img src="assets/img/login-logos.png">
+                  </div>
+                </div>
+              </div>
+
+              <ul class="sidebar-menus">
+
+                <li class="treeview"><a href="#" class="subs-title">
+                    <i class="fa fa-users s-20"></i> <span>Partners</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Customer Master"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Customer Master') > -1 ? false : true"><a
+                    routerLink="Customer">
+                    <i class="fa  fa-group s-20"></i> <span>Customer Master
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Customer Group"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Customer Group') > -1 ? false : true"><a
+                    routerLink="customer-group">
+                    <i class="fa fa-handshake-o s-20"></i> <span>Customer Group
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Vendor"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Vendor') > -1 ? false : true"><a
+                    routerLink="vendor">
+                    <i class="fa fa-user-secret s-20"></i> <span>Vendor Master
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="VendorGroup"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('VendorGroup') > -1 ? false : true"><a
+                    routerLink="vendor-group">
+                    <i class="fa fa-user-circle-o s-20"></i> <span>Vendor Group
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+
+            <div class="tab-pane fade show" id="v-pills-report" role="tabpanel" aria-labelledby="v-pills-report">
+
+              <div class="relative brand-wrapper sticky b-b">
+                <div class="d-flex justify-content-between align-items-center p-3">
+                  <div class="text-xs-center d-logo">
+                    <img src="assets/img/login-logos.png">
+                  </div>
+                </div>
+              </div>
+
+              <ul class="sidebar-menus">
+
+                <li class="treeview"><a href="#" class="subs-title">
+                    <i class="fa fa-pie-chart s-20"></i> <span>Reports</span>
+                  </a>
+                </li>
+                <li class="treeview" id="Duplicate Receipt"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Duplicate Receipt') > -1 ? false : true"><a
+                    href="#">
+                    <i class="fa  fa-file s-20"></i> <span>Duplicate Receipt
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Exchange Receipt"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Exchange Receipt') > -1 ? false : true"><a
+                    href="#">
+                    <i class="fa  fa-exchange s-20"></i> <span>Exchange Receipt
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Hold Receipt"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Hold Receipt') > -1 ? false : true"><a
+                    href="#">
+                    <i class="fa  fa-server s-20"></i> <span>Hold Receipt
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Invoice Receipt"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Invoice Receipt') > -1 ? false : true"><a
+                    href="#">
+                    <i class="fa fa-file-text s-20"></i> <span>Invoice Receipt
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="Return Receipt"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('Return Receipt') > -1 ? false : true"><a
+                    href="#">
+                    <i class="fa  fa-mail-forward s-20"></i> <span>Return Receipt
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="XReport"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('XReport') > -1 ? false : true"><a routerLink="x-report">
+                    <i class="fa  fa-file-text-o  s-20"></i> <span>X Report
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="ZReport"
+                  [hidden]="accessibleMenus != null && accessibleMenus.indexOf('ZReport') > -1 ? false : true"><a routerLink="z-report">
+                    <i class="fa fa-file-archive-o s-20"></i> <span>Z Report
+                    </span>
+                  </a>
+                </li>
+                <li class="treeview" id="StyleLedger"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('StyleLedger') > -1 ? false : true"><a routerLink="style-ledger">
+                  <i class="fa fa-file-image-o s-20"></i> <span>Style Ledger
+                  </span>
+                </a>
+                </li>
+                <li class="treeview" id="CashInCashOutReport"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('CashInCashOutReport') > -1 ? false : true"><a routerLink="Cash-In-Out-Report">
+                  <i class="fa  fa-file-o s-20"></i> <span>CashIn CashOut Report
+                  </span>
+                </a>
+                </li>
+                <li class="treeview" id="CashierWiseReport"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('CashierWiseReport') > -1 ? false : true"><a routerLink="cashier-wise-report">
+                  <i class="fa  fa-file-text s-20"></i> <span>Cashier Wise Report
+                  </span>
+                </a>
+                </li>
+                <li class="treeview" id="SalesManWiseReport"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('SalesManWiseReport') > -1 ? false : true"><a routerLink="sales-man-wise-report">
+                  <i class="fa  fa-file-text-o s-20"></i> <span>SalesMan Wise Report
+                  </span>
+                </a>
+                </li>
+                <li class="treeview" id="DetailedShowroomSalesReport"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('DetailedShowroomSalesReport') > -1 ? false : true"><a routerLink="detailed-showroom-sales-report">
+                  <i class="fa  fa-bar-chart s-20"></i> <span>Showroom Sales Report
+                  </span>
+                </a>
+                </li>
+                <li class="treeview" id="SalesReturnInvoiceReport"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('SalesReturnInvoiceReport') > -1 ? false : true"><a routerLink="sales-return-invoice-report">
+                  <i class="fa  fa-file s-20"></i> <span>Sales Return Report
+                  </span>
+                </a>
+                </li>
+                <li class="treeview" id="DetailedSalesInvoiceReport"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('DetailedSalesInvoiceReport') > -1 ? false : true"><a routerLink="sales-invoice-report">
+                  <i class="fa  fa-file-pdf-o s-20"></i> <span>Sales Invoice Report
+                  </span>
+                </a>
+                </li>
+                <!-- <li class="treeview" id="StockReceiptReport"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('StockReceiptReport') > -1 ? false : true"><a routerLink="stock-receipt-report">
+                  <i class="fa  fa-clipboard s-20"></i> <span>Stock Receipt Report
+                  </span>
+                </a>
+                </li>
+                <li class="treeview" id="StockReturnReport"
+                [hidden]="accessibleMenus != null && accessibleMenus.indexOf('StockReturnReport') > -1 ? false : true"><a routerLink="stock-return-report">
+                  <i class="fa  fa-repeat s-20"></i> <span>Stock Return Report
+                  </span>
+                </a>
+                </li> -->
+              </ul>
+            </div>
+
+
+            <!-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+              <div class="tab-pane fade show active" id="v-pills-menu" role="tabpanel" aria-labelledby="v-pills-menu-tab">
+
+                <div class="relative brand-wrapper sticky b-b">
+                  <div class="d-flex justify-content-between align-items-center p-3">
+                    <div class="text-xs-center d-logo">
+                      <img src="assets/img/login-logos.png">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div [ngClass]="{'pos-nav' : get_pos_mode() == true}">
+      <a href="javascript(void)" (click)="span_clicks()" data-toggle="push-menu"
+        class="paper-nav-toggles left ml-2 fixed desk-not-view">
+        <i class="fa fa-bars" style="background-color: #00aaff; padding: 4px 8px 4px 8px; color: #fff; border-radius: 4px;"></i>
+        <div class="close-icons py-1"><i class="fa fa-times-circle" aria-hidden="true" style="
+          color: #fff;
+      "></i></div>
+      </a>
+
+      <a (click)="homeClick()" class="link-home left ml-2 fixed" *ngIf="get_pos_mode() != false">
+        <i class="fa fa-home"></i>
+      </a>
+
+      <div class="has-sidebar-left has-sidebar-tabs">
+        <div class="pos-f-t">
+          <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark pt-2 pb-2 pl-4 pr-2">
+              <div class="search-bar">
+                <input class="transparent  text-white b-0 font-weight-lighter w-128 height-50" type="text"
+                  placeholder="start typing...">
+              </div>
+              <a href="#" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-expanded="false"
+                aria-label="Toggle navigation" class="paper-nav-toggle paper-nav-white active "><i></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="sticky">
+          <div class="navbar navbar-expand d-flex justify-content-between bd-navbar nav-top-color"
+            [ngClass]="{'pos-nav' : get_pos_mode() == true}" *ngIf="isAuthenticated()">
+            <div class="relative">
+              <div class="d-flex">
+                <!--  <div class="d-none d-md-block">
+                        <h1 class="nav-title text-white">Dashboard</h1>
+                    </div> -->
+                <div>
+                  <span href="javascript(void)" *ngIf="get_pos_mode() != true" (click)="span_clicks()"
+                    data-toggle="push-menu" class="mobile-hid paper-nav-toggles left ml-2 fixed">
+                    <i class="fa fa-bars" style="background-color: #00aaff; padding: 4px 8px 4px 8px;
+                      color: #fff; border-radius: 4px;"></i>
+                    <div class="close-icon py-1"><i class="fa fa-times-circle" aria-hidden="true" style="
+                      color: #fff;
+                  "></i></div>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <!--Top Menu Start -->
+            <div class="navbar-custom-menu">
+              <ul class="nav navbar-nav">
+                <!-- <li>
+                  <input class="form-control search-bars" (input)="onSearch($event.target.value)"
+                    placeholder="start typing...">
+                </li> -->
+
+                <li>
+                  <button type="button" class="btn btn-language" (click)="changeSiteLanguage()" style="margin: 6px 10px 0px 10px;"> {{ buttonLanguage }} </button>
+                </li>
+
+                <!-- <li class="user-ptext">
+                  User Profile
+                </li> -->
+
+                <li class="login-ptext">
+                  <a routerLink="login" class="logout btn btn-logout">
+                    <i class="fa fa-sign-out"> </i> Logout
+                  </a>
+                </li>
+
+
+                <!-- <li class="dropdown custom-dropdown user user-menu ">
+                  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <i class="fa fa-user-circle-o mat-fa"></i>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <span class="mat-span"><i class="fa fa-address-book"> </i> Profile</span>
+                    </button>
+                    <button mat-menu-item routerLink="login">
+                      <span class="mat-span"><i class="fa fa-lock"> </i> Logout</span>
+                    </button>
+                  </mat-menu>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- /Sidebar -->
+        <!-- Spinner -->
+        <!-- <ngx-spinner></ngx-spinner> -->
+        <!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff"
+        type="line-spin-fade-rotating"
+        [fullScreen]="true">
+        <p style="color: white"> Please wait... </p>
+      </ngx-spinner> -->
+        <!-- Main Wrapper -->
+        <router-outlet></router-outlet>
+
+
+        <!-- <ngx-spinner></ngx-spinner> -->
+
+        <!-- line-spin-fade-rotating -->
+        <!-- ball-spin-clockwise -->
+        <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="line-spin-fade-rotating">
+          <p style="color: white">Please Wait. </p>
+        </ngx-spinner>
+
+        <!-- <section id="content" class="animated fadeIn">
+        <div class="chute chute-center" style="/* height: 579px; */">
+          <div class="center-block">
+            <div class="allcp-form theme-info">
+              <div class="panel">
+                <div class="panel-heading">
+                  <div class="panel-title">
+                    {{ get_pos_mode() }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> -->
+
+      </div>
+    </div>
+    <!-- /Body Wrap  -->

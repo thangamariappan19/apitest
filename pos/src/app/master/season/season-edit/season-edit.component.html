@@ -1,0 +1,163 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../season">{{ 'SEASON.SEASON_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+     
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'SEASON.EDIT_SEASON' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="seasonCode" autocomplete="off"
+                                                formControlName="seasonCode" #seasonCode readonly
+                                                [ngClass]="{'red-border': myForm.controls['seasonCode'].invalid}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                                class="gui-input floating-input" placeholder="Season Code">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'SEASON.SEASON_CODE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="seasonName" autocomplete="off"
+                                                formControlName="seasonName" #seasonName
+                                                [ngClass]="{'red-border': myForm.controls['seasonName'].invalid}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                                class="gui-input floating-input" placeholder="Season Name">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'SEASON.SEASON_NAME' | translate }}</label>
+                                    </div>                                    
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="seasonDrop" autocomplete="off" (keypress)="keyPressD($event)"
+                                                formControlName="seasonDrop" #seasonDrop
+                                                [ngClass]="{'red-border': myForm.controls['seasonDrop'].invalid}"
+                                                class="gui-input floating-input" placeholder="Season Drop">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'SEASON.SEASON_DROP' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="date" name="startDate" autocomplete="off" (change)="calculateDaysandWeeks()"
+                                                formControlName="startDate" #startDate
+                                                [ngClass]="{'red-border': myForm.controls['startDate'].invalid}"
+                                                class="gui-input floating-input" placeholder="Start Date" >
+                                                <span class="highlight"></span>
+                                                <label>{{ 'SEASON.START_DATE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="date" name="endDate" autocomplete="off" (change)="calculateDaysandWeeks()"
+                                                formControlName="endDate" #endDate
+                                                [ngClass]="{'red-border': myForm.controls['endDate'].invalid}"
+                                                class="gui-input floating-input" placeholder="End Date" >
+                                                <span class="highlight"></span>
+                                                <label>{{ 'SEASON.END_DATE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="noofWeeks" autocomplete="off" readonly
+                                                formControlName="noofWeeks" #noofWeeks
+                                                [ngClass]="{'red-border': myForm.controls['noofWeeks'].invalid}"
+                                                class="gui-input floating-input" placeholder="No of Weeks">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'SEASON.NO_OF_WEEKS' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="noofDays" autocomplete="off" readonly
+                                                formControlName="noofDays" #noofDays
+                                                [ngClass]="{'red-border': myForm.controls['noofDays'].invalid}"
+                                                class="gui-input floating-input" placeholder="No of Days">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'SEASON.NO_OF_DAYS' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>  
+                                </div>                                   
+                                    <div class="row default-forms">
+
+                                    <div class="offset-md-4 col-md-2 mt10">
+                                            <button type="submit" class="btn btn-lg btn-success btn-block common-button" 
+                                            (click)="updateSeason()" [disabled]="myForm.pristine || myForm.invalid"><i
+                                                    class="fa fa-save"></i> Update
+                                                    
+                                            </button>
+                                    </div>
+
+                                    <div class="col-md-2 mt10">
+                                            <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                                class="fa fa-remove"></i> Close</button>
+    
+                                    </div>
+                                    
+                                   
+                                    <!--<div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>-->
+                        
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

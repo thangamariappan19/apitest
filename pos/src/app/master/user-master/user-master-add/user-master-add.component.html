@@ -1,0 +1,249 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../user-master">{{ 'USER_MASTER.USER_MASTER_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'USER_MASTER.CREATE_USER' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="userCode" autocomplete="off"
+                                                formControlName="userCode" #userCode
+                                                [ngClass]="{'red-border': myForm.controls['userCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="User Code"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'USER_MASTER.USER_CODE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="userName" autocomplete="off"
+                                                formControlName="userName" #userName
+                                                [ngClass]="{'red-border': myForm.controls['userName'].invalid}"
+                                                class="gui-input floating-input" placeholder="User Name"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'USER_MASTER.USER_NAME' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                             
+                                            <input   [type]="hide ? 'password' : 'text'" name="password" autocomplete="off"
+                                                formControlName="password" #password
+                                                [ngClass]="{'red-border': myForm.controls['password'].invalid}"
+                                                class="gui-input floating-input" placeholder="Password"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'USER_MASTER.PASSWORD' | translate }}</label>
+                                                <mat-icon class="show-password-icon" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                       <input [type]="hide1 ? 'password' : 'text'" name="Confirmpassword" autocomplete="off"
+                                            formControlName="Confirmpassword" #Confirmpassword
+                                            [ngClass]="{'red-border': myForm.controls['Confirmpassword'].invalid}"
+                                            class="gui-input floating-input" placeholder="Confirmpassword"
+                                            spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>Confirm Password</label>
+                                            <mat-icon class="show-password-icon" matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </div>
+                                       
+                                            
+                                
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'USER_MASTER.EMPLOYEE_NAME' | translate }}</label>
+                                       
+                                            <select name="employeeID" formControlName="employeeID" #employeeID
+                                                class="gui-input" (change)="empRolename()"
+                                                [ngClass]="{'red-border': myForm.controls['employeeID'].invalid}">
+                                                <option value="">Select Employee</option>
+                                                <option *ngFor="let item of employee_list" value="{{item.id}}"><span>{{item.employeeCode}}-</span>{{item.employeeName}} </option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>                                    
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'USER_MASTER.ROLE' | translate }}</label>
+                                       
+                                            <select name="roleID" formControlName="roleID" #roleID disabled
+                                                class="gui-input" (change)="rolecode()"
+                                               >
+                                                <option value="0">Select Role</option>
+                                                <option *ngFor="let item of role_list" value="{{item.roleName}}">{{item.roleName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'USER_MASTER.MANAGER_OVERRIDE' | translate }}</label>
+                                       
+                                            <select name="managerOverrideID" formControlName="managerOverrideID" #managerOverrideID
+                                                class="gui-input" (change)="manageroverridecode()"
+                                                [ngClass]="{'red-border': myForm.controls['managerOverrideID'].invalid}">
+                                                <option value="">Select Manager Override</option>
+                                                <option *ngFor="let item of manager_override_list" value="{{item.id}}">{{item.name}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'USER_MASTER.RETAIL_SETTINGS' | translate }}</label>
+                                       
+                                            <select name="retailSettingsID" formControlName="retailSettingsID" #retailSettingsID
+                                                class="gui-input" (change)="retailsettingscode()"
+                                                [ngClass]="{'red-border': myForm.controls['retailSettingsID'].invalid}">
+                                                <option value="">Select Retail Settings</option>
+                                                <option *ngFor="let item of retailsettings_list" value="{{item.id}}">{{item.retailName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                   
+                                   
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb30">
+                                                        <input type="checkbox" checked="" id="passwordReset" name="passwordReset" #passwordReset formControlName="passwordReset">
+                                                        <label for="passwordReset"></label>
+                                                        <p class="label-text">{{ 'USER_MASTER.PASSWORD_RESET' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb30">
+                                                        <input type="checkbox" checked="" id="allowStockEdit" name="allowStockEdit" #allowStockEdit formControlName="allowStockEdit">
+                                                        <label for="allowStockEdit"></label>
+                                                        <p class="label-text"> {{ 'USER_MASTER.ALLOW_STOCK_EDIT' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb30">
+                                                        <input type="checkbox" checked="" id="mobileUser" name="mobileUser" #mobileUser formControlName="mobileUser">
+                                                        <label for="mobileUser"></label>
+                                                        <p class="label-text">{{ 'USER_MASTER.MOBILE_USER' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb30">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text"> {{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+
+
+                                <div class="row default-forms">
+                                    
+                                    <div class="offset-md-3 col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                        [disabled]="myForm.pristine || myForm.invalid" (click)="addUser()"><i
+                                                class="fa fa-check-circle-o"></i> Save                                                
+                                        </button>
+                                    </div>
+                                  
+                                    <div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button" (click)="clear_controls()" ><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+                                    </div>
+                                  
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

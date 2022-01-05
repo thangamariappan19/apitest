@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Customer Details</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="allcp-form theme-info">
+        <mat-card>
+            <mat-card-header>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="panel-body country-table">
+                        <div class="table-responsive">
+                            <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                <thead>
+                                    <tr class="bg-dark">
+                                        <th></th>
+                                        <th class="">Code</th>
+                                        <th class="">Name</th>
+                                        <th class="">Phone Number</th>
+                                        <th class="">Alter Phone Number</th>
+                                        <th class="">Group</th>
+                                        <th class="">Country</th>
+                                        <th class="">Email</th>
+                                        <th class="">Remarks</th>
+                                        <th class="">Active</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let item of TableList;" >
+                                    <tr>
+                                        <td>  <input type="checkbox" 
+                                            (change) = "SelectItem_checkedChanged(item)"
+                                            [checked]="false"></td>
+                                        <td>{{item.customerCode}}</td>
+                                        <td>{{item.customerName}}</td>
+                                        <td>{{item.phoneNumber}}</td>
+                                        <td>{{item.alterPhoneNumber}}</td>
+                                        <td>{{item.customerGroupCode}}</td>
+                                        <td>{{item.email}}</td>
+                                        <td>{{item.countryCode}}</td>
+                                        <td>{{item.remarks}}</td>
+                                        <td align="center">
+                                            <div class="circle"
+                                                [ngStyle]="item.active ? {'background-image': 'linear-gradient(#68be7f 5%, #019531 )'} : {'background-image': 'linear-gradient(#ec756c 5%, #c31103 )'}">
+                                            </div>
+                                        </td>
+                                        
+                                       
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </mat-card-content>
+        </mat-card>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>SelectList</button>
+</mat-dialog-actions>

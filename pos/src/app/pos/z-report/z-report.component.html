@@ -1,0 +1,256 @@
+<html>		
+	<div style="width: 95mm;">
+		<div style="width: 60%; text-align: center;margin-left:45px">
+			<img src="{{storeImage}}" style="height: 50px;width:50%;margin-left:45px;"/>
+		</div>	   
+	  <div style="width: 100%; text-align: center;font-weight:900">
+		  <h4 style="margin: 2mm 0mm;font-weight:900">*&nbsp;Z REPORT&nbsp;*</h4>
+	  </div>
+		 <div style="width: 100%; text-align: center;font-weight:900">
+		  <h4 style="margin: 2mm 0mm;font-weight: 900">{{business_date}}</h4>	  
+	</div>
+		
+	  <table style="width: 100%;">
+		  <tr>
+			  <td style="width: 30%;">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Shop: </h5>
+			  </td>
+			  <td style="width: 50%; text-align: left;" colspan="3">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{shopName}} </h5>
+			  </td>			  
+		  </tr>
+		  <tr>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Shop Code: </h5>
+			  </td>
+			  <td style="width: 50%;text-align: left;">
+				  <h5 style="margin: 2mm 0mm; font-weight: 100;"> {{shopCode}} </h5>
+			  </td>
+			   <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Country: </h5>
+			  </td>
+			  <td style="width: 50%;text-align: left;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{country}} </h5>
+			  </td>
+		  </tr>
+		  <tr>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Date: </h5>
+			  </td>
+			  <td style="width: 50%; text-align: left;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{current_date | date: 'dd-MMM-yy'}} </h5>
+			  </td>
+			   <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Time: </h5>
+			  </td>
+			  <td style="width: 50%; text-align: left;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{current_date | date:'hh:mm a'}} </h5>
+			  </td>
+		  </tr>		 
+	  </table>
+		<table style="width: 100%; border-collapse: collapse;" border="1">	
+		  <tr style="border-top:1px #000;border-bottom:1px #000">
+			  <td style="width: 50%;text-align:center;border-right:hidden;border-left:hidden;">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Invoice No.: </h5>
+			  </td>
+			  <td style="width: 50%;text-align: center;border-left: 1px solid #d0caca;border-right: hidden">
+				  <h5 style="margin: 2mm 0mm;;font-weight: 550;"> Amount </h5>
+			  </td>			  
+		  </tr>
+			<tr>
+			  <td style="width: 50%;text-align:center;border-left:hidden;border-right:hidden" colspan="2">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">{{returnValue}}</h5>
+			  </td>			  			  
+		  </tr>
+			<tr style="border-left:hidden;border-right:hidden;border-bottom:1px #d0caca">
+			  <td style="width: 50%;text-align:center;font-weight:100;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm">{{invoiceNo}} </h5>
+			  </td>
+			  <td style="width: 50%;text-align:center;font-weight:100">
+				  <h5 style="margin: 2mm 0mm;"> {{totalAmount}}</h5>
+			  </td>			  
+		  </tr>
+			<tr style="border-left:hidden;border-right:hidden;border-bottom:1px #d0caca">
+			  <td style="width: 50%;text-align:center;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Total Sales </h5>
+			  </td>
+			  <td style="width: 50%;text-align:center;font-weight:100">
+				  <h5 style="margin: 2mm 0mm;"> {{subTotal}}</h5>
+			  </td>			  
+		  </tr>
+			<tr style="border-left:hidden;border-right:hidden;border-bottom:1px #d0caca">
+			  <td style="width: 50%;text-align:center;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Total Discount </h5>
+			  </td>
+			  <td style="width: 50%;text-align:center;font-weight:100">
+				  <h5 style="margin: 2mm 0mm;"> {{totalDiscount}} </h5>
+			  </td>			  
+		  </tr>
+			<tr style="border-left:hidden;border-right:hidden;border-bottom:1px #d0caca">
+			  <td style="width: 50%;text-align:center;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Total </h5>
+			  </td>
+			  <td style="width: 50%;text-align:center;font-weight:100">
+				  <h5 style="margin: 2mm 0mm;"> {{total}} </h5>
+			  </td>			  
+		  </tr>
+			<tr style="border-left:hidden;border-right:hidden;border-bottom:1px #d0caca">
+			  <td style="width: 50%;text-align:center;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Total Amount </h5>
+			  </td>
+			  <td style="width: 50%; text-align: center; font-weight: 100">
+				  <h5 style="margin: 2mm 0mm;"> {{netSales}} </h5>
+			  </td>			  
+		  </tr>
+		</table>
+		<table style="width: 100%; height: 2px">
+		  <tr>  
+		  </tr>
+	  </table>
+		<table style="width: 100%;border-collapse: collapse;" border="1">		   
+		  <tr>
+			  <td>
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">SHIFT </h5>
+			  </td>
+			  <td>
+				  <h5 style="margin: 2mm 0mm">  </h5>
+			  </td>	
+			   <td>
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">CASH </h5>
+			  </td>
+			  <td>
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;;">KNET </h5>
+			  </td>
+			   <td>
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">VISA </h5>
+			  </td>
+			  <td>
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">CREDIT </h5>
+			  </td>
+		  </tr>	
+			 <tr>
+			  <td style="width: 20%;">
+				  <h5 style="margin: 2mm 0mm"> </h5>
+			  </td>
+			  <td style="width: 80%; font-weight: 100; text-align: center" colspan="5">
+				  <h5 style=" margin: 2mm 0mm; "> {{posid}} </h5>
+			  </td>	
+			</tr>
+			<tr>
+			  <td style="font-weight:100">
+				  <h5 style="margin: 2mm 0mm">{{shiftID}} </h5>
+			  </td>
+			  <td style="font-weight: 100;width: 10%">
+				  <h5 style="margin: 2mm 0mm;">{{paymentCurrency}} </h5>
+			  </td>	
+			   <td style="font-weight: 100">
+				  <h5 style="margin: 2mm 0mm">{{cashValue}} </h5>
+			  </td>
+			  <td style="font-weight:100">
+				  <h5 style="margin: 2mm 0mm;">{{knet}} </h5>
+			  </td>
+			   <td style="font-weight:100">
+				  <h5 style="margin: 2mm 0mm">{{visa}} </h5>
+			  </td>
+			  <td style="font-weight:100">
+				  <h5 style="margin: 2mm 0mm;">{{creditcard}}</h5>
+			  </td>
+		  </tr>	
+		</table>
+		<table style="width: 100%;height: 2px">
+		  <tr>  
+		  </tr>
+	  </table>
+		<table style="width: 90%;margin-left: 15px;border-collapse: collapse;" border="1">
+		  <tr>
+			  <td style="width: 70%;border-left:hidden;border-right:hidden;border-top:hidden" colspan="2">
+				  <h5 style="margin: 2mm 0mm;font-weight: 700;"><u>STORE COLLECTION</u></h5>
+			  </td>			  		  
+		  </tr>		  
+		  <tr style="border-bottom:hidden;">
+			  <td style="width: 70%;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">NET SALES </h5>
+			  </td>
+			  <td style="width: 30%;text-align:right;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{netSalesAmount}}</h5>
+			  </td>			  
+		  </tr>	
+		  <tr style="border-bottom:hidden;">
+			  <td style="width: 70%;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">CASH </h5>
+			  </td>
+			  <td style="width: 30%;text-align:right">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{totCash}} </h5>
+			  </td>			  
+		  </tr>	
+		  <tr style="border-bottom:hidden;">
+			  <td style="width: 70%;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">KNET </h5>
+			  </td>
+			  <td style="width: 30%;text-align:right">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{totalKnet}} </h5>
+			  </td>			  
+		  </tr>	
+			<tr style="border-bottom:hidden;">
+			  <td style="width: 70%;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">VISA </h5>
+			  </td>
+			  <td style="width: 30%;text-align:right">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{totalVisa}} </h5>
+			  </td>			  
+		  </tr>	
+			<tr style="border-bottom:hidden;">
+			  <td style="width: 70%;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">CREDIT CARD </h5>
+			  </td>
+			  <td style="width: 30%;text-align:right">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{totalCreditCard}} </h5>
+			  </td>			  
+		  </tr>	
+			<tr style="border-bottom:hidden;">
+			  <td style="width: 70%;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">TOTAL CARD AMOUNT </h5>
+			  </td>
+			  <td style="width: 30%;text-align:right">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{totalCardValue}} </h5>
+			  </td>			  
+		  </tr>	
+			<tr style="border-bottom:hidden;">
+			  <td style="width: 70%;border-right:hidden">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">CREDIT SALE </h5>
+			  </td>
+			  <td style="width: 30%;text-align:right">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{totalCreditSale}} </h5>
+			  </td>			  
+		  </tr>	
+			<tr>
+			  <td style="width: 70%;border-right:hidden;border-bottom:hidden;">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">FOREIGN CURRENCY VALUE </h5>
+			  </td>
+			  <td style="width: 30%;text-align:right;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{foreignTotal}} </h5>
+			  </td>			  
+		  </tr>	
+			<tr>
+			  <td style="width: 70%;">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">DIFFERENCE </h5>
+			  </td>
+			  <td style="width: 30%;text-align:right;border-top:1px solid #000;border-left:1px solid #000;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100;"> {{differenceValue}} </h5>
+			  </td>			  
+		  </tr>	
+	  </table>
+	 <table style="width: 100%;height:60px">
+		  <tr>  
+		  </tr>
+	  </table>	 
+	  <table style="width: 100%;">
+		  <tr>
+			 <td></td>
+			  <td style="width: 50%;text-align:center;border-top:1px solid #000">
+				  <h5 style="margin: 2mm 0mm;font-weight: 550;">Manager Signature</h5>
+			  </td>
+		  </tr>
+	  </table>
+	</div>
+</html>

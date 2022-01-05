@@ -1,0 +1,203 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../price-list">{{ 'PRICE_LIST.PRICE_LIST_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'PRICE_LIST.CREATE_PRICE_LIST' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="pricelistCode" autocomplete="off"
+                                                formControlName="pricelistCode" #pricelistCode
+                                                [ngClass]="{'red-border': myForm.controls['pricelistCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="Price-List Code"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'PRICE_LIST.PRICE_LIST_CODE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="pricelistName" autocomplete="off"
+                                                formControlName="pricelistName" #divisionName
+                                                [ngClass]="{'red-border': myForm.controls['pricelistName'].invalid}"
+                                                class="gui-input floating-input" placeholder="Price-List Name"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'PRICE_LIST.PRICE_LIST_NAME' | translate }}</label>
+                                    </div>      
+                                    
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'PRICE_LIST.CURRENCY' | translate }}</label>
+                                       
+                                            <select name="currency" formControlName="currency" #currency (change)="currencyCode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['currency'].invalid}">
+                                                <option value="" >Select Currency</option>
+                                                <option *ngFor="let item of currencyList" value="{{item.id}}">{{item.internationalCode}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'PRICE_LIST.BASE_PRICE_LIST' | translate }}</label>
+                                       
+                                            <select name="basepricelistID" formControlName="basepricelistID" #basepricelistID (change)="fun_basepricelistcode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['basepricelistID'].invalid}">
+                                                <option value="">Select Base Price-List</option>
+                                                <option *ngFor="let item of basepricelist" value="{{item.id}}">{{item.priceListName}}</option>
+                                                <!--<option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="conversionfactor" autocomplete="off" (keypress)="keyPress($event)"
+                                                formControlName="conversionfactor" #conversionfactor
+                                                [ngClass]="{'red-border': myForm.controls['conversionfactor'].invalid}"
+                                                class="gui-input floating-input" placeholder="Conversion Factor"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'PRICE_LIST.CONVERSION_FACTOR' | translate }}</label>
+                                    </div> 
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="remarks" autocomplete="off"
+                                                formControlName="remarks" #remarks
+                                                [ngClass]="{'red-border': myForm.controls['remarks'].invalid}"
+                                                class="gui-input floating-input" placeholder="Remarks"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                    </div>
+
+                                     <!-- hardcoded value -->
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'PRICE_LIST.PRICE_LIST_TYPE' | translate }}</label>
+                                       
+                                            <select name="pricelisttypeID" formControlName="pricelisttypeID" #pricelisttypeID (change)="fun_basepricelistcode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['pricelisttypeID'].invalid}">
+                                                <option value="">Select Price-List Type</option>
+                                                <!--<option *ngFor="let item of json" value="{{item.id}}">{{item.countryName}}</option>-->
+                                                <option>Sales</option>
+                                                <option>Purchase</option>
+                                                </select>
+                                                <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+
+                                    <!-- hardcoded value -->
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'PRICE_LIST.PRICE_LIST_CATEGORY' | translate }}</label>
+                                       
+                                            <select name="pricelistcategoryID" formControlName="pricelistcategoryID" #pricelistcategoryID (change)="fun_basepricelistcode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['pricelistcategoryID'].invalid}">
+                                                <option value="">Select Price-List Category</option>
+                                                <!--<option *ngFor="let item of json" value="{{item.id}}">{{item.countryName}}</option>-->
+                                                <option>RRP Price</option>
+                                                <option>Retail Price</option>
+                                                <option>Outlet Price</option>
+                                                </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text"> {{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                               
+                                <div class="row default-forms">
+                                    
+                                    <div class="offset-md-3 col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button" 
+                                        (click)="addPrice()"  [disabled]="myForm.pristine || myForm.invalid"><i class="fa fa-check-circle-o"></i> Save                                                
+                                        </button>
+                                    </div>
+                                    <div class=" col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"
+                                        (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                                        (click)="close()"><i class="fa fa-remove"></i> Close</button>
+
+                                    </div>
+                                  
+
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

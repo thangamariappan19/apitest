@@ -1,0 +1,404 @@
+<form [formGroup]="myForm" novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../retail-settings">{{ 'RETAIL_SETTINGS.RETAIL_SETTINGS_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'RETAIL_SETTINGS.EDIT_RETAIL_SETTINGS' | translate }}</h4>            
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                              
+                                            <input type="text" name="retailCode" autocomplete="off" readonly
+                                                formControlName="retailCode" #retailCode
+                                                [ngClass]="{'red-border': myForm.controls['retailCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="Retail Code"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'RETAIL_SETTINGS.RETAIL_CODE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                        
+                                            <input type="text" name="retailName" autocomplete="off"
+                                                formControlName="retailName" #retailName
+                                                [ngClass]="{'red-border': myForm.controls['retailName'].invalid}"
+                                                class="gui-input floating-input" placeholder="Retail Name"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'RETAIL_SETTINGS.RETAIL_NAME' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'RETAIL_SETTINGS.DEFAULT_TRANSACTION_MODE' | translate }}</label>
+                                       
+                                            <select name="defaultTransactionMode" formControlName="defaultTransactionMode" #defaultTransactionMode (change)="countrycode()"
+                                                class="gui-input">
+                                                <option value="">Select Transaction Mode</option>
+                                                <option value="Sales">Sales</option>
+                                                <option value="Return">Return</option>
+                                                <option value="Exchange">Exchange</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="priceOverrideLowerLimit" autocomplete="off" (keypress)="keyPress($event)"
+                                                formControlName="priceOverrideLowerLimit" #priceOverrideLowerLimit (change)="priceLowerPercentChange()"
+                                                [ngClass]="{'red-border': myForm.controls['priceOverrideLowerLimit'].invalid}"
+                                                class="gui-input floating-input" placeholder="Price Override Lower Limit">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'RETAIL_SETTINGS.PRICE_OVERRIDE_LOWER_LIMIT' | translate }}</label>
+                                        
+                                    </div>   
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="priceOverrideUpperLimit" autocomplete="off" (keypress)="keyPress($event)"
+                                                formControlName="priceOverrideUpperLimit" #priceOverrideUpperLimit (change)="priceUpperPercentChange()"
+                                                [ngClass]="{'red-border': myForm.controls['priceOverrideUpperLimit'].invalid}"
+                                                class="gui-input floating-input" placeholder="Price Override Upper Limit">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'RETAIL_SETTINGS.PRICE_OVERRIDE_UPPER_LIMIT' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="newRowForScan" name="newRowForScan" #newRowForScan formControlName="newRowForScan">
+                                                        <label for="newRowForScan"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.NEW_ROW_FOR_SCAN' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'RETAIL_SETTINGS.CHANGE_AMOUNT_CURRENCY' | translate }}</label>
+                                        
+                                            <select name="changeAmountCurrency" formControlName="changeAmountCurrency" #changeAmountCurrency (change)="countrycode()"
+                                                class="gui-input">
+                                                <option value="0">Select Currency</option>
+                                                <option *ngFor="let item of currencyList" value="{{item.id}}">{{item.currencyCode}}</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="refundForPromotionalItem" name="refundForPromotionalItem" #refundForPromotionalItem formControlName="refundForPromotionalItem">
+                                                        <label for="refundForPromotionalItem"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.REFUND_FOR_PROMOTIONAL_ITEM' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="printParkedTransaction" name="printParkedTransaction" #printParkedTransaction formControlName="printParkedTransaction">
+                                                        <label for="printParkedTransaction"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.PRINT_PARKED_TRANSACTION' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round  fill mb10">
+                                                        <input type="checkbox" checked="" id="deleteParkedTransactionDayEnd" name="deleteParkedTransactionDayEnd" #deleteParkedTransactionDayEnd formControlName="deleteParkedTransactionDayEnd">
+                                                        <label for="deleteParkedTransactionDayEnd"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.DELETE_PARKED_TRANSACTION_DAY_END' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt30">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="changeSalesEmployeeAtPOS" name="changeSalesEmployeeAtPOS" #changeSalesEmployeeAtPOS formControlName="changeSalesEmployeeAtPOS">
+                                                        <label for="changeSalesEmployeeAtPOS"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.CHANGE_SALES_EMPLOYEE_AT_POS' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt30">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="useQuickComplete" name="useQuickComplete" #useQuickComplete formControlName="useQuickComplete">
+                                                        <label for="useQuickComplete"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.USE_QUICK_COMPLETE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt30">
+                                                    <div class="round fill mb30">
+                                                        <input type="checkbox" checked="" id="allowLoginIfBusinessDateIsNotSameAsCurrentDate" name="allowLoginIfBusinessDateIsNotSameAsCurrentDate" #allowLoginIfBusinessDateIsNotSameAsCurrentDate formControlName="allowLoginIfBusinessDateIsNotSameAsCurrentDate">
+                                                        <label for="allowLoginIfBusinessDateIsNotSameAsCurrentDate"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.ALLOW_LOGIN' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt30">
+                                                    <div class="round fill mb30">
+                                                        <input type="checkbox" checked="" id="logVoidedTransaction" name="logVoidedTransaction" #logVoidedTransaction formControlName="logVoidedTransaction">
+                                                        <label for="logVoidedTransaction"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.LOG_VOIDED_TRANSACTION' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                        
+                                            <input type="text" name="maxnooflinespertransaction" autocomplete="off" (keypress)="keyPress1($event)"
+                                                formControlName="maxnooflinespertransaction" #maxnooflinespertransaction
+                                                [ngClass]="{'red-border': myForm.controls['maxnooflinespertransaction'].invalid}"
+                                                class="gui-input floating-input" placeholder="Max No of Lines Per Transaction">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'RETAIL_SETTINGS.MAX_NO_LINES' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                        
+                                            <input type="text" name="maxsalediscountpercentallowed" autocomplete="off" (keypress)="keyPress($event)"
+                                                formControlName="maxsalediscountpercentallowed" #maxsalediscountpercentallowed (change)="maxSalesPercentage()"
+                                                [ngClass]="{'red-border': myForm.controls['maxsalediscountpercentallowed'].invalid}"
+                                                class="gui-input floating-input" placeholder="Max Sale Discount Percent Allowed">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'RETAIL_SETTINGS.MAX_SALE_DISCOUNT_PERCENTAGE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                       
+                                            <input type="text" name="maxsalediscountamountallowed" autocomplete="off" (keypress)="keyPress($event)"
+                                                formControlName="maxsalediscountamountallowed" #maxsalediscountamountallowed
+                                                [ngClass]="{'red-border': myForm.controls['maxsalediscountamountallowed'].invalid}"
+                                                class="gui-input floating-input" placeholder="Max Sale Discount Amount Allowed">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'RETAIL_SETTINGS.MAX_SALE_DISCOUNT_AMOUNT' | translate }}</label>
+                                        
+                                    </div>
+                                   
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="allowRefundToExchange" name="allowRefundToExchange" #allowRefundToExchange formControlName="allowRefundToExchange">
+                                                        <label for="allowRefundToExchange"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.ALLOW_REFUND_TO_EXCHANGE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="allowSalesForNegativeStock" name="allowSalesForNegativeStock" #allowSalesForNegativeStock formControlName="allowSalesForNegativeStock">
+                                                        <label for="allowSalesForNegativeStock"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.ALLOW_SALES_FOR_NEGATIVE_STOCK' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="allowSalesForZeroPrice" name="allowSalesForZeroPrice" #allowSalesForZeroPrice formControlName="allowSalesForZeroPrice">
+                                                        <label for="allowSalesForZeroPrice"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.ALLOW_SALES_FOR_ZERO_PRICE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt30">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="isCreditCardDetailsMandatory" name="isCreditCardDetailsMandatory" #isCreditCardDetailsMandatory formControlName="isCreditCardDetailsMandatory">
+                                                        <label for="isCreditCardDetailsMandatory"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.IS_CREDIT_CARD_DETAILS_MANDATORY' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt30">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="allowMultiplePromotions" name="allowMultiplePromotions" #allowMultiplePromotions formControlName="allowMultiplePromotions">
+                                                        <label for="allowMultiplePromotions"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.ALLOW_MULTIPLE_PROMOTIONS' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt30">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="allowWNPromotions" name="allowWNPromotions" #allowWNPromotions formControlName="allowWNPromotions">
+                                                        <label for="allowWNPromotions"></label>
+                                                        <p class="label-text">{{ 'RETAIL_SETTINGS.ALLOW_WN_PROMOTIONS' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label></label>
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt30">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="row default-forms">
+                                    
+                                   
+                                    <!--<div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>-->
+                                    <div class="offset-md-4 col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button" 
+                                        [disabled]="myForm.invalid" (click) = "updateRetailSettings()"><i
+                                                class="fa fa-refresh"></i> Update
+                                                
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click) = "close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+
+                                    </div>
+                                   
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

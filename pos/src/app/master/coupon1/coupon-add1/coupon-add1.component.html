@@ -1,0 +1,900 @@
+<section id="content_wrapper">
+  <!-- Topbar -->
+  <header id="topbar" class="alt">
+      <div class="topbar-left">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-icon">
+                  <a routerLink="../home">
+                      <span class="fa fa-home"></span>
+                  </a>
+              </li>
+              <li class="breadcrumb-link">
+                  <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+              </li>
+              <li class="">
+                  <a routerLink="../coupon-list">{{ 'COUPON.COUPON_MASTER' | translate }}</a>
+              </li>
+              <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+          </ol>
+      </div>
+  </header>
+
+  <section class="grids-search grid-search-row allcp-form">
+
+
+      <div class="row title-section-row">
+          <h4>{{ 'COUPON.CREATE_COUPON' | translate }}</h4>
+      </div>
+
+
+ </section>
+  <!-- /Topbar -->
+  <form [formGroup]="myForm" novalidate>
+      <!-- Content -->
+      <section id="content" class="animated fadeIn title-bottom-section">
+          <div>
+              <div class="profile-sec-first">
+                  <div class="col-md-12 style-tabs">
+                      <div class="tab-block mb25">
+
+
+                          <mat-tab-group>
+                              <mat-tab label="{{ 'COUPON.COUPONS' | translate }}" >
+                                  <div id="style" class="tab-pane active">
+                                      <!-- choose grid -->
+                                      <div class="allcp-form theme-info">
+                                          <div class="panel">
+                                              <div class="panel-body" >
+                                                  <div class="row" style="margin-top: 20px;">
+                                                      <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                              <input type="text" name="CouponCode"
+                                                                  autocomplete="off" formControlName="CouponCode"
+                                                                  #CouponCode
+                                                                  [ngClass]="{'red-border': myForm.controls['CouponCode'].invalid}"
+                                                                  class="gui-input floating-input" placeholder="Coupon Code">
+                                                                  <span class="highlight"></span>
+                                                                  <label>{{ 'COUPON.COUPON_CODE' | translate }}</label>
+                                                      </div>
+                                                      <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                              <input type="text" name="Coupondescription"
+                                                                  autocomplete="off" formControlName="Coupondescription"
+                                                                  #Coupondescription
+                                                                  [ngClass]="{'red-border': myForm.controls['Coupondescription'].invalid}"
+                                                                  class="gui-input floating-input" placeholder="Coupon Description">
+                                                                  <span class="highlight"></span>
+                                                                  <label>{{ 'COUPON.COUPON_DESCRIPTION' | translate }}</label>
+                                                      </div>
+
+                                                      <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                          <input type="text" name="BarCode"
+                                                              autocomplete="off" formControlName="BarCode"
+                                                              #BarCode
+                                                              [ngClass]="{'red-border': myForm.controls['BarCode'].invalid}"
+                                                              class="gui-input floating-input" placeholder="Bar Code">
+                                                              <span class="highlight"></span>
+                                                              <label>{{ 'COUPON.BARCODE' | translate }}</label>
+                                                  </div>
+                                                  <div class="col-md-6 mb20 select-forms">
+                                                      <label>{{ 'COUPON.COUNTRY' | translate }}</label>
+
+                                                          <select name="countryID" formControlName="countryID" #countryID (change)="countrycode()"
+                                                              class="gui-input" [ngClass]="{'red-border': myForm.controls['countryID'].invalid}">
+                                                              <option value="">Select Country</option>
+                                                              <option *ngFor="let item of countryList" value="{{item.id}}">{{item.countryName}}</option>
+                                                              <!--<option value="1">OPEN</option>
+                                                              <option value="2">INPROGRESS</option>
+                                                              <option value="3">CLOSED</option>
+                                                              <option value="4">CANCELLED</option>-->
+                                                          </select>
+                                                          <i class="fa fa-angle-down"></i>
+
+
+                                                  </div>
+                                                  <div class="col-md-6 mb20 select-forms">
+                                                      <label>{{ 'COUPON.COUPON_TYPE' | translate }}</label>
+
+                                                          <select name="CouponType"
+                                                              formControlName="CouponType"
+                                                              #CouponType class="gui-input"
+
+                                                              [ngClass]="{'red-border': myForm.controls['CouponType'].invalid}">
+                                                              <option value="">Select Coupon Type</option>
+                                                              <option value="Pre-Printed">Pre-Printed</option>
+                                                              <option value="System">System</option>
+                                                          </select>
+                                                          <i class="fa fa-angle-down"></i>
+
+                                                  </div>
+                                                  <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                          <input type="date" name="startDate" autocomplete="off"
+                                                              formControlName="startDate" #startDate
+                                                              [ngClass]="{'red-border': myForm.controls['startDate'].invalid}"
+                                                              class="gui-input floating-input" placeholder="Start Date">
+                                                              <span class="highlight"></span>
+                                                              <label>{{ 'COUPON.START_DATE' | translate }}</label>
+                                                  </div>
+                                                  <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                          <input type="date" name="endDate" autocomplete="off"
+                                                              formControlName="endDate" #endDate
+                                                              [ngClass]="{'red-border': myForm.controls['endDate'].invalid}"
+                                                              class="gui-input floating-input" placeholder="End Date">
+                                                              <span class="highlight"></span>
+                                                              <label>{{ 'COUPON.END_DATE' | translate }}</label>
+                                                  </div>
+                                                  <div class="col-md-6 mb20 select-forms">
+                                                      <label>{{ 'COUPON.DISCOUNT_TYPE' | translate }}</label>
+
+                                                          <select name="DiscountType"
+                                                              formControlName="DiscountType" #DiscountType
+                                                              class="gui-input"
+                                                              [ngClass]="{'red-border': myForm.controls['DiscountType'].invalid}">
+                                                              <option value="">Select Discount Type</option>
+                                                              <option value="Percentage">Percentage</option>
+                                                              <option value="Amount">Amount</option>
+                                                              <option value="Promotion">Promotion</option>
+                                                              <option value="voucher">voucher</option>
+                                                          </select>
+                                                          <i class="fa fa-angle-down"></i>
+
+                                                  </div>
+
+                                                  <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                          <input type="text" name="DiscountValue"
+                                                              autocomplete="off" formControlName="DiscountValue"
+                                                              #DiscountValue (keypress)="keyPress($event)"
+                                                              [ngClass]="{'red-border': myForm.controls['DiscountValue'].invalid}"
+                                                              class="gui-input floating-input" placeholder="Discount Value">
+                                                              <span class="highlight"></span>
+                                                              <label>{{ 'COUPON.DISCOUNT_VALUE' | translate }}</label>
+                                                  </div>
+
+                                                  <div class="col-md-6">
+
+                                                      <div class="section">
+                                                          <div class="bs-component mt10">
+
+                                                              <div class="round fill mb10">
+                                                                  <input type="checkbox" checked=""
+                                                                      id="IsExpirable" name="IsExpirable" #IsExpirable
+                                                                      formControlName="IsExpirable">
+                                                                  <label for="IsExpirable"></label>
+                                                                  <p class="label-text">{{ 'COUPON.ISEXPIRABLE' | translate }}</p>
+                                                              </div>
+                                                              <div id="source-button"
+                                                                  class="btn btn-system btn-xs"
+                                                                  style="display: none;">&lt; &gt;</div>
+                                                          </div>
+                                                      </div>
+
+                                              </div>
+
+
+
+                                                      <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                  <input type="text" name="Remarks"
+                                                      autocomplete="off" formControlName="Remarks"
+                                                      #Remarks
+                                                      [ngClass]="{'red-border': myForm.controls['Remarks'].invalid}"
+                                                      class="gui-input floating-input" placeholder="Remarks">
+                                                      <span class="highlight"></span>
+                                                      <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                          </div>
+
+                                          <div class="col-md-6 mb20 floating-form floating-label">
+
+                                              <input type="number" name="MinBillAmount" autocomplete="off"
+                                                  formControlName="MinBillAmount" #MinBillAmount
+                                                  [ngClass]="{'red-border': myForm.controls['MinBillAmount'].invalid}"
+                                                  class="gui-input floating-input" placeholder="Minimum Bill Amount">
+                                                  <span class="highlight"></span>
+                                                  <label>{{ 'COUPON.MINIMUM_BILL_AMOUNT' | translate }}</label>
+                                      </div>
+                                      <div class="col-md-6 mb20 floating-form floating-label">
+
+                                              <input type="number" name="MaxNoIssue" autocomplete="off"
+                                                  formControlName="MaxNoIssue" #MaxNoIssue
+                                                  [ngClass]="{'red-border': myForm.controls['MaxNoIssue'].invalid}"
+                                                  class="gui-input floating-input" placeholder="Max No. of Coupons to be Issued">
+                                                  <span class="highlight"></span>
+                                                  <label>{{ 'COUPON.MAX_NO_ISSUE' | translate }}</label>
+                                      </div>
+
+                                      <div class="col-md-6 mb20 floating-form floating-label">
+
+                                          <input type="number" name="MaxLimit" autocomplete="off"
+                                              formControlName="MaxLimit" #MaxLimit
+                                              [ngClass]="{'red-border': myForm.controls['MaxLimit'].invalid}"
+                                              class="gui-input floating-input" placeholder="Max Limit of Coupon">
+                                              <span class="highlight"></span>
+                                              <label>{{ 'COUPON.MAX_LIMIT' | translate }}</label>
+
+                                  </div>
+
+                                  <div class="col-md-6 mb20 select-forms">
+                                      <label>{{ 'COUPON.REDEEM_TYPE' | translate }}</label>
+
+                                          <select name="RedeemType"
+                                              formControlName="RedeemType"
+                                              #RedeemType class="gui-input"
+
+                                              [ngClass]="{'red-border': myForm.controls['RedeemType'].invalid}">
+                                              <option value="">Select Redeem Type</option>
+                                              <option value="1">Coupon</option>
+                                              <option value="2">Voucher</option>
+                                          </select>
+                                          <i class="fa fa-angle-down"></i>
+
+                                  </div>
+
+                                  <div class="col-md-6 mb20 floating-form floating-label">
+
+                                      <input type="number" name="ExpiryDays" autocomplete="off"
+                                          formControlName="ExpiryDays" #ExpiryDays
+                                          [ngClass]="{'red-border': myForm.controls['ExpiryDays'].invalid}"
+                                          class="gui-input floating-input" placeholder="Expiry Days">
+                                          <span class="highlight"></span>
+                                          <label>{{ 'COUPON.EXPIRY_DAYS' | translate }}</label>
+                              </div>
+
+                                                  <div class="col-md-6">
+
+                                                      <div class="section">
+                                                          <div class="bs-component mt10">
+
+                                                              <div class="round fill mb10">
+                                                                  <input type="checkbox" checked=""
+                                                                      id="IssuableAtPOS" name="IssuableAtPOS" #IssuableAtPOS
+                                                                      formControlName="IssuableAtPOS">
+                                                                  <label for="IssuableAtPOS"></label>
+                                                                  <p class="label-text">{{ 'COUPON.ISSUABLEATPOS' | translate }}</p>
+                                                              </div>
+                                                              <div id="source-button"
+                                                                  class="btn btn-system btn-xs"
+                                                                  style="display: none;">&lt; &gt;</div>
+                                                          </div>
+                                                      </div>
+
+                                              </div>
+                                                  <div class="col-md-6">
+
+                                                      <div class="section">
+                                                          <div class="bs-component mt10">
+
+                                                              <div class="round fill mb10">
+                                                                  <input type="checkbox" checked=""
+                                                                      id="Serial" name="Serial" #Serial
+                                                                      formControlName="Serial">
+                                                                  <label for="Serial"></label>
+                                                                  <p class="label-text">{{ 'COUPON.SERIAL' | translate }}</p>
+                                                              </div>
+                                                              <div id="source-button"
+                                                                  class="btn btn-system btn-xs"
+                                                                  style="display: none;">&lt; &gt;</div>
+                                                          </div>
+                                                      </div>
+
+                                              </div>
+
+
+                                                  <div class="col-md-6">
+
+                                                      <div class="section">
+                                                          <div class="bs-component mt10">
+
+                                                              <div class="round fill mb10">
+                                                                  <input type="checkbox" checked=""
+                                                                      id="Active" name="Active" #Active
+                                                                      formControlName="Active">
+                                                                  <label for="Active"></label>
+                                                                  <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                              </div>
+                                                              <div id="source-button"
+                                                                  class="btn btn-system btn-xs"
+                                                                  style="display: none;">&lt; &gt;</div>
+                                                          </div>
+                                                      </div>
+
+                                              </div>
+
+
+
+                                                      <!-- <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                              <input type="date" name="endDate" autocomplete="off"
+                                                                  formControlName="endDate" #endDate
+                                                                  [ngClass]="{'red-border': myForm.controls['endDate'].invalid}"
+                                                                  class="gui-input floating-input" placeholder="End Date">
+                                                                  <span class="highlight"></span>
+                                                                  <label>{{ 'PROMOTIONS.END_DATE' | translate }}</label>
+                                                      </div>
+                                                      <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                              <input type="text" name="minimumBillAmount"
+                                                                  autocomplete="off" min="1" (keypress)="keyPress($event)"
+                                                                  formControlName="minimumBillAmount"
+                                                                  #minimumBillAmount
+                                                                  [ngClass]="{'red-border': myForm.controls['minimumBillAmount'].invalid}"
+                                                                  class="gui-input floating-input" placeholder="Minimum Bill Amount">
+                                                                  <span class="highlight"></span>
+                                                                  <label>{{ 'PROMOTIONS.MINIMUM_BILL_AMOUNT' | translate }}</label>
+                                                      </div>
+                                                      <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                              <input type="text" name="minimumQuantity"
+                                                                  autocomplete="off" formControlName="minimumQuantity"
+                                                                  #minimumQuantity min="1" (keypress)="keyPress($event)"
+                                                                  [ngClass]="{'red-border': myForm.controls['minimumQuantity'].invalid}"
+                                                                  class="gui-input floating-input" placeholder="Minimum Quantity">
+                                                                  <span class="highlight"></span>
+                                                                  <label>{{ 'PROMOTIONS.MINIMUM_QUANTITY' | translate }}</label>
+                                                      </div>
+                                                      <div class="col-md-6 mb20 select-forms">
+                                                          <label>{{ 'PROMOTIONS.DISCOUNT_TYPE' | translate }}</label>
+
+                                                              <select name="discountType"
+                                                                  formControlName="discountType" #discountType
+                                                                  class="gui-input"
+                                                                  [ngClass]="{'red-border': myForm.controls['discountType'].invalid}">
+                                                                  <option value="">Select Discount Type</option>
+                                                                  <option value="Percentage">Percentage</option>
+                                                                  <option value="Amount">Amount</option>
+                                                              </select>
+                                                              <i class="fa fa-angle-down"></i>
+
+                                                      </div>
+                                                      <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                              <input type="text" name="discountValue"
+                                                                  autocomplete="off" formControlName="discountValue"
+                                                                  #discountValue (keypress)="keyPress($event)"
+                                                                  [ngClass]="{'red-border': myForm.controls['discountValue'].invalid}"
+                                                                  class="gui-input floating-input" placeholder="Discount Value">
+                                                                  <span class="highlight"></span>
+                                                                  <label>{{ 'PROMOTIONS.DISCOUNT_VALUE' | translate }}</label>
+                                                      </div>
+                                                      <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                              <input type="color"
+                                                              value="#ff0000"
+                                                              formControlName="colors" #colors
+                                                              [ngClass]="{'red-border': myForm.controls['colors'].invalid}"
+                                                              class="gui-input floating-input" placeholder="Color" name="colors"/>
+                                                              <span class="highlight"></span>
+                                                              <label>{{ 'PROMOTIONS.COLOR' | translate }}</label>
+                                                      </div>
+                                                      <div class="col-md-6 mb20 select-forms">
+                                                          <label>{{ 'PROMOTIONS.PROMOTION_TYPE' | translate }}</label>
+
+                                                              <select name="promotionType"
+                                                                  formControlName="promotionType" #promotionType
+                                                                  class="gui-input"
+                                                                  [ngClass]="{'red-border': myForm.controls['promotionType'].invalid}">
+                                                                  <option value="">Select Promotion Type</option>
+                                                                  <option value="Quantity Based Promotion">Quantity Based Promotion</option>
+                                                                  <option value="Amount Based Promotion">Amount Based
+                                                                      Promotion</option>
+                                                              </select>
+                                                              <i class="fa fa-angle-down"></i>
+
+                                                      </div>
+                                                      <div class="col-md-6">
+
+                                                              <div class="section">
+                                                                  <div class="bs-component mt10">
+                                                                      <div class="round fill mb10">
+                                                                          <input type="checkbox" checked=""
+                                                                              id="allowMultiplePromotion"
+                                                                              name="allowMultiplePromotion"
+                                                                              #allowMultiplePromotion
+                                                                              formControlName="allowMultiplePromotion">
+                                                                          <label for="allowMultiplePromotion"></label>
+                                                                          <p class="label-text">{{ 'PROMOTIONS.ALLOW_MULTIPLE_PROMOTION' | translate }}</p>
+                                                                      </div>
+                                                                      <div id="source-button"
+                                                                          class="btn btn-system btn-xs"
+                                                                          style="display: none;">&lt; &gt;</div>
+                                                                  </div>
+                                                              </div>
+
+                                                      </div>
+                                                      <div class="col-md-6">
+
+                                                              <div class="section">
+                                                                  <div class="bs-component">
+                                                                      <div class="round fill mb20">
+                                                                          <input type="checkbox" checked=""
+                                                                              (change)="onCheckboxChangeLowest($event)"
+                                                                              id="lowestValue" name="lowestValue"
+                                                                              #lowestValue
+                                                                              formControlName="lowestValue">
+                                                                          <label for="lowestValue"></label>
+                                                                          <p class="label-text">{{ 'PROMOTIONS.LOWEST_VALUE' | translate }}</p>
+                                                                      </div>
+                                                                      <div id="source-button"
+                                                                          class="btn btn-system btn-xs"
+                                                                          style="display: none;">&lt; &gt;</div>
+                                                                  </div>
+                                                              </div>
+
+                                                      </div>
+                                                      <div class="col-md-6">
+
+                                                              <div class="section">
+                                                                  <div class="bs-component">
+                                                                      <div class="round fill mb20">
+                                                                          <input type="checkbox" checked=""
+                                                                              id="lowestValueWithGroup"
+                                                                              name="lowestValueWithGroup"
+                                                                              (change)="onCheckboxChange($event)"
+                                                                              #lowestValueWithGroup
+                                                                              formControlName="lowestValueWithGroup">
+                                                                          <label for="lowestValueWithGroup"></label>
+                                                                              <p class="label-text">{{ 'PROMOTIONS.LOWEST_VALUE_WITH_GROUP' | translate }}</p>
+                                                                      </div>
+                                                                      <div id="source-button"
+                                                                          class="btn btn-system btn-xs"
+                                                                          style="display: none;">&lt; &gt;</div>
+                                                                  </div>
+                                                              </div>
+
+                                                      </div>
+                                                      <div class="col-md-6">
+
+                                                              <div class="section">
+                                                                  <div class="bs-component mt10">
+                                                                      <div class="round fill mb30">
+                                                                          <input type="checkbox" checked=""
+                                                                              id="exculdeDiscountAmount"
+                                                                              name="exculdeDiscountAmount"
+                                                                              #exculdeDiscountAmount
+                                                                              formControlName="exculdeDiscountAmount">
+                                                                          <label for="exculdeDiscountAmount"></label>
+                                                                              <p class="label-text">{{ 'PROMOTIONS.EXCLUDE_DISCOUNT_AMOUNT' | translate }}</p>
+
+                                                                      </div>
+                                                                      <div id="source-button"
+                                                                          class="btn btn-system btn-xs"
+                                                                          style="display: none;">&lt; &gt;</div>
+                                                                  </div>
+                                                              </div>
+
+                                                      </div>
+                                                      <div class="col-md-6">
+
+                                                              <div class="section">
+                                                                  <div class="bs-component mt10">
+                                                                      <div class="round fill mb30">
+                                                                          <input type="checkbox" checked=""
+                                                                              id="prompt" name="prompt" #prompt
+                                                                              formControlName="prompt">
+                                                                          <label for="prompt"></label>
+                                                                          <p class="label-text">{{ 'PROMOTIONS.PROMPT' | translate }}</p>
+                                                                      </div>
+                                                                      <div id="source-button"
+                                                                          class="btn btn-system btn-xs"
+                                                                          style="display: none;">&lt; &gt;</div>
+                                                                  </div>
+                                                              </div>
+
+                                                      </div>
+                                                      <div class="col-md-6">
+
+                                                              <div class="section">
+                                                                  <div class="bs-component mt10">
+
+                                                                      <div class="round fill mb10">
+                                                                          <input type="checkbox" checked=""
+                                                                              id="active" name="active" #active
+                                                                              formControlName="active">
+                                                                          <label for="active"></label>
+                                                                          <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                                      </div>
+                                                                      <div id="source-button"
+                                                                          class="btn btn-system btn-xs"
+                                                                          style="display: none;">&lt; &gt;</div>
+                                                                  </div>
+                                                              </div>
+
+                                                      </div>
+                                                      <div class="col-md-6 mb20 mt10 select-forms">
+                                                          <label>{{ 'PROMOTIONS.PROMOTION_APPLY' | translate }}</label>
+
+                                                              <select name="promotionApply"
+                                                                  formControlName="promotionApply" #promotionApply
+                                                                  class="gui-input" (change)="promotionGetApply()"
+                                                                  [ngClass]="{'red-border': myForm.controls['promotionApply'].invalid}">
+                                                                  <option value="">Select Promotion</option>
+                                                                  <option value="Apply On Buy Items">Apply On Buy Items</option>
+                                                                  <option value="Apply All Items">Apply All Items</option>
+                                                                  <option value="Apply On Bill">Apply On Bill</option>
+                                                                  <option value="Coupon">Coupon</option>
+                                                                  <option value="None">None</option>
+                                                              </select>
+                                                              <i class="fa fa-angle-dowm"></i>
+
+                                                      </div> -->
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <!-- choose grid -->
+                                  </div>
+                              </mat-tab>
+                             <mat-tab label="{{ 'COUPON.STORE_DETAILS'   | translate }}" >
+
+                                  <div id="store" class="tab-pane">
+                                      <div class="row" style="margin-top: 20px;">
+                                          <div class="col-md-12 mbb20 default-forms">
+                                              <label>{{ 'COUPON.STORE_GROUP' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Store Group'"
+                                                  [settings]="storeGroupDropdownSettings" [data]="storegroup_list"
+                                                  [(ngModel)]="selectedStoreGroupList"
+                                                  (onSelect)="onSelectStoreGroup($event)"
+                                                  (onSelectAll)="onSelectAllStoreGroup($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-12 mbb20 default-forms">
+                                              <label>{{ 'COUPON.STORE' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Store'"
+                                                  [settings]="storeDropDownSettings" [data]="storeList"
+                                                  [(ngModel)]="selectedStoreList" (onSelect)="onSelectStore($event)"
+                                                  (onSelectAll)="onSelectAllStore($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-12 mbb20 default-forms">
+                                              <label>{{ 'COUPON.BRAND' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Brand'"
+                                                  [settings]="brandDropdownSettings" [data]="brand_list"
+                                                  [(ngModel)]="selectedBrandList" (onSelect)="onSelectBrand($event)"
+                                                  (onSelectAll)="onSelectAllBrand($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-12 mbb20 default-forms">
+                                              <label>{{ 'COUPON.COUNTRY' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Country'"
+                                                  [settings]="countryDropdownSettings" [data]="countryList"
+                                                  [(ngModel)]="selectedCountryList"
+                                                  (onSelect)="onSelectCountry($event)"
+                                                  (onSelectAll)="onSelectAllCountry($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                              </mat-tab>
+                              <mat-tab label="{{ 'COUPON.CUSTOMERS_DETAILS' | translate }}" >
+                                  <div id="customer" class="tab-pane">
+                                      <div class="row" style="margin-top: 20px;">
+                                          <div class="col-md-12 mbb20 default-forms">
+                                              <label>{{ 'COUPON.CUSTOMER_GROUP' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Customer Group'"
+                                                  [settings]="customerGroupDropDownSettings"
+                                                  [data]="customerGroup_List" [(ngModel)]="selectedCustomerGroupList"
+                                                  (onSelect)="onSelectCustomerGroup($event)"
+                                                  (onSelectAll)="onSelectAllCustomerGroup($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                      </div>
+
+
+
+                                      <div class="row" style="margin-top: 20px;">
+
+                                                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 allcp-form floating-form floating-label">
+                                                  <input type="text" class="form-control gui-input floating-input" id="globalSearch" style="height: 40px;" name="globalSearch"
+                                                  placeholder="Search"  formControlName="globalSearch" (keyup.enter)="customersearch()"
+                                                  #globalSearch >
+                                                  <span class="highlight"></span>
+                                                  <label>{{ 'COUPON.CUSTOMER' | translate }}</label>
+
+                                                  <button type="button"  (click)="customersearch()" class="coupon-search btn btn-primary add-search btn-sm ml10" >Search</button>
+
+                                                  </div>
+
+
+                                                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                                      <div class="allcp-form theme-info">
+                                                          <div class="panel">
+                                                              <div class="panel-body country-table">
+                                                                  <div class="table-responsive">
+                                                                      <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                                          <thead>
+                                                                              <tr class="bg-dark">
+                                                                                  <th class="">{{ 'Customer Name' | translate }}</th>
+                                                                                  <th class="">{{ 'Customer Code' | translate }}</th>
+                                                                                  <!-- <th class="">{{ 'Customer Phone' | translate }}</th> -->
+
+                                                                                  <th class=""></th>
+                                                                              </tr>
+                                                                          </thead>
+                                                                          <tbody>
+                                                                              <tr *ngFor = "let item of cusList">
+                                                                                  <td>{{item.customerName}}</td>
+                                                                                  <td>{{item.customerCode}}</td>
+                                                                                  <!-- <td>{{item.phoneNumber}}</td> -->
+
+                                                                                  <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                                                      class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                                                              </tr>
+                                                                          </tbody>
+                                                                      </table>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                          </div>
+
+                                  </div>
+                              </mat-tab>
+                              <mat-tab label="{{ 'COUPON.APPLICABLE_LIST' | translate }}" >
+                                  <div id="product" class="tab-pane">
+                                      <div class="row" style="margin-top: 20px;">
+                                          <div class="col-md-6 mbb20 default-forms">
+                                              <label>{{ 'COUPON.STYLE_SEGMENTATION' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Style Segmentation'"
+                                                  [settings]="styleSegmentationDropDownSettings"
+                                                  [data]="styleSegmentList"
+                                                  [(ngModel)]="selectedStyleSegmentationList"
+                                                  (onSelect)="onSelectStyleSegmentation($event)"
+                                                  (onSelectAll)="onSelectAllStyleSegmentation($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-6 mbb20 default-forms">
+                                              <label>{{ 'COUPON.YEAR' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Year'"
+                                                  [settings]="yearDropDownSettings" [data]="yearList"
+                                                  [(ngModel)]="selectedYearList" (onSelect)="onSelectYear($event)"
+                                                  (onSelectAll)="onSelectAllYear($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-6 mbb20 default-forms">
+                                              <label>{{ 'COUPON.BRAND' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Brand'"
+                                                  [settings]="exclusionBrandGropDownSettings" [data]="brand_list"
+                                                  [(ngModel)]="selectedExclusionBrandList"
+                                                  (onSelect)="onSelectExclusionBrand($event)"
+                                                  (onSelectAll)="onSelectAllExclusionBrand($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-6 mbb20 default-forms">
+                                              <label>{{ 'COUPON.SUB_BRAND' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Sub Brand'"
+                                                  [settings]="subBrandDropDownSettings" [data]="subBrandList"
+                                                  [(ngModel)]="selectedSubBrandList"
+                                                  (onSelect)="onSelectsubBrand($event)"
+                                                  (onSelectAll)="onSelectAllsubBrand($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-6 mbb20 default-forms">
+                                              <label>{{ 'COUPON.SEASONS' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Season'"
+                                                  [settings]="seasonDropDownSettings" [data]="seasonList"
+                                                  [(ngModel)]="selectedSeasonList" (onSelect)="onSelectSeason($event)"
+                                                  (onSelectAll)="onSelectAllSeason($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-6 mbb20 default-forms">
+                                              <label>{{ 'COUPON.PRODUCT_GROUP' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Product Group'"
+                                                  [settings]="productGroupDropDownSettings" [data]="productGroupList"
+                                                  [(ngModel)]="selectedProductGroupList"
+                                                  (onSelect)="onSelectProductGroup($event)"
+                                                  (onSelectAll)="onSelectAllProductGroup($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-6 mbb20 default-forms">
+                                              <label>{{ 'COUPON.PRODUCT_SUB_GROUP' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Product Sub Group'"
+                                                  [settings]="productSubGroupDropDownSettings"
+                                                  [data]="productSubGroupList"
+                                                  [(ngModel)]="selectedProductSubGroupList"
+                                                  (onSelect)="onSelectProductSubGroup($event)"
+                                                  (onSelectAll)="onSelectAllProductSubGroup($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-6 mbb20 default-forms">
+                                              <label>{{ 'COUPON.STYLE' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Style'"
+                                                  [settings]="styleDropDownSettings" [data]="styleList"
+                                                  [(ngModel)]="selectedStyleList" (onSelect)="onSelectStyle($event)"
+                                                  (onSelectAll)="onSelectAllStyle($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                          <div class="col-md-12 mbb20 default-forms">
+                                              <label>{{ 'PROMOTIONS.COUPON' | translate }}</label>
+                                              <ng-multiselect-dropdown [placeholder]="'Select Coupon'"
+                                                  [settings]="couponDropDownSettings" [data]="coupon"
+                                                  [(ngModel)]="selectedCouponList" (onSelect)="onSelectCoupon($event)"
+                                                  (onSelectAll)="onSelectAllCoupon($event)"
+                                                  [ngModelOptions]="{standalone: true}">
+                                              </ng-multiselect-dropdown>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </mat-tab>
+
+                              <mat-tab label="{{ 'COUPON.COUPON_LIST_DETAILS' | translate }}" >
+                                  <div id="coupon" class="tab-pane">
+                                      <div class="allcp-form row" style="margin-top: 20px;">
+                                          <div class="col-md-4 mb20 floating-form floating-label">
+
+                                              <input type="text" name="CouponSerialCode"
+                                                  autocomplete="off" formControlName="CouponSerialCode"
+                                                  #CouponSerialCode
+                                                  [ngClass]="{'red-border': myForm.controls['CouponSerialCode'].invalid}"
+                                                  class="gui-input floating-input" placeholder="Coupon Serial Code">
+                                                  <span class="highlight"></span>
+                                                  <label>{{ 'COUPON.COUPON_SERIAL_CODE' | translate }}</label>
+                                      </div>
+
+
+
+                                      <div class="col-md-4 mb20 floating-form floating-label">
+
+                                          <input type="text" name="PhysicalStore"
+                                              autocomplete="off" formControlName="PhysicalStore"
+                                              #PhysicalStore
+                                              [ngClass]="{'red-border': myForm.controls['PhysicalStore'].invalid}"
+                                              class="gui-input floating-input" placeholder="Physical Store">
+                                              <span class="highlight"></span>
+                                              <label>{{ 'COUPON.PHYSICAL_STORE' | translate }}</label>
+                                  </div>
+                                  <div class="col-md-4 mb20 floating-form floating-label">
+
+                                      <input type="text" name="Remainingamount"
+                                          autocomplete="off" formControlName="Remainingamount"
+                                          #Remainingamount  (keypress)="keyPress($event)"
+                                          [ngClass]="{'red-border': myForm.controls['Remainingamount'].invalid}"
+                                          class="gui-input floating-input" placeholder="Remaining amount">
+                                          <span class="highlight"></span>
+                                          <label>{{ 'COUPON.REMAINING_AMOUNT' | translate }}</label>
+                              </div>
+                              <div class="col-md-4 mb20 select-forms">
+                                  <label>{{ 'COUPON.REDEEMED_STATUS' | translate }}</label>
+
+                                      <select name="Redeemedstatus"
+                                          formControlName="Redeemedstatus" #Redeemedstatus
+                                          class="gui-input"
+                                          [ngClass]="{'red-border': myForm.controls['Redeemedstatus'].invalid}">
+                                          <option value="">Select Redeemed Status</option>
+                                          <option value="Fully Redeemed">Fully Redeemed</option>
+                                          <option value="Partially Redeemed">Partially Redeemed</option>
+                                          <option value="Not">Not</option>
+                                      </select>
+                                      <i class="fa fa-angle-down"></i>
+
+                              </div>
+
+                              <div class="col-md-4" style="margin-top: -15px;">
+
+                                  <label style="font-size: 15px;
+                                  color: #00aaff;">Issued Status</label>
+
+
+                                      <div class="section">
+                                      <div class="bs-component mb20">
+
+                                          <div class="round fill mb10">
+                                              <input type="checkbox" checked=""
+                                                  id="yes" name="yes" #yes
+                                                  formControlName="Issuedstatus">
+                                              <label for="yes"></label>
+                                              <p class="label-text" style="left: 15% !important;">{{ 'COUPON.YES' | translate }}</p>
+                                          </div>
+
+                                      </div>
+                                      </div>
+
+
+                              </div>
+
+                              <div class="offset-md-5 col-md-2 default-forms">
+                                  <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                      (click)="addCouponDetails()">
+                                      <i class="fa fa-check-circle-o"></i> Add
+                                  </button>
+
+                              </div>
+
+
+
+                                      </div>
+
+
+
+
+
+                                  </div>
+                                  <div class="allcp-form theme-info mt-5" style="display: block !important">
+                                    <div class="panel">
+                                        <div class="panel-body country-table">
+                                            <div class="table-responsive">
+                                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                    <thead>
+                                                        <tr class="bg-dark">
+                                                            <th class="">#</th>
+                                                            <th class="">{{ 'COUPON.COUPON_SERIAL_CODE' | translate }}</th>
+                                                            <th class="">{{ 'COUPON.PHYSICAL_STORE' | translate }}</th>
+                                                            <th class="">{{ 'COUPON.REMAINING_AMOUNT' | translate }}</th>
+                                                            <th class="">{{ 'COUPON.REDEEMED_STATUS' | translate }}</th>
+                                                            <th class=""></th>
+                                                            <th class=""></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of couponDetailList; let i = index;">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{item.CouponSerialCode}}</td>
+                                                            <td>{{item.PhysicalStore}}</td>
+                                                            <td>{{item.Remainingamount}}</td>
+                                                            <td>{{item.Redeemedstatus}}</td>
+                                                            <td>{{item.Issuedstatus}}</td>
+
+
+                                                            <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                                    class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                              </mat-tab>
+
+
+
+                          </mat-tab-group>
+                      </div>
+                  </div>
+              </div>
+              <div class="row default-forms">
+
+                  <div class="offset-md-3 col-md-2 mt10">
+                      <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                          (click)="addCoupon()" [disabled]="myForm.pristine || myForm.invalid">
+                          <i class="fa fa-check-circle-o"></i> Save
+
+
+                      </button>
+                  </div>
+                  <div class="col-md-2 mt10">
+                      <button type="clear" class="btn btn-lg btn-primary btn-block common-button"
+                          (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+
+                  </div>
+                  <div class="col-md-2 mt10">
+                      <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                              class="fa fa-remove"></i> Close</button>
+
+                  </div>
+
+
+              </div>
+          </div>
+      </section>
+      <!-- /Content -->
+  </form>
+</section>

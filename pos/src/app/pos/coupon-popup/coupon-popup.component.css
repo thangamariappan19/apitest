@@ -1,0 +1,34 @@
+#cdk-overlay-5 .mat-form-field-appearance-legacy .mat-form-field-wrapper
+{
+    width: 250px !important ;
+}
+
+#cdk-overlay-5
+{
+    width: 310px !important;
+}
+
+
+.mat-dialog-actions .mat-button .mat-primary 
+{
+    color: #fff;
+    background-color: #3f51b5;
+    padding: 5px 10px !important;
+    font-size: 12px;
+}
+
+.mat-dialog-actions .mat-button .mat-warn 
+{
+    color: #fff;
+    background-color: #f44336;
+    padding: 5px 10px !important;
+    font-size: 12px;
+}
+
+.mat-dialog-actions .mat-button .mat-accent 
+{
+    color: #fff;
+    background-color: #ff4081;
+    padding: 5px 10px !important;
+    font-size: 12px;
+}

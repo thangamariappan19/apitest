@@ -1,0 +1,44 @@
+.oap-div
+{
+  
+  margin-top: -10px;
+  border: 1px solid #e1e8ee;
+  border-radius: 10px;
+  margin-top: 0px;
+  padding: 15px 20px;
+}
+.oap-div-two
+{
+  padding: 15px 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #e1e8ee;
+    border-radius: 10px;
+  
+}
+.oap-div-three
+{
+  padding: 15px 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #e1e8ee;
+    border-radius: 10px;
+  
+}
+.oap-title h4
+{
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: -10px;
+}
+
+.tab-form .section 
+{
+  margin-bottom: 0px;
+}
+
+.tab-form .select, .tab-form .gui-input, .tab-form .gui-textarea, .tab-form .select > select, .tab-form .select-multiple select
+{
+  margin-bottom: 5px;
+}

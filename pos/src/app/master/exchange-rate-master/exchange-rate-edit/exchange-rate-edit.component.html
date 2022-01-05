@@ -1,0 +1,231 @@
+<form [formGroup]="myForm" validate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../exchange-rate">{{ 'EXCHANGE_RATE.EXCHANGE_RATE_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'EXCHANGE_RATE.EDIT_EXCHANGE_RATE' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="code" autocomplete="off" readonly
+                                                formControlName="code" #code
+                                                [ngClass]="{'red-border': myForm.controls['code'].invalid}"
+                                                class="gui-input floating-input" placeholder="{{ 'EXCHANGE_RATE.EXCHANGE_RATE_CODE' | translate }}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'EXCHANGE_RATE.EXCHANGE_RATE_CODE' | translate }}</label>
+                                    </div> 
+                                    <div class="col-md-6 floating-form floating-label">
+                                                                              
+                                            <input type="text" name="name" autocomplete="off" readonly
+                                                formControlName="name" #name
+                                                [ngClass]="{'red-border': myForm.controls['name'].invalid}"
+                                                class="gui-input floating-input" placeholder="{{ 'EXCHANGE_RATE.EXCHANGE_RATE_NAME' | translate }}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'EXCHANGE_RATE.EXCHANGE_RATE_NAME' | translate }}</label>
+                                    </div>  
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'EXCHANGE_RATE.BASE_CURRENCY' | translate }}</label>
+                                        
+                                            <select name="baseCurrency" formControlName="baseCurrency" #baseCurrency class="gui-input"
+                                            [ngClass]="{'red-border': myForm.controls['baseCurrency'].invalid}" disabled>
+                                                <option value="">Base Currency</option>
+                                                <option *ngFor="let item of currencyDropDownList" value="{{item.id}}">{{item.currencyCode}}</option>                                                
+                                            </select>
+                                            <i class="arrow"></i>
+                                       
+                                    </div>   
+                                    <div class="col-md-6 floating-form floating-label">
+                                                                                
+                                            <input type="month" name="monthYear" autocomplete="off" readonly
+                                                formControlName="monthYear" #monthYear
+                                                class="gui-input floating-input" placeholder="{{ 'EXCHANGE_RATE.MONTH_YEAR' | translate }}">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'EXCHANGE_RATE.MONTH_YEAR' | translate }}</label>
+                                       
+                                    </div>  
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-6">
+                                      
+                                            <div class="section">
+                                                <div class="bs-component">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                </div>
+                               
+                                    
+                                
+                                    <div class="allcp-form theme-info">
+                                        <div class="panel">
+                                            <div class="row mb20 mt30">
+                                                <div class="col-md-3 floating-form floating-label">
+                                                                                                        
+                                                        <input type="date" name="startDate" autocomplete="off"
+                                                            formControlName="startDate" #startDate
+                                                            [ngClass]="{'red-border': myForm.controls['startDate'].invalid}"
+                                                            class="gui-input floating-input" min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}" 
+                                                            placeholder="{{ 'EXCHANGE_RATE.START_DATE' | translate }}">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'EXCHANGE_RATE.START_DATE' | translate }}</label>
+                                                </div>  
+                                                <div class="col-md-3 floating-form floating-label">
+                                                                                                       
+                                                        <input type="date" name="endDate" autocomplete="off"
+                                                            formControlName="endDate" #endDate
+                                                            [ngClass]="{'red-border': myForm.controls['endDate'].invalid}"
+                                                            class="gui-input floating-input" min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}" 
+                                                            placeholder="{{ 'EXCHANGE_RATE.END_DATE' | translate }}">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'EXCHANGE_RATE.END_DATE' | translate }}</label>
+                                                </div>
+                                                <div class="col-md-2 mb20 select-forms">
+                                                    <label>{{ 'EXCHANGE_RATE.TARGET_CURRENCY' | translate }}</label>
+                                                    
+                                                        <select name="targetCurrencys" formControlName="targetCurrencys" #targetCurrencys class="gui-input"
+                                                        [ngClass]="{'red-border': myForm.controls['targetCurrencys'].invalid}">
+                                                            <option value="">Target Currency</option>
+                                                            <option *ngFor="let item of currencyList" value="{{item.currencyCode}}">{{item.currencyCode}}</option>                                                
+                                                        </select>
+                                                        <i class="fa fa-angle-down"></i>
+                                                   
+                                                </div>
+                                                <div class="col-md-2 floating-form floating-label">
+                                                                                                       
+                                                        <input type="text" name="exchangeRates" autocomplete="off" (keypress)="keyPress($event)"
+                                                            formControlName="exchangeRates" #exchangeRates
+                                                            [ngClass]="{'red-border': myForm.controls['exchangeRates'].invalid}"
+                                                            class="gui-input floating-input" placeholder="{{ 'EXCHANGE_RATE.RATE' | translate }}">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'EXCHANGE_RATE.RATE' | translate }}</label>
+                                                    
+                                                </div> 
+                                                <div class="col-md-2">
+                                                    <button type="submit" class="btn btn-lg btn-success btn-block common-button" (click)="assignRates()"><i
+                                                            class="fa fa-save"></i> Set
+                                                            
+                                                    </button>
+                                                </div> 
+                                            </div>
+                                            <div class="panel-body country-table">
+                                                <div class="table-responsive">
+                                                    <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                        <thead>
+                                                            <tr class="bg-dark">
+                                                                <th class="">{{ 'EXCHANGE_RATE.DATE' | translate }}</th>
+                                                                <th class="" *ngFor = "let cur of currencyList">
+
+                                                                    {{cur.currencyCode}}
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor = "let dat of dateList;">
+                                                                <td>{{dat.displayDate}}</td>
+                                                                <td *ngFor = "let curr of currencyList">
+                                                                   <!-- <input type="number" value="{{getExchangeRate(dat.valueDate, curr.currencyCode)}}" 
+                                                                    [(ngModel)]="curr.exchangeRate" [ngModelOptions]="{standalone: true}" style="width: 60px;">-->
+                                                                    <input type="text" value="{{getExchangeRate(dat.valueDate, curr.currencyCode)}}" #eRate (keypress)="keyPress($event)"
+                                                                    (change) = "setExchangeRate(dat.valueDate, curr.currencyCode, eRate.value)" style="width: 60px;">
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                            <!--<tr *ngFor = "let item of storeGroupDetails; let i = index"> 
+                                                                <td>{{item.productGroupID}}</td>  
+                                                                <td>{{item.productGroupName}}</td>  
+                                                                <td>
+                                                                    <input type="text" [(ngModel)]="item.min" [ngModelOptions]="{standalone: true}">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="text" [(ngModel)]="item.max" [ngModelOptions]="{standalone: true}">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="text" [(ngModel)]="item.avg" [ngModelOptions]="{standalone: true}">
+                                                                </td>
+                                                            </tr>-->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row default-forms">
+                                   
+                                        <div class="offset-md-4 col-md-2 mt10">
+                                            <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                             (click)="addExchangeRate()" [disabled]="myForm.invalid"><i
+                                                    class="fa fa-refresh"></i> Update
+                                                    
+                                            </button>
+                                        </div>
+                   
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+                                    </div>
+                                    
+
+                                   
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

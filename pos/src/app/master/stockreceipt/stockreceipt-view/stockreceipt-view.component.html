@@ -1,0 +1,364 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../stockreceipt">{{ 'STOCK_RECEIPT.STOCK_RECEIPT_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.VIEW' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+    <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <ul class="nav nav-list nav-list-topbar pull-left">
+                <li>{{ 'STOCK_RECEIPT.VIEW_STOCK_RECEIPT' | translate }}
+                </li>
+            </ul>
+        </div>
+    </header>
+    <!-- /Topbar -->
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'STOCK_RECEIPT.VIEW_STOCK_RECEIPT' | translate }}</h4>             
+        </div>
+
+
+   </section>
+
+
+
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4 mb20">
+                                    <label>{{ 'STOCK_RECEIPT.RECEIVED_TYPE' | translate }}</label>
+                                    <label class="field"><br/>
+                                        <!--<input type="text"  name="receivedType" autocomplete="off"
+                                            formControlName="receivedType" #receivedType readonly
+                                            [ngClass]="{'red-border': myForm.controls['receivedType'].invalid}"
+                                            class="gui-input" placeholder="Received Type">-->
+                                            <input type="radio" id="BarCode" value="Bar Code" name="group" formControlName="group" disabled checked> {{ 'STOCK_RECEIPT.BARCODE' | translate }}
+                                            <input type="radio" id="RFID" value="RFID" name="group" formControlName="group" disabled> {{ 'STOCK_RECEIPT.RFID' | translate }}
+                                    </label>
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                    
+                                        <input type="text" name="barCode" autocomplete="off" readonly
+                                            formControlName="barCode" #barCode
+                                            [ngClass]="{'red-border': myForm.controls['barCode'].invalid}"
+                                            class="gui-input floating-input" placeholder="SKU/BarCode">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_RECEIPT.SKU_BARCODE' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="stockreqdocno" autocomplete="off" readonly
+                                            formControlName="stockreqdocno" #stockreqdocno
+                                            class="gui-input floating-input" placeholder="StockRequest DocumentNo">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_RECEIPT.STOCK_REQUEST_DOCUMENTNO' | translate }}</label>
+                                                                       
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="date" name="date" autocomplete="off" readonly
+                                            formControlName="date" #date
+                                            class="gui-input floating-input" placeholder="Date">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_RECEIPT.DATE' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="documentNo" autocomplete="off" readonly
+                                            formControlName="documentNo" #documentNo
+                                            [ngClass]="{'red-border': myForm.controls['documentNo'].invalid}"
+                                            class="gui-input floating-input" placeholder="DocumentNo">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_RECEIPT.DOCUMENTNO' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="towarehousestore" autocomplete="off" readonly
+                                            formControlName="towarehousestore" #towarehousestore readonly
+                                               class="gui-input floating-input" placeholder="ToWareHouse/Store">
+                                               <span class="highlight"></span>
+                                               <label>{{ 'STOCK_RECEIPT.TOWAREHOUSE_STORE' | translate }}</label>
+                                    
+                                </div> 
+                                <div class="col-md-4 mb20 select-forms">
+                                    <label>{{ 'STOCK_RECEIPT.STATUS' | translate }}</label>
+                                    
+                                        <select name="status" formControlName="status" #status disabled
+                                            class="gui-input" readonly
+                                            [ngClass]="{'red-border': myForm.controls['status'].invalid}">
+                                            <option value="0">Select Status</option>
+                                            <option value="Open">Open</option>                                            
+                                        </select>
+                                        <i class="fa fa-angle-down"></i>
+                                    
+                                </div> 
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                        
+                                    <input type="text" name="bin" autocomplete="off" readonly
+                                        formControlName="bin" #bin readonly
+                                           class="gui-input floating-input" placeholder="BIN">
+                                           <span class="highlight"></span>
+                                           <label>BIN</label>                                
+                                </div>                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div id="sr_nobin">
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.BARCODE' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.SKU_NAME' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.SKU_CODE' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.BRAND' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.COLOR' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.SIZE' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.REQUEST_QUANTITY' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.TRANSFER_QUANTITY' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.OLD_RECEIVED_QUANTITY' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.RECEIVED_QUANTITY' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.DOCUMENTNO' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of stockreceiptlist; let i = index;">
+                                            <td>{{i+1}}</td>                                           
+                                            <td>{{item.barCode}}</td>
+                                            <td>{{item.skuName}}</td>
+                                            <td>{{item.skuCode}}</td>
+                                            <td>{{item.brand}}</td>
+                                            <td>{{item.color}}</td>
+                                            <td>{{item.size}}</td>
+                                            <td>{{item.requestQuantity}}</td>
+                                            <td>{{item.transferQuantity}}</td>
+                                            <td>{{item.oldReceivedQuantity}}</td>
+                                            <td><input type="number" min="0" oninput="this.value = Math.abs(this.value)" name="receivedQuantity" value={{item.receivedQuantity}} [(ngModel)]="item.receivedQuantity" [ngModelOptions]="{standalone: true}" style="text-align:center;"
+                                                class="gui-input" (change)="addQTY()" autocomplete="off"></td>
+                                            <td>{{item.documentNo}}</td>                                            
+                                        </tr>
+                                    </tbody>
+                                </table>                                
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb20 floating-form floating-label">
+                                                
+                            <input type="text" name="rem" autocomplete="off"
+                                formControlName="rem" #rem
+                                   class="gui-input floating-input" placeholder="Remarks">
+                                   <span class="highlight"></span>
+                                   <label>{{ 'COMMON.REMARKS' | translate }}  </label>
+                        
+                    </div>
+                    <div class="col-md-3 mb20"></div>
+                    <div class="col-md-3 mb20">
+                        <label>{{ 'STOCK_RECEIPT.TOTAL' | translate }}: </label>
+                                    <label class="field">
+                                    <input type="text" name="totaltransferqty" autocomplete="off" readonly
+                                        formControlName="totaltransferqty" #totaltransferqty
+                                        class="gui-input" placeholder="">
+                                    </label>
+                    </div>
+                    <div class="col-md-3 mb20">
+                        <label>{{ 'STOCK_RECEIPT.TOTAL' | translate }}: </label>
+                                    <label class="field">
+                                    <input type="text" name="totalrcvdqty" autocomplete="off" readonly
+                                        formControlName="totalrcvdqty" #totalrcvdqty
+                                        class="gui-input" placeholder="">
+                                    </label>
+                    </div>
+                </div>
+                <!-- <div class="row default-forms">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                         (click)="UpdateStockReceiptDetails()"><i
+                                class="fa fa-check-circle-o"></i> Save
+
+                        </button>
+                    </div>                    
+                    <div class="col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div> -->
+                </div>
+            </div>
+            <div id="sr_withbin" class="style-tabs">
+            <mat-tab-group>
+                <mat-tab label="{{ 'STOCK_RECEIPT.SCANNING_ITEM' | translate }}">
+                    <div id="scan" class="tab-pane inner-tabs">
+                        <div class="col-md-4 mb20 allcp-form floating-form floating-label">   
+                            <input type="text" name="barCode1" autocomplete="off" (keyup.enter)="getSKUData()"
+                                formControlName="barCode1" #barCode1
+                                spellcheck="false" trim="blur"
+                                [ngClass]="{'red-border': myForm.controls['barCode1'].invalid}"
+                                class="gui-input floating-input" placeholder="SKU/BarCode">
+                                <span class="highlight"></span>
+                                <label>{{ 'STOCK_RECEIPT.SKU_BARCODE' | translate }}</label>
+                        </div>
+                        <div class="table-responsive tabs-table color-table-responsive" id="ctr" style="height: 250px;">
+                            <table class="table">
+                                <thead>
+                                    <tr class="bg-light">
+                                        <th class="">#</th>
+                                        <th>{{ 'STOCK_RECEIPT.SKU_CODE' | translate }}</th>
+                                        <th>{{ 'STOCK_RECEIPT.BARCODE' | translate }}</th>
+                                        <th>{{ 'STOCK_RECEIPT.STOREID' | translate }}</th>
+                                        <th>{{ 'STOCK_RECEIPT.STORECODE' | translate }}</th>
+                                        <th>{{ 'STOCK_RECEIPT.BINID' | translate }}</th>
+                                        <th>{{ 'STOCK_RECEIPT.BINCODE' | translate }}</th>
+                                        <th>{{ 'STOCK_RECEIPT.BINSUBLEVELCODE' | translate }}</th>
+                                        <th>{{ 'STOCK_RECEIPT.QUANTITY' | translate }}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor = "let item of stockreceiptlistBin;let i = index;">
+                                        <td>{{i+1}}</td>
+                                        <td>{{item.sKUCode}}</td>
+                                        <td>{{item.barCode}}</td>
+                                        <td>{{item.storeID}}</td>
+                                        <td>{{item.storeCode}}</td>
+                                        <td>{{item.binID}}</td>
+                                        <td>{{item.binCode}}</td>
+                                        <td>{{item.binSubLevelCode}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                            class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> 
+                    </div>                                
+                </mat-tab>
+                <mat-tab label="{{ 'STOCK_RECEIPT.ITEM_SUMMARY' | translate }}">                       
+                    <div id="summary" class="tab-pane inner-tabs">
+                        <div class="table-responsive tabs-table color-table-responsive" id="ctr" style="height: 250px;">
+                            <table class="table">
+                                <thead>
+                                    <tr class="bg-light">
+                                        <th class="">#</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.BARCODE' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.SKU_NAME' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.SKU_CODE' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.BRAND' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.COLOR' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.SIZE' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.REQUEST_QUANTITY' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.TRANSFER_QUANTITY' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.OLD_RECEIVED_QUANTITY' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.RECEIVED_QUANTITY' | translate }}</th>
+                                            <th class="">{{ 'STOCK_RECEIPT.DOCUMENTNO' | translate }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of stockreceiptlist; let i = index;">
+                                            <td>{{i+1}}</td>                                           
+                                            <td>{{item.barCode}}</td>
+                                            <td>{{item.skuName}}</td>
+                                            <td>{{item.skuCode}}</td>
+                                            <td>{{item.brand}}</td>
+                                            <td>{{item.color}}</td>
+                                            <td>{{item.size}}</td>
+                                            <td>{{item.requestQuantity}}</td>
+                                            <td>{{item.transferQuantity}}</td>
+                                            <td>{{item.oldReceivedQuantity}}</td>
+                                            <td>
+                                                <span style="padding: 10px;
+                                                width: 50%;" contenteditable="true" (keyup)="changeValue(i, 'receivedQuantity', $event)" (blur)="updateList(i, 'receivedQuantity', $event)">{{item.receivedQuantity}}</span>
+                                             </td>
+                                            <!-- <td>{{item.receivedQuantity}}</td> -->
+                                            <td>{{item.documentNo}}</td>   
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                                
+                </mat-tab>             
+               </mat-tab-group>                       
+            </div>      
+        </section>
+           
+        <!-- /Content -->
+    </form>
+    <div class="row default-forms">
+         <div class="offset-md-3 col-md-2 col-md-2 mt10">
+            <button type="submit" class="btn btn-lg btn-success btn-block common-button" (click)="UpdateStockReceiptDetails()"><i
+                    class="fa fa-check-circle-o"></i> Save        
+            </button>
+        </div>                    
+        <!-- <div class="col-md-2 mt10">
+            <button type="button" class="btn btn-lg btn-success btn-block common-button" (click)="view()"><i
+                class="fa fa-remove"></i> View</button>
+        </div> -->
+        <div class="col-md-2 mt10">
+            <button type="submit" class="btn btn-lg btn-primary btn-block common-button" (click)="onPrint($event)"><i
+                class="fa fa-print"></i> Print</button>
+        </div>
+        <div class="col-md-2 mt10">
+            <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                    class="fa fa-remove"></i> Close</button>
+        </div>
+    
+    
+    </div>  
+
+     <!-- pdf-viewer section -->
+  <!-- <div class="output-pdf-viewer">
+    <pdf-viewer
+    [src]="pdfSrc"
+    [(page)]="pageVariable"
+    [show-all]="true"
+    [stick-to-page]="true"
+    [render-text]="true"
+    [original-size]="false"
+    [fit-to-page]="true"
+    [autoresize]="true"
+    [show-borders]="true"
+    (after-load-complete)="afterLoadComplete($event)"
+    #pdfViewer
+    ></pdf-viewer>
+  </div> -->
+</section>

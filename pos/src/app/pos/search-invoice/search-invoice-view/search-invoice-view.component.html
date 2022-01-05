@@ -1,0 +1,325 @@
+<!-- <p>search-invoice-view works!</p> -->
+<div class="rptloader" *ngIf="ispopupShow" ></div>
+<section id="content_wrapper" *ngIf="isShow" >
+  <button (click)="onNoClick()" class="btn btn danger invoice-popup"><i class="fa fa-window-close"></i></button>
+
+    <!-- Topbar -->
+    <!-- <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../searchinvoice">{{ 'SEARCH-INVOICE-VIEW' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.VIEW' | translate }}</li>
+            </ol>
+        </div>
+    </header> -->
+
+    <!-- <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <ul class="nav nav-list nav-list-topbar pull-left">
+                <li>{{ 'SEARCH-INVOICE-VIEW' | translate }}
+                </li>
+            </ul>
+        </div>
+    </header> -->
+    <!-- /Topbar -->
+</section>
+<div *ngIf="isShow"  >
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <!-- <div class="row title-section-row">
+            <h4>Search Invoice View</h4>             
+        </div> -->
+
+        <div class="offset-md-4 col-md-4">
+          <button (click)="getDuplicateReceiptHTML()" type="button" class="btn btn-primary" style="width: 100%"><i class="fa fa-refresh"></i>Print</button>
+        </div>
+
+
+   </section>
+
+
+   <html>	
+    <div  style="width: 100mm;" >
+      <div style="width: 60%; text-align: center;margin-left:45px">
+         <img src="{{storeImage }}" style="height: 50px;width:50%;margin-left:45px;"/>
+    </div>
+      <div style="width: 100%; text-align: center;font-weight:900">
+			  <h4 style="margin: 2mm 0mm">*&nbsp;DUPLICATE INVOICE&nbsp;*</h4>
+		  </div>
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 30%;">
+            <h5 style="margin: 2px;font-weight: 550;">المحل/Shop : </h5>
+          </td>
+          <td>
+            <h5 style="margin: 2px;font-weight:100;margin-right:10px;">{{shopName}}</h5>
+          </td>
+        </tr>
+      </table>
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 30%;">
+            <h5 style="margin: 2px;font-weight: 550;">نقاط البيع/POS : </h5>
+          </td>
+          <td>
+            <h5 style="margin: 2px;font-weight:100;margin-right:10px;">{{posName }}</h5>
+          </td>
+        </tr>
+      </table>
+     <table style="width: 100%;">
+        <tr>
+          <td style="width: 30%;">
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">رقم الفاتورة /Invoice: </h5>
+          </td>
+          <td>
+            <h5 style="margin: 2px;;margin-right:10px;">{{invoiceNum}}</h5>
+          </td>
+        </tr>
+      </table>
+     <table style="width: 100%;">
+         <tr>
+           <td style="width:25%;">
+             <h5 style="margin: 2px;font-weight: 550;"> التاريخ /Date: </h5>
+           </td>
+            <td>
+             <h5 style="margin: 2px;font-weight:100;margin-right:10px;">{{date}}</h5>
+           </td>
+           <td>
+             <h5 style="margin: 2px;font-weight: 550;"> الوقت/Time : </h5>
+           </td>
+           <td>
+             <h5 style="margin: 2px;font-weight: 100;margin-right:10px;">{{time}}</h5>
+           </td>
+         </tr>
+      </table>	
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 40%;">
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">العميل/Customer : </h5>
+          </td>
+          <td>
+            <h5 style="margin: 2mm 0mm;font-weight:100;margin-right:10px;">{{customerName}}</h5>
+          </td>
+        </tr>
+      </table>	 	  
+     <table style="width: 100%;">
+        <tr>
+          <td style="width:30%;">
+            <h5 style="margin: 2px; height: 15px;font-weight: 550;">البائع</h5>
+                      <h5 style="margin: 2px;font-weight: 550;">/Salesman: </h5>
+          </td>
+          <td>
+            <h5 style="margin: 2px;font-weight:100">{{salesMan}}</h5>
+          </td>
+          <td style="width:65%;">
+            <h5 style="margin: 2px;width:100%;font-weight: 550;">أمين الصندوق </h5>
+            <h5 style="margin: 2px;font-weight: 550;">/Cashier: </h5>
+          </td>
+          <td style="width:25%;text-align:left;">
+            <h5 style="margin: 2px;font-weight:100">{{cashier}}</h5>
+          </td>
+        </tr>
+     </table>
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 40%;">
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">ألرقم الضريبي للمؤسسة /Tax :</h5>
+          </td>
+          <td>
+            <h5 style="margin: 2px;font-weight:100;margin-right:10px;">{{taxNo}}</h5>
+          </td>
+        </tr>
+      </table>
+      <table style="width:95%; border-collapse: collapse;">
+              <thead>
+                  <tr style="border-top: 1px solid #000; border-bottom: 2px solid #000;">
+                     <th style="width: 10%;text-align: center;">م e</th>
+                     <th style="width: 40%;text-align: center;">النوع</th>
+                     <th style="width: 10%;text-align: center;">العدد</th>
+                     <th style="width: 30%;text-align: right;">السعر</th>
+                  </tr>
+               </thead>
+               <tbody>
+                <tr *ngFor="let item of DuplicateDetailsList; let i = index;">
+                  <td style="text-align: center;font-weight: 100"><h5 style="margin: 5px;">{{i+1}}</h5></td>
+                  <td style="width: 55%;text-align: left;font-weight: 100"><h5 style="margin: 5px;">{{item.itemCode}}</h5></td>
+                  <td style="text-align: center;font-weight: 100"><h5 style="margin: 5px;">{{item.qty}}</h5></td>
+                  <td style="text-align: right;font-weight: 100"><h5 style="margin: 5px;">{{item.price.toFixed(decimal_places)}}</h5></td>
+              </tr>
+               </tbody> 
+            <tfoot>
+          <tr style="border-bottom: 1px solid #000;border-top: 2px solid #000;">
+                    <td></td>
+            <td style="text-align: left;font-weight: 100"><h5>اجمالي الكميه</h5></td>
+            <td style="text-align: center;font-weight: 100"><h5>{{billtotalQty}}</h5></td>
+            <td></td>
+                </tr>
+        </tfoot>
+       </table>
+       <table style="width: 88%;margin-left: 38px;border-collapse: collapse;">
+         <tr>
+           <td>
+             <h5 style="margin: 5px;font-weight: 550;"> المبلغ الاجمالي/Total Price:</h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px;text-align: right;font-weight:100">{{totalPrice.toFixed(decimal_places)}}</h5>
+           </td>
+         </tr>
+         <tr>
+           <td>
+             <h5 style="margin: 5px;font-weight: 550;"> ض.ق.م./Total Discount:</h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px; text-align: right;font-weight:100">{{totalDiscount.toFixed(decimal_places)}}</h5>
+           </td>
+         </tr>
+         <tr style="border-bottom: 2px solid #000;">
+           <td>
+             <h5 style="margin: 5px;font-weight: 550;"> 5% ضريبة القيمة  المضافة/Tax:</h5>
+           </td>
+           <td>
+              <h5 style="margin: 5px; text-align: right;font-weight:100">{{taxAmount.toFixed(decimal_places)}}</h5>
+           </td>
+         </tr>
+         <tr style="border-bottom: 2px solid #000;">
+           <td>
+             <h5 style="margin: 5px;font-weight: 550;">  المبلغ الصافي/Net Amount:</h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px; text-align: right;font-weight:100">{{netAmount.toFixed(decimal_places)}}</h5>
+           </td>
+         </tr>
+         <tr style="border-bottom: 2px solid #000;">
+           <td>
+             <h5 style="margin: 5px;font-weight: 550;"> المبلغ المدفوع/Paid Amount:</h5>
+           </td>
+           <td>
+             <h5 style="margin: 2mm 0mm; text-align: right; font-weight: 100">{{paidAmount.toFixed(decimal_places)}}</h5>
+           </td>
+         </tr>
+        <tr style="border-bottom: 2px solid #000;">
+           <td>
+             <h5 style="margin: 5px;font-weight: 550;"> رصيد/Balance Amount:</h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px;text-align: right;font-weight: 100">{{customerBalance.toFixed(decimal_places)}}</h5>
+           </td>
+         </tr>
+       </table>
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 20%;">
+            <h5 style="margin: 5px;font-weight: 550;">المحل : </h5>
+          </td>
+          <td style="width: 80%;">
+            <h5 style="margin: 5px;font-weight: 100">  </h5>
+          </td>
+      </table>
+      <table style="width: 100%; border-collapse: collapse;">
+         <tr style="border-bottom: 2px solid #000;border-top: 1px solid #000;">
+           <td>
+             <h5 style="margin: 5px;text-align: left;font-weight: 550;"> نوعية الدفع </h5>
+           </td>
+           <td>
+              <h5 style="margin: 5px;text-align: center;font-weight: 550;"> المبلغ المدفوع </h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px;text-align: center;font-weight: 550;"> رقم الموافقة </h5>
+           </td>
+         </tr>
+         <tr style="border-bottom: 1px solid #d0caca;">
+           <td>
+            <h5 style="margin: 5px;text-align: left;font-weight:100"> نقدي/Cash: </h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px;text-align: center;font-weight: 100">{{amount.toFixed(decimal_places)}}</h5>
+           </td>
+           <td>
+             <h5 style="margin: 2mm 0mm;text-align: center;font-weight:100">  </h5>
+           </td>
+         </tr>
+         <tr style="border-bottom: 1px solid #d0caca;">
+           <td>
+             <h5 style="margin: 5px;text-align: left;font-weight:100"> كي نت/Knet: </h5>
+           </td>
+           <td>
+             <h5 style="margin: 2mm 0mm;text-align: center;font-weight:100">{{knet.toFixed(decimal_places)}}</h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px;text-align: center;font-weight:100">{{approvalNumberKNet}}</h5>
+           </td>
+         </tr>
+         <tr style="border-bottom: 1px solid #d0caca;">
+           <td>
+             <h5 style="margin: 5px;text-align: left;font-weight:100">بطاقة فيزا/Visa: </h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px;text-align: center;font-weight:100">{{visa.toFixed(decimal_places)}}</h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px;text-align: center;font-weight:100">{{approvalNumberVisa}}</h5>
+           </td>
+         </tr>
+        <tr style="border-bottom: 1px solid #000;">
+           <td>
+             <h5 style="margin: 5px;text-align: left;font-weight:100">بطاقة فيزا/Credit Card: </h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px;text-align: center;font-weight:100">
+              {{creditcard.toFixed(decimal_places)}}</h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px;text-align: center;font-weight:100">{{approvalNumberMaster}}</h5>
+           </td>
+         </tr>
+       </table>
+      <table style="width: 100%;height:10px">
+        <tr>  
+        </tr>
+      </table>
+       <table style="width: 100%; border-collapse: collapse;" border="1">
+         <tr>
+           <td>
+             <h5 style="margin: 5px;font-weight: 550;">{{paymentCurrency}}</h5>
+           </td>
+           <td>
+             <h5 style="margin: 5px;text-align: center;font-weight:100">{{paycash.toFixed(decimal_places)}}</h5>
+           </td>
+         </tr>
+      </table>
+      <table style="width:100%;">
+         <tr>
+           <td>
+             <h5 style="margin: 5px;text-align:center;font-weight:100"><p style="letter-spacing: 1.8px;
+              font-size: 13px;">{{footer1}}</p></h5>
+           </td>
+         </tr>
+         </table>
+      <table style="width:100%;height:50px">
+         <tr>
+           <td style="width: 100%; text-align: center;height:50px">
+            <img src="{{barcode}}" />
+           </td>
+         </tr>
+         </table>
+         <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="line-spin-fade-rotating">
+          <p style="color: white">Please Wait. </p>
+        </ngx-spinner>
+  </div>
+   <!-- line-spin-fade-rotating -->
+        <!-- ball-spin-clockwise -->
+        
+  
+  </html>
+</div>

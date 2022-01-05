@@ -1,0 +1,19 @@
+<div class="table-responsive tabs-table color-table-responsive" id="ctr">
+    <button (click)="onNoClick()" class="btn btn danger mpop"><i class="fa fa-window-close"></i></button>
+    <table class="table">
+        <thead>
+            <tr class="bg-light">
+                <th>Country</th>
+                <th>Currency Code</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let price of priceList;">
+                <td>{{price.countryName}}</td>
+                <td>{{price.currencyCode}}</td>
+                <td>{{price.price}}</td>                
+            </tr>
+        </tbody>
+    </table>   
+</div>

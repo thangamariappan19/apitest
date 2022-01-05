@@ -1,0 +1,145 @@
+<form [formGroup]="myForm" novalidate>
+    <section id="content_wrapper" class="sales-content-wrapper" style="margin-left: 0px">
+        <!-- Content -->
+        <section class="animated fadeIn pos-start">
+            <header id="topbar" class="ph10 second-top">
+                <div class="topbar-left">
+                    <ul class="nav nav-list nav-list-topbar pull-left">
+                        <li>
+                            <i class="fa fa-money"></i> Cash In
+                        </li>
+                    </ul>
+                </div>
+                <div class="topbar-right mt5">
+                    <a href="javascript:void(0)" 
+                        (click) = "goto_pos()"
+                        class="btn btn-back btn-sm ml10" title="New">
+                        <span class="fa fa-arrow-left pr5"></span>Back
+                    </a>
+                </div>
+            </header>
+            <div class="main-start mt10">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cash-switch">
+                            <div class="row ds-row allcp-form theme-info">
+                                <!-- <div class="col-md-2 switch-text">
+                                    <h5><i class="fa fa-calendar"></i> Document Date</h5>
+                                </div> -->
+                                <div class="col-md-2 floating-form floating-label">
+                                    
+                                        <input type="date" name="date" autocomplete="off"
+                                            [ngModel]="todayDate | date:'yyyy-MM-dd'" 
+                                            formControlName="date" #date id="date" class="gui-input floating-input"
+                                            [ngClass]="{'red-border': myForm.controls['date'].invalid}"
+                                            readonly>
+                                            <span class="highlight"></span>
+                                            <label>Document Date</label>
+                                </div>
+                                <!-- <div class="col-md-2 switch-text">
+                                    <h5><i class="fa fa-money"></i> Total Amount</h5>
+                                </div> -->
+                                <div class="col-md-2 floating-form floating-label">
+                                   
+                                        <input type="number" name="totalamount" autocomplete="off"
+                                            formControlName="totalamount" #totalamount id="totalamount" class="gui-input floating-input"
+                                            placeholder="Total Amount" readonly>
+                                            <span class="highlight"></span>
+                                        <label>Total Amount</label>
+                                </div>
+                            <!-- </div>
+                            <div class="row ds-row allcp-form theme-info"> -->
+                                    <!-- <div class="col-md-4 switch-text">
+                                    <h5><i class="fa fa-angle-double-right"></i> Reason</h5>    
+                                    <label class="field">
+                                    <input type="text" name="from2" id="from2" class="gui-input" >
+                                    </label> -->
+                                    <!-- </div>   -->
+
+                                    <div class="col-md-2 switch-text select-forms">
+                                    
+                                    <div class="section">
+                                        <label>Reasons</label>
+                                        <select name="reason" formControlName="reason" #reason class="gui-input"
+                                        [ngClass]="{'red-border': myForm.controls['reason'].invalid}">
+                                            <option value="" selected="selected">Select Reason</option>
+                                            <option *ngFor="let item of ReasonList" value="{{item.reasonID}}">{{item.reasonName}}</option> 
+            
+                                        </select>
+                                        <i class="fa fa-angle-down"></i>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 switch-text floating-form floating-label">
+                                    <!-- <h5><i class="fa fa-money"></i> Received Amount</h5> -->
+                                        <input type="number" min="0" name="receivedamount" autocomplete="off" min="0"
+                                        [ngClass]="{'red-border': myForm.controls['receivedamount'].invalid}"
+                                            formControlName="receivedamount" #receivedamount id="receivedamount" class="gui-input floating-input">
+                                    <span class="highlight"></span>
+                                    <label>Received Amount</label>
+                                </div>
+                                <div class="col-md-3 switch-text floating-form floating-label">
+                                    <!-- <h5><i class="fa fa-edit"></i> Remarks</h5> -->
+                                   
+                                        <input type="text"  name="remarks" autocomplete="off"
+                                            formControlName="remarks" #receivedamount id="remarks" class="gui-input floating-input">
+                                            <span class="highlight"></span>
+
+                                    <label>Remarks</label>
+                                </div>
+                                <div class="col-md-1" >
+                                    <button type="submit" (click) = "addlist()" class="btn cash-add"><i class="fa fa-plus"></i> Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- details -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cash-switch  mt5">
+                        <div class="table-responsive sales-second-section2 cash-table" id="pms">
+                            <table class="table allcp-form theme-warning">
+                                <thead>
+                                    <tr class="main-tr">
+                                        <th>Reason</th>
+                                        <th>Received Amount</th>
+                                        <th>Remarks</th>
+                                        <th></th>
+
+                                    </tr>
+                                    <tr *ngFor="let item of CashinList">
+                                        <td>{{item.reason}}</td>
+                                        <td>{{item.receivedAmount}}</td>
+                                        <td>{{item.remarks}}</td>
+                                        <td>
+                                        <a href="javascript:void(0);" (click) = "void_item(item)" class="cash-remove"><i class="fa fa-remove"></i></a>
+                                      
+                                        </td>
+                                    </tr>
+
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                   
+                    <div class="row payment-final default-forms">
+                        <div class="offset-md-4 col-md-2">
+                            <button class="btn btn-lg btn-success btn-block common-button" 
+                            [disabled]="CashinList==null" (click) = "addcashin()" type="button"><i
+                                    class="fa fa-money"></i> Save</button>
+
+
+                        </div>
+                        <div class=" col-md-2">
+                            <button (click) = "clear_controls()" class="btn btn-lg btn-cancel btn-block common-button" type="button"><i class="fa fa-money"></i>
+                                Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content --->
+    </section>
+</form>

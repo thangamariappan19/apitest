@@ -1,0 +1,402 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../design">{{ 'DESIGN.DESIGN_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+       
+        
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'DESIGN.EDIT_DESIGN' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="designCode" autocomplete="off"
+                                                formControlName="designCode" #designCode readonly                                                [ngClass]="{'red-border': myForm.controls['designCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="Design Code">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'DESIGN.DESIGN_CODE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="designName" autocomplete="off"
+                                                formControlName="designName" #designName
+                                                [ngClass]="{'red-border': myForm.controls['designName'].invalid}"
+                                                class="gui-input floating-input" placeholder="Design Name"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'DESIGN.DESIGN_NAME' | translate }}</label>
+                                    </div>   
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="description" autocomplete="off"
+                                                formControlName="description" #description readonly
+                                                [ngClass]="{'red-border': myForm.controls['description'].invalid}"
+                                                class="gui-input floating-input" placeholder="Description"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'DESIGN.DESCRIPTION' | translate }}</label>
+                                    </div>   
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.GRADE' | translate }}</label>
+                                        
+                                            <select name="gradeID" formControlName="gradeID" #gradeID
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['gradeID'].invalid}">
+                                                <option value="">Select Grade</option>
+                                                <!--<option *ngFor="let item of season_list" value="{{item.id}}">{{item.seasonName}}</option>-->
+                                                <option>NA</option>
+                                                <option>GA</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>           
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.SEASON' | translate }}</label>
+                                       
+                                            <select name="seasonID" formControlName="seasonID" #seasonID disabled (change)="seasoncode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['seasonID'].invalid}">
+                                                <option value="">Select Season</option>
+                                                <option *ngFor="let item of season_list" value="{{item.id}}">{{item.seasonName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.DROP' | translate }}</label>
+                                      
+                                            <select name="dropID" formControlName="dropID" #dropID disabled (change)="dropcode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['dropID'].invalid}">
+                                                <option value="">Select Drop</option>
+                                                <option *ngFor="let item of drop_list" value="{{item.id}}">{{item.dropName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.COLLECTION' | translate }}</label>
+                                      
+                                            <select name="collectionID" formControlName="collectionID" #collectionID (change)="collectioncode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['collectionID'].invalid}">
+                                                <option value="">Select Collection</option>
+                                                <option *ngFor="let item of collection_list" value="{{item.id}}">{{item.collectionName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.SUB_COLLECTION' | translate }}</label>
+                                       
+                                            <select name="subcollectionID" formControlName="subcollectionID" #subcollectionID (change)="subcollectioncode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['subcollectionID'].invalid}">
+                                                <option value="">Select Sub-Collection</option>
+                                                <option *ngFor="let item of subcollection_list" value="{{item.id}}">{{item.subCollectionName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                <!--    <div class="col-md-6 mb20">
+                                        <label>Short Design Code</label>
+                                        <label class="field">
+                                            <input type="text" name="shortdesigncode" autocomplete="off"
+                                                formControlName="shortdesigncode" #shortdesigncode
+                                                [ngClass]="{'red-border': myForm.controls['shortdesigncode'].invalid}"
+                                                class="gui-input" placeholder="Short Design Code"
+                                                spellcheck="false" trim="blur">
+                                        </label>
+                                    </div>-->
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.BRAND' | translate }}</label>
+                                       
+                                            <select name="brandID" formControlName="brandID" #brandID disabled (change)="brandcode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['brandID'].invalid}">
+                                                <option value="">Select Brand</option>
+                                                <option *ngFor="let item of brand_list" value="{{item.id}}">{{item.brandName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.PRODUCT_GROUP' | translate }}</label>
+                                        
+                                            <select name="productgroupID" formControlName="productgroupID" #productgroupID disabled 
+                                            (change)="productgroupcode()" class="gui-input"
+                                            [ngClass]="{'red-border': myForm.controls['productgroupID'].invalid}">
+                                                <option value="">Select Product Group</option>
+                                                <option *ngFor="let item of productgroup_list" value="{{item.id}}">{{item.productGroupName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.PRODUCT_LINE' | translate }}</label>
+                                       
+                                            <select name="productlineID" formControlName="productlineID" #productlineID (change)="productlinecode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['productlineID'].invalid}">
+                                                <option value="">Select Product Line</option>
+                                                <option *ngFor="let item of productline_list" value="{{item.id}}">{{item.productLineName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                      
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.STYLE_STATUS' | translate }}</label>
+                                       
+                                            <select name="stylestatusID" formControlName="stylestatusID" #stylestatusID (change)="stylestatuscode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['stylestatusID'].invalid}">
+                                                <option value="">Select Style Status</option>
+                                                <option *ngFor="let item of stylestatus_list" value="{{item.id}}">{{item.statusName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.YEAR' | translate }}</label>
+                                       
+                                            <select name="yearID" formControlName="yearID" #yearID (change)="yearcode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['yearID'].invalid}">
+                                                <option value="">Select Year</option>
+                                                <option *ngFor="let item of year_list" value="{{item.id}}">{{item.yearCode}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="shortdescription" autocomplete="off"
+                                                formControlName="shortdescription" #shortdescription
+                                                [ngClass]="{'red-border': myForm.controls['shortdescription'].invalid}"
+                                                class="gui-input floating-input" placeholder="Short Description"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'DESIGN.SHORT_DESCRIPTION' | translate }}</label>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.DEVELOPMENT_OFFICE' | translate }}</label>
+                                       
+                                            <select name="developmentofficeID" formControlName="developmentofficeID" #developmentofficeID (change)="developmentofficecode()"
+                                                class="gui-input">
+                                                <option value="">Select Development Office</option>
+                                               <!-- <option *ngFor="let item of developmentoffice_list" value="{{item.id}}">{{item.developmentOffice}}</option>-->
+                                                <option value="KUWAIT">KUWAIT</option>
+                                                <option value="BAHRAIN">BAHRAIN</option>
+                                               <!-- <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="symbolgroup" autocomplete="off"
+                                                formControlName="symbolgroup" #symbolgroup
+                                                [ngClass]="{'red-border': myForm.controls['symbolgroup'].invalid}"
+                                                class="gui-input floating-input" placeholder="Symbol Group"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'DESIGN.SYMBOL_GROUP' | translate }}</label>
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="composition" autocomplete="off"
+                                                formControlName="composition" #composition
+                                                [ngClass]="{'red-border': myForm.controls['composition'].invalid}"
+                                                class="gui-input floating-input" placeholder="Composition"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'DESIGN.COMPOSITION' | translate }}</label>
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.DESIGNER' | translate }}</label>
+                                        
+                                            <select name="designerID" formControlName="designerID" #designerID (change)="designercode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['designerID'].invalid}">
+                                                <option value="">Select Designer</option>
+                                                <option *ngFor="let item of designer_list" value="{{item.id}}">{{item.employeeName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'DESIGN.DIVISION' | translate }}</label>
+                                       
+                                            <select name="divisionID" formControlName="divisionID" #divisionID (change)="divisioncode()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['divisionID'].invalid}">
+                                                <option value="">Select Division</option>
+                                                <option *ngFor="let item of division_list" value="{{item.id}}">{{item.divisionCode}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="remarks" autocomplete="off"
+                                                formControlName="remarks" #remarks
+                                                class="gui-input floating-input" placeholder="Remarks"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                        
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="row default-forms">
+                                    <div class="offset-md-4 col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                        [disabled]="myForm.invalid" (click)="updatedesign()" ><i
+                                                class="fa fa-refresh"></i> Update
+                                                
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                                        (click)="close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+
+                                    </div>
+                                    
+                                   
+                                    <!--<div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>-->
+                      
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

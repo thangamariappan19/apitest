@@ -1,0 +1,305 @@
+<form [formGroup]="myForm" novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../WNPromotions">{{ 'WNPROMOTION.WNPROMOTION_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'WNPROMOTION.CREATE_WNPROMOTION' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn 
+        title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-4 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="promotionCode" autocomplete="off"
+                                                formControlName="promotionCode" #promotionCode
+                                                [ngClass]="{'red-border': myForm.controls['promotionCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="Promotion Code">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'WNPROMOTION.PROMOTION_CODE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-4 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="promotionName" autocomplete="off"
+                                                formControlName="promotionName" #promotionName
+                                                [ngClass]="{'red-border': myForm.controls['promotionName'].invalid}"
+                                                class="gui-input floating-input" placeholder="Promotion Name">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'WNPROMOTION.PROMOTION_NAME' | translate }}</label>
+                                    </div>
+
+                                    <div class="col-md-4 mb20 select-forms">
+                                        <label>{{ 'WNPROMOTION.PRICE_LIST' | translate }}</label>
+                                        
+                                        <select name="priceListID" formControlName="priceListID" #priceListID  (change)='onOptionsSelected(priceListID.value)'
+                                            class="gui-input" [ngClass]="{'red-border': myForm.controls['priceListID'].invalid}">
+                                            <option value="">Select PriceList</option>
+                                            <option *ngFor="let item of PriceList" value="{{item.id}}">{{item.priceListName}}</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <div class="col-md-4 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="date" name="startDate" formControlName="startDate" #startDate
+                                            class="gui-input floating-input" placeholder="Date Of Joining"
+                                            autocomplete="off">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'WNPROMOTION.START_DATE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-4 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="date" name="endDate" formControlName="endDate" #endDate
+                                            class="gui-input floating-input" placeholder="Date Of Joining"
+                                            autocomplete="off">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'WNPROMOTION.END_DATE' | translate }}</label>
+                                    </div>
+
+                                    <div class="col-md-4 mb20 select-forms">
+                                        <label>{{ 'WNPROMOTION.UPLOAD_TYPE' | translate }}</label>
+                                       
+                                            <select name="uploadType" formControlName="uploadType" #uploadType [ngClass]="{'red-border': myForm.controls['uploadType'].invalid}" (change)='checkUploadtype()'
+                                                class="gui-input" [disabled]="wnPromotiondetails.length>0" >
+                                                <option value="">Select uploadType</option>
+                                                <!-- <option *ngFor="let item of json" value="{{item.id}}">{{item.countryName}}</option> -->
+                                                <option value="Discount">Discount</option>
+                                                <option value="Now Price">Now Price</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>                                       
+                                    </div>
+
+                                    <div class="col-md-4 mb20 default-forms" style="margin-top: -20px;">
+                                        <label>{{ 'WNPROMOTION.COUNTRY' | translate }}</label>
+                                       
+                                        <!-- <select name="countryID" formControlName="countryID" #countryID (change)="countrycode()"
+                                            class="gui-input" [ngClass]="{'red-border': myForm.controls['countryID'].invalid}">
+                                            <option value="">Select Country</option>
+                                            <option *ngFor="let item of countryList" value="{{item.id}}">{{item.countryName}}</option>
+                                            </select> -->
+                                            <ng-multiselect-dropdown #multiSelect
+                                            [placeholder]="'Select Country'" 
+                                            [data]="countryList" 
+                                            formControlName = "countries"
+                                            [settings]="dropdownSettings"
+                                            [disabled]="false"
+                                            (onSelect)="onItemSelect($event)" 
+                                            (onDeSelect)="onDeSelect($event)"
+                                            >
+                                                    </ng-multiselect-dropdown>
+                                        
+                                    </div>
+       
+
+       
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component" style="margin-top: 10px;">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text leftp">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                       
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                        <div class="section">
+                                            <div class="bs-component mt10" style="margin-top: 10px;">
+
+                                                <div class="round fill mb10">
+                                                  
+                                                    <input type="checkbox" checked="" id="pricePointApplicable" name="pricePointApplicable" #pricePointApplicable formControlName="pricePointApplicable">
+                                                    <label for="pricePointApplicable"></label>
+                                                    <p class="label-text leftp">{{ 'WNPROMOTION.PRICE_POINT_APPLICABLE' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                </div>
+                                    <div>
+                                        <div class="allcp-form theme-info">
+                                            <div class="panel">
+                                                <div class="panel-body country-table">
+                                                    <div class="table-responsive">
+                                                        <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                            <thead>
+                                                                <tr>   
+                                                                    <th>{{ 'WNPROMOTION.COUNTRY' | translate }}</th>                                                                
+                                                                    <th>{{ 'WNPROMOTION.STYLECODE' | translate }}</th>
+                                                                    <th>{{ 'WNPROMOTION.BRAND' | translate }}</th>
+                                                                    <th>{{ 'WNPROMOTION.WAS_PRICE' | translate }}</th>
+                                                                    <th>{{ 'WNPROMOTION.DISCOUNT_PERCENTAGE' | translate }}</th>
+                                                                    <th>{{ 'WNPROMOTION.NOW_PRICE' | translate }}</th>
+                                                                    <th>{{ 'WNPROMOTION.STATUS_ERROR_MSG' | translate }}</th>
+                                                                    <th>{{ 'WNPROMOTION.ERROR_MESSAGE' | translate }}</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let sl of wnPromotiondetails"> 
+                                                                    <td>
+                                                                        <input type="text" class="gui-input" #eCountry value="{{sl.country}}"
+                                                                        readonly>                                                                        
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="gui-input" #eStyleCode [(ngModel)]="sl.styleCode" [ngModelOptions]="{standalone: true}">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="gui-input" #eBrand value="{{sl.brand}}"
+                                                                        readonly>                                                                        
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="gui-input" #eWasPrice value="{{sl.wasPrice}}"
+                                                                        readonly>                                                                        
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="gui-input" #eDiscountPrice [(ngModel)]="sl.discount"
+                                                                        (keypress)="keyPress($event)" [readonly]="discount==false" [ngModelOptions]="{standalone: true}">                                                                        
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="gui-input" #eNowPrice [(ngModel)]="sl.nowPrice"
+                                                                        (keypress)="keyPress($event)" [readonly]="nowprice==false" [ngModelOptions]="{standalone: true}">                                                                        
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="gui-input" #eStatus value="{{sl.status}}"
+                                                                        readonly>                                                                        
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" class="gui-input" #eErrorMsg value="{{sl.errorMsg}}"
+                                                                        readonly>                                                                        
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="javascript:void(0);" (click)="void_item(sl)"
+                                                                            class="cash-remove"><i class="fa fa-remove"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="column col-12">
+                                        <ngx-table
+                                          [configuration]="configuration"
+                                          [data]="data"
+                                          (event)="eventEmitted($event)"
+                                          [columns]="columns"
+                                        >
+                                        </ngx-table>
+                                      </div>
+                                      <div>
+                                        <ng-template #actionTpl let-row let-rowIndex="rowIndex">
+                                            <a class="btn btn-primary" (click)="remove(rowIndex)">Remove</a>
+                                          </ng-template>
+                                      </div>
+                                      <ng-template #styleCodeTpl let-row let-rowIndex="rowIndex">
+                                        <div class="styleCode" *ngIf="edit !== rowIndex">{{ row.styleCode }}</div>
+                                        <div *ngIf="edit === rowIndex">
+                                          <input
+                                            type="text"
+                                            placeholder="styleCode"
+                                            (blur)="update($event)"
+                                            class="form-label"
+                                            [value]="row.styleCode"
+                                          />
+                                        </div>
+                                      </ng-template>
+                                    <div class="clearfix"></div>-->
+                                    <hr>
+                                <div class="row default-forms">
+                                    <div class="col-md-2 mt10">
+                                        <button type="clear"   [disabled]="myForm.pristine || myForm.invalid" class="btn btn-lg btn-primary btn-block common-button" (click) = "AddNewRow()"><i
+                                            class="fa fa-refresh"></i>NewRow</button>
+                                    </div>
+
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" (click) = "Save()"   class="btn btn-lg btn-success btn-block common-button"
+                                        [disabled]="isSaveEnable==false"><i
+                                                class="fa fa-save"></i> Save
+                                                
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                                        [disabled]="wnPromotiondetails.length==0" (click) = "Validate()"><i
+                                            class="fa fa-remove"></i> Validate</button>
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="button" class="btn btn-lg btn-primary btn-block common-button" (click)="fileInput.click()">
+                                            <i class="fa fa-upload"> Upload</i>
+                                            <input   type="file" #fileInput  id='excel-upload' formControlName="fileInput" accept=".xlsx" multiple="false"
+                                            [disabled]="myForm.pristine || myForm.invalid"
+                                            (change)="inputExcelOnClick($event)" style="display:none;" />
+                                    
+                                          </button>
+                                          </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button" (click) = "clear_controls()"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click) = "close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

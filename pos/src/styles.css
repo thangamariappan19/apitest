@@ -1,0 +1,38 @@
+@import "./assets/fonts/roboto-css.css";
+@import "./assets/fonts/ubuntu.css";
+@import "./assets/fonts/popins.css";
+/* @import "./assets/skin/default_skin/less/theme.min.css"; */
+@import "./assets/allcp/forms/css/forms.css";
+@import "./assets/css/main.css";
+@import "./assets/css/responsive.css";
+@import "./assets/css/responsive-rtl.css";
+/* @import "https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap"; */
+@import "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap";
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+@import "./assets/css/app.css";
+@import "./assets/css/app-main.css";
+@import "./assets/css/start.css";
+@import "./assets/css/input-phone.css";
+@import "./assets/css/numpad.css";
+@import "./assets/css/pos-rtl.css";
+/* @import "./assets/css/easy-numpad.css"; */
+
+/* @import "./assets/img/favicons.png"; */
+@import "./assets/js/utility/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css";
+@import "./assets/fonts/css2-roboto.css";
+
+/* @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';   */
+@import "../node_modules/ngx-toastr/toastr.css";    
+
+/* @import "./assets/css/input-phone.css";
+@import "./assets/css/easy-numpad.css"; */
+
+/* @import "./assets/css/ngxSimple.css"; */
+
+@import "~ngx-easy-table/style.scss";
+@import "./assets/css/app.css";
+@import "./assets/css/app-main.css";
+@import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

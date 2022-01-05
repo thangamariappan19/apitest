@@ -1,0 +1,192 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../sub-collection">{{ 'SUBCOLLECTION.SUBCOLLECTION_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+ 
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'SUBCOLLECTION.EDIT_SUBCOLLECTION_MASTER' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 mb20 select-forms">
+                                    <label>{{ 'SUBCOLLECTION.COLLECTION' | translate }}</label>
+                                   
+                                        <select name="collectionID" formControlName="collectionID" #collectionID
+                                            class="gui-input"
+                                            [ngClass]="{'red-border': myForm.controls['collectionID'].invalid}" disabled>
+                                            <option value="">Select Collection</option>
+                                            <option *ngFor="let item of collectionList" value="{{item.id}}">
+                                                {{item.collectionName}}</option>
+                                        </select>
+                                        <i class="fa fa-angle-down"></i>
+                                   
+                                </div>
+                                <div class="col-md-3 mb20 floating-form floating-label">
+                                    
+                                        <input type="text" name="subCollectionCode" autocomplete="off"
+                                            formControlName="subCollectionCode" #subCollectionCode
+                                            [ngClass]="{'red-border': myForm.controls['subCollectionCode'].invalid}"
+                                            class="gui-input floating-input" placeholder="Sub Collection Code"
+                                            maxlength="4"
+                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'SUBCOLLECTION.SUBCOLLECTION_CODE' | translate }}</label>
+                                   
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="subCollectionName" autocomplete="off"
+                                            formControlName="subCollectionName" #subCollectionName
+                                            [ngClass]="{'red-border': myForm.controls['subCollectionName'].invalid}"
+                                            class="gui-input floating-input" placeholder="Sub Collection Name"
+                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'SUBCOLLECTION.SUBCOLLECTION_NAME' | translate }}</label>   
+                                    
+                                </div>
+                                <div class="col-md-3">
+                                  
+                                        <div class="section">
+                                            <div class="bs-component mt10">
+
+                                                <div class="round fill mb10">
+                                                    <input type="checkbox" checked="" id="active" name="active" #active
+                                                        formControlName="active">
+                                                    <label for="active"></label>
+                                                    <p class="label-text-sub">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                            
+                            <div class="col-md-1 mt10 default-forms">
+                                    <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                        (click)="addSubCollectionList()" [disabled]="myForm.pristine || myForm.invalid"
+                                        title="Add"><i class="fa fa-plus"></i></button>
+                                </div>
+                                <div class="col-md-1 mt10 default-forms">
+                                    <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                                        title="Clear" (click)="clear_controls()" disabled><i class="fa fa-refresh"></i> </button>
+                                </div>
+                            </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">{{ 'SUBCOLLECTION.SUBCOLLECTION_CODE' | translate }}</th>
+                                            <th class="">{{ 'SUBCOLLECTION.SUBCOLLECTION_NAME' | translate }}</th>
+                                            <th class="">{{ 'COMMON.ACTIVE' | translate }}</th>
+                                            <th class=""></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of subCollectionList; let i = index;">
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <!-- <td>{{item.subCollectionCode}}</td> -->
+                                            <td>
+                                                <input type="text" [(ngModel)]="item.subCollectionCode" [ngModelOptions]="{standalone: true}" (change)="subCollection_code_changed(item)"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false"
+                                                maxlength="4"
+                                                style="text-align:center;"
+                                               class="gui-input">
+                                            </td>
+                                            <!-- <td>{{item.subCollectionName}}</td> -->
+                                            <td>
+                                                <input type="text" [(ngModel)]="item.subCollectionName" [ngModelOptions]="{standalone: true}" 
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false"
+                                                style="text-align:center;"
+                                               class="gui-input">
+                                            </td>
+                                            <!-- <td>{{item.active}} -->
+                                            <td>
+                                                <input type="checkbox" [(ngModel)]="item.active" [ngModelOptions]="{standalone: true}" 
+                                                style="text-align:center;">
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0);" (click)="void_item(item)"
+                                                    class="cash-remove"><i class="fa fa-remove"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row default-forms">
+                    
+            
+                    <!--<div class="col-md-2 mt10">
+                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"
+                            (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+
+                    </div>-->
+                    <div class="offset-md-4 col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                        [disabled]="myForm.invalid"  (click)="updateSubCollection()"><i
+                                class="fa fa-save"></i> Update
+
+                        </button>
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+
+                    
+                    
+                </div>
+            
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

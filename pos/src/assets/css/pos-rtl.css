@@ -1,0 +1,53 @@
+[dir=rtl] .pos-nav .has-sidebar-left,
+html[dir=rtl] .pos-nav .has-sidebar-left
+{
+    margin-right: 0px !important;
+    z-index: 840 !important;
+}
+[dir=rtl] .pos-nav .topbar-right,
+html[dir=rtl] .pos-nav .topbar-right 
+{
+    float: right !important;
+    position: absolute;
+    right: 88%;
+    top: 10%;
+    left: 0;
+}
+
+[dir=rtl] .pos-nav .paper-nav-toggles,
+html[dir=rtl] .pos-nav .paper-nav-toggles
+{
+display: none !important;
+}
+
+
+
+
+@media screen and (max-width: 767px)
+{
+
+    [dir=rtl] .pos-nav .topbar-right,
+    html[dir=rtl] .pos-nav .topbar-right
+    {
+    float: right !important;
+    position: absolute;
+    right: 88%;
+    top: 10%;
+    left: 0;
+}
+
+}
+
+
+@media (min-width:768px) and (max-width: 1025px) {
+
+    [dir=rtl] .pos-nav .topbar-right,
+    html[dir=rtl] .pos-nav .topbar-right 
+    {
+        float: right !important;
+        position: absolute;
+        right: 88%;
+        top: 10%;
+        left: 0;
+    }
+}

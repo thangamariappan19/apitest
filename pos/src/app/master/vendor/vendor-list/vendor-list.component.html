@@ -1,0 +1,128 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a href="home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a href="home">Home</a>
+                </li>
+                <li class="breadcrumb-current-item">Vendor List</li>
+            </ol>
+        </div>        
+    </header>
+
+    <!-- <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <ul class="nav nav-list nav-list-topbar pull-left">
+                <li>Vendor Master List
+                </li>
+            </ul>
+        </div>
+        <div class="topbar-right hidden-xs hidden-sm mt5 mr35">
+            <a href="vendor-add" class="btn btn-primary add-c btn-sm ml10" title="New Vendor">
+                <span class="fa fa-plus pr5"></span> Create New</a>
+        </div>
+    </header> -->
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row search-section-row">
+                            
+            <div class="col-xl-4 col-lg-3 col-md-4 col-sm-8 col-8" style="padding-right: 0px; position: relative;
+            left: 10px; margin-top: 6px;">
+              
+              <input type="text" class="gui-input" placeholder="Search">
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 mt10" style="padding-left: 14px;
+            padding-right: 0px;">
+                <button type="button"  class="add-search btn btn-lg btn-primary btn-block common-button"><i
+                    class="fa fa-refresh"></i> Search</button>
+            </div>
+
+         
+
+         
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-8 col-6  mt10" style="padding-right: 0px;">   
+            
+                <a routerLink="../vendor-add" class="btn btn-primary add-c btn-sm ml10" style="width: 100%;" title="New Vendor">
+                    <span class="fa fa-plus pr5"></span>  Create New</a>
+
+            </div>
+
+            <!-- <div class="col-md-1">
+             
+                <p class="show-text">Show</p>
+
+            </div> -->
+        
+
+        </div>
+
+
+
+ </section>
+
+
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn">
+            <div>
+                <!-- listing table -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">Vendor Code</th>
+                                            <th class="">Vendor Name</th>
+                                            <th class="">Vendor Group Name</th>
+                                            <th class="">Country</th>
+                                            <th class="">Company</th>
+                                            <th class="">Address</th>
+                                            <th class="">Email ID</th>
+                                            <th class="">Remarks</th>
+                                            <th class="">Active</th>
+                                            <th class="">Action</th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <tr *ngFor = "let item of json; let i = index"> -->
+                                        <tr *ngFor = "let item of vendorList; let i = index">
+                                            
+                                            <td>{{i + 1}}</td>
+                                            <td>{{item.vendorCode}}</td>
+                                            <td>{{item.vendorName}}</td>
+                                            <td>{{item.vendorGroupName}}</td>
+                                            <td>{{item.countryName}}</td>
+                                            <td>{{item.companyName}}</td>
+                                            <td>{{item.address}}</td>
+                                            <td>{{item.emailID}}</td>
+                                            <td>{{item.remarks}}</td>
+                                            <td class="active_state">{{item.active == true ? 'Yes' : 'No'}}</td>
+                                            <td>
+                                                <a routerLink="{{ '/vendor-edit/' + item.id.toString() }}"  class="btn btn-edits  btn-sm ml10">
+                                                    EDIT
+                                                </a>                                               
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

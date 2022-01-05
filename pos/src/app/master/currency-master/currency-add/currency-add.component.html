@@ -1,0 +1,296 @@
+<form [formGroup]="myForm" validate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../!home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../currency">{{ 'CURRENCY.CURRENCY_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'CURRENCY.CREATE_CURRENCY_MASTER' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="currencyCode" autocomplete="off"
+                                                formControlName="currencyCode" #currencyCode  maxlength="8"
+                                                [ngClass]="{'red-border': myForm.controls['currencyCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="Currency Code"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.CURRENCY_CODE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="currencyName" autocomplete="off"
+                                                formControlName="currencyName" #currencyName
+                                                [ngClass]="{'red-border': myForm.controls['currencyName'].invalid}"
+                                                class="gui-input floating-input" placeholder="Currency Name"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.CURRENCY_NAME' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="currencySymbol" autocomplete="off" maxlength="5"
+                                                formControlName="currencySymbol" #currencySymbol
+                                                [ngClass]="{'red-border': myForm.controls['currencySymbol'].invalid}"
+                                                class="gui-input floating-input" placeholder="Currency Symbol"
+                                                spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.CURRENCY_SYMBOL' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="isoCurrencyCode" autocomplete="off"
+                                                formControlName="isoCurrencyCode" #isoCurrencyCode
+                                                [ngClass]="{'red-border': myForm.controls['isoCurrencyCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="ISO Currency Code"
+                                                spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.ISO_CURRENCY_CODE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="internationalDescription" autocomplete="off"
+                                                formControlName="internationalDescription" #internationalDescription
+                                                [ngClass]="{'red-border': myForm.controls['internationalDescription'].invalid}"
+                                                class="gui-input floating-input" placeholder="International Description"
+                                                spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.INTERNATIONAL_DESCRIPTION' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="hunderdthName" autocomplete="off"
+                                                formControlName="hunderdthName" #hunderdthName
+                                                [ngClass]="{'red-border': myForm.controls['hunderdthName'].invalid}"
+                                                class="gui-input floating-input" placeholder="Hundredth Name"
+                                                spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.HUNDREDTH_NAME' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="english" autocomplete="off"
+                                                formControlName="english" #english
+                                                [ngClass]="{'red-border': myForm.controls['english'].invalid}"
+                                                class="gui-input floating-input" placeholder="English"
+                                                spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.ENGLISH' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="englishHunderdthName" autocomplete="off"
+                                                formControlName="englishHunderdthName" #englishHunderdthName
+                                                [ngClass]="{'red-border': myForm.controls['englishHunderdthName'].invalid}"
+                                                class="gui-input floating-input" placeholder="English Hundredth Name"
+                                                spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.ENGLISH_HUNDREDTH_NAME' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="decimalPlaces" autocomplete="off" 
+                                                formControlName="decimalPlaces" #decimalPlaces  (keypress)="restrictExceptNos($event)" 
+                                                [ngClass]="{'red-border': myForm.controls['decimalPlaces'].invalid}"
+                                                class="gui-input floating-input" placeholder="Decimal Places"
+                                                spellcheck="false" trim="blur"   maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" >
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.DECIMAL_PLACES' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="mRoundValue" autocomplete="off" 
+                                                formControlName="mRoundValue" #mRoundValue
+                                                [ngClass]="{'red-border': myForm.controls['mRoundValue'].invalid}"
+                                                class="gui-input floating-input" placeholder="M Round Value"
+                                                spellcheck="false" trim="blur" onKeyPress="if(this.value.length==4) return false;" numbersOnly>
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.M_ROUND_VALUE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 default-forms" style="margin-top: -30px;
+                                    margin-bottom: 35px;">
+                                        <label>{{ 'CURRENCY.CURRENCY_TYPE' | translate }}</label>
+                                        <ng-multiselect-dropdown [placeholder]="'Select Currency'" class="gui-Input"
+                                                    [settings]="currencyTypeDropdownSettings" [data]="data"
+                                                    [(ngModel)]="selectedCurrencyTypeList" 
+                                                    [ngModelOptions]="{standalone: true}">
+                                                </ng-multiselect-dropdown>
+                                    </div>
+                                   <!-- <div class="col-md-6 mb20">
+                                        <label>Currency Type</label>
+                                        <ng-multiselect-dropdown [placeholder]="'Select Brand'"
+                                        [settings]="brandDropdownSettings"
+                                        [data]="brand_list" [(ngModel)]="selectedBrandList"
+                                         (onSelect)="onSelectBrand($event)"
+                                        (onSelectAll)="onSelectAllBrand($event)" [ngModelOptions]="{standalone: true}"
+                                        >
+                                    </ng-multiselect-dropdown>
+                                    </div>-->
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                </div>
+                                    
+                                
+                                <div class="row" style="margin-top: -28px;">
+                                    <div class="col-md-6 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="currencyValue" autocomplete="off" (keypress)="keyPressD($event)" maxlength="9"
+                                                formControlName="currencyValue" #currencyValue 
+                                                class="gui-input floating-input" placeholder="Currency Value"
+                                                spellcheck="false" trim="blur"  >
+                                            <span class="highlight"></span>
+                                            <label>{{ 'CURRENCY.CURRENCY_VALUE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="remarks" autocomplete="off"
+                                                formControlName="remarks" #remarks
+                                                class="gui-input floating-input" placeholder="Remarks"
+                                                spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="row  mt30 mb20 default-forms">
+                                    
+                                    <div class="offset-md-4  col-md-2">
+                                        <button type="submit" class="mt20 btn btn-lg btn-success btn-block common-button"
+                                            title="Add" (click) = "addCurrencyValue()" [disabled]="myForm.pristine || myForm.invalid"><i class="fa fa-plus"></i> Add</button>
+                                    </div>
+    
+                                    <div class="col-md-2">
+                                        <button type="submit" (click)="clearGrid()" class="mt20 btn btn-lg btn-cancel btn-block common-button"
+                                            title="Clear"><i class="fa fa-refresh"></i> Clear</button>
+                                    </div>
+
+                                   
+                                    
+                                </div>
+
+                                <div class="row">
+                                    
+                                  <div class="allcp-form theme-info">
+                                        <div class="panel">
+                                            <div class="panel-body country-table">
+                                                <div class="table-responsive">
+                                                    <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                        <thead>
+                                                            <tr class="bg-dark">
+                                                                <th class="">{{ 'CURRENCY.CURRENCY_VALUE' | translate }}</th>
+                                                                <th class="">{{ 'COMMON.REMARKS' | translate }}</th>
+                                                                <th class=""></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor = "let item of currencyList; let i = index"> 
+                                                                <td>{{item.currencyValue}}</td>  
+                                                                <td>{{item.remarks}}</td>  
+                                                                <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                                    class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                                            </tr>                                                        
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row default-forms">
+
+                                    <div class="offset-md-3 col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button" [disabled]="myForm.pristine || myForm.invalid" (click)="addCurrency()"><i
+                                                class="fa fa-check-circle-o"></i> Save
+                                                
+                                        </button>
+                                    </div>
+                                   
+                                    <div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button" (click)="clear_controls()"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+                                    </div>
+
+                                   
+                                
+                                 </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

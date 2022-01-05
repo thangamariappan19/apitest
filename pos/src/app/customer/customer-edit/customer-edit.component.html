@@ -1,0 +1,578 @@
+<form [formGroup]="myForm" novalidate>
+    <!-- Main Wrapper -->
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../Customer">{{ 'CUSTOMER.CUSTOMER_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+                </ol>
+            </div>
+        </header>
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'CUSTOMER.EDIT_CUSTOMER' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+
+       <div class="row">
+        <div class="offset-md-3 col-md-9 common-titles" style="margin-bottom: 10px;">
+         <ul class="com-title">
+             <li class="tbg"><a pageScroll href="#overview" ><i class="fa fa-user-o"></i> {{ 'CUSTOMER.CUSTOMER_OVERVIEW' | translate }}</a></li>
+             <li class="tbg"><a pageScroll href="#address" ><i class="fa fa-envelope-o"></i> {{ 'CUSTOMER.ADDRESS' | translate }}</a></li>
+             <li class="tbg"><a pageScroll href="#notes" ><i class="fa fa-edit"></i> {{ 'CUSTOMER.NOTES' | translate }}</a></li>
+         </ul>
+        </div>
+        </div>
+
+        <!-- /Topbar -->
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div class="chute chute-center" >
+                <div class="center-block">
+                    <!-- Spec Form -->
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                    <!-- Basic -->
+                                    <div class="row" id="overview">
+                                        <div class="col-lg-4 col-xl-3 cust-title">
+                                            <h6 class="mb20"><i class="fa fa-user"></i> {{ 'CUSTOMER.CUSTOMER_OVERVIEW' | translate }}</h6>
+
+                                            <div class="mt20 style-picture">
+                                                <div class="avatar-upload">
+                                                    <div class="avatar-preview">
+                                                        <div id="imagePreview">
+                                                            <img src="{{ current_image}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="avatar-edit upload-btn-wrapper-cust">
+                                                        <label for="imageUpload" class="input-file">UPLOAD
+                                                        <input type='file'  #fileInput1 formControlName="fileInput1" id="imageUpload" name="imageUpload" (change)="picked($event,null)" accept=".png, .jpg, .jpeg" />
+                                                        </label>
+                                                    </div>
+                                                   
+                                                    <div class="image-clear" (click)="clearimg()"><button    class="btn btn danger">CLEAR</button></div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-8 col-xl-9">
+                                            <div class="row">
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="text" name="customerCode" formControlName="customerCode" #customerCode class="gui-input floating-input" readonly
+                                                            placeholder="Customer Code"  autocomplete="off"
+                                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'CUSTOMER.CUSTOMER_CODE' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                   
+                                                        <input type="text" name="customerName" formControlName="customerName" #customerName class="gui-input floating-input"
+                                                            placeholder="First Name"  [ngClass]="{'red-border': myForm.controls['customerName'].invalid}" autocomplete="off"
+                                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'CUSTOMER.FIRST_NAME' | translate }}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                    <input type="text" name="lastName" formControlName="lastName" #lastName class="gui-input floating-input"
+                                                        placeholder="Last Name" [ngClass]="{'red-border': myForm.controls['lastName'].invalid}" autocomplete="off"
+                                                        (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                    <span class="highlight"></span>
+                                                    <label>{{ 'CUSTOMER.LAST_NAME' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="date"name="dob" formControlName="dob" #dob class="gui-input floating-input"
+                                                        placeholder="DOB" [ngModel] ="getdob | date:'yyyy-MM-dd'" autocomplete="off">
+                                                        <span class="highlight"></span>
+                                                        <label>{{ 'CUSTOMER.DOB' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="text" name="email"  formControlName="email" #email class="gui-input floating-input"
+                                                        pattern ="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" (keyup)="keyPressupper($event)"
+                                                        placeholder="Email ID" autocomplete="off" spellcheck="false" trim="blur"
+                                                        [ngClass]="{'red-border': myForm.controls['email'].invalid}">
+                                                        <span class="highlight"></span>
+                                                        <label>{{ 'CUSTOMER.EMAIL' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                          <!--  <div class="col-md-4">
+                                                <div class="section">
+                                                    <div class="input-phone" name="phoneNumber"></div>
+                                                </div>
+                                            </div>-->
+                                            <div class="col-lg-6 col-xl-4 flags">
+                                                <div class="section floating-form floating-label">
+                                                    
+                                                        <input type="text" #phoneInput ng2TelInput  [ng2TelInputOptions]="{initialCountry: initialCountry}"  (countryChange)="onCountryChange($event)" 
+                                                        name="phoneNumber" formControlName="phoneNumber" #phoneNumber class="gui-input floating-input"
+                                                        (keypress)="keyPress($event)" minlength=0 maxlength=12
+                                                        placeholder="Phone Number" autocomplete="off" spellcheck="false" trim="blur"
+                                                        [ngClass]="{'red-border': myForm.controls['phoneNumber'].invalid}">
+                                                        <span class="highlight"></span>
+                                                        <label>{{ 'CUSTOMER.PHONE_NUMBER' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 select-forms">
+                                                <div class="section">
+                                                    <label>{{ 'CUSTOMER.CUSTOMER_GROUP' | translate }}</label>
+                                                        <select name="customerGroupID" formControlName="customerGroupID" #customerGroupID (change)="customerGroupcode()"
+                                                                class="gui-input"  [ngClass]="{'red-border': myForm.controls['customerGroupID'].invalid}">
+                                                                <option value="">Select Customer Group</option>
+                                                                <option *ngFor="let item of customerGroup_List" value="{{item.id}}">{{item.groupName}}</option>
+                                                                <!--<option value="1">OPEN</option>
+                                                                <option value="2">INPROGRESS</option>
+                                                                <option value="3">CLOSED</option>
+                                                                <option value="4">CANCELLED</option>-->
+                                                            </select>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 select-forms">
+                                                <div class="section">
+                                                    <label>{{ 'CUSTOMER.SUB_GROUP' | translate }}</label>
+                                                    <select name="subGroupID" formControlName="subGroupID" #subGroupID class="gui-input">
+                                                        <option value="">--Sub Group--</option>
+                                                        <option value="1">Group 1</option>
+                                                    </select>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 select-forms">
+                                                <div class="section">
+                                                    <label>{{ 'CUSTOMER.PAYMENT_TERMS' | translate }}</label>
+                                                    <select name="paymentTermsDays" formControlName="paymentTermsDays" #paymentTermsDays class="gui-input">
+                                                        <option value="">--Payment Terms--</option>
+                                                        <option value="10">10 days</option>
+                                                        <option value="15">15 days</option>
+                                                    </select>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                    <input type="text" name="creditDays" formControlName="creditDays" #creditDays class="gui-input floating-input"
+                                                    placeholder="Credit Days" [ngClass]="{'red-border': myForm.controls['creditDays'].invalid}" autocomplete="off"
+                                                    (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'CUSTOMER.CREDIT_DAYS' | translate }}</label>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-lg-3 col-xl-2">
+                                                <div class="bs-component">
+                                                    <div class="round fill mb10 mt10">
+                                                        <input type="checkbox" checked=""  id="active" name="active" #active formControlName="active">
+                                                            <label for="active"></label>
+                                                            <p class="label-textcu">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-xl-2">
+                                                <div class="section">
+                                                    <div class="bs-component">
+                                                        <div class="round fill mt10">
+                                                            <input type="checkbox" checked="" id="isTaxExempt"  name="isTaxExempt" #isTaxExempt formControlName="isTaxExempt">
+                                                            <label for="isTaxExempt"></label>
+                                                            <p class="label-textcu">{{ 'CUSTOMER.TAX_EXEMPT' | translate }}</p>
+                                                        </div>
+                                                        <div id="source-button" class="btn btn-system btn-xs"
+                                                            style="display: none;">&lt; &gt;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-xl-4">
+                                                <div class="section">
+                                                    <div class="bs-component">
+                                                        <div class="round fill mb10 mt10">
+                                                            <input type="checkbox" checked="" id="isLoyalty"  name="isLoyalty" #isLoyalty formControlName="isLoyalty">
+                                                            <label for="isLoyalty"></label>
+                                                            <p class="label-textc">{{ 'CUSTOMER.LOYALTY' | translate }}</p>
+                                                        </div>
+                                                        <div id="source-button" class="btn btn-system btn-xs"
+                                                            style="display: none;">&lt; &gt;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                    <input type="text" name="loyaltyID" formControlName="loyaltyID" #loyaltyID class="gui-input floating-input"
+                                                        placeholder="Loyalty ID" [ngClass]="{'red-border': myForm.controls['loyaltyID'].invalid}" autocomplete="off"
+                                                        (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                            <span class="highlight"></span>
+                                                        <label>{{ 'CUSTOMER.LOYALTY_ID' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 select-forms">
+                                                <div class="section">
+                                                    <label>{{ 'CUSTOMER.LOYALTY_PLAN' | translate }}</label>
+                                                    <select name="loyaltyPlan" formControlName="loyaltyPlan" #loyaltyPlan class="gui-input">
+
+                                                        <option value="">--Loyalty Plan--</option>
+                                                        <option value="Gold">Gold Plan</option>
+                                                        <option value="Silver">Silver Plan</option>
+                                                    </select>
+                                                    <i class="fa fa-angle-down"></i>
+                                               
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 select-forms">
+                                                <div class="section">
+                                                    <label>{{ 'CUSTOMER.LOYALTY_SEGMENT' | translate }}</label>
+                                                    <select class="gui-input"> 
+                                                            <option>--Loyalty Segment--</option>
+                                                        </select>
+                                                        <i class="fa fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-8">
+                                                <div class="section">
+                                                    <div class="bs-component">
+                                                        <div class="round fill mb10 mt10">
+                                                            <input type="checkbox" checked="" id="onAccountApplicable" name="onAccountApplicable" #onAccountApplicable formControlName="onAccountApplicable">
+                                                                <label for="onAccountApplicable"></label>
+                                                                <p class="label-text">{{ 'CUSTOMER.ON_ACCOUNT_APPLICABLE' | translate }}</p>
+                                                        </div>
+                                                        <div id="source-button" class="btn btn-system btn-xs"
+                                                            style="display: none;">&lt; &gt;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <!-- <div class="col-md-12 mt20">
+                                                <div class="avatar-upload">
+                                                    <div class="avatar-edit">
+                                                        <input type='file' id="imageUpload" (change)="picked($event,null)" accept=".png, .jpg, .jpeg" />
+                                                        <label for="imageUpload"></label>
+                                                    </div>
+                                                    <div class="avatar-preview">
+                                                        <div id="imagePreview">
+                                                            <img src="{{ current_image}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="image-delete">
+                                                        <a href="#"><i class="fa fa-window-close"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                    <!-- customer address -->
+                                    <hr>
+                                    <div class="row" id="address">
+                                        <div class="col-lg-4 col-xl-3 cust-title">
+                                            <h6 class="mb20"><i class="fa fa-home"></i> {{ 'CUSTOMER.ADDRESS' | translate }}</h6>
+                                        </div>
+                                        <div class="col-lg-8 col-xl-9">
+                                            <div class="row">
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="text" name="areaName1"  formControlName="areaName1" #areaName1 class="gui-input floating-input"
+                                                            placeholder="Address Line 1" autocomplete="off" spellcheck="false" trim="blur"
+                                                            (change)="addkeyPress()">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'CUSTOMER.ADDRESS_LINE_1' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="text" name="areaName2"  formControlName="areaName2" #areaName2 class="gui-input floating-input"
+                                                            placeholder="Address Line 2" autocomplete="off" spellcheck="false" trim="blur"
+                                                            (change)="add2keyPress()">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'CUSTOMER.ADDRESS_LINE_2' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                           <!-- <div class="col-md-4">
+                                                <div class="section">
+                                                    <button type="button"
+                                                        class="btn btn-lg btn-success btn-block common-button"><i
+                                                            class="fa fa-plus"></i> Add Address Line</button>
+                                                </div>
+                                            </div>-->
+                                            <!--<div class="clearfix"></div>
+                                            <div class="col-md-4">
+                                                <div class="section">
+                                                    <div class="input-phone"></div>
+                                                </div>
+                                            </div> -->
+
+                                            <div class="col-lg-6 col-xl-4 flags">
+                                                <div class="section floating-form floating-label">
+                                                    
+                                                        <input type="text" #phoneInput1 ng2TelInput  [ng2TelInputOptions]="{initialCountry: initialCountry}" 
+                                                        (countryChange)="onCountryChange1($event)" 
+                                                        name="phone1" formControlName="phone1" #phone1 class="gui-input floating-input"
+                                                        placeholder="Phone Number" autocomplete="off" spellcheck="false" trim="blur"
+                                                        (keypress)="keyPress($event)" minlength=0 maxlength=12
+                                                        (change)="addphonekeyPress()">
+                                                        <span class="highlight"></span>
+                                                        <label>{{ 'CUSTOMER.PHONE_NUMBER' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-xl-4 select-forms" >
+                                                <label>{{ 'CUSTOMER.SELECT_COUNTRY' | translate }}</label>
+                                                    <select name="countryID" formControlName="countryID" #countryID (change)="countrycode()"
+                                                        class="gui-input" [ngClass]="{'red-border': myForm.controls['countryID'].invalid}">
+                                                        <option value="">Select Country</option>
+                                                        <option *ngFor="let item of country_list" value="{{item.id}}">{{item.countryName}}</option>
+                                                    </select>
+                                                    <i class="fa fa-angle-down"></i>
+                                                
+                                            </div>
+
+                                            
+                                            <div class="col-lg-6 col-xl-4 select-forms">
+                                                <div class="section">
+                                                    <label>{{ 'CUSTOMER.SELECT_STATE' | translate }}</label>
+                                                        <select name="stateID" formControlName="stateID" #stateID (change)="statecode()"
+                                                            class="gui-input"
+                                                            [ngClass]="{'red-border': myForm.controls['phoneNumber'].invalid}">
+                                                            <option value="">Select State</option>
+                                                            <option *ngFor="let item of state_List" value="{{item.id}}">{{item.stateName}}</option>
+                                                            <!--<option value="1">OPEN</option>
+                                                            <option value="2">INPROGRESS</option>
+                                                            <option value="3">CLOSED</option>
+                                                            <option value="4">CANCELLED</option>-->
+                                                        </select>
+                                                        <i class="fa fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="text" name="city" formControlName="city" #city class="gui-input floating-input"
+                                                            placeholder="City" autocomplete="off"  spellcheck="false" trim="blur"
+                                                            (change)="addcitykeyPress()">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'CUSTOMER.CITY' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-lg-4 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="text" name="pincode" formControlName="pincode" #pincode class="gui-input floating-input" 
+                                                        placeholder="Pincode" spellcheck="false" trim="blur" minlength="0" maxlength="15"
+                                                        (change)="addpincodekeyPress()" autocomplete="off">
+                                                        <span class="highlight"></span>
+                                                        <label>{{ 'CUSTOMER.PINCODE' | translate }}</label>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-xl-8">
+                                                <div class="section">
+                                                    <div class="bs-component">
+                                                        <div class="round fill mb10 mt10">
+                                                            <input type="checkbox" (change)="onCheckboxChange($event)" name="shippingcheck"  formControlName="shippingcheck" id="sb">
+                                                            <label for="sb"></label>
+                                                            <p class="label-text">{{ 'CUSTOMER.SHIPPING_ADDRESS_SAME_AS_BILLING_ADDRESS' | translate }}</p>
+                                                        </div>
+                                                        <div id="source-button" class="btn btn-system btn-xs"
+                                                            style="display: none;">&lt; &gt;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <hr>
+                                    <!-- customer address -->
+                                    <div class="row">
+                                        <div class="col-lg-4 col-xl-3 cust-title">
+                                            <h6 class="mb20"><i class="fa fa-home"></i> {{ 'CUSTOMER.SHIPPING_ADDRESS' | translate }}</h6>
+                                        </div>
+                                        <div class="col-lg-8 col-xl-9">
+                                            <div class="row">
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="text" name="shippingAddress1" formControlName="shippingAddress1" #shippingAddress1 class="gui-input floating-input"
+                                                            placeholder="Address Line 1" spellcheck="false" trim="blur" autocomplete="off" [readonly]="isReadonly">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'CUSTOMER.ADDRESS_LINE_1' | translate }}</label>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="text" name="shippingAddress2" formControlName="shippingAddress2" #shippingAddress2 class="gui-input floating-input"
+                                                            placeholder="Address Line 2" spellcheck="false" trim="blur" autocomplete="off" [readonly]="isReadonly">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'CUSTOMER.ADDRESS_LINE_2' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                          <!--  <div class="col-md-4">
+                                                <div class="section">
+                                                    <button type="button"
+                                                        class="btn btn-lg btn-success btn-block common-button"><i
+                                                            class="fa fa-plus"></i> Add Address Line</button>
+                                                </div>
+                                            </div>-->
+                                          <!--  <div class="clearfix"></div>
+                                            <div class="col-md-4">
+                                                <div class="section">
+                                                    <div class="section">
+                                                        <div class="input-phone"></div>
+                                                    </div>
+                                                </div>
+                                            </div>--> 
+
+                                            <div class="col-lg-6 col-xl-4  flags">
+                                                <div class="section floating-form floating-label">
+                                                    
+                                                        <input type="text" #phoneInput2 ng2TelInput  [ng2TelInputOptions]="{initialCountry: initialCountry}"  (countryChange)="onCountryChange2($event)" 
+                                                        name="shippingPhoneNumber" formControlName="shippingPhoneNumber"  class="gui-input floating-input"
+                                                        placeholder="Phone Number" autocomplete="off" spellcheck="false" trim="blur" [readonly]="isReadonly"
+                                                        (keypress)="keyPress($event)" minlength=0 maxlength=12>
+                                                        <span class="highlight"></span>
+                                                        <label>{{ 'CUSTOMER.PHONE_NUMBER' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 select-forms" >
+                                             
+                                                <label>{{ 'CUSTOMER.SELECT_COUNTRY' | translate }}</label>
+                                                    <select name="shippingcountryID" formControlName="shippingcountryID" #shippingcountryID (change)="shippingcountrycode()"
+                                                        class="gui-input" [ngClass]="{'red-border': myForm.controls['shippingcountryID'].invalid}" >
+                                                        <option value="">Select Country</option>
+                                                        <option *ngFor="let items of shippingcountry_list" value="{{items.id}}">{{items.countryName}}</option>
+                                                    </select>
+                                                    <i class="fa fa-angle-down"></i>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 select-forms">
+                                                <div class="section">
+                                                    <label>{{ 'CUSTOMER.SELECT_STATE' | translate }}</label>
+                                                        <select name="shippingStateID" formControlName="shippingStateID" #shippingStateID (change)="shippingstatecode()"
+                                                            class="gui-input" >
+                                                            <option value="0">Select State</option>
+                                                            <option *ngFor="let items of shippingstate_list" value="{{items.id}}">{{items.stateName}}</option>
+                                                            <!--<option value="1">OPEN</option>
+                                                            <option value="2">INPROGRESS</option>
+                                                            <option value="3">CLOSED</option>
+                                                            <option value="4">CANCELLED</option>-->
+                                                        </select>
+                                                        <i class="fa fa-angle-down"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="text" name="shippingCity" formControlName="shippingCity" #shippingCity class="gui-input floating-input"
+                                                            placeholder="City" spellcheck="false" trim="blur" autocomplete="off" [readonly]="isReadonly">
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'CUSTOMER.CITY' | translate }}</label>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4 floating-form floating-label">
+                                                <div class="section">
+                                                    
+                                                        <input type="text" name="shippingPincode" formControlName="shippingPincode" #shippingPincode class="gui-input floating-input" placeholder="Pincode"
+                                                        spellcheck="false" trim="blur" minlength="0" maxlength="15" autocomplete="off" [readonly]="isReadonly">
+                                                        <span class="highlight"></span>
+                                                        <label>{{ 'CUSTOMER.PINCODE' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row" id="notes">
+                                        <div class="col-lg-4 col-xl-3 cust-title">
+                                            <h6 class="mb20"><i class="fa fa-edit"></i> {{ 'CUSTOMER.NOTES' | translate }}</h6>
+                                        </div>
+                                        <div class="col-lg-8 col-xl-8">
+                                            <div class="row">
+                                            <div class="col-lg-12 col-md-12 floating-form floating-label">
+                                                <div class="section">
+                                                   
+                                                        <textarea type="text" name="remarks" formControlName="remarks" #remarks class="gui-input floating-input"
+                                                            placeholder="Notes" autocomplete="off" 
+                                                            spellcheck="false" trim="blur"></textarea>
+                                                            <span class="highlight"></span>
+                                                            <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="mt30 default-forms">
+                                        <div class="row">
+                                            <div class="offset-md-4 col-md-2">
+                                                <button type="submit" (click) = "update_customer()"
+                                                    class="btn btn-lg btn-success btn-block common-button"><i class="fa fa-refresh"></i> Update</button>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" (click)="close()" class="btn btn-lg btn-cancel btn-block common-button">
+                                                    <i  class="fa fa-remove"></i> Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+                    <button type="button" style="background-color: #0af" class="btn active" data-toggle="button" aria-pressed="true" (click)="scrollToTop()">
+                        <i class="fa fa-chevron-up" style="color: #fff"></i>
+                    </button>
+                  </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </section>
+</form>

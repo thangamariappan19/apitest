@@ -1,0 +1,121 @@
+<form [formGroup]="myForm" novalidate>
+    <section id="content_wrapper" class="sales-content-wrapper" style="margin-left: 0px">
+        <!-- Content -->
+        <section class="animated fadeIn">
+            <header id="topbar" class="ph10 second-top">
+                <div class="topbar-left">
+                    <ul class="nav nav-list nav-list-topbar pull-left">
+                        <li>
+                            <i class="fa fa-database"></i> Stock Details
+                        </li>
+                    </ul>
+                </div>
+                <div class="topbar-right mt5">
+                    <a (click)="btn_back_click()" href="javascript:void(0);" class="btn btn-back btn-sm ml10"
+                        title="New">
+                        <span class="fa fa-arrow-left pr5"></span>Back
+                    </a>
+                </div>
+            </header>
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xl-12 mt5">
+                    <div class="return-filter allcp-form theme-info">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12 col-xl-8">
+                                <label class="field">
+                                    <input type="text" name="sku_code" class="gui-input" autocomplete="off" matInput
+                                        [matAutocomplete]="auto" [formControl]="searchStockCtrl"
+                                        formControlName="sku_code" #sku_code class="gui-input"
+                                        placeholder="Enter SKU / Bar Code" (keyup.enter)="sku_changed()">
+                                    <mat-autocomplete id="pms" #auto="matAutocomplete"
+                                        class="pos filtered-search pos-full-search">
+                                        <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                        <ng-container *ngIf="!isLoading">
+
+                                            <mat-option *ngFor="let stock of filteredstock" [value]="stock.code">
+
+                                                <div class="col-md-3 pos-search-div"><b><i class="fa fa-list"></i>
+                                                        {{stock.code}}</b></div>
+                                                <div class="col-md-3 pos-search-div"><b><i
+                                                            class="fa fa-check-circle"></i> {{stock.number}}</b></div>
+                                                <div class="col-md-6 pos-search-div"><b><i class="fa fa-square"></i>
+                                                        {{stock.name}}</b></div>
+
+                                            </mat-option>
+
+                                        </ng-container>
+                                    </mat-autocomplete>
+                                </label>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6 col-xl-2">
+                                <button (click)="sku_changed()" type="button" class="btn btn-primary"
+                                    style="width: 100%"><i class="fa fa-search"></i> Submit</button>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-6 col-xl-2">
+                                <button (click)="refresh()" type="button" class="btn btn-clear" style="width: 100%"><i
+                                        class="fa fa-refresh"></i> Clear</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- table -->
+                    <hr>
+                    <div class="table-responsive sales-second-section2 return-table" id="res">
+                        <table class="table allcp-form theme-warning">
+                            <thead>
+                                <tr class="main-tr">
+                                    <th>S.No</th>
+                                    <th>Style Code</th>
+                                    <th>SKU Code</th>
+                                    <th>Barcode</th>
+                                    <th>Supplier BarCode</th>
+                                    <th>Color Code</th>
+                                    <th>Color Name</th>
+                                    <th>Size Code</th>
+                                    <th>Stock Qty</th>
+                                    <th>SKU Name</th>
+                                    <th>Price</th>
+                                    <th>Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr *ngFor = "let item of json; let i = index"> -->
+                                <tr *ngFor="let item of json; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{item.styleCode}}</td>
+                                    <td>{{item.skuCode}}</td>
+                                    <td>{{item.barCode}}</td>
+                                    <td>{{item.supplierBarCode}}</td>
+                                    <td>{{item.colorCode}}</td>
+                                    <td>{{item.colorName}}</td>
+                                    <td>{{item.sizeCode}}</td>
+                                    <td>{{item.stockQty}}</td>
+                                    <td>{{item.skuName}}</td>
+                                    <td>{{item.price}}</td>
+                                    <td>
+                                        <div class="" style="height:80px; width:100px;">
+                                            <img src="{{item.skuImageSource}}" class="img-responsive" alt="">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="total-stock">
+                        <div class="row">
+                            <div class="col-md-offset-8 col-md-2">
+                                <p><i class="fa fa-circle"></i> Total Stock :</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p>{{totalQty}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </section>
+</form>

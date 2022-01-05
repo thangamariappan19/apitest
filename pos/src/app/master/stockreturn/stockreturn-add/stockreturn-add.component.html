@@ -1,0 +1,233 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../stockreturn">{{ 'STOCK_RETURN.STOCK_RETURN_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'STOCK_RETURN.CREATE_STOCK_RETURN' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="documentNo" autocomplete="off" readonly
+                                            formControlName="documentNo" #documentNo class="gui-input floating-input"
+                                            placeholder="Document Number">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_RETURN.DOCUMENT_NUMBER' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="documentDate" autocomplete="off" readonly
+                                            formControlName="documentDate" #documentDate class="gui-input floating-input"
+                                            placeholder="Document Date">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_RETURN.DOCUMENT_DATE' | translate }}</label>
+                                </div>
+                                <div class="col-md-4 mb20 select-forms">
+                                    <label>{{ 'STOCK_RETURN.TOWAREHOUSE' | translate }}</label>
+                                    
+                                        <select name="toWareHouse" formControlName="toWareHouse" #toWareHouse
+                                            class="gui-input" (change)="warehousecode()"
+                                            [ngClass]="{'red-border': myForm.controls['toWareHouse'].invalid}">
+                                            <option value="">Select ToWareHouse</option>
+                                            <option *ngFor="let item of wareHouseList" value="{{item.id}}">
+                                                {{item.warehouseName}}
+                                        </select>
+                                        <i class="fa fa-angle-down"></i>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20 select-forms">
+                                    <label>{{ 'STOCK_RETURN.STATUS' | translate }}</label>
+                                    
+                                        <select name="status" formControlName="status" #status disabled
+                                            class="gui-input"
+                                            [ngClass]="{'red-border': myForm.controls['status'].invalid}">
+                                            <option value="0">Select Status</option>
+                                            <option value="Open">Open</option>
+                                        </select>
+                                        <i class="fa fa-angle-down"></i>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20">
+                                    <label>{{ 'STOCK_RETURN.RETURN_TYPE' | translate }}  </label>
+                                    <label class="field">
+                                        <!--<input type="text" name="fromstore" autocomplete="off" readonly
+                                            formControlName="fromstore" #fromstore
+                                               class="gui-input" placeholder="Return Type">-->
+                                               <input type="radio" id="BarCode" value="Bar Code" name="group" formControlName="group"> {{ 'STOCK_RETURN.BARCODE' | translate }}
+                                               <input type="radio" id="RFID" value="RFID" name="group" formControlName="group"> {{ 'STOCK_RETURN.RFID' | translate }}
+
+                                    </label>
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label" *ngIf="binShow1">
+                                                                        
+                                    <input type="text" name="bin" autocomplete="off"
+                                        formControlName="bin" #bin class="gui-input floating-input"
+                                        spellcheck="false" trim="blur"
+                                        placeholder="From BIN">
+                                        <span class="highlight"></span>
+                                        <label>From BIN</label>
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label" *ngIf="binShow2">
+                                                                      
+                                        <input type="text" name="barCode1" autocomplete="off"
+                                            (keyup.enter)="getSKUDataBin()" formControlName="barCode1" #barCode1
+                                            spellcheck="false" trim="blur"
+                                            [ngClass]="{'red-border': myForm.controls['barCode1'].invalid}"
+                                            class="gui-input floating-input" placeholder="SKU/BarCode">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_RETURN.SKU_BARCODE' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label" *ngIf="binnotShow">
+                                                                      
+                                    <input type="text" name="barCode" autocomplete="off"
+                                        (keyup.enter)="getSKUData()" formControlName="barCode" #barCode
+                                        spellcheck="false" trim="blur"
+                                        [ngClass]="{'red-border': myForm.controls['barCode'].invalid}"
+                                        class="gui-input floating-input" placeholder="SKU/BarCode">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'STOCK_RETURN.SKU_BARCODE' | translate }}</label>
+                                
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body ">
+                            <div class="resolution">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13" role="table">
+                                    <thead role="rowgroup">
+                                        <tr class="bg-dark" role="row">
+                                            <th class="" role="columnheader">#</th>
+                                            <th class="" role="columnheader">{{ 'STOCK_RETURN.BARCODE' | translate }}</th>
+                                            <th class="" role="columnheader">{{ 'STOCK_RETURN.RFID' | translate }}</th>
+                                            <th class="" role="columnheader">{{ 'STOCK_RETURN.SKU_NAME' | translate }}</th>
+                                            <th class="" role="columnheader">{{ 'STOCK_RETURN.SKU_CODE' | translate }}</th>
+                                            <th class="" role="columnheader">{{ 'STOCK_RETURN.STYLE_CODE' | translate }}</th>
+                                            <th class="" role="columnheader">{{ 'STOCK_RETURN.BRAND' | translate }}</th>
+                                            <th class="" role="columnheader">{{ 'STOCK_RETURN.COLOR' | translate }}</th>
+                                            <th class="" role="columnheader">{{ 'STOCK_RETURN.SIZE' | translate }}</th>
+                                            <th class="" role="columnheader">{{ 'STOCK_RETURN.RETURN_QUANTITY' | translate }}</th>
+                                            <th class="" role="columnheader">{{ 'STOCK_RETURN.STOCK_QUANTITY' | translate }}</th>
+                                            <th class="" role="columnheader">{{ 'COMMON.REMARKS' | translate }}</th>
+                                            <th role="columnheader">BinCode</th>
+                                            <th role="columnheader"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody role="rowgroup">
+                                        <tr *ngFor="let item of stockreturnlist; let i = index;" role="row">
+                                            <td role="cell">{{i+1}}</td>
+                                            <td role="cell">{{item.barCode}}</td>
+                                            <td role="cell">{{item.rfid}}</td>
+                                            <td role="cell">{{item.sKUName}}</td>
+                                            <td role="cell">{{item.sKUCode}}</td>
+                                            <td role="cell">{{item.styleCode}}</td>
+                                            <td role="cell">{{item.brand}}</td>
+                                            <td role="cell">{{item.color}}</td>
+                                            <td role="cell">{{item.size}}</td>
+                                            <td role="cell">
+                                                <!-- <input type="number" min="1" (keypress)="keyPress($event)" oninput="this.value = Math.abs(this.value)" name="returnquantity" value={{item.quantity}}
+                                                    [(ngModel)]="item.quantity" [ngModelOptions]="{standalone: true}"
+                                                    style="text-align:center;" class="gui-input" autocomplete="off" readonly
+                                                    (change)="addQTY()"> -->
+                                                    {{item.quantity}}
+                                                </td>
+                                            <td role="cell">{{item.stockQty}}</td>
+                                            <td role="cell">{{item.remarks}}</td>                                            
+                                            <td role="cell">{{item.binCode}}</td>
+                                            <td role="cell"><a href="javascript:void(0);" (click)="void_item(item)"
+                                                    class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb20 col-12 floating-form floating-label">
+                                                
+                            <input type="text" name="rem" autocomplete="off" spellcheck="false" trim="blur"
+                                formControlName="rem" #rem class="reso-input-remark gui-input floating-input" placeholder="Remarks">
+                                <span class="highlight"></span>
+                                <label>{{ 'COMMON.REMARKS' | translate }} </label>
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-2 col-12">
+                        <label></label>
+                        <label class="field">
+                            <input type="text" name="totalqty" autocomplete="off" readonly formControlName="totalqty"
+                                #totalqty style="text-align:right;" class="reso-input gui-input" placeholder="">
+                        </label>
+                    </div>
+                    <div class="col-sm-2 col-12">
+                        <label></label>
+                        <label class="field">
+                            <input type="text" name="stockqty" autocomplete="off" readonly formControlName="stockqty"
+                                #stockqty style="text-align:right;" class="reso-input gui-input" placeholder="">
+                        </label>
+                    </div>
+                </div>
+                <div class="row default-forms">
+                    <div class="offset-md-3  col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-success btn-block common-button"
+                        [disabled]="myForm.pristine || myForm.invalid"  (click)="addStockRequestDetails()"><i class="fa fa-check-circle-o"></i> Save
+
+                        </button>
+                    </div>
+                   
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-primary btn-block common-button"
+                        [disabled]="myForm.pristine || myForm.invalid" (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+                  
+                    
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

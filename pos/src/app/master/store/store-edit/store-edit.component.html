@@ -1,0 +1,635 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../store">{{ 'STORE.STORE_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'STORE.EDIT_STORE' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="storeCode" autocomplete="off"
+                                                formControlName="storeCode" #storeCode readonly
+                                                [ngClass]="{'red-border': myForm.controls['storeCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="Store Code">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'STORE.STORE_CODE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="storeName" autocomplete="off"
+                                                formControlName="storeName" #storeName
+                                                [ngClass]="{'red-border': myForm.controls['storeName'].invalid}"
+                                                class="gui-input floating-input" placeholder="Store Name">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'STORE.STORE_NAME' | translate }}</label>
+                                        
+                                    </div>   
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="storeSize" autocomplete="off"
+                                                formControlName="storeSize" #storeSize (keypress)="keyPress($event)"
+                                                [ngClass]="{'red-border': myForm.controls['storeSize'].invalid}"
+                                                class="gui-input floating-input" placeholder="Store Size">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'STORE.STORE_SIZE' | translate }}</label>
+                                       
+                                    </div> 
+
+                                    <div class="col-md-6 floating-form floating-label">
+                                        <div class="section">
+                                                                                        
+                                                <input type="date"name="startDate" formControlName="startDate" #startDate class="gui-input floating-input"
+                                                placeholder="Start Date" autocomplete="off">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'STORE.START_DATE' | translate }}</label>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 floating-form floating-label">
+                                        <div class="section">
+                                                                                       
+                                                <input type="date"name="endDate" formControlName="endDate" #endDate class="gui-input floating-input"
+                                                placeholder="End Date" autocomplete="off">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'STORE.END_DATE' | translate }}</label>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <!-- value may be hardcoded -->
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'STORE.GRADE' | translate }}</label>
+                                       
+                                            <select name="gradeID" formControlName="gradeID" #gradeID 
+                                                class="gui-input">
+                                                <option value="0">Select Grade</option>
+                                                <!--<option *ngFor="let item of json" value="{{item.id}}">{{item.countryName}}</option>-->
+                                                <option>NA</option>
+                                                <option>GA</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'STORE.COUNTRY' | translate }}</label>
+                                       
+                                            <select name="countryID" formControlName="countryID" #countryID (change)="countrycode()"
+                                                class="gui-input">
+                                                <option value="0">Select Country</option>
+                                                <option *ngFor="let item of countryList" value="{{item.id}}">{{item.countryName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'STORE.STATE' | translate }}</label>
+                                       
+                                            <select name="stateID" formControlName="stateID" #stateID (change)="statecode()"
+                                                class="gui-input">
+                                                <option value="0">Select state</option>
+                                                <option *ngFor="let item of state_list" value="{{item.id}}">{{item.stateName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'STORE.CITY' | translate }}</label>
+                                       
+                                            <select name="cityID" formControlName="cityID" #cityID (change)="citycode()"
+                                                class="gui-input">
+                                                <option value="0">Select City</option>
+                                                <option *ngFor="let item of city_list" value="{{item.id}}">{{item.cityName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'STORE.STORE_GROUP' | translate }}</label>
+                                       
+                                            <select name="storegroupID" formControlName="storegroupID" #storegroupID (change)="storegroupcode()"
+                                                class="gui-input">
+                                                <option value="0">Select Store Group</option>
+                                                <option *ngFor="let item of storegroup_list" value="{{item.id}}">{{item.storeGroupName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'STORE.STORE_COMPANY' | translate }}</label>
+                                        
+                                            <select name="storecompanyID" formControlName="storecompanyID" #storecompanyID (change)="storecompanycode()"
+                                                class="gui-input">
+                                                <option value="0">Select Store Company</option>
+                                                <option *ngFor="let item of storeCompany_list" value="{{item.id}}">{{item.companyName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'STORE.PRICE_LIST' | translate }}</label>
+                                       
+                                            <select name="pricelistID" formControlName="pricelistID" #pricelistID (change)="pricelistcode()"
+                                                class="gui-input">
+                                                <option value="0">Select Price List</option>
+                                                <option *ngFor="let item of price_list" value="{{item.id}}">{{item.priceListName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="noofoptions" autocomplete="off"
+                                                formControlName="noofoptions" #noofoptions (keypress)="keyPress($event)"
+                                                [ngClass]="{'red-border': myForm.controls['noofoptions'].invalid}"
+                                                class="gui-input floating-input" placeholder="No Of Options">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'STORE.NO_OF_OPTIONS' | translate }}</label>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 default-forms" style="margin-top: -30px;">
+                                        <label>{{ 'STORE.BRAND' | translate }}</label>
+                                        <!--<label class="field select">
+                                            <select name="brandID" formControlName="brandID" #brandID (change)="brandcode()"
+                                                class="gui-input">
+                                                <option value="0">Select Brand</option>
+                                                <option *ngFor="let item of brand_list" value="{{item.id}}">{{item.brandName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>
+                                            </select>
+                                            <i class="arrow"></i>
+                                        </label>-->
+                                        <ng-multiselect-dropdown [placeholder]="'Select Brand'"
+                                                [settings]="brandDropdownSettings"
+                                                [data]="brand_list" [(ngModel)]="selectedBrandList"
+                                                 (onSelect)="onSelectBrand($event)"
+                                                (onSelectAll)="onSelectAllBrand($event)" [ngModelOptions]="{standalone: true}"
+                                                >
+                                            </ng-multiselect-dropdown>
+                                    </div>
+
+                                    <div class="col-md-6 mb20 default-forms" style="margin-top: -53px;">
+                                        <label>{{ 'STORE.SHOP_BRAND' | translate }}</label>
+                                        <!--<label class="field select">
+                                            <select name="subbrandID" formControlName="subbrandID" #subbrandID (change)="subbrandcode()"
+                                                class="gui-input">
+                                                <option value="0">Select SubBrand</option>
+                                                <option *ngFor="let item of subbrand_list" value="{{item.subBrandName}}">{{item.subBrandName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>
+                                            </select>
+                                            <i class="arrow"></i>
+                                        </label>-->
+                                        <ng-multiselect-dropdown [placeholder]="'Select ShopBrand'"
+                                                [settings]="shopbrandDropdownSettings"
+                                                [data]="brand_list" [(ngModel)]="selectedshopBrandList"
+                                                 [ngModelOptions]="{standalone: true}"
+                                                >
+                                            </ng-multiselect-dropdown>
+                                    </div>
+
+                                    <div class="col-md-6 mb20 select-forms" style="margin-top: -25px;">
+                                        <label>{{ 'STORE.FRANCHISE_LIST' | translate }}</label>
+                                       
+                                            <select name="franchiselistID" formControlName="franchiselistID" #franchiselistID (change)="franchiselistcode()"
+                                            [ngClass]="{'red-border': myForm.controls['franchiselistID'].invalid}"    
+                                            class="gui-input">
+                                                <option value="0">Select Franchise List</option>
+                                                <option *ngFor="let item of franchise_list" value="{{item.id}}">{{item.franchiseName}}</option>
+                                                <!--<option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>-->
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+
+                                    <!-- can use dropdown instead of radio button -->
+                                    <div class="col-md-6 mb20 select-forms" style="margin-top: -25px;">
+                                        <label>{{ 'STORE.STORE_TYPE' | translate }}</label>
+                                       
+                                            <select name="storetypeID" formControlName="storetypeID" #storetypeID 
+                                            [ngClass]="{'red-border': myForm.controls['storetypeID'].invalid}"
+                                                class="gui-input">
+                                                <option value="0">Select Store Type</option>
+                                                <!--<option *ngFor="let item of json" value="{{item.id}}">{{item.countryName}}</option>-->
+                                                <option>Retail</option>
+                                                <option>Online</option>
+                                                <option>Outlet</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+
+                                    
+                                    <div class="col-md-6 mb20 floating-form floating-label" style="margin-top: -25px;">
+                                                                              
+                                            <input type="text" name="address" autocomplete="off"
+                                                formControlName="address" #address
+                                                [ngClass]="{'red-border': myForm.controls['address'].invalid}"
+                                                class="gui-input floating-input" placeholder="Address">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'STORE.ADDRESS' | translate }}</label>
+                                       
+                                    </div>
+
+                                    
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                              
+                                            <input type="text" name="location" autocomplete="off"
+                                                formControlName="location" #location
+                                                [ngClass]="{'red-border': myForm.controls['location'].invalid}"
+                                                class="gui-input floating-input" placeholder="Location">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'STORE.LOCATION' | translate }}</label>
+                                        
+                                    </div>
+
+                                    
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                              
+                                            <input type="text" name="remarks" autocomplete="off"
+                                                formControlName="remarks" #remarks
+                                                class="gui-input floating-input" placeholder="Remarks">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                        
+                                    </div>
+
+                                    
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="storeheader" autocomplete="off"
+                                                formControlName="storeheader" #storeheader
+                                                [ngClass]="{'red-border': myForm.controls['storeheader'].invalid}"
+                                                class="gui-input floating-input" placeholder="Store Header">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'STORE.STORE_HEADER' | translate }}</label>
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="storefooter" autocomplete="off"
+                                                formControlName="storefooter" #storefooter
+                                                [ngClass]="{'red-border': myForm.controls['storefooter'].invalid}"
+                                                class="gui-input floating-input" placeholder="Store Footer">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'STORE.STORE_FOOTER' | translate }}</label>
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="invoiceprintcount" autocomplete="off"
+                                                formControlName="invoiceprintcount" #invoiceprintcount (keypress)="keyPress($event)"
+                                                [ngClass]="{'red-border': myForm.controls['invoiceprintcount'].invalid}"
+                                                class="gui-input floating-input" placeholder="Invoice Print Count">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'STORE.INVOICE_PRINT_COUNT' | translate }}</label>
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="returnprintcount" autocomplete="off"
+                                                formControlName="returnprintcount" #returnprintcount (keypress)="keyPress($event)"
+                                                [ngClass]="{'red-border': myForm.controls['returnprintcount'].invalid}"
+                                                class="gui-input floating-input" placeholder="Return Print Count">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'STORE.RETURN_PRINT_COUNT' | translate }}</label>
+                                       
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="exchangeprintcount" autocomplete="off"
+                                                formControlName="exchangeprintcount" #exchangeprintcount (keypress)="keyPress($event)"
+                                                [ngClass]="{'red-border': myForm.controls['exchangeprintcount'].invalid}"
+                                                class="gui-input floating-input" placeholder="Exchange Print Count">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'STORE.EXCHANGE_PRINT_COUNT' | translate }}</label>
+                                    </div>
+                                    
+                                    <div class="col-md-6 mb20">
+
+                                    </div>
+
+                                    <!-- store image -->
+                                    <div class="col-md-6 mt20 av-down">
+                                        <label class="av-image">{{ 'STORE.STORE_IMAGE' | translate }}</label>
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <!-- <input type='file' id="imageUpload" (change)="picked1($event, null)" accept=".png, .jpg, .jpeg" /> -->
+                                                <input type='file' #fileInput1 formControlName="fileInput1" id="imageUpload" name="imageUpload"
+                                                 (change)="picked1($event, null)" accept=".png, .jpg, .jpeg" />
+                                               
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div id="imagePreview">
+                                                <img src="{{ current_store_image}}">
+                                                </div>
+                                            </div>
+                                            <label for="imageUpload" class="store-master-upload"><i class="fa fa-upload"></i></label>
+                                            <div class="image-delete">
+                                                <button (click)="delStoreImage()" class="btn btn danger"><i class="fa fa-window-close"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- license image -->
+                                    <div class="col-md-6 mt20 av-down">
+                                        <label class="av-image">{{ 'STORE.LICENSE_IMAGE' | translate }}</label>
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <!-- <input type='file' id="imageUpload" (change)="picked2($event, null)" accept=".png, .jpg, .jpeg" /> -->
+                                                <input type='file' #fileInput2 formControlName="fileInput2" id="imageUpload1" name="imageUpload1"
+                                                 (change)="picked2($event, null)" accept=".png, .jpg, .jpeg" />
+                                               
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div id="imagePreview">
+                                                <img src="{{ current_license_image}}">
+                                                </div>
+                                            </div>
+                                            <label for="imageUpload1" class="store-master-upload"><i class="fa fa-upload"></i></label>
+                                            <div class="image-delete">
+                                                <button (click)="delLicenseImage()" class="btn btn danger"><i class="fa fa-window-close"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="diskid" autocomplete="off"
+                                                formControlName="diskid" #diskid
+                                                [ngClass]="{'red-border': myForm.controls['diskid'].invalid}"
+                                                class="gui-input floating-input" placeholder="DISK ID">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'STORE.DISK_ID' | translate }}</label>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="cpuid" autocomplete="off"
+                                                formControlName="cpuid" #cpuid
+                                                [ngClass]="{'red-border': myForm.controls['cpuid'].invalid}"
+                                                class="gui-input floating-input" placeholder="CPU ID">
+                                                <span class="highlight"></span>
+                                            <label>{{ 'STORE.CPU_ID' | translate }}</label>
+                                      
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="emailtemplate" autocomplete="off"
+                                                formControlName="emailtemplate" #emailtemplate
+                                                [ngClass]="{'red-border': myForm.controls['emailtemplate'].invalid}"
+                                                class="gui-input floating-input" placeholder="Email Template">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'STORE.EMAIL_TEMPLATE' | translate }}</label>
+                                    </div>
+
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="smstemplate" autocomplete="off"
+                                                formControlName="smstemplate" #smstemplate
+                                                [ngClass]="{'red-border': myForm.controls['smstemplate'].invalid}"
+                                                class="gui-input floating-input" placeholder="SMS Template">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'STORE.SMS_TEMPLATE' | translate }}</label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="enableonlinestock" name="enableonlinestock" #enableonlinestock formControlName="enableonlinestock">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'STORE.ENABLE_ONLINE_STOCK' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="enableorderfulfillment" name="enableorderfulfillment" #enableorderfulfillment formControlName="enableorderfulfillment">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'STORE.ENABLE_ORDER_FULFILLMENT' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="enablefingerprint" name="enablefingerprint" #enablefingerprint formControlName="enablefingerprint">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'STORE.ENABLE_FINGER_PRINT' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="section">
+                                            <div class="bs-component mt10">
+
+                                                <div class="round fill mb10">
+                                                    <input type="checkbox" checked="" id="enableBin" name="enableBin" #enableBin
+                                                        formControlName="enableBin" (change)="onCheckboxChange($event)">
+                                                    <label for="enableBin"></label>
+                                                    <p class="label-text">{{ 'STORE.ENABLE_BIN' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 floating-form floating-label mt20">
+
+                                        <input type="text" name="noOfLevels" autocomplete="off"
+                                            formControlName="noOfLevels" #noOfLevels (keypress)="restrictSpecialChars($event)"
+                                            class="gui-input floating-input" (change)="gridBind()" placeholder="No Of Levels">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STORE.NO_OF_LEVELS' | translate }}</label>
+                                    </div>
+
+
+                                    <!-- <div class="clearfix"></div> -->
+
+                                    <div class="col-md-12" *ngIf="show">
+                                        <div class="allcp-form theme-info ">
+                                            <div class="panel">
+                                                <div class="panel-body country-table">
+                                                    <div class="table-responsive">
+                                                        <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                            <thead>
+                                                                <tr class="bg-dark">
+                                                                    <th class="">{{ 'STORE.LEVEL_NO' | translate }}</th>
+                                                                    <th class="">{{ 'STORE.LEVEL_NAME' | translate }}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let item of binConfig; let i = index;">
+                                                                    <td>
+                                                                        {{item.levelNo}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" [(ngModel)]="item.levelName" [ngModelOptions]="{standalone: true}"
+                                                                        spellcheck="false" maxlength="4" readonly
+                                                                       class="gui-input">
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- buttons -->
+                                <div class="row">
+                                    <div class="offset-md-4 col-md-2 mt10 default-forms">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button" (click)="update_store()" ><i
+                                                class="fa fa-check-circle-o"></i> Update                                                
+                                        </button>
+                                    </div>
+  
+                                    <div class="col-md-2 mt10 default-forms">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+                                    </div>
+                                </div>
+                                <!-- buttons -->
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

@@ -1,0 +1,238 @@
+<html>	
+	<div style="width: 95mm;">
+		<div style="width: 60%; text-align: center;margin-left:45px">
+			<img src="{{storeImage}}" style="height: 50px;width:50%;margin-left:45px;"/>
+		</div>
+	   <div style="width: 100%; text-align: center;font-weight:100">
+		  <h4 style="margin: 2mm 0mm">*&nbsp;{{header}} &nbsp;*</h4>
+	  </div>
+	  <table style="width: 100%;">
+		  <tr>
+			  <td style="width: 30%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">المحل/Shop : </h5>
+			  </td>
+			  <td style="width: 70%;text-align:left;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{shopName}} </h5>
+			  </td>
+		  </tr>
+	  </table>
+	  <table style="width: 100%;">
+		  <tr>
+			  <td style="width: 30%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">نقاط البيع/POS : </h5>
+			  </td>
+			  <td style="width: 70%;text-align:left;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{posName}} </h5>
+			  </td>
+		  </tr>
+	  </table>
+	 <table style="width: 100%;">
+		  <tr>
+			  <td style="width: 40%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">رقم الفاتورة/Invoice : </h5>
+			  </td>
+			  <td style="width: 60%;text-align:left;">
+				  <h5 style="margin: 2mm 0mm;"> {{invoiceNo}} </h5>
+			  </td>
+		  </tr>
+	  </table>	  
+	 <table style="width: 100%;">
+			 <tr>
+				 <td style="width: 25%;">
+					 <h5 style="margin: 2mm 0mm;font-weight:550"> التاريخ/Date : </h5>
+				 </td>
+				  <td style="width:25%;text-align:left;">
+					 <h5 style="margin: 2mm 0mm;font-weight:100"> {{date | date: 'dd-MMM-yy'}} </h5>
+				 </td>
+				 <td style="width: 25%;">
+					 <h5 style="margin: 2mm 0mm;font-weight:550"> الوقت/Time : </h5>
+				 </td>	
+				 <td style="width:25%;text-align:left;">
+					 <h5 style="margin: 2mm 0mm;font-weight: 100"> {{time | date:'hh:mm a'}} </h5>
+				 </td>	
+			 </tr>
+		</table>		
+		<table style="width: 100%;">
+		  <tr>
+			  <td style="width: 40%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">العميل/Customer : </h5>
+			  </td>
+			  <td style="width: 60%;text-align:left;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{customerName}} </h5>
+			  </td>
+		  </tr>
+	  </table>	 	  
+	 <table style="width: 100%;">
+			<tr>
+				<td style="width:25%;">
+					<h5 style="margin: 2mm 0mm; height: 15px;font-weight:550">البائع</h5>
+                    <h5 style="margin: 2mm 0mm;font-weight:550">/Salesman: </h5>
+				</td>
+				<td style="width:25%;text-align:left;">
+					<h5 style="margin: 2mm 0mm;font-weight:100"> {{salesMan}} </h5>
+				</td>
+				<td style="width:25%;">
+					<h5 style="margin: 2mm 0mm; height: 15px;font-weight:550">أمين الصندوق </h5>
+					<h5 style="margin: 2mm 0mm;font-weight:550">/Cashier: </h5>
+				</td>
+				<td style="width:25%;text-align:left;">
+					<h5 style="margin: 2mm 0mm;font-weight:100"> {{cashier}} </h5>
+				</td>
+			</tr>
+	 </table>
+		<table style="width: 100%;">
+		  <tr>
+			  <td style="width: 65%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">ألرقم الضريبي للمؤسسة/Tax :</h5>
+			  </td>
+			  <td style="width: 35%;text-align:left;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{taxNo}} </h5>
+			  </td>
+		  </tr>
+	  </table>	
+		<table style="width: 100%;">
+		  <tr>
+			  <td style="width: 50%;">
+				  <h5 style="margin: 2mm 0mm;font-weight:550">Reference Sales Invoice No :</h5>
+			  </td>
+			  <td style="width: 50%;text-align:left;">
+				  <h5 style="margin: 2mm 0mm;font-weight:100"> {{salesinvoiceNo}} </h5>
+			  </td>
+		  </tr>
+	  </table>	
+	  <table style="width:100%; border-collapse: collapse;">
+          <thead>
+			<tr style="border-top: 1px solid #000; border-bottom: 2px solid #000;">
+                 <th style="width: 10%;text-align: center;">م</th>
+                 <th style="width: 50%;text-align: center;">النوع</th>
+                 <th style="width: 10%;text-align: center;">المبلغ</th>
+                 <th style="width: 30%;text-align: right;">المبلغ</th>
+              </tr>
+           </thead>
+           <tbody>
+			<tr *ngFor="let item of SalesReturnDetailsList; let i = index;">
+                <td style="text-align: center;font-weight: 100"><h5>{{i+1}}</h5></td>
+                <td style="text-align: left;font-weight: 100"><h5>{{item.itemCode}}</h5></td>
+				<td style="text-align: center;font-weight: 100"><h5>{{item.quantity}}</h5></td>
+				<td style="text-align: right;font-weight: 100"><h5>{{item.price}}</h5></td>
+			</tr>
+            </tbody>
+		  <tfoot>
+			<tr style="border-top: 2px solid #000;border-bottom: 1px solid #000;">
+                  <td></td>
+				  <td style="text-align: left;font-weight: 100"><h5>اجمالي الكميه</h5></td>
+				  <td style="text-align: center;font-weight: 100"><h5>{{totalQty}}</h5></td>
+				  <td></td>
+              </tr>
+		  </tfoot>
+	   </table>
+	    <table style="width: 80%;margin-left: 28px;border-collapse: collapse;">
+		   <tr>
+			   <td>
+				   <h5 style="margin: 2mm 0mm;font-weight:550"> المبلغ الاجمالي/Total Price:</h5>
+			   </td>
+			   <td>
+				   <h5 style="margin: 2mm 0mm;
+				           text-align: right;font-weight:100"> {{totalPrice}}</h5>
+			   </td>
+		   </tr>
+		   <tr>
+			   <td>
+				   <h5 style="margin: 2mm 0mm;font-weight:550"> الخصم/Total Discount:</h5>
+			   </td>
+			   <td>
+				   <h5 style="margin: 2mm 0mm; text-align: right;font-weight:100"> {{totalDiscount}} </h5>
+			   </td>
+		   </tr>
+		   <tr style="border-bottom: 2px solid #000;">
+			   <td>
+				   <h5 style="margin: 2mm 0mm;font-weight:550"> 5% ض.ق.م./Tax:</h5>
+			   </td>
+			   <td>
+				    <h5 style="margin: 2mm 0mm;text-align: right;font-weight: 100"> {{taxAmount}} </h5>
+			   </td>
+		   </tr>
+		   <tr style="border-bottom: 2px solid #000;">
+			   <td>
+				   <h5 style="margin: 2mm 0mm;font-weight:550">  المبلغ الصافي/Net Amount:</h5>
+			   </td>
+			   <td>
+				   <h5 style="margin: 2mm 0mm; text-align: right;font-weight:100"> {{netAmount}}</h5>
+			   </td>
+		   </tr>
+		   <tr style="border-bottom: 2px solid #000;">
+			   <td>
+				   <h5 style="margin: 2mm 0mm;font-weight:550"> المدفوع/Balance Amount</h5>
+			   </td>
+			   <td>
+				   <h5 style="margin: 2mm 0mm;text-align: right;font-weight: 100"> {{customerBalance}}</h5>
+			   </td>
+		   </tr>
+	   </table>
+		<table style="width: 100%;height:20px">
+		  <tr>  
+		  </tr>
+	  </table>
+	   <table style="width: 100%; border-collapse: collapse;">	   
+		   <tr>
+			   <td style="width:40%;">
+				  <h5 style="margin: 2mm 0mm;text-align: left;font-weight:550"> العميل/Cash: </h5> 
+			   </td>
+			   <td style="border-bottom: 2px solid #000;">
+				   <h5 style="margin: 2mm 0mm;text-align: center;font-weight: 100"> {{cash}} </h5> 
+			   </td>			   
+		   </tr>
+		   <tr>
+			   <td style="width:40%;">
+				   <h5 style="margin: 2mm 0mm;text-align: left;font-weight:550"> رقم الهاتف/Knet: </h5>
+			   </td>
+			   <td  style="border-bottom: 2px solid #000;">
+				   <h5 style="margin: 2mm 0mm;text-align: center;font-weight:100"> {{knet}} </h5> 
+			   </td>
+		   </tr>
+		   <tr>
+			   <td style="width:40%;">
+				   <h5 style="margin: 2mm 0mm;text-align: left;font-weight:550">موافقة من قبل/Visa: </h5> 
+			   </td>
+			   <td>
+				   <h5 style="margin: 2mm 0mm;text-align: center;font-weight:100"> {{visa}} </h5> 
+			   </td>
+		   </tr>		   
+	   </table>
+		<table style="width: 100%;height:60px">
+		  <tr>  
+		  </tr>
+	  </table>
+	   <table style="width:100%;">
+		   <tr>
+			   <td style="border-top: 1px solid #000;">
+				   <h5 style="margin: 2mm 0mm;text-align:center;font-weight:550">امضاء العميل</h5>
+			   </td>
+			   <td style="border-top: 1px solid #000;">
+				   <h5 style="margin: 2mm 0mm;text-align:center;font-weight:550"> امضاء المدير</h5>
+			   </td>
+		   </tr>
+		</table>
+		 <table style="width:100%;">
+		   <tr>
+			   <td>
+				   <h5 style="margin: 2mm 0mm;text-align:center;font-weight:100">{{footer}}</h5>
+			   </td>
+		   </tr>
+	     </table>		 
+		 <table style="width:100%;height:50px">
+			<tr>
+				<td>
+					<h5 style="margin: 2mm 0mm;text-align:center;font-weight:700">* &nbsp; {{invoiceNo}} &nbsp; *</h5>
+				</td>
+			</tr>
+		  </table>
+		<!-- <table style="width:100%;height:75px;background-color:gray">
+		   <tr>
+			   <td>
+				   <h5 style="margin: 2mm 0mm;text-align:center;font-weight:100">DuplicateReceipt</h5>
+			   </td>
+		   </tr>
+	     </table> -->
+</div>
+</html>

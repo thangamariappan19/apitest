@@ -1,0 +1,408 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../manager-override">{{ 'MANAGER_OVERRIDE.MANAGER_OVERRIDE_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+        
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'MANAGER_OVERRIDE.EDIT_MANAGER_OVERRIDE' | translate }} </h4>             
+            </div>
+    
+    
+       </section>
+
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="managerOverrideCode" autocomplete="off" readonly
+                                                formControlName="managerOverrideCode" #tailoringCode
+                                                [ngClass]="{'red-border': myForm.controls['managerOverrideCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="{{ 'MANAGER_OVERRIDE.MANAGER_OVERRIDE_CODE' | translate }}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'MANAGER_OVERRIDE.MANAGER_OVERRIDE_CODE' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="managerOverrideName" autocomplete="off" 
+                                                formControlName="managerOverrideName" #tailoringName
+                                                [ngClass]="{'red-border': myForm.controls['managerOverrideName'].invalid}"
+                                                class="gui-input floating-input" placeholder="{{ 'MANAGER_OVERRIDE.MANAGER_OVERRIDE_NAME' | translate }}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'MANAGER_OVERRIDE.MANAGER_OVERRIDE_NAME' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="changeSalesPersonInSOE" name="changeSalesPersonInSOE" #changeSalesPersonInSOE formControlName="changeSalesPersonInSOE">
+                                                        <label for="changeSalesPersonInSOE"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.CHANGE_SALES_PERSON_SOE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="reprintTransactionReceipt" name="reprintTransactionReceipt" #reprintTransactionReceipt formControlName="reprintTransactionReceipt">
+                                                        <label for="reprintTransactionReceipt"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.REPRINT_TRANSACTION_RECEIPT' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="deleteSuspendedTransaction" name="deleteSuspendedTransaction" #deleteSuspendedTransaction formControlName="deleteSuspendedTransaction">
+                                                        <label for="deleteSuspendedTransaction"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.DELETE_SUSPENDED_TRANSACTION' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="changeSalesPersonRefund" name="changeSalesPersonRefund" #changeSalesPersonRefund formControlName="changeSalesPersonRefund">
+                                                        <label for="changeSalesPersonRefund"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.CHANGE_SALES_PERSON_REFUND' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="voidItem" name="voidItem" #voidItem formControlName="voidItem">
+                                                        <label for="voidItem"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.VOID_ITEM' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="salesExchange" name="salesExchange" #salesExchange formControlName="salesExchange">
+                                                        <label for="salesExchange"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.SALES_EXCHANGE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                      
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill ">
+                                                        <input type="checkbox" checked="" id="customerSearch" name="customerSearch" #customerSearch formControlName="customerSearch">
+                                                        <label for="customerSearch"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.CUSTOMER_SEARCH' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill ">
+                                                        <input type="checkbox" checked="" id="voidSale" name="voidSale" #voidSale formControlName="voidSale">
+                                                        <label for="voidSale"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.VOID_SALE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="transactionSearch" name="transactionSearch" #transactionSearch formControlName="transactionSearch">
+                                                        <label for="transactionSearch"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.TRANSACTION_SEARCH' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="productSearch" name="productSearch" #productSearch formControlName="productSearch">
+                                                        <label for="productSearch"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.PRODUCT_SEARCH' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="cashOut" name="cashOut" #cashOut formControlName="cashOut">
+                                                        <label for="cashOut"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.CASH_OUT' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="suspendRecall" name="suspendRecall" #suspendRecall formControlName="suspendRecall">
+                                                        <label for="suspendRecall"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.SUSPEND_RECALL' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="transactionRefund" name="transactionRefund" #transactionRefund formControlName="transactionRefund">
+                                                        <label for="transactionRefund"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.TRANSACTION_REFUND' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="cashIn" name="cashIn" #cashIn formControlName="cashIn">
+                                                        <label for="cashIn"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.CASH_IN' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                    <div class="col-md-4">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="dayInDayOut" name="dayInDayOut" #dayInDayOut formControlName="dayInDayOut">
+                                                        <label for="dayInDayOut"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.DAY_IN_OUT' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="totalDiscount" name="totalDiscount" #totalDiscount formControlName="totalDiscount">
+                                                        <label for="totalDiscount"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.TOTAL_DISCOUNT' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="allowEditCustomer" name="allowEditCustomer" #allowEditCustomer formControlName="allowEditCustomer">
+                                                        <label for="allowEditCustomer"></label>
+                                                        <p class="label-textm">{{ 'MANAGER_OVERRIDE.ALLOW_EDIT_CUSTOMER' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                        
+                                            <div class="section">
+                                                <div class="bs-component ">
+
+                                                    <div class="round fill mt10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-textm">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                                    
+                                <div class="row default-forms mt20">
+                                    
+                                    
+                                  <!--  <div class="col-md-2 ">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>-->
+                                    <div class="offset-md-4  col-md-2 ">
+                                        <button type="submit" (click) = "updateManagerOverride()" [disabled]="myForm.invalid"
+                                         class="btn btn-lg btn-success btn-block common-button"><i
+                                                class="fa fa-save"></i> Update
+                                                
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click) = "close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

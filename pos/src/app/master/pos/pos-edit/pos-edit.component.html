@@ -1,0 +1,254 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../pos-list">{{ 'POS.POS_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+      
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'POS.EDIT_POS' | translate }} </h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="posCode" autocomplete="off" readonly
+                                                formControlName="posCode" #posCode
+                                                [ngClass]="{'red-border': myForm.controls['posCode'].invalid}"
+                                                class="gui-input floating-input" placeholder="POS Code"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'POS.POS_CODE' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="posName" autocomplete="off"
+                                                formControlName="posName" #posName
+                                                [ngClass]="{'red-border': myForm.controls['posName'].invalid}"
+                                                class="gui-input floating-input" placeholder="POS Name"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'POS.POS_NAME' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'POS.COUNTRY' | translate }}</label>
+                                        
+                                            <select name="countryID" formControlName="countryID" #countryID (change)="countrycode_Changed()"
+                                                class="gui-input" 
+                                                [ngClass]="{'red-border': myForm.controls['countryID'].invalid}">
+                                                <option value="" disabled>Select Country</option>
+                                               <option *ngFor="let item of country_list" value="{{item.id}}" disabled>{{item.countryName}}</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'POS.STORE_GROUP' | translate }}</label>
+                                        
+                                            <select name="storeGroupID" formControlName="storeGroupID" #storeGroupID  (change)="storegroupcodeonchange()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['storeGroupID'].invalid}">
+                                                <option value="" disabled>Select Store Group</option>
+                                                <option *ngFor="let item of storegroup_list" value="{{item.id}}" disabled>{{item.storeGroupName}}</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'POS.STORE' | translate }}</label>
+                                       
+                                            <select name="storeID" formControlName="storeID" #storeID (change)="storecode_Changed()"
+                                                class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['storeID'].invalid}">
+                                                <option value="" disabled>Select Store</option>
+                                                <option *ngFor="let item of store_list" value="{{item.id}}" disabled>{{item.storeName}}</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                        <input type="text" name="printerDevice" autocomplete="off"
+                                        formControlName="printerDevice" #printerDevice
+                                        [ngClass]="{'red-border': myForm.controls['printerDevice'].invalid}"
+                                        class="gui-input floating-input" placeholder="Printer Device"  trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'POS.PRINTER_DEVICE' | translate }}</label>
+<!--                                       
+                                            <select name="printerDevice" formControlName="printerDevice" #printerDevice 
+                                                class="gui-input" >
+                                                <option value="">Select Printer</option> -->
+                                              <!-- <option *ngFor="let item of json" value="{{item.id}}">{{item.countryName}}</option> -->
+                                                <!-- <option value="HP Printer">HP Printer</option>
+                                                <option value="Citizen Printer">Citizen Printer</option> -->
+                                                <!-- <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option> -->
+                                            <!-- </select>
+                                            <i class="fa fa-angle-down"></i> -->
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                      
+                                           <input matInput placeholder="Search" aria-label="State" 
+                                           [matAutocomplete]="auto" [formControl]="searchCustomerCtrl" class="gui-input floating-input">
+                                           <mat-autocomplete id="pms" #auto="matAutocomplete" class="pos filtered-search pos-full-search" 
+                                           [displayWith]="customerDisplayWith.bind(filteredCustomers)">
+                                             <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                             <ng-container *ngIf="!isLoading">
+               
+                                               <mat-option *ngFor="let customer of filteredCustomers" [value]="customer">
+                                               
+                                                 <div class="col-md-3 pos-search-div"><b><i class="fa fa-list"></i> {{customer.code}}</b></div>  <div class="col-md-6 pos-search-div"><b><i class="fa fa-square"></i> {{customer.name}}</b></div> <div class="col-md-3 pos-search-div"><b><i class="fa fa-check-circle"></i> {{customer.number}}</b></div> 
+                                               </mat-option>
+                                           
+                                             </ng-container>
+                                           </mat-autocomplete>
+                                           <span class="highlight"></span>
+                                           <label>DefaultCustomer</label>
+                                                                   
+                                           <!-- <input type="text" name="defaultCustomer" autocomplete="off"
+                                               formControlName="defaultCustomer" #defaultCustomer (keypress)="keyPress($event)"
+                                               [ngClass]="{'red-border': myForm.controls['defaultCustomer'].invalid}"
+                                               class="gui-input floating-input" placeholder="Default Customer" spellcheck="false" trim="blur">
+                                               <span class="highlight"></span>
+                                               <label>{{ 'POS.DEFAULT_CUSTOMER' | translate }}</label> -->
+                                   </div>                         
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="poleDisplayPort" autocomplete="off"
+                                                formControlName="poleDisplayPort" #poleDisplayPort
+                                                [ngClass]="{'red-border': myForm.controls['poleDisplayPort'].invalid}"
+                                                class="gui-input floating-input" placeholder="Pole Display Port"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'POS.POLE_DISPLAY_PORT' | translate }}</label>
+                                        
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="posDisplayLineMessageOne" autocomplete="off" maxlength="20"
+                                                formControlName="posDisplayLineMessageOne" #posDisplayLineMessageOne
+                                                [ngClass]="{'red-border': myForm.controls['posDisplayLineMessageOne'].invalid}"
+                                                class="gui-input floating-input" placeholder="POS Display Line Message One"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'POS.POS_DISPLAY_LINE_MESSAGE_ONE' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="posDisplayLineMessageTwo" autocomplete="off" maxlength="20"
+                                                formControlName="posDisplayLineMessageTwo" #posDisplayLineMessageTwo
+                                                [ngClass]="{'red-border': myForm.controls['posDisplayLineMessageTwo'].invalid}"
+                                                class="gui-input floating-input" placeholder="POS Display Line Message Two"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'POS.POS_DISPLAY_LINE_MESSAGE_TWO' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="diskID" autocomplete="off" readonly
+                                                formControlName="diskID" #diskID
+                                                [ngClass]="{'red-border': myForm.controls['diskID'].invalid}"
+                                                class="gui-input floating-input" placeholder="Disk ID"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'POS.DISK_ID' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="cpuID" autocomplete="off" readonly
+                                                formControlName="cpuID" #cpuID
+                                                [ngClass]="{'red-border': myForm.controls['cpuID'].invalid}"
+                                                class="gui-input floating-input" placeholder="CPU ID"
+                                                spellcheck="false" trim="blur">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'POS.CPU_ID' | translate }}</label>
+                                       
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text"> {{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="row default-forms">
+                                    
+                                  
+                                  <!--  <div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>-->
+                                    <div class="offset-md-4  col-md-2 mt10">
+                                        <button type="submit" (click)="update_pos()" 
+                                        class="btn btn-lg btn-success btn-block common-button" 
+                                        [disabled]="myForm.invalid"><i
+                                                class="fa fa-save"></i> Update
+                                                
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" (click)="close()" class="btn btn-lg btn-cancel btn-block common-button"><i
+                                            class="fa fa-remove"></i> Close</button>
+
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

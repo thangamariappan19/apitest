@@ -1,0 +1,190 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../sub-brand">{{ 'SUB_BRAND.SUB_BRAND_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'SUB_BRAND.CREATE_SUB_BRAND' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 mb20 select-forms">
+                                    <label>{{ 'SUB_BRAND.BRAND' | translate }}</label>
+                                    <ng-multiselect-dropdown [placeholder]="'Select Brand'"
+                                    formControlName="brandID"
+                                    [settings]="brandDropdownSettings" [data]="brandList"
+                                    [(ngModel)]="selectedBrandList" (onSelect)="brandcode($event)"
+                                    [disabled]="disabled">
+                                   </ng-multiselect-dropdown>
+
+                        
+                                   
+                                        <!-- <select name="brandID" formControlName="brandID" #brandID (change)="brandcode()" class="gui-input"
+                                            [ngClass]="{'red-border': myForm.controls['brandID'].invalid}">
+                                            <option value="">Select Brand</option>
+                                            <option *ngFor="let item of brandList" value="{{item.id}}">
+                                                {{item.brandName}}</option>
+                                        </select>
+                                        <i class="fa fa-angle-down"></i> -->
+                                   
+                                </div>
+                                <div class="col-md-2 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="subBrandCode" autocomplete="off"
+                                            formControlName="subBrandCode" #subBrandCode maxlength="4"
+                                            [ngClass]="{'red-border': myForm.controls['subBrandCode'].invalid}"
+                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                            class="gui-input floating-input" placeholder="Sub Brand Code">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'SUB_BRAND.SUB_BRAND_CODE' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-3 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="subBrandName" autocomplete="off"
+                                            formControlName="subBrandName" #subBrandName
+                                            [ngClass]="{'red-border': myForm.controls['subBrandName'].invalid}"
+                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                            class="gui-input floating-input" placeholder="Sub Brand Name">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'SUB_BRAND.SUB_BRAND_NAME' | translate }}</label>
+                                   
+                                </div>
+                                <div class="col-md-4">
+                                   
+                                        <div class="section">
+                                            <div class="bs-component mt10">
+
+                                                <div class="round  mt10 fill mb10">
+                                                    <input type="checkbox" checked="" id="active" name="active" #active
+                                                        formControlName="active">
+                                                    <label for="active"></label>
+                                                    <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+
+                                            </div>
+                                        </div>
+                                   
+                                </div>
+                                <div class="col-md-1 mt10 default-forms">
+                                    <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                        (click)="addSubBrandList()" [disabled]="myForm.pristine || myForm.invalid"
+                                        title="Add"><i class="fa fa-plus"></i> </button>                                    
+                                </div>
+                                <div class="col-md-1 mt10 default-forms">
+                                    <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                                        title="Clear" (click)="clear_controls()"><i class="fa fa-refresh"></i> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">{{ 'SUB_BRAND.SUB_BRAND_CODE' | translate }}</th>
+                                            <th class="">{{ 'SUB_BRAND.SUB_BRAND_NAME' | translate }}</th>
+                                            <th class="">{{ 'COMMON.ACTIVE' | translate }}</th>
+                                            <th class=""></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of subBrandList; let i = index;">
+                                            <!--<td>{{i+1}}</td>
+                                            <td>{{item.subBrandCode}}</td>
+                                            <td>{{item.subBrandName}}</td>
+                                            <td>{{item.active}}</td>-->
+                                            <td>
+                                                {{i+1}}
+                                            </td>
+                                            <td>
+                                                <input type="text" [(ngModel)]="item.subBrandCode" [ngModelOptions]="{standalone: true}" (change)="subBrand_code_changed(item)"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false"
+                                                maxlength="4"
+                                                style="text-align:center;"
+                                               class="gui-input">
+                                            </td>
+                                            <td>
+                                                <input type="text" [(ngModel)]="item.subBrandName" [ngModelOptions]="{standalone: true}" 
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false"
+                                                style="text-align:center;"
+                                               class="gui-input">
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" [(ngModel)]="item.active" [ngModelOptions]="{standalone: true}" 
+                                                style="text-align:center;">
+                                            </td>
+                                            <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                    class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row default-forms">
+                    
+                    <div class="offset-md-3 col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-success btn-block common-button" name="save"
+                            [disabled]="myForm.invalid" (click)="addSubBrand()"><i
+                                class="fa fa-check-circle-o"></i> Save
+
+                        </button>
+                    </div>
+                    <div class=" col-md-2 mt10">
+                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"
+                            (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+
+                    </div>
+                    <div class="col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+                   
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

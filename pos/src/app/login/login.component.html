@@ -1,0 +1,192 @@
+
+<div class="">
+    <div class="container-fluid p-t-b-100 log-bg">
+        <div class="row">
+            
+    
+             <!-- <div class="col-md-7 hidden-xs login-section-two">
+                <div class="login-right-content">
+                    <div class="login-icon">
+                         <img src="../assets/img/logicon.png">
+                        <div class="login-right-title">
+                            <h4>RETAIL <span>POS</span></h4>
+                        </div> -->
+                        <!-- <div class="login-text">
+                            <div id="myCarousel" class="carousel slide login-caro" data-ride="carousel">
+                                
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                       <img src="../assets/img/c2.png">
+                                    </div>
+                                     <div class="item">
+                                       <img src="../assets/img/c1.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div> 
+            </div>  -->
+            
+         
+    
+           
+    
+            <div class="offset-xl-4 offset-lg-4 offset-md-3 offset-sm-2 col-xl-4 col-lg-4 col-md-6 col-sm-8 col-12">
+    
+            <!-- new login -->
+           
+    
+            <div class="log-div ">
+                <div class="text-center" style="margin-bottom: 30px;
+                     margin-top: 19px !important;">
+                    <img src="../assets/img/login-logos.png" alt="" class="log-img">
+                    <!-- <h3 class="mt-2 log-text" >Log In</h3> -->
+                   
+                </div>
+    
+                  
+                <form (ngSubmit)="login_submit(myForm)" #myForm="ngForm" >
+                    
+                    <div class="common-login">                    
+                    
+                        <mat-form-field appearance="outline"> 
+                            <mat-label>Username</mat-label>
+                               <input type="text" matInput
+                                name="email" placeholder="Username"
+                                autocomplete="off" 
+                                ngModel
+                                required
+                                #email="ngModel"
+                                
+                                [ngClass]="{'red-border': email.errors && (email.dirty || email.touched)}"
+                                >
+                                
+                        </mat-form-field>
+                    
+                           
+                        <mat-form-field appearance="outline">  
+                            <mat-label>Password</mat-label>
+                              <input type="password" 
+                                name="password"  matInput placeholder="Password"
+                                autocomplete="off" 
+                                ngModel
+                                required
+                                #password="ngModel"
+                               
+                                [ngClass]="{'red-border': password.errors && (password.dirty || password.touched)}"
+                                >
+                        </mat-form-field>
+
+                </div>
+
+                    <!-- <div class="floating-label">      
+                        <input class="floating-input form-control" type="text" placeholder="Username"  autocomplete="off" 
+                        ngModel
+                        required
+                        #email="ngModel"
+                        [ngClass]="{'red-border': password.errors && (password.dirty || password.touched)}"
+                        >
+                        <span class="highlight"></span>
+                        <label>Username</label>
+                    </div>
+
+                    <div class="floating-label">      
+                        <input class="floating-input form-control" type="password" placeholder="Password"  autocomplete="off" 
+                        ngModel
+                        required
+                        #password="ngModel"
+                        [ngClass]="{'red-border': password.errors && (password.dirty || password.touched)}"
+                        >
+                        <span class="highlight"></span>
+                        <label>Password</label>
+                    </div> -->
+                
+
+                            <!-- <span class="field-icon">
+                                <i class="fa fa-lock"></i>
+                            </span> -->
+                            <button type="submit" 
+                           class="btn btn-hover btn-login btn-block">
+                             LOGIN
+                        </button>
+<!--             
+                    <button type="submit" 
+                        [disabled]="myForm.pristine || myForm.invalid"
+                        class="btn btn-hover btn-login btn-block">
+                         LOGIN
+                    </button> -->
+                     <!-- <label class="block mt15 option option-info">
+                        <input type="checkbox" name="checked" value="checked" checked="">
+                        <span class="checkbox"></span>Remember Me
+                    </label>  -->
+    
+                    
+                    <div>
+                    <div class="text-center" style="margin-top: 10px">
+                        <label style="color: #000">
+                        <input type="checkbox"> Remember Me
+                        </label>
+                    </div>
+                    </div>
+                
+    
+                    <!-- <div class="forget-password">
+                    <p><a href="">Forget Password ?</a></p>
+                    </div> -->
+    
+    
+                </form>
+    
+    
+    
+                <!-- <form class="main-logins">
+                          
+                      <div class="form-group" style="margin-bottom: 0px;
+                       margin-top: -8px;">
+                          <label class="pure-material-textfield-outlined focused">
+                              <input placeholder=" " class="form-control">
+                              <span>Username</span>
+                          </label>
+                          </div>
+    
+                          <div class="form-group">
+                          <label class="pure-material-textfield-outlined focused">
+                              <input placeholder=" " class="form-control" type="password">
+                              <span>Password</span>
+                          </label>
+                          </div>
+    
+                         
+                    <input type="submit" class="btn main-login btn-lg btn-block" value="Log In">
+    
+                   
+    
+                </form> -->
+              </div>
+
+              <div class="developer-info">
+                  <p class="pos-version">{{version}}</p>
+                  <h5>Developed by : <span class="dev-company"><a href="https://www.astenlabs.com/">Astenlabs</a></span></h5>
+              </div>
+    
+            
+    
+    
+           <!-- new login -->
+    
+           
+            </div>
+    
+    
+    
+          
+           
+    
+    
+    
+        </div>
+    </div>
+    </div>
+    
+    

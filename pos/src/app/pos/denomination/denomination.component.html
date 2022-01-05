@@ -1,0 +1,120 @@
+<form [formGroup]="myForm" novalidate>
+<section class="grids-search grid-search-row allcp-form" style="margin-bottom: -45px; margin-top: 0px;">
+    
+    
+    <div class="row title-section-row">
+        <h4>Denomination Entry</h4>             
+    </div>
+
+
+</section>
+<section class="mt30" id="content_wrapper">
+
+
+    <div class="style-tabs mt20">
+
+      
+       <mat-tab-group>
+           <mat-tab label="Cash"> 
+
+                <div  class="tab-pane inner-tabs" style="padding:0px; margin-top: 10px;">
+
+                    <div class="table-responsive tabs-table table-scroll " id="ctr">
+
+                     <table class="table">
+                         <thead>
+                             <tr>
+                             <th>CurrencyCode</th>
+                             <th>Denomination Value</th>
+                             <th>Payment Value</th>
+                             <th>Total Value</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                            <tr *ngFor="let item of objCashInCashOutDetailsList;let id = index">
+                             <td>{{item.currencyCode}}</td>
+                             <td>{{item.currencyValue}}</td>
+                             <td>
+                                <span style="padding: 10px;
+                                width: 50%;" contenteditable="true" (keyup)="changeValue(id, 'paymemtValue', $event)" (blur)="updateList(id, 'paymemtValue', $event)">{{item.paymemtValue}}</span>
+                             </td>
+                             <td>
+                                <span style="padding: 10px;
+                                width: 50%;" contenteditable="true" (keyup)="changeValue(id, 'totalValue', $event)" (blur)="updateList(id, 'totalValue', $event)">{{item.totalValue}}</span>
+                              </td>
+                             </tr>
+                             <tr colspan="2">  
+                                <td></td>
+                                 <td>Total:</td>
+                                 <td>{{sumofpaymemtValue}}</td>
+                                 <td>{{sumofTotalvalue}}</td>
+                                </tr>
+                         </tbody>
+                     </table>
+
+                    </div>
+
+                </div>
+
+           </mat-tab>
+
+           <mat-tab label="Card"> 
+
+            <div  class="tab-pane inner-tabs" style="padding:0px; margin-top: 10px;">
+
+                <div class="table-responsive tabs-table table-scroll" id="ctr">
+
+                 <table class="table">
+                     <thead>
+                         <tr>
+                         <th>Payment Code</th>
+                         <th>Payment Name</th>
+                         <th>Payment Vale</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let item of objCardDetailsList;let id = index">
+                         <td>{{item.paymentCode}}</td>
+                         <td>{{item.paymentName}}</td>
+                         <td>
+                            <span style="padding: 10px;
+                            width: 50%;" contenteditable="true" (keyup)="changeValue1(id, 'paymemtValue', $event)" (blur)="updateList1(id, 'paymemtValue', $event)">
+                                {{item.paymemtValue}}</span>
+                         </td>
+                         </tr>
+                         <tr colspan="2">
+                             <td></td>
+                             <td>Total:</td>
+                             <td>{{sumofCardpaymemtValue}}</td>
+                            </tr>
+                     </tbody>
+                 </table>
+
+                </div>
+
+            </div>
+
+          </mat-tab>
+       </mat-tab-group>
+       <div class="row">
+        <div class="offset-md-3 col-md-6 mt30 mb20 allcp-form">
+                <label>Remarks</label>
+                            
+                            <input type="text" name="remarks" autocomplete="off" 
+                                formControlName="remarks" #remarks 
+                                class="gui-input inventory-form-two" placeholder="">
+                                <i class="arrow"></i>
+                            
+            </div>
+        </div>
+       <div class="row payment-final default-forms">
+            
+        <div class="offset-md-5 col-md-2">
+            <button (click) = "Savedenomination()" class="btn btn-lg btn-success btn-block common-button" type="button"><i class="fa fa-check-circle-o"></i>
+                 Save</button>
+        </div>
+    </div>
+    </div>
+
+    </section>
+</form>

@@ -1,0 +1,185 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../shift">{{ 'SHIFT.SHIFT_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+  
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'SHIFT.EDIT_SHIFT' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6 mb20 select-forms">
+                                    <label>{{ 'SHIFT.COUNTRY' | translate }}</label>
+                                    
+                                        <select name="countryID" formControlName="countryID" #countryID
+                                            class="gui-input"
+                                            [ngClass]="{'red-border': myForm.controls['countryID'].invalid}" disabled>
+                                            <option value="">Select Country</option>
+                                            <option *ngFor="let item of countryList" value="{{item.id}}">
+                                                {{item.countryName}}</option>
+                                        </select>
+                                        <i class="fa fa-angle-down"></i>
+                                    
+                                </div>
+                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="shiftCode" autocomplete="off"
+                                            formControlName="shiftCode" #shiftCode                                            
+                                            class="gui-input floating-input" placeholder="Shift Code"
+                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'SHIFT.SHIFT_CODE' | translate }}</label>
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="shiftName" autocomplete="off"
+                                            formControlName="shiftName" #shiftName                                           
+                                            class="gui-input floating-input" placeholder="Shift Name"
+                                            (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'SHIFT.SHIFT_NAME' | translate }}</label>
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="sortOrder" autocomplete="off" (keypress)="keyPress($event)"
+                                            formControlName="sortOrder" #sortOrder readonly
+                                            class="gui-input floating-input" placeholder="Sort Order"
+                                            spellcheck="false" trim="blur">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'SHIFT.SORT_ORDER' | translate }}</label>
+                                   
+                                </div>
+                                <div class="col-md-4">
+                                   
+                                        <div class="section">
+                                            <div class="bs-component mt10">
+
+                                                <div class="round fill mb10">
+                                                    <input type="checkbox" checked="" id="active" name="active" #active
+                                                        formControlName="active">
+                                                    <label for="active"></label>
+                                                    <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                </div>
+                                                <div id="source-button" class="btn btn-system btn-xs"
+                                                    style="display: none;">&lt; &gt;</div>
+
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="row default-forms">
+                                <div class="offset-md-4 col-md-2 mt20">
+                                    <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                        (click)="addShiftList()" [disabled]="myForm.pristine || myForm.invalid"
+                                        title="Add"><i class="fa fa-plus"></i> Add</button>                                    
+                                </div>
+                                <div class="col-md-2  mt20">
+                                    <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                                        title="Clear" (click)="clearsubcontrols()"><i class="fa fa-refresh"></i> Clear</button>
+                                </div>
+                               
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">{{ 'SHIFT.SHIFT_CODE' | translate }}</th>
+                                            <th class="">{{ 'SHIFT.SHIFT_NAME' | translate }}</th>
+                                            <th class="">{{ 'SHIFT.SORT_ORDER' | translate }}</th>
+                                            <th class="">{{ 'COMMON.ACTIVE' | translate }}</th>
+                                            <th class=""></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of shiftList; let i = index;">
+                                            <td>{{i+1}}</td>
+                                            <td>{{item.shiftCode}}</td>
+                                            <td>{{item.shiftName}}</td>
+                                            <!--<td>{{item.sortOrder}}</td>-->
+                                            <td><input type="text" [(ngModel)]="item.sortOrder" (change)="prioritynochange(item)" [ngModelOptions]="{standalone: true}" 
+                                                (keypress)="keyPress($event)"  style="text-align:center;"
+                                                class="gui-input"></td>
+                                            <td>
+                                                <input type="checkbox" [(ngModel)]="item.active" [ngModelOptions]="{standalone: true}">
+                                                <label for="{{item.id}}"></label>
+                                            </td>
+                                            <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                    class="cash-remove"><i class="fa fa-remove"></i></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row default-forms">
+                    
+        
+                    <!--<div class="col-md-2 mt10">
+                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button"
+                            (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+
+                    </div>-->
+                    <div class="offset-md-4 col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                            (click)="updateShift()"><i
+                                class="fa fa-refresh"></i> Update
+                        </button>
+                    </div>
+                    <div class=" col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+
+                  
+                   
+                </div>
+            
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

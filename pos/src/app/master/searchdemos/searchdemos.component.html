@@ -1,0 +1,24 @@
+<div>
+
+    <mat-form-field>
+      <input matInput placeholder="Search" aria-label="State" [matAutocomplete]="auto" [formControl]="searchCustomerCtrl">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="customerDisplayWith.bind(filteredCustomers)">
+        <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+        <ng-container *ngIf="!isLoading">
+          <mat-option *ngFor="let customer of filteredCustomers" [value]="customer.id">
+            <span><b>{{customer.name}}</b> ({{customer.name}})</span>
+          </mat-option>
+        </ng-container>
+      </mat-autocomplete>
+    </mat-form-field>
+  
+    <br>
+  
+  <ng-container *ngIf="errorMsg; else elseTemplate">
+    {{errorMsg}}
+  </ng-container>
+  <ng-template #elseTemplate>
+    <h5>Selected Value: {{searchCustomerCtrl.value}}</h5>
+  </ng-template>
+  
+  </div>

@@ -1,0 +1,185 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a href="../../color">{{ 'COLOR.COLOR_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+
+                </ol>
+            </div>
+        </header>
+
+      
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'COLOR.EDIT_COLOR' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                            
+                                            <input type="text" name="colorCode" autocomplete="off"
+                                                formControlName="colorCode" #colorCode readonly
+                                                [ngClass]="{'red-border': myForm.controls['colorCode'].invalid}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                                class="gui-input floating-input" placeholder="Color Code">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COLOR.COLOR_CODE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="description" autocomplete="off"
+                                                formControlName="description" #description
+                                                [ngClass]="{'red-border': myForm.controls['description'].invalid}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                                class="gui-input floating-input" placeholder="Description">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COLOR.DESCRIPTION' | translate }}</label>
+                                    </div>                                   
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="shade" autocomplete="off"
+                                                formControlName="shade" #shade
+                                                [ngClass]="{'red-border': myForm.controls['shade'].invalid}"
+                                                class="gui-input floating-input" placeholder="Shade">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COLOR.SHADE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="nrfCode" autocomplete="off"
+                                                formControlName="nrfCode" #nrfCode
+                                                [ngClass]="{'red-border': myForm.controls['nrfCode'].invalid}"
+                                                (keypress)="restrictSpecialChars($event)" spellcheck="false" trim="blur"
+                                                class="gui-input floating-input" placeholder="NRF Code">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COLOR.NRF_CODE' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="color"
+                                            (colorPickerChange)="color=$event" 
+                                            [style.background]="colorCode" 
+                                            formControlName="colors" #colors
+                                            [ngClass]="{'red-border': myForm.controls['colors'].invalid}"
+                                            class="gui-input floating-input" placeholder="Color" name="colors"/>
+                                            <span class="highlight"></span>
+                                            <label>{{ 'COLOR.COLOR' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                            <input type="text" name="attribute1" autocomplete="off"
+                                                formControlName="attribute1" #attribute1
+                                                class="gui-input floating-input" placeholder="Attribute1">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COLOR.ATTRIBUTE1' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="attribute2" autocomplete="off"
+                                                formControlName="attribute2" #attribute2
+                                                class="gui-input floating-input" placeholder="Attribute2">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COLOR.ATTRIBUTE2' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-12  av-down">
+                                        <label class="av-image">{{ 'COLOR.IMAGE' | translate }}</label>
+                                        <div class="avatar-upload">
+                                            <div class="avatar-edit">
+                                                <input type='file' id="imageUpload" (change)="picked($event, null)" accept=".png, .jpg, .jpeg" />
+                                                <label for="imageUpload"></label>
+                                            </div>
+                                            <div class="avatar-preview">
+                                                <div id="imagePreview">
+                                                    <img src="{{ current_image}}">
+                                                </div>
+                                            </div>
+                                            <div class="image-delete">
+                                                <a href="#"><i class="fa fa-window-close"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                            <input type="text" name="remarks" autocomplete="off"
+                                                formControlName="remarks" #remarks
+                                                [ngClass]="{'red-border': myForm.controls['remarks'].invalid}"
+                                                class="gui-input floating-input" placeholder="Remarks">
+                                                <span class="highlight"></span>
+                                                <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                            <div class="section">
+                                                <div class="bs-component mt10">
+
+                                                    <div class="round fill mb10">
+                                                        <input type="checkbox" checked="" id="active" name="active" #active formControlName="active">
+                                                        <label for="active"></label>
+                                                        <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}</p>
+                                                    </div>
+                                                    <div id="source-button" class="btn btn-system btn-xs"
+                                                        style="display: none;">&lt; &gt;</div>
+
+                                                </div>
+                                            </div>
+                                       
+                                    </div>
+                                </div>
+                                <div class="row default-forms">
+                                    
+                                   
+                                    <!--<div class="col-md-2 mt10">
+                                        <button type="clear" class="btn btn-lg btn-primary btn-block common-button" (click)="clear_controls()"><i
+                                                class="fa fa-refresh"></i> Clear</button>
+
+                                    </div>-->
+                                    <div class="offset-md-4 col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-success btn-block common-button" 
+                                        (click)="updateColor()" [disabled]="myForm.pristine || myForm.invalid"><i
+                                                class="fa fa-refresh"></i> Update                                                
+                                        </button>                                        
+                                    </div>                                    
+                                    <div class="col-md-2 mt10">
+                                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                            class="fa fa-remove"></i> Close</button>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+
+    </section>
+</form>

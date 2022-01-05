@@ -1,0 +1,411 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">Home</a>
+                </li>
+                <li class="breadcrumb-current-item">Order Fullfilment</li>
+            </ol>
+        </div>
+    </header>
+
+    <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <ul class="nav nav-list nav-list-topbar pull-left">
+                <li>Orders
+                </li>
+            </ul>
+        </div>
+    </header>
+    <!-- /Topbar -->
+
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Range From</label>
+                                        <label class="field">
+                                            <input type="date" name="from_date" autocomplete="off"
+                                                formControlName="from_date" #from_date
+                                                [ngClass]="{'red-border': myForm.controls['from_date'].invalid}"
+                                                class="gui-input" placeholder="From date">
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>To</label>
+                                        <label class="field">
+                                            <input type="date" name="to_date" autocomplete="off"
+                                                formControlName="to_date" #to_date
+                                                [ngClass]="{'red-border': myForm.controls['to_date'].invalid}"
+                                                class="gui-input" placeholder="To date">
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Order No</label>
+                                        <label class="field">
+                                            <input type="text" name="order_no" autocomplete="off"
+                                                formControlName="order_no" #order_no
+                                                class="gui-input" placeholder="Order No">
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Order Reference</label>
+                                        <label class="field">
+                                            <input type="text" name="order_reference" autocomplete="off"
+                                                formControlName="order_reference" #order_reference
+                                                class="gui-input" placeholder="Order Reference">
+                                        </label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Status</label>
+                                        <label class="field select">
+                                            <!-- (change)="order_status_changed()" -->
+                                            <select name="order_status" formControlName="order_status" #order_status
+                                                [ngClass]="{'red-border': myForm.controls['order_status'].invalid}"
+                                                class="gui-input">
+                                                <option value="">Select</option>
+                                                <option value="1">OPEN</option>
+                                                <option value="2">INPROGRESS</option>
+                                                <option value="3">CLOSED</option>
+                                                <option value="4">CANCELLED</option>
+                                            </select>
+                                            <i class="arrow"></i>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <button type="submit" (click)="searchCityOrder()"
+                                            [disabled]="myForm.pristine || myForm.invalid"
+                                            class="btn btn-lg btn-primary btn-block pos-button mt20 order-search">
+                                            <i class="fa fa-search"></i>
+                                            Search
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- listing table -->
+                <div class="allcp-form theme-info" *ngIf="city_orders_list != null && city_orders_list.length > 0">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">Order No</th>
+                                            <th class="">Date</th>
+                                            <th class="">Order Reference</th>
+                                            <th class="">City</th>
+                                            <th class="">Customer Code</th>
+                                            <th class="">Phone No</th>
+                                            <th class="">Order Amount</th>
+                                            <th class="">Status</th>
+                                            <th [hidden]="order_status_temp != 1" class="">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container *ngFor="let item of city_orders_list; let i = index">
+                                            <tr>
+                                                <td>
+                                                    <!-- <span [hidden]="order_status_temp == 1" ng-click="collapse_item(item)"> -->
+                                                    <span [hidden]="order_status_temp == 1"
+                                                        (click)="collapse_item(item)">
+                                                        <i class="fa"
+                                                            [ngClass]="{'fa-plus-circle': item.isCollasped == true, 'fa-minus-circle': item.isCollasped == false}"></i>
+                                                    </span>
+                                                    {{i + 1}}
+                                                </td>
+                                                <td>{{item.documentNo}}</td>
+                                                <td>{{item.documentDate | date : 'dd-MM-yyyy'}}</td>
+                                                <td>{{item.refOrderNo}}</td>
+                                                <td>{{item.cityName}}</td>
+                                                <td>{{item.customerCode}}</td>
+                                                <td>{{item.customerPhoneNo}}</td>
+                                                <td>{{item.netAmount}}</td>
+                                                <td>
+                                                    <button type="button" class="br2 btn-xs order-inp fs12 dropdown-toggle btn"
+                                                        [ngClass]="{'btn-success': item.statusCode == 'CLOSED', 'btn-danger': item.statusCode == 'OPEN'}"
+                                                        data-toggle="dropdown" aria-expanded="false">
+                                                        {{item.statusCode}}
+                                                    </button>
+                                                </td>
+                                                <td [hidden]="order_status_temp != 1">
+                                                    <button (click)="getCityOrderAllocation(item,false,null)"
+                                                        class="btn btn-primary btn-sm ml10">
+                                                        Find Stores
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr [hidden]="item.isCollasped">
+                                                <td colspan="11">
+                                                    <div class="details-div mt5">
+                                                        <p class="details-title">
+                                                            <span>Order Details</span>
+                                                        </p>
+                                                        <table class="table allcp-form theme-warning tc-checkbox-1 fs13 t-border">
+                                                            <thead>
+                                                                <tr class="bg-light">
+                                                                    <th>SKU Code</th>
+                                                                    <th>Qty</th>
+                                                                    <th>Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let cd of item.cityOrderDetails">
+                                                                    <td>{{cd.skuCode}}</td>
+                                                                    <td>{{cd.qty}}</td>
+                                                                    <!-- <td>{{cd.statusCode}}</td> -->
+                                                                    <td>
+                                                                        <button type="button" class="br2 btn-xs order-inp fs12 dropdown-toggle btn"
+                                                                            [ngClass]="{'btn-success': cd.statusCode == 'CLOSED', 'btn-danger': cd.statusCode == 'OPEN'}"
+                                                                            data-toggle="dropdown" aria-expanded="false">
+                                                                            {{cd.statusCode}}
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    
+                                                    <div class="details-div mt5">
+                                                        <p class="details-title">
+                                                            <span>Allocation Details</span>
+                                                        </p>
+                                                        <table class="table allcp-form theme-warning tc-checkbox-1 fs13 t-border">
+                                                            <thead>
+                                                                <tr class="bg-light">
+                                                                    <th>#</th>
+                                                                    <th>Document No</th>
+                                                                    <th>Store Code</th>
+                                                                    <th>Store Name</th>
+                                                                    <th>Status</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <ng-container *ngFor="let sd of item.storeOrders; let j = index">
+                                                                    <tr >
+                                                                        <td>
+                                                                            <!-- <span [hidden]="order_status_temp == 1" ng-click="collapse_item(item)"> -->
+                                                                            <span (click)="collapse_store_order(sd)">
+                                                                                <i class="fa"
+                                                                                    [ngClass]="{'fa-plus-circle': sd.isCollasped == true, 'fa-minus-circle': sd.isCollasped == false}"></i>
+                                                                            </span>
+                                                                            {{j + 1}}
+                                                                        </td>
+                                                                        <td>{{sd.documentNo}}</td>
+                                                                        <td>{{sd.storeCode}}</td>
+                                                                        <td>{{sd.storeName}}</td>
+                                                                        <!-- <td>{{sd.statusCode}}</td> -->
+                                                                        <td>
+                                                                            <button type="button" class="br2 btn-xs order-inp fs12 dropdown-toggle btn"
+                                                                                [ngClass]="{'btn-success': sd.statusCode == 'CLOSED', 'btn-danger': sd.statusCode == 'OPEN'}"
+                                                                                data-toggle="dropdown" aria-expanded="false">
+                                                                                {{sd.statusCode}}
+                                                                            </button>
+                                                                        </td>
+                                                                        <td>
+                                                                            <button class="btn btn-danger btn-sm ml10"
+                                                                                *ngIf="sd.statusID == 6 || sd.statusID == 7 || sd.statusID == 9"    
+                                                                                (click)="getCityOrderAllocation(item,true,sd)">
+                                                                                    Re-Allocate
+                                                                            </button>
+                                                                            <button class="btn btn-warning btn-sm ml10"
+                                                                                *ngIf="sd.statusID == 1 || sd.statusID == 2 || sd.statusID == 5"    
+                                                                                (click)="cancel_store_order(sd)">
+                                                                                    Cancel
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr [hidden]="sd.isCollasped">
+                                                                        <td colspan="6">
+                                                                            <div style="padding: 10px 30px 0px 30px;" class="sub-div-details">
+                                                                                <p>
+                                                                                    <span>Item Details</span>
+                                                                                </p>
+                                                                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13 t-sub-border">
+                                                                                    <thead>
+                                                                                        <tr class="bg-light">
+                                                                                            <th>SKU Code</th>
+                                                                                            <th>Order Qty</th>
+                                                                                            <th>Issued Qty</th>
+                                                                                            <th>Status</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr *ngFor="let sod of sd.storeOrderDetails">
+                                                                                            <td>{{sod.skuCode}}</td>
+                                                                                            <td>{{sod.orderQty}}</td>
+                                                                                            <td>{{sod.issuedQty}}</td>
+                                                                                            <!-- <td>{{sod.statusCode}}</td> -->
+                                                                                            <td>
+                                                                                                <button type="button" class="br2 btn-xs order-inp fs12 dropdown-toggle btn"
+                                                                                                    [ngClass]="{'btn-success': sod.statusCode == 'CLOSED', 'btn-danger': sod.statusCode == 'OPEN'}"
+                                                                                                    data-toggle="dropdown" aria-expanded="false">
+                                                                                                    {{sod.statusCode}}
+                                                                                                </button>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            
+                                                                        </td>
+                                                                    </tr>
+                                                                </ng-container>
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- order allocation -->
+                <div class="order-allocation-bg" *ngIf="city_order_details != null && city_order_details.length > 0">
+                    <!-- tabs -->
+                    <div class="order-allocation-city">
+                        <p><span>Item Details</span></p>
+                    </div>
+                    <!-- stores -->
+                    <div class="store-grid">
+                        <div class="store-details">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th>#</th>
+                                            <th>SKU Code</th>
+                                            <th>Price</th>
+                                            <th>Order Qty</th>
+                                            <th>Already Allocated</th>
+                                            <th>Open Qty</th>
+                                            <th>Allocated Now</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of city_order_details; let i = index">
+                                            <td>{{i + 1}}</td>
+                                            <td>{{item.skuCode}}</td>
+                                            <td>{{item.price}}</td>
+                                            <td>{{item.qty}}</td>
+                                            <td>{{item.allocatedQty}}</td>
+                                            <td>{{item.openQty}}</td>
+                                            <td>{{item.allocatedNow}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- order allocation -->
+                <div class="order-allocation-bg"
+                    *ngIf="city_store_stock_list != null && city_store_stock_list.cityID != null && city_store_stock_list.cityID != 0">
+                    <!-- tabs -->
+                    <div class="order-allocation-city">
+                        <p><i class="fa fa-map-marker"></i>City : <span>{{city_store_stock_list.cityName}}</span></p>
+                    </div>
+                    <!-- stores -->
+                    <div class="store-grid" *ngFor="let store of city_store_stock_list.stores">
+                        <div class="store-bg"
+                            [ngClass]="{'full': store.availability == 'FULL', 'partial': store.availability == 'PARTIAL'}">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p>Store Code : <span>{{store.storeCode}}</span></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>Store Name : <span>{{store.storeName}}</span></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>Stock Availability : <span>{{store.availability}}</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="store-details">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th>#</th>
+                                            <th>SKU Code</th>
+                                            <th>Order Qty</th>
+                                            <th>Open Qty</th>
+                                            <th>Available Qty</th>
+                                            <th>Stock Availability</th>
+                                            <th>Allocated Qty</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let stock of store.stocks; let i = index">
+                                            <td>{{i + 1}}</td>
+                                            <td>{{stock.skuCode}}</td>
+                                            <td>{{stock.orderQty}}</td>
+                                            <td>{{stock.openQty}}</td>
+                                            <td>{{stock.availableQty}}</td>
+                                            <td>{{stock.availability}}</td>
+                                            <td>{{stock.allocatedQty}}</td>
+                                            <td>
+                                                <button [disabled]="stock.availableQty <= 0 || stock.openQty <= 0"
+                                                    (click)="allocateStore(stock)" class="btn btn-primary btn-sm ml10">
+                                                    Allocate
+                                                </button>
+                                                <button [disabled]="stock.allocatedQty <= 0"
+                                                    (click)="cancelAllocation(stock)"
+                                                    class="btn btn-warning btn-sm ml10">
+                                                    Cancel
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row allcp-form">
+                        <div class="col-md-offset-5 col-md-2">
+                            <button [disabled]="noAllocationMade" (click)="saveAllocation()"
+                                class="btn btn-lg btn-primary btn-block pos-button mt10">
+                                Save Allocation
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

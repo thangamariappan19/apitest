@@ -1,0 +1,264 @@
+<form [formGroup]="myForm"novalidate>
+    <!-- Main Wrapper -->
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../price-change">{{ 'PRICE_CHANGE.PRICE_CHANGE_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.EDIT' | translate }}</li>
+                </ol>
+            </div>
+        </header>
+   
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'PRICE_CHANGE.EDIT_PRICE_CHANGE' | translate }} </h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div class="chute chute-center">
+                <div class="center-block">
+                    <!-- Spec Form -->
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <!-- Basic -->
+                                <div class="row">
+                                    <!-- <div class="col-md-6"> -->
+                                        <div class="col-md-3 mb20 floating-form floating-label">
+                                            <div class="section">
+                                                                                                
+                                                    <input type="text" name="documentNo" readonly
+                                                        formControlName="documentNo" #documentNo class="gui-input floating-input"
+                                                        placeholder="Document No"
+                                                        [ngClass]="{'red-border': myForm.controls['documentNo'].invalid}"
+                                                        autocomplete="off"
+                                                         spellcheck="false" trim="blur">
+                                                         <span class="highlight"></span>
+                                                         <label>{{ 'PRICE_CHANGE.DOCUMENT_NO' | translate }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 floating-form floating-label">
+                                            <div class="section">
+                                                                                                
+                                                    <input type="date" name="documentDate" formControlName="documentDate" #documentDate
+                                                        class="gui-input floating-input" placeholder="Document Date" readonly
+                                                        autocomplete="off">
+                                                        <span class="highlight"></span>
+                                                        <label>{{ 'PRICE_CHANGE.DOCUMENT_DATE' | translate }}</label>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 floating-form floating-label">
+                                            <div class="section">
+                                                                                                
+                                                    <input type="date" name="priceChangeDate" formControlName="priceChangeDate" #priceChangeDate
+                                                        class="gui-input floating-input" placeholder="Price Change Date"
+                                                        autocomplete="off">
+                                                        <span class="highlight"></span>
+                                                        <label>{{ 'PRICE_CHANGE.PRICE_CHANGE_DATE' | translate }}</label>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 select-forms">
+                                            <label>{{ 'PRICE_CHANGE.PRICE_CHANGE_TYPE' | translate }}</label>
+                                           
+                                                <select name="priceChangeType" formControlName="priceChangeType" #priceChangeType class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['priceChangeType'].invalid}">
+                                                    <option value="">Select Price Change Type</option>
+                                                    <option value="RRP Price">RRP Price</option>
+                                                    <option value="Retail Price">Retail Price</option>
+                                                    <option value="Outlet Price">Outlet Price</option>
+                                                </select>
+                                                <i class="fa fa-angle-down"></i>
+                                            
+                                        </div>
+                                        <div class="col-md-4 select-forms">
+                                            <label>{{ 'PRICE_CHANGE.SOURCE_COUNTRY' | translate }}</label>
+                                           
+                                                <select name="sourceCountry" formControlName="sourceCountry" #sourceCountry class="gui-input"
+                                                [ngClass]="{'red-border': myForm.controls['sourceCountry'].invalid}" (change)="getRemainingCurrencyList()">
+                                                    <option value="0">Select Source Country</option>
+                                                    <option *ngFor="let item of countryList" value="{{item.id}}">{{item.countryName}}</option>
+                                                </select>
+                                                <i class="fa fa-angle-down"></i>
+                                            
+                                        </div>
+                                        <div class="col-md-4">
+                                           
+                                                <div class="section">
+                                                    <div class="bs-component mt10">
+    
+                                                        <div class="round fill mb10">
+                                                            <input type="checkbox" checked="" id="multipleCountries" name="multipleCountries" (change)="getMultipleCountries()"
+                                                             #multipleCountries formControlName="multipleCountries">
+                                                            <label for="multipleCountries"></label>
+                                                            <p class="label-text">{{ 'PRICE_CHANGE.MULTIPLE_COUNTRIES' | translate }}</p>
+                                                        </div>
+                                                        <div id="source-button" class="btn btn-system btn-xs"
+                                                            style="display: none;">&lt; &gt;</div>
+    
+                                                    </div>
+                                                </div>
+                                           
+                                        </div>
+                                      
+                                        <div class="col-md-4 floating-form floating-label">
+                                            <div class="section">
+                                                                                                
+                                                    <input type="type" name="remarks" formControlName="remarks" #remarks
+                                                        class="gui-input floating-input" placeholder="Remarks"
+                                                        autocomplete="off">                                                
+                                                        <span class="highlight"></span>
+                                                        <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                                            </div>
+                                        </div>
+                                    <!-- </div> -->
+                                    
+                                    <!-- <div class="col-md-6">
+                                        grid column
+                                    </div> -->
+                                </div>
+                                <div>
+                                    <div class="allcp-form theme-info">
+                                        <div class="panel">
+                                            <div class="panel-body country-table">
+                                                <div class="table-responsive">
+                                                    <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                        <thead>
+                                                            <tr class="bg-dark">                                                                
+                                                                <th *ngFor="let item of gridcolumnheaders;">{{item.name}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let item of countryDropDownList; let i = index;">                                                                
+                                                                <td>
+                                                                    <input type="checkbox" [(ngModel)]="item.active" [ngModelOptions]="{standalone: true}">
+                                                                    <label for="{{item.id}}"></label>
+                                                                </td>
+                                                                <td>
+                                                                    {{item.countryCode}}
+                                                                </td>
+                                                                <td>
+                                                                    {{item.countryName}}
+                                                                </td>
+                                                                <td>
+                                                                    <input type="checkbox" [(ngModel)]="item.pricePointApplicable" [ngModelOptions]="{standalone: true}"
+                                                                    style="text-align:center;">
+                                                                </td>                                                                 
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="allcp-form theme-info">
+                                        <div class="panel">
+                                            <div class="panel-body country-table">
+                                                <div class="table-responsive">
+                                                    <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                        <thead>
+                                                            <tr>   
+                                                                <th *ngFor="let item of tableColumns;">{{item.name}}</th>                                                                
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let sl of styleList; let in = index"> 
+                                                                <td *ngFor="let item of tableColumns; ">
+                                                                    <input type="text" class="gui-input" #eRate name="{{item.name}}-{{in}}" id="{{item.name}}" value="{{getActualValue(item.name, sl.serialNo)}}"
+                                                                    (change) = "setExchangeRate(item.name,sl.serialNo, eRate.value)" (keypress)="keyPress(item.name,$event)" >
+                                                                    
+                                                                </td>      
+                                                                <!-- <td *ngFor="let item1 of priceChangeDetailsList;">
+                                                                    <input type="text" value=""  #ecountryValue style="text-align:center;"
+                                                                     class="gui-input"
+                                                                   >
+                                                                </td>                                                             -->
+                                                                <!-- <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                                    class="cash-remove"><i class="fa fa-remove"></i></a></td> -->
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- customer address -->
+                                <div>
+                                    <div class="row default-forms" style="margin-top: -30px;">
+                                       
+                                        <div class="col-md-3">
+                                            <button type="button" (click)="generate()"
+                                                class="btn btn-lg btn-generate btn-block common-button">Generate</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="button" (click)="createRow()"
+                                                class="btn btn-lg btn-success btn-block common-button">Add Row</button>
+                                        </div>
+                                        <!--<div class="col-md-2">
+                                            <button type="button" [disabled]="myForm.pristine || myForm.invalid"
+                                                class="btn btn-lg btn-primary btn-block common-button">Delete Row</button>
+                                        </div>-->
+                                        <div class="col-md-3" style="margin-top: -22px;">
+                                            <input type="file" id='excel-upload' accept=".xlsx" multiple="false"
+                                            (change)="inputExcelOnClick($event)" />    
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button"  (click)="validation()"
+                                                class="btn btn-lg btn-validate btn-block common-button">Validate</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                        
+                                    <div class="row default-forms mt30" >
+                                   
+                                        <!--<div class="col-md-2">
+                                            <button type="button" class="btn btn-lg btn-primary btn-block common-button"><i
+                                                    class="fa fa-refresh"></i> Clear</button>
+    
+                                        </div>-->
+                                        <div class="offset-md-4 col-md-2">
+                                            <button type="button" (click)="savePriceChange()" [disabled]="isValidate==false"
+                                                class="btn btn-lg btn-primary btn-block common-button">Update</button>
+                                        </div>
+                                        
+                                        <div class="col-md-2">
+                                            <button type="button" (click)="close()" class="btn btn-lg btn-cancel btn-block common-button">
+                                                Close</button>
+                                        </div>
+
+                                       
+                                       
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </section>
+        <!-- /Content -->
+    </section>
+</form>

@@ -1,0 +1,127 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../brand-division-mapping">{{ 'BRAND_DIVISION_MAPPING.BRAND_DIVISION_MAPPING_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'BRAND_DIVISION_MAPPING.MAPPING' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'BRAND_DIVISION_MAPPING.MAPPING_BRAND_DIVISION' | translate }}</h4>             
+        </div>
+
+
+   </section>
+
+    <!-- <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <ul class="nav nav-list nav-list-topbar pull-left">
+                <li>Mapping Brand Division
+                </li>
+            </ul>
+        </div>
+    </header> -->
+    <!-- /Topbar -->
+
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info" >
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-2 mt10">
+                                    <label>{{ 'BRAND_DIVISION_MAPPING.BRAND' | translate }}</label>
+                                </div>
+                                <div class="col-md-6 select-forms">
+                                    
+                                        <select name="brandID" formControlName="brandID" #brandID
+                                                class="gui-input" disabled>
+                                                <option value="0">Select Brand</option>
+                                                <option *ngFor="let item of brandDivisionMapping_Filter" value="{{item.id}}">{{item.brandName}}</option>
+                                            </select>
+                                            <i class="arrow"></i>
+                                    
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info" >
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">{{ 'BRAND_DIVISION_MAPPING.SELECT' | translate }}</th>
+                                            <th class="">{{ 'BRAND_DIVISION_MAPPING.DIVISION_CODE' | translate }}</th>
+                                            <th class="">{{ 'BRAND_DIVISION_MAPPING.DIVISION_NAME' | translate }}</th>
+                                            <!--<th class="">Default Description</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr *ngFor = "let item of brandDivisionMapplingList; let i = index">                                            
+                                                <td>
+                                                    <input type="checkbox" [(ngModel)]="item.active" [ngModelOptions]="{standalone: true}">
+                                                    <label for="{{item.id}}"></label>
+                                                </td>
+                                                <td>{{item.divisionCode}}</td>
+                                                <td>{{item.divisionName}}</td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             <!--   <div class="clearfix"></div>-->
+                <hr>
+               <!-- <div class="col-md-3">
+                </div>-->
+                <div class="row default-forms">
+                <div class="offset-md-4 col-md-2 mt10">
+                    <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                        (click) = "updateBrandDivision()" ><i
+                            class="fa fa-clear"></i> Update
+                            
+                    </button>
+                </div>
+                <!--<div class="col-md-2 mt10">
+                    <button type="clear" class="btn btn-lg btn-primary btn-block common-button" 
+                    (click) = "clear_controls()"><i
+                            class="fa fa-refresh"></i> Clear</button>
+
+                </div>-->
+                <div class="col-md-2 mt10">
+                    <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                    (click) = "close()"><i
+                        class="fa fa-remove"></i> Close</button>
+
+                </div>
+               </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

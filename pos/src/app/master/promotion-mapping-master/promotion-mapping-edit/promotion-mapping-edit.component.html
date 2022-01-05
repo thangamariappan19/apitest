@@ -1,0 +1,115 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../promotion-mapping">{{ 'PROMOTION_MAPPING.PROMOTION_MAPPING_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'PROMOTION_MAPPING.CONFIGURE' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+  
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'PROMOTION_MAPPING.CONFIGURE_PROMOTION_MAPPING' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <!-- <div class="col-md-offset-3 col-md-2 mt10">
+                                    <label>Promotion</label>
+                                </div> -->
+                                <div class="col-md-6 select-forms">
+                                    <label>{{ 'PROMOTION_MAPPING.PROMOTION' | translate }}</label>
+                                        <select name="wnPromotionID" formControlName="wnPromotionID" #wnPromotionID
+                                                class="gui-input" disabled>
+                                                <option value="">Select Promotion</option>
+                                                <option *ngFor="let item of promotion_List" value="{{item.id}}">{{item.promotionName}}</option>
+                                            </select>
+                                            <i class="fa fa-angle-down"></i>
+                                    
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info" >
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">{{ 'PROMOTION_MAPPING.SELECT' | translate }}</th>
+                                            <th class="">{{ 'PROMOTION_MAPPING.STORE_CODE' | translate }}</th>
+                                            <th class="">{{ 'PROMOTION_MAPPING.STORE_NAME' | translate }}</th>
+                                            <!--<th class="">Default Description</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr *ngFor = "let item of storeList; let i = index">                                            
+                                                <td>
+                                                    <input type="checkbox" [(ngModel)]="item.active" [ngModelOptions]="{standalone: true}">
+                                                    <label for="{{item.id}}"></label>
+                                                </td>
+                                                <td>{{item.storeCode}}</td>
+                                                <td>{{item.storeName}}</td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <hr>
+                <div class="row default-forms">
+                    <div class="offset-md-4 col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                          (click)="updatePromotionMapping()"><i
+                                class="fa fa-refresh"></i> Update
+                                
+                        </button>
+                    </div> 
+                    <div class="col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                        (click)="close()"><i
+                            class="fa fa-remove"></i> Close</button>
+                    </div>
+               
+                </div>               
+               
+               
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

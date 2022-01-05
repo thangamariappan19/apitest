@@ -1,0 +1,257 @@
+<form [formGroup]="myForm" novalidate>
+    <!-- Main Wrapper -->
+    <section id="content_wrapper" class="sales-content-wrapper" style="margin-left: 0px">
+        <!-- Content -->
+        <section class="animated fadeIn">
+            <header id="topbar" class="ph10 second-top">
+                <div class="topbar-left">
+                    <ul class="nav nav-list nav-list-topbar pull-left">
+                        <li>
+                            <i class="fa fa-refresh"></i> Sales Return
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- <div class="topbar-right mt5">
+                    <a href="javascript:void(0)" 
+                        (click) = "goto_pos()"
+                        class="btn btn-back btn-sm ml10" title="New">
+                        <span class="fa fa-arrow-left pr5"></span>Back
+                    </a>
+                </div> -->
+            </header>
+            <div class="clearfix"></div>
+            <div class="row mt20">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt5">
+                    <!--<div class="e-title">
+                        <h4><i class="fa fa-refresh"></i> Sales Return</h4>
+                    </div>-->
+                    <div class="sales-first-form">
+                        <div class="allcp-form theme-info">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-md-5 col-lg-5 col-xl-5 floating-form floating-label return-input-margin">
+                                    
+                                        <input type="text" name="documentNo" class="gui-input floating-input" autocomplete="off"
+                                            formControlName="documentNo" #documentNo
+                                             placeholder="Document Number" trim="blur">
+                                            <span class="highlight"></span>
+                                        <label>Document Number</label>
+                                    
+                                </div>
+                                <div class="col-lg-5 col-xl-5 col-md-5 col-sm-6 col-12 mb20 floating-form floating-label">
+                                    
+                                    <input type="text" name="storeCode" autocomplete="off" readonly
+                                        formControlName="storeCode" #storeCode
+                                        class="gui-input floating-input" placeholder="Store Code"
+                                        spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>Store Code</label>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                                    <button type="button" 
+                                        class="btn btn-lg btn-primary btn-block pos-button"  (click)="invoice_no_changed()">
+                                            <i class="fa fa-search"></i> Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- table -->
+                   
+                </div>
+               
+            </div>
+        </section>
+        <!-- /Content -->
+    </section>
+
+    
+</form>
+
+<div *ngIf="isShown">
+<html>	
+    <div style="width: 100mm;">
+      <!-- <div style="width: 60%; text-align: center;margin-left:45px">
+         <img src="{{storeImage }}" style="height: 50px;width:50%;margin-left:45px;"/>
+    </div> -->
+      <!-- <div style="width: 100%; text-align: center;font-weight:900">
+			  <h4 style="margin: 2mm 0mm">*&nbsp;DUPLICATE INVOICE&nbsp;*</h4>
+		  </div> -->
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 50%;">
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">countryID  : </h5>
+          </td>
+          <td style="width: 50%;text-align: right;">
+            <h5 style="margin: 2mm 0mm;font-weight:100">{{countryID }}</h5>
+          </td>
+        </tr>
+      </table>
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 50%;">
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">customerFullName : </h5>
+          </td>
+          <td style="width: 50%;text-align:right;">
+            <h5 style="margin: 2mm 0mm;font-weight:100">{{customerFullName }}</h5>
+          </td>
+        </tr>
+      </table>
+     <table style="width: 100%;">
+        <tr>
+          <td style="width: 50%;">
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">invoiceNo : </h5>
+          </td>
+          <td style="width: 50%;text-align:left;">
+            <h5 style="margin: 2mm 0mm;">{{invoiceNo}}</h5>
+          </td>
+        </tr>
+      </table>
+   
+     <!-- <table style="width: 100%;">
+         <tr>
+           <td style="width:25%;">
+             <h5 style="margin: 2mm 0mm;font-weight: 550;"> التاريخ/Date : </h5>
+           </td>
+            <td style="width:25%;text-align:left;">
+             <h5 style="margin: 2mm 0mm;font-weight:100">{{date}}</h5>
+           </td>
+           <td style="width: 25%;">
+             <h5 style="margin: 2mm 0mm;font-weight: 550;"> الوقت/Time : </h5>
+           </td>
+           <td style="width:25%;text-align:left;">
+             <h5 style="margin: 2mm 0mm;font-weight: 100">{{time}}</h5>
+           </td>
+         </tr>
+      </table>	 -->
+      <!-- <table style="width: 100%;">
+        <tr>
+          <td style="width: 50%;">
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">customerFullName : </h5>
+          </td>
+          <td style="width: 50%;text-align:right;">
+            <h5 style="margin: 2mm 0mm;font-weight:100">{{customerFullName}}</h5>
+          </td>
+        </tr>
+      </table>	 	   -->
+     <table style="width: 100%;">
+        <tr>
+          <td style="width:20%;">
+            
+                      <h5 style="margin: 2mm 0mm;font-weight: 550;">shopName: </h5>
+          </td>
+          <td style="width:30%;text-align:left;">
+            <h5 style="margin: 2mm 0mm;font-weight:100">{{shopName}}</h5>
+          </td>
+          <td style="width:25%;">
+           
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">salesinvoiceNo:</h5>
+          </td>
+          <td style="width:25%;text-align:left;">
+            <h5 style="margin: 2mm 0mm;font-weight:100">{{salesinvoiceNo}}</h5>
+          </td>
+        </tr>
+     </table>
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 50%;">
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">totalReturnAmount :</h5>
+          </td>
+          <td style="width: 50%;text-align:right;">
+            <h5 style="margin: 2mm 0mm;font-weight:100">{{totalReturnAmount}}</h5>
+          </td>
+        </tr>
+      </table>
+   
+       <table style="width: 80%;margin-left: 38px;border-collapse: collapse;">
+         <tr>
+           <td>
+             <h5 style="margin: 2mm 0mm;font-weight: 550;"> taxAmount:</h5>
+           </td>
+           <td>
+             <h5 style="margin: 2mm 0mm;text-align: right;font-weight:100">{{taxAmount}}</h5>
+           </td>
+         </tr>
+         <tr>
+           <td>
+             <h5 style="margin: 2mm 0mm;font-weight: 550;">itemCode:</h5>
+           </td>
+           <td>
+             <h5 style="margin: 2mm 0mm; text-align: right;font-weight:100">{{itemCode}}</h5>
+           </td>
+         </tr>
+         <tr style="border-bottom: 2px solid #000;">
+           <td>
+             <h5 style="margin: 2mm 0mm;font-weight: 550;">cashReceivedAmount:</h5>
+           </td>
+           <td>
+              <h5 style="margin: 2mm 0mm; text-align: right;font-weight:100">{{cashReceivedAmount}}</h5>
+           </td>
+         </tr>
+         <tr style="border-bottom: 2px solid #000;">
+           <td>
+             <h5 style="margin: 2mm 0mm;font-weight: 550;"> knet:</h5>
+           </td>
+           <td>
+             <h5 style="margin: 2mm 0mm; text-align: right;font-weight:100">{{knet}}</h5>
+           </td>
+         </tr>
+         <tr style="border-bottom: 2px solid #000;">
+           <td>
+             <h5 style="margin: 2mm 0mm;font-weight: 550;"> salesInvoiceNumber:</h5>
+           </td>
+           <td>
+             <h5 style="margin: 2mm 0mm; text-align: right; font-weight: 100">{{salesInvoiceNumber}}</h5>
+           </td>
+         </tr>
+       
+       </table>
+       <table style="width: 86%;margin-left: 38px;border-collapse: collapse;">
+        <tr>
+          <td>
+            <h5 style="margin: 2mm 0mm;font-weight: 550;"> remarks:</h5>
+          </td>
+          <td>
+            <h5 style="margin: 2mm 0mm;text-align: right;font-weight:100">{{remarks}}</h5>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">returnAmount:</h5>
+          </td>
+          <td>
+            <h5 style="margin: 2mm 0mm; text-align: right;font-weight:100">{{returnAmount}}</h5>
+          </td>
+        </tr>
+        <tr style="border-bottom: 2px solid #000;">
+          <td>
+            <h5 style="margin: 2mm 0mm;font-weight: 550;">returnQty:</h5>
+          </td>
+          <td>
+             <h5 style="margin: 2mm 0mm; text-align: right;font-weight:100">{{returnQty}}</h5>
+          </td>
+        </tr>
+        <tr style="border-bottom: 2px solid #000;">
+          <td>
+            <h5 style="margin: 2mm 0mm;font-weight: 550;"> cardType:</h5>
+          </td>
+          <td>
+            <h5 style="margin: 2mm 0mm; text-align: right;font-weight:100">{{cardType}}</h5>
+          </td>
+        </tr>
+        <tr style="border-bottom: 2px solid #000;">
+          <td>
+            <h5 style="margin: 2mm 0mm;font-weight: 550;"> unitPrice:</h5>
+          </td>
+          <td>
+            <h5 style="margin: 2mm 0mm; text-align: right; font-weight: 100">{{unitPrice}}</h5>
+          </td>
+        </tr>
+     
+      </table>
+         <div class="offset-md-4 col-md-4 mt30">
+          <button (click)="getReturnReport()" type="button" class="btn btn-primary" style="width: 100%"><i class="fa fa-refresh"></i>Print</button>
+      </div>
+  </div>
+</html>
+</div>
+

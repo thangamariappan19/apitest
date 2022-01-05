@@ -1,0 +1,45 @@
+.mat-expansion-panel-spacing
+{
+    margin: 0;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z])
+{
+    box-shadow: none;
+}
+
+.mat-expansion-panel-header-title p{
+    margin: 0;
+    font-size: 13px;
+}
+
+.mat-expansion-panel-body
+{
+    padding: 0px !important;
+}
+
+.mat-expansion-panel-header.mat-expanded
+{
+    height: 50px;
+}
+
+
+.mat-tab-group {
+    flex-direction: row;
+}
+.mat-tab-header {
+  border-bottom: none;
+}
+.mat-tab-header-pagination {
+    display: none !important;
+}
+.mat-tab-labels {
+    flex-direction: column;
+}
+.mat-ink-bar {
+    height: 100%;
+    left: 98% !important;
+}
+.mat-tab-body-wrapper {
+    flex: 1 1 auto;
+}

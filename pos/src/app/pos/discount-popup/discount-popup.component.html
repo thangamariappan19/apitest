@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Discount</h1>
+<div mat-dialog-content>
+    <!-- <mat-form-field>
+    <mat-label>Discount Type</mat-label>
+    <mat-radio-group [(value)]="data.discountType">
+        <mat-radio-button value="1">%</mat-radio-button>
+        <mat-radio-button value="2">Amt</mat-radio-button>
+      </mat-radio-group>
+    </mat-form-field> -->
+    
+        <!-- <mat-label>Discount Type</mat-label> -->
+        <mat-select [(value)]="data.discountType" >
+            <mat-option value="Amount">Amount</mat-option>
+            <mat-option value="Percentage">Percentage</mat-option>
+        </mat-select>
+    
+    <mat-form-field>
+        <mat-label>Discount Value</mat-label>
+        <input type="number" matInput [(ngModel)]="data.discountValue"
+        (change) = "validate()"
+         min="0" max="{{data.discountType == 'Amount' ? max_amount : 100}}">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Discount Remarks</mat-label>
+        <input type="text" matInput [(ngModel)]="data.discountRemarks">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="primary"><i class="fa fa-check-circle"></i> Apply</button>
+    <button mat-button (click)="onNoClick()" color="accent"><i class="fa fa-close"></i> Cancel</button>
+    <button mat-button [mat-dialog-close]="data" (click)="removeClick()" color="warn"><i class="fa fa-trash"></i> Remove</button>
+</div>

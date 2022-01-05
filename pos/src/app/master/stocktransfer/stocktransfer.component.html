@@ -1,0 +1,199 @@
+<form [formGroup]="myForm"novalidate>
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a href="../stocktransfer/">{{ 'STOCK_TRANSFER.STOCK_TRANSFER_MASTER' | translate }}</a>
+                    </li>
+                    <!-- <li class="breadcrumb-current-item">Create</li> -->
+
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'STOCK_TRANSFER.STOCK_TRANSFER_MASTER' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+        <!-- /Topbar -->
+
+
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                               
+                                        <input type="text" name="documentNo" autocomplete="off" readonly
+                                        formControlName="documentNo" #documentNo
+                                        class="gui-input floating-input" placeholder="Document Number">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'STOCK_TRANSFER.DOCUMENT_NUMBER' | translate }}</label>
+
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                        <input type="text" name="documentDate" autocomplete="off" readonly
+                                        formControlName="documentDate" #documentDate
+                                        class="gui-input floating-input" placeholder="Document Date"
+                                        spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'STOCK_TRANSFER.DOCUMENT_DATE' | translate }}</label>
+
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                        <input type="text" name="fromBinNo" autocomplete="off" 
+                                        formControlName="fromBinNo" #fromBinNo
+                                        class="gui-input floating-input" placeholder="From BinNo"
+                                        spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'STOCK_TRANSFER.FROM_BIN_NO' | translate }}</label>
+
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                        <input type="text" name="toBiNo" autocomplete="off" 
+                                        formControlName="toBiNo" #toBiNo
+                                        class="gui-input floating-input" placeholder="To BiNo"
+                                        spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'STOCK_TRANSFER.TO_BIN_NO' | translate }}</label>
+
+                                    </div>
+                                    <!-- <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'STOCK_TRANSFER.FROM_BIN_NO' | translate }}</label>                             
+                                           <select name="fromBinNo" id="fromBinNo" (change)="binCodeChange()"
+                                                    formControlName="fromBinNo" #fromBinNo class="gui-input"
+                                                    [ngClass]="{'red-border': myForm.controls['fromBinNo'].invalid}">
+                                                    <option value="" selected="selected">Select</option>
+                                                    <option *ngFor="let item of fromBinNoList"
+                                                        value="{{item.binCode}}">{{item.binCode}}</option>
+                                                </select>
+                                                <i class="fa fa-angle-down"></i>
+                                                
+                                    </div>
+                                    <div class="col-md-6 mb20 select-forms">
+                                        <label>{{ 'STOCK_TRANSFER.TO_BIN_NO' | translate }}</label>                                    
+                                        <select name="toBiNo" id="toBiNo"
+                                                 formControlName="toBiNo" #toBiNo class="gui-input"
+                                                 [ngClass]="{'red-border': myForm.controls['toBiNo'].invalid}">
+                                                 <option value="" selected="selected">Select</option>
+                                                 <option *ngFor="let item of toBinNoList"
+                                                     value="{{item.binCode}}">{{item.binCode}}</option>
+                                             </select>
+                                             <i class="fa fa-angle-down"></i>
+                                             
+                                    </div> -->
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                        <input type="text" name="storeCode" autocomplete="off" readonly
+                                        formControlName="storeCode" #storeCode
+                                        class="gui-input floating-input" placeholder="Store Code"
+                                        spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'STOCK_TRANSFER.STORE_CODE' | translate }}</label>
+
+                                    </div>
+                                    <div class="col-md-6 mb20">
+                                        <label>{{ 'STOCK_TRANSFER.TRANSFER_METHOD' | translate }}  </label>
+                                        <label class="field">                                            
+                                                <input type="radio" id="BarCode" value="Bar Code" name="group" formControlName="group"> {{ 'STOCK_TRANSFER.BARCODE' | translate }}
+                                                <input type="radio" id="RFID" value="RFID" name="group" formControlName="group" > {{ 'STOCK_TRANSFER.RFID' | translate }}
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 mb20 floating-form floating-label">
+                                                                                
+                                        <input type="text" name="scanItem" autocomplete="off" (keyup.enter)="getBinLogDetails()"
+                                        formControlName="scanItem" #scanItem
+                                        class="gui-input floating-input" placeholder="Scan Item"
+                                        spellcheck="false" trim="blur">
+                                        <span class="highlight"></span>
+                                        <label>{{ 'STOCK_TRANSFER.SCAN_ITEM' | translate }}</label>
+
+                                    </div>                                                                       
+                                 </div>
+                                 <div class="allcp-form theme-info">
+                                    <div class="panel">
+                                        <div class="panel-body ">
+                                            <div class="resolution-bin">
+                                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                    <thead>
+                                                        <tr class="bg-dark">
+                                                            <th class="">{{ 'STOCK_TRANSFER.S_NO' | translate }}</th>
+                                                            <th class="">{{ 'STOCK_TRANSFER.SKUCODE' | translate }}</th>
+                                                            <th class="">{{ 'STOCK_TRANSFER.BARCODE' | translate }}</th>
+                                                            <th class="">{{ 'STOCK_TRANSFER.RFID' | translate }}</th> 
+                                                            <th></th>                                                               
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of saveBinList; let i = index;">
+                                                            <td>{{i+1}}</td>                                           
+                                                            <td>{{item.sKUCode}}</td>
+                                                            <td>{{item.barCode}}</td>
+                                                            <td>{{item.rfid}}</td>   
+                                                            <td><a href="javascript:void(0);" (click)="void_item(item)"
+                                                                class="cash-remove"><i class="fa fa-remove"></i></a></td>                                                                                                        
+                                                        </tr>
+                                                    </tbody>
+                                                </table>                                
+                                            </div>                            
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="offset-md-9 col-md-3 mb20 floating-form floating-label">
+                                                                                
+                                    <input type="text" name="totQTY" autocomplete="off" readonly
+                                    formControlName="totQTY" #totQTY
+                                    class="gui-input floating-input" placeholder="Scan Item"
+                                    spellcheck="false" trim="blur">
+                                    <span class="highlight"></span>
+                                    <label>{{ 'STOCK_TRANSFER.TOTAL_QTY' | translate }}</label>
+
+                                </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row default-forms">
+
+                    <div class="offset-md-4 col-md-2 mt10">
+                            <button type="button" class="btn btn-lg btn-success btn-block common-button" (click)="saveBinTransferDetails()"
+                            [disabled]="myForm.pristine || myForm.invalid" ><i class="fa fa-check-circle-o"></i> Save                                                
+                            </button>
+                    </div>                                    
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()">
+                            <i class="fa fa-remove"></i> Close</button>
+        
+                    </div>
+                   
+                  </div>
+            
+        </section>
+        <!-- /Content -->
+        
+    </section>
+    
+</form>

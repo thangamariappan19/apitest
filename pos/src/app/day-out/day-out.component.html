@@ -1,0 +1,74 @@
+<form [formGroup]="myForm" novalidate>
+    <section id="content_wrapper" class="sales-content-wrapper" style="margin-left: 0px;background-color: #fff;">
+        <!-- Content -->
+        <section class="animated fadeIn pos-start">
+            <header id="topbar" class="ph10 second-top">
+                <div class="topbar-left">
+                    <ul class="nav nav-list nav-list-topbar pull-left">
+                        <li>
+                            <i class="fa fa-calendar-o"></i> Day Out / Shift Out
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="topbar-right mt5">
+                    <a (click)="btn_back_click()" href="javascript:void(0);" class="btn btn-back btn-sm ml10"
+                        title="New">
+                        <span class="fa fa-arrow-left pr5"></span> {{ shiftOutMade == false ? "Back to POS" : "Back to Home" }}
+                    </a>
+                </div>
+            </header>
+            <div class="main-start mt10">
+                <div class="row">
+                    <div class="offset-md-3 col-md-6">
+                        <div class="main-start-switch">
+                            <div class="row">
+                                <div class="col-md-12 switch-text">
+                                    <h4 class="text-center"><i class="fa fa-calendar-o"></i>Day-Out /Shift-Out</h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row allcp-form theme-info ">
+                                <!-- <div class="col-md-6 switch-text">
+                                    <h5><i class="fa fa-money"></i> Shift Out Amount</h5>
+                                </div> -->
+                                <div class="offset-md-3 col-md-6 floating-form floating-label">
+                                    <div>
+
+                                        <input type="number" name="shiftin" min="0"
+                                                oninput="this.value = Math.abs(this.value)" formControlName="shiftin"
+                                                #shiftin class="gui-input floating-input" autocomplete="off">
+                                            <span class="highlight"></span>
+                                            <label>Shift Out Amount</label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="offset-md-3 col-md-3 ">
+                                    <button type="button" (click)="dayOut()"
+                                        class="btn btn-lg btn-primary btn-block day">
+                                        <i class="fa fa-check-circle"></i> Day Out</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" [disabled]="dayout==true || shiftOutMade == true" (click)="shiftout()"
+                                        class="btn btn-lg btn-primary btn-block shift">
+                                        <i class="fa fa-check-circle"></i> Shift Out</button>
+                                </div>
+                                <!-- <div class="col-md-3 mt10">
+                                    <button type="button"
+                                    (click) = "btn_back_click()" class="btn btn-lg btn-primary btn-block shift">
+                                        <i class="fa fa-arrow-left" ></i> Back to POS</button>
+                                </div> -->
+                                <!-- <span class="fa fa-arrow-left pr5"></span> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </section>
+</form>

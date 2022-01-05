@@ -1,0 +1,225 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../combo-list">{{ 'COMBO.COMBO_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.CREATE' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+    <section class="grids-search grid-search-row allcp-form">
+        <div class="row title-section-row">
+            <h4>{{ 'COMBO.CREATE_COMBO' | translate }}</h4>
+        </div>
+    </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <div class="profile-sec-first">
+                    <div class="col-md-12 style-tabs">
+                        <div class="tab-block mb25">
+                            <div id="style" class="tab-pane active">
+                                <!-- choose grid -->
+                                <div class="allcp-form theme-info">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <div class="row" style="margin-top: 20px;">
+                                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                    <input type="text" name="documentDate" autocomplete="off" readonly
+                                                        formControlName="documentDate" #documentDate
+                                                        [ngClass]="{'red-border': myForm.controls['documentDate'].invalid}"
+                                                        class="gui-input floating-input" placeholder="DocumentDate">
+                                                    <span class="highlight"></span>
+                                                    <label>{{ 'COMBO.DOCUMENT_DATE' | translate }}</label>
+                                                </div>
+
+                                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                    <input type="text" name="productBarcode" autocomplete="off"
+                                                        formControlName="productBarcode" #productBarcode
+                                                        [ngClass]="{'red-border': myForm.controls['productBarcode'].invalid}"
+                                                        class="gui-input floating-input" placeholder="Product Barcode">
+                                                    <span class="highlight"></span>
+                                                    <label>{{ 'COMBO.PRODUCTBARCODE' | translate }}</label>
+                                                </div>
+
+                                                <div class="col-md-6 mb20 floating-form floating-label">
+
+                                                    <input type="text" name="productSKU" autocomplete="off"
+                                                        formControlName="productSKU" #productSKU
+                                                        [ngClass]="{'red-border': myForm.controls['productSKU'].invalid}"
+                                                        class="gui-input floating-input" placeholder="ProductSKU">
+                                                    <span class="highlight"></span>
+                                                    <label>{{ 'COMBO.PRODUCTSKU' | translate }}</label>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="section">
+                                                        <div class="bs-component mt10">
+
+                                                            <div class="round fill mb10">
+                                                                <input type="checkbox" checked="" id="Active"
+                                                                    name="Active" #Active formControlName="Active">
+                                                                <label for="Active"></label>
+                                                                <p class="label-text">{{ 'COMMON.ACTIVE' | translate }}
+                                                                </p>
+                                                            </div>
+                                                            <div id="source-button" class="btn btn-system btn-xs"
+                                                                style="display: none;">&lt; &gt;</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- choose grid -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="profile-sec-first">
+                    <div class="col-md-12 style-tabs">
+                        <div class="tab-block mb25">
+                            <mat-tab-group>
+                                <mat-tab label="{{ 'COMBO.ITEMLIST' | translate }}">
+                                    <div id="items" class="tab-pane">
+                                        <div class="row" style="margin-top: 20px; display: block;">
+                                            <div class="allcp-form theme-info">
+                                                <div class="col-md-6 mb20 floating-form floating-label">
+                                                    <input type="text" name="BarCode" autocomplete="off"
+                                                        formControlName="BarCode" #BarCode
+                                                        (keydown)="getSKUData($event)" class="gui-input floating-input"
+                                                        placeholder="SKU/BarCode">
+                                                    <span class="highlight"></span>
+                                                    <label>{{ 'COMBO.SKU_BARCODE' | translate }}</label>
+                                                </div>
+                                                <div class="panel">
+                                                    <div class="panel-body country-table">
+                                                        <div class="table-responsive">
+                                                            <table
+                                                                class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                                <thead>
+                                                                    <tr class="bg-dark">
+                                                                        <th>#</th>
+                                                                        <th class="">{{ 'COMBO.BARCODE' | translate }}
+                                                                        </th>
+                                                                        <th class="">{{ 'COMBO.SKU_CODE' | translate }}
+                                                                        </th>
+                                                                        <th class="">{{ 'COMBO.STYLE_CODE' | translate
+                                                                            }}</th>
+                                                                        <th class="">{{ 'COMBO.SKU_NAME' | translate }}
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr *ngFor="let item of comboList; let i = index;">
+                                                                        <td>{{i+1}}</td>
+                                                                        <td>{{item.barcode}}</td>
+                                                                        <td>{{item.skuCode}}</td>
+                                                                        <td>{{item.skuName}}</td>
+                                                                        <td>{{item.stylecode}}</td>
+
+                                                                        <td><a href="javascript:void(0);"
+                                                                                (click)="void_item(item)"
+                                                                                class="cash-remove"><i
+                                                                                    class="fa fa-remove"></i></a></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab label="{{ 'COMBO.PRICELIST' | translate }}">
+                                    <div id="prices" class="tab-pane">
+                                        <div class="row" style="margin-top: 20px;display: block;">
+                                            <div class="allcp-form theme-info">
+                                                <div class="panel">
+
+                                                    <div class="panel-body country-table">
+                                                        <div class="table-responsive">
+                                                            <table
+                                                                class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                                <thead>
+                                                                    <tr class="bg-dark">
+                                                                        <th class="">#</th>
+                                                                        <th class="">{{ 'COMBO.PRICELIST_CODE' |
+                                                                            translate }}</th>
+                                                                        <th class="">{{ 'COMBO.PRICELIST_NAME' |
+                                                                            translate }}</th>
+                                                                        <th class="">{{ 'COMBO.PRICE' | translate }}
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr
+                                                                        *ngFor="let item of stylepricingList; let i = index;">
+                                                                        <td>{{i+1}}</td>
+                                                                        <td>{{item.priceListCode}}</td>
+                                                                        <td>{{item.priceListName}}</td>
+                                                                        <td>
+                                                                            <input type="number" min="1"
+                                                                                oninput="this.value = Math.abs(this.value)"
+                                                                                name="price" value={{item.price}}
+                                                                                [(ngModel)]="item.price"
+                                                                                [ngModelOptions]="{standalone: true}"
+                                                                                style="text-align:center;"
+                                                                                class="gui-input" autocomplete="off" style="width: 30%;">
+                                                                        </td>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                            </mat-tab-group>
+                        </div>
+                    </div>
+                </div>
+                <div class="row default-forms">
+
+                    <div class="offset-md-3 col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-success btn-block common-button"
+                            (click)="addComboOfferDetails()" [disabled]="myForm.pristine || myForm.invalid">
+                            <i class="fa fa-check-circle-o"></i> Save
+                        </button>
+                    </div>
+
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-primary btn-block common-button"
+                            (click)="clear_controls()"><i class="fa fa-refresh"></i> Clear</button>
+                    </div>
+
+                    <div class="col-md-2 mt10">
+                        <button type="button" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

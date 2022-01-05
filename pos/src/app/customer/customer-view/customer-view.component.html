@@ -1,0 +1,387 @@
+
+<form [formGroup]="myForm" novalidate><!-- Main Wrapper -->
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../Customer">{{ 'CUSTOMER.CUSTOMER_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.VIEW' | translate }}</li>
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>{{ 'CUSTOMER.VIEW_CUSTOMER' | translate }}</h4>             
+            </div>
+    
+    
+       </section>
+
+            <div class="topbar-right hidden-xs hidden-sm mt5 mr35">
+                <!-- <a href="sales-stats-purchases.html" class="btn btn-primary btn-sm ml10" title="New Order">
+                    <span class="fa fa-plus pr5"></span><span class="fa fa-file-o pr5"></span></a>
+                <a href="sales-stats-products.html" class="btn btn-primary btn-sm ml10" title="New Product">
+                    <span class="fa fa-plus pr5"></span><span class="fa fa-shopping-cart pr5"></span></a> -->
+               
+            </div>
+    
+        <!-- /Topbar -->
+        <!-- Content -->
+        <section id="content" class="animated fadeIn view-tabs">
+            <div class="row">
+                <div class="col-md-3 mt10">
+                    <div class="profile-sec-first">
+                        <div class="profile-sidebar">
+                            <!-- SIDEBAR USERPIC -->
+                            <div class="profile-userpic">
+                                <img src="{{ current_image}}" class="img-responsive" alt="">
+                            </div>
+                            <!-- END SIDEBAR USERPIC -->
+                            <!-- SIDEBAR USER TITLE -->
+                            <div class="profile-usertitle">
+                                <div class="profile-usertitle-name">
+                                    {{customerName}}
+                                </div>
+                                <div class="profile-usertitle-status">
+                                    <!-- Since March 17, 3.39PM -->
+                                    {{ 'CUSTOMER.SINCE' | translate }} {{createdOn | date:'MMMM d, y h:mm a'}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="profile-contact">
+                                <p><i class="fa fa-envelope"></i> {{email}}</p>
+                                <p><i class="fa fa-phone"></i> {{phoneNumber}}</p>
+                                <p class="last-visit"><i class="fa fa-calendar-o"></i> 
+                                    {{ 'CUSTOMER.LAST_VISITED' | translate }} : <span> {{lastTried | date:'MMMM d, y h:mm a'}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pf-second">
+                        <div class="panel panel-tile info-block info-block-bg-reward">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-5 ph10 text-center">
+                                        <i class="fa fa-gift"></i>
+                                    </div>
+                                    <div class="col-7 pl35 text-center">
+                                        <h2 class="">0</h2>
+                                        <h6 class="text-muted">{{ 'CUSTOMER.REWARD_ID' | translate }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-tile info-block info-block-bg-system">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-5 ph10 text-center">
+                                        <i class="fa fa-caret-right"></i>
+                                    </div>
+                                    <div class="col-7 pl35 text-center">
+                                        <h2 class="">0</h2>
+                                        <h6 class="text-muted">{{ 'CUSTOMER.AVAILABLE_POINTS' | translate }}</h6>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-tile info-block info-block-bg-points">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-5 ph10 text-center">
+                                        <i class="fa fa-th-large"></i>
+                                    </div>
+                                    <div class="col-7 pl35 text-center">
+                                        <h2 class="">0</h2>
+                                        <h6 class="text-muted">{{ 'CUSTOMER.LIFETIME_POINTS' | translate }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ctabs -->
+                <div class="col-md-9 mt10">
+
+                    <div class="common-titles">
+                        <ul class="com-title">
+                            <li class="tbg"><a pageScroll href="#overview" ><i class="fa fa-user-o"></i> {{ 'CUSTOMER.OVERVIEW' | translate }}</a></li>
+                            <li class="tbg"><a pageScroll href="#address" ><i class="fa fa-envelope-o"></i> {{ 'CUSTOMER.ADDRESS' | translate }}</a></li>
+                            <li class="tbg"><a pageScroll href="#transactions" ><i class="fa fa-credit-card"></i> {{ 'CUSTOMER.TRANSACTIONS' | translate }}</a></li>
+                            <li class="tbg"><a pageScroll href="#frequent" ><i class="fa fa-hourglass-o"></i> {{ 'CUSTOMER.FREQUENTLY_BUYING_ITEMS' | translate }}</a></li>
+                        </ul>
+
+                    </div>
+
+                    
+
+                    <!-- new view design -->
+
+                    <div class="col-md-12">
+
+                        <div class="customer-stats">
+
+                            <div class="profile-stats">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p><i class="fa fa-file"></i> {{countDays}}</p>
+                                        <h5>{{ 'CUSTOMER.LAST_ORDERED' | translate }}</h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p><i class="fa fa-arrows"></i>{{avgpurchase}}</p>
+                                        <h5>{{ 'CUSTOMER.AVERAGE_ORDER_AMOUNT' | translate }}</h5>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p><i class="fa fa-money"></i> {{totalspent}}</p>
+                                        <h5>{{ 'CUSTOMER.TOTAL_SPENT' | translate }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="vcustomer-overview" id="overview">
+
+                            <div class="view-titles">
+                                <h4>{{ 'CUSTOMER.CUSTOMER_OVERVIEW' | translate }}</h4>
+                            </div>
+
+
+                            <div class="row mt10">
+                                <div class="col-md-4">
+                                    <div class="customer-profile-section">
+                                        <p><i class="fa fa-user"></i> {{ 'CUSTOMER.CUSTOMER_NAME' | translate }} :</p>
+                                        <div class="prof-details">
+                                            <h5>{{customerName}}</h5>
+                                        </div>
+                                        <p><i class="fa fa-chevron-right"></i> {{ 'CUSTOMER.ACTIVE_STATUS' | translate }} :</p>
+                                        <div class="prof-details">
+                                            <h5 class="c-active">{{active == true ? 'Yes' : 'No'}}</h5>
+                                        </div>
+                                        <p><i class="fa fa-database"></i> {{ 'CUSTOMER.LOYALTY_PLAN' | translate }} :</p>
+                                        <div class="prof-details">
+                                            <h5>{{loyaltyPlan}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="customer-profile-section">
+                                        <p><i class="fa fa-circle"></i> {{ 'CUSTOMER.CUSTOMER_CODE' | translate }} :</p>
+                                        <div class="prof-details">
+                                            <h5>{{documentNo}}</h5>
+                                        </div>
+                                        <p><i class="fa fa-list"></i> {{ 'CUSTOMER.CATEGORY' | translate }} :</p>
+                                        <div class="prof-details">
+                                            <h5>{{customerGroupCodeFetch}}</h5>
+                                        </div>
+                                        <p><i class="fa fa-list"></i>{{ 'CUSTOMER.LOYALTY_SEGMENT' | translate }}:</p>
+                                        <div class="prof-details">
+                                            <h5></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="customer-profile-section">
+                                        <p><i class="fa fa-calendar-o"></i> {{ 'CUSTOMER.DOB' | translate }} :</p>
+                                        <div class="prof-details">
+                                            <h5>{{dob | date:'yyyy-MM-dd'}}</h5>
+                                        </div>
+                                        <p><i class="fa fa-money"></i> {{ 'CUSTOMER.PAYMENT_TERM' | translate }}:</p>
+                                        <div class="prof-details">
+                                            <h5>{{paymentTermsDays}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                         </div>
+
+                         <div class="vcustomer-overview" id="address">
+                            <div class="view-titles">
+                                <h4>{{ 'CUSTOMER.ADDRESS' | translate }}</h4>
+                            </div>
+
+                            <div class="row mt10">
+                                <div class="col-md-6">
+                                    <div class="customer-profile-section">
+                                        <p><i class="fa fa-home"></i> {{ 'CUSTOMER.BILLING_ADDRESS' | translate }} :</p>
+                                        <div class="prof-details">
+                                            <p>{{address1}}</p>
+                                            <p>{{address2}}</p>
+                                            <p>{{city}}, {{state_Code}}</p>
+                                            <p>{{countryCode}}</p>
+                                            <p>zip code - {{pincode}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="customer-profile-section">
+                                        <p><i class="fa fa-home"></i> {{ 'CUSTOMER.SHIPPING_ADDRESS' | translate }} :</p>
+                                        <div class="prof-details">
+                                            <p>{{shippingAddress1}}</p>
+                                            <p>{{shippingAddress2}}</p>
+                                            <p>{{shippingCity}}, {{shippingStateCode}}</p>
+                                            <p>{{shippingCountryCode}}</p>
+                                            <p>zip code - {{shippingPincode}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                         </div>
+
+                         
+
+                         <div class="vcustomer-overview" id="transactions">
+
+                            <div class="view-titles">
+                                <h4>{{ 'CUSTOMER.TRANSACTIONS' | translate }}</h4>
+                            </div>
+
+                            <div class="user-tabs tran_tab mt20">
+                                <div class="tab-block mb25">
+
+                                    <mat-tab-group>
+                                        <mat-tab label="{{ 'CUSTOMER.INVOICES' | translate }}"> 
+                                            <div class="table-responsive tabs-table ">
+                                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                    <thead>
+                                                        <tr class="bg-light">
+                                                            <th class="">DATE</th>
+                                                            <th class="">INVOICE NO</th>
+                                                            <th class="">PAYABLE</th>
+                                                            <th class="">PAID AMOUNT</th>
+                                                            <th class="">DUE</th>
+                                                            <th>STATUS</th>
+                                                        
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of salestransactionlist">
+                                                            <td>{{item.date | date }}</td>
+                                                            <td>{{item.invoiceNo}} </td>
+                                                            <td>{{item.netAmount}}</td>
+                                                            <td>{{item.receivedAmount}}</td>
+                                                            <td>{{item.dueAmount}}</td>
+                                                            <td>
+                                                                <div class="btn-group text-right">
+                                                                    <button type="button"
+                                                                        class="btn btn-success br2 btn-xs fs12 dropdown-toggle"
+                                                                        data-toggle="dropdown"
+                                                                        aria-expanded="false">{{item.status}}
+                                                                    </button>
+
+                                                                </div>
+                                                            </td>
+                                                          
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div> 
+                                        </mat-tab>
+                                        <mat-tab label="{{ 'CUSTOMER.RETURNS' | translate }}"> 
+
+                                            <div class="table-responsive tabs-table">
+                                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                                    <thead>
+                                                        <tr class="bg-light">
+                                                            <th class="">DATE</th>
+                                                            <th class="">INVOICE NO</th>
+                                                            <th class="">RETURN AMOUNT</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of returntransactionlist">
+                                                            <td>{{item.date | date }}</td>
+                                                            <td>{{item.invoiceNo}} </td>
+                                                            <td>{{item.returnAmount}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </mat-tab>
+                                      
+                                    </mat-tab-group>
+
+                                 
+                                </div>
+                            </div> 
+
+                        </div>
+
+                        <!-- <div class="vcustomer-overview" id="frequent">
+
+                            <div class="view-titles">
+                                <h4>{{ 'CUSTOMER.FREQUENTLY_BUYING_ITEMS' | translate }}</h4>
+                            </div>
+
+                           
+                          <div class="charts-filter">
+                            <select class="form-control">
+                                <option>Week</option>
+                                <option>Month</option>
+                                <option>Week</option>
+                              </select>
+                        </div>
+
+                        <ngx-charts-line-chart  style="position: static; display: inline-block; transform: none; margin-top: 30px;
+                        margin-bottom: -30px;"
+                              [view]="view"
+                              [scheme]="colorScheme"
+                              [legend]="legend"
+                              [showXAxisLabel]="showXAxisLabel"
+                              [showYAxisLabel]="showYAxisLabel"
+                              [xAxis]="xAxis"
+                              [yAxis]="yAxis"
+                              [xAxisLabel]="xAxisLabel"
+                              [yAxisLabel]="yAxisLabel"
+                              [timeline]="timeline"
+                              [results]="saleData"
+                              [showGridLines]="true">
+                              >
+                      </ngx-charts-line-chart>
+
+                          
+
+                        </div> -->
+
+
+                    </div>
+
+                    <!-- new view design -->
+
+
+                    <!-- tabs start -->
+                    
+                    <!-- tabs end -->
+                </div>
+                <!-- <div class="col-md-1 mt10">
+                    <a routerLink="{{ '/CustomerEdit/' + id}}" class="btn btn-edits btn-sm ml10" title="New Customer">
+                        <span class="fa fa-edit pr5"></span>Edit</a>
+                </div> -->
+                <div class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+                    <button type="button" style="background-color: #0af" class="btn active" data-toggle="button" aria-pressed="true" (click)="scrollToTop()">
+                        <i class="fa fa-chevron-up" style="color: #fff"></i>
+                    </button>
+                  </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </section>
+</form>

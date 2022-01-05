@@ -1,0 +1,111 @@
+
+    <section id="content_wrapper">
+        <!-- Topbar -->
+        <header id="topbar" class="alt">
+            <div class="topbar-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-icon">
+                        <a routerLink="../../home">
+                            <span class="fa fa-home"></span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-link">
+                        <a routerLink="../../home">Home</a>
+                    </li>
+                    <li class="">
+                        <a routerLink="../../Employee">{{ 'EMPLOYEE.EMPLOYEE_MASTER' | translate }}</a>
+                    </li>
+                    <li class="breadcrumb-current-item">{{ 'COMMON.VIEW' | translate }}</li>
+                </ol>
+            </div>
+        </header>
+
+        <section class="grids-search grid-search-row allcp-form">
+
+
+            <div class="row title-section-row">
+                <h4>VIEW EMPLOYEE</h4>             
+            </div>
+    
+    
+       </section>
+
+           
+    
+        <!-- /Topbar -->
+        <!-- Content -->
+        <section id="content" class="animated fadeIn view-tabs title-bottom-section eview-one">
+
+               <div class="row">
+                   <div class="col-md-4 emp-view">
+                   <!-- <img src="assets/img/customer.png" class="img-responsive"> -->
+                   <img src="{{current_store_image}}">
+                   </div>
+                   <div class="col-md-8 empl-details">
+
+                      <div class="main-empl-name">
+                       <h3>{{employeeName}}</h3>
+                      </div>
+                      <div class="main-empl-design">
+                        <p><i class="fa fa-briefcase"></i>{{designation_Name}}</p>
+                       </div>
+                       <div class="main-empl-phone">
+                        <p><i class="fa fa-phone"></i>{{phoneNo}}</p>
+                       </div>
+                       
+                   </div>
+               </div>
+            
+        </section>
+
+        <section id="content" class="animated fadeIn view-tabs title-bottom-section eview-two">
+
+            <div class="row">
+
+               <div class="col-md-6">
+                  <div class="emp-title-detail">
+                   <h4>Employee Details</h4>
+                  </div>
+               </div>
+
+
+               <div class="col-md-6">
+                <div class="emp-status-detail">
+                    <h4>STATUS : <span>{{active}}</span></h4>
+                </div>
+               </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 style-main-view">
+                    <h5>EMPLOYEE CODE</h5>
+                    <p>{{employeeCode}}</p>
+                </div>
+                <div class="col-md-4 style-main-view">
+                    <h5>DESIGNATION</h5>
+                    <p>{{designation_Name}}</p>
+                </div>
+                <div class="col-md-4 style-main-view">
+                    <h5>COUNTRY</h5>
+                    <p>{{countryCode}}</p>
+                </div>
+                <div class="col-md-4 style-main-view">
+                    <h5>STORE</h5>
+                    <p>{{storeCode}}</p>
+                </div>
+                <div class="col-md-4 style-main-view">
+                    <h5>SALARY</h5>
+                    <p>{{salary}}</p>
+                </div>
+                <div class="col-md-4 style-main-view">
+                    <h5>REMARKS</h5>
+                    <p>{{remarks}}</p>
+                </div>
+            </div>
+
+
+        </section>
+        <!-- /Content -->
+    </section>

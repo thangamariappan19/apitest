@@ -1,0 +1,318 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../sku-master">{{ 'SKU_MASTER.SKU_MASTER_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.VIEW' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+
+
+    <form [formGroup]="myForm" novalidate>
+    <section id="content" class="animated fadeIn title-bottom-section style-tabs style-view-first">
+
+
+            <div class="row">
+
+
+                <div class="col-sm-12 col-12 col-md-12 col-xl-5 col-lg-5">
+
+                   <div class="sku-view-image">
+                        <img src="assets/img/sku.png">
+                    </div>
+
+                </div>
+
+
+                <div class="col-sm-12 col-12 col-md-12 col-xl-7 col-lg-7">
+
+                    <div class="style-view-title">
+                    <!-- <h3>MAC:MS1180002069:DRESS FLUID BEADS</h3> -->
+                    <h3>
+                        <input type="text" id="styleHead" style="border: none;background: transparent;outline: none;width:1000px" readonly formControlName="styleHead" #styleHead>
+                    </h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2">
+                           <div class="style-count">
+                            <img src="assets/img/sv1.png" class="img-responsive">
+                           </div>
+                        </div>
+                        <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                            <div class="style-stats">
+                             <h3>35</h3>
+                             <p>{{ 'SKU_MASTER.IN_QUANTITY' | translate }}</p>
+                            </div>
+                         </div>
+                         <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2">
+                            <div class="style-count">
+                                <img src="assets/img/sv2.png" class="img-responsive">
+                            </div>
+                         </div>
+                         <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                            <div class="style-stats">
+                                <h3>25</h3>
+                                <p>{{ 'SKU_MASTER.OUT_QUANTITY' | translate }}</p>
+                               </div>
+                         </div>
+                    </div>
+
+
+                    <div class="row mt20">
+                        <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2">
+                           <div class="style-count">
+                            <img src="assets/img/sv3.png" class="img-responsive">
+                           </div>
+                        </div>
+                        <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                            <div class="style-stats">
+                             <h3>35</h3>
+                             <p>{{ 'SKU_MASTER.TOTAL_SALES' | translate }}</p>
+                            </div>
+                         </div>
+                         <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2">
+                            <div class="style-count">
+                                <img src="assets/img/sv4.png" class="img-responsive">
+                            </div>
+                         </div>
+                         <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                            <div class="style-stats">
+                                <h3>50</h3>
+                                <p>{{ 'SKU_MASTER.SALES%' | translate }}</p>
+                               </div>
+                         </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+    </section>
+
+    <!-- section two -->
+
+    <section style="overflow-x: hidden;">
+
+         
+            <div class="row">
+
+
+                   <div class="col-sm-12 col-12 col-md-12 col-xl-8 col-lg-8">
+
+                       <div class="style-view-second">
+
+                            <div class="row style-view-second-content">
+                                <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2 text-center">
+                                <img src="assets/img/sv5.png" class="img-responsive">
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                                 <!-- <h4>351101-16017</h4> -->
+                                 <h4><input type="text" id="skuCode" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="skuCode" #skuCode>
+                                 </h4>
+                                 <p>{{ 'SKU_MASTER.SKU_CODE' | translate }}</p>
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2 text-center">
+                                <img src="assets/img/sv5.png" class="img-responsive"> 
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4 ">
+                                 <!-- <h4>:2E16D1:DRESS</h4> -->
+                                 <input type="text" id="skuName" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="skuName" #skuName>
+                                 <p>{{ 'SKU_MASTER.SKU_NAME' | translate }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row style-view-second-content mt20">
+                                <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2 text-center active">
+                                <i class="fa fa-check-circle"></i>
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                                 <!-- <h4 class="style-active">ACTIVE</h4> -->
+                                 <input type="text" id="active" style="border: none;background: transparent;color: limegreen;font-weight: bold;" readonly formControlName="active" #active>
+                                 <p>{{ 'SKU_MASTER.STATUS' | translate }}</p>
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-2 col-xl-2 col-lg-2 text-center">
+                                <img src="assets/img/sv7.png" class="img-responsive">
+                                </div>
+                                <div class="col-sm-3 col-3 col-md-4 col-xl-4 col-lg-4">
+                                 <!-- <h4>FASHION</h4> -->
+                                 <input type="text" id="brand" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="brand" #brand>
+                                 <p>{{ 'SKU_MASTER.BRAND' | translate }}</p>
+                                </div>
+                            </div>
+
+                       </div>
+
+                   </div>
+
+
+                   <div class="col-sm-12 col-12 col-md-12 col-xl-4 col-lg-4">
+   
+                        <div class="style-view-third">
+
+                            <div class="row price-list">
+                                <div class="col-sm-6 col-6 col-md-6 col-xl-6 col-lg-6">
+                                 <p>{{ 'SKU_MASTER.PRICE' | translate }}</p>
+                                </div>
+                                <div class="col-sm-6 col-6 col-md-6 col-xl-6 col-lg-6 price-icon">
+                                 <i class="fa fa-money"></i>
+                                </div>
+                            </div>
+
+                            <div class="row price-view" id="pms">                                            
+                                <div class="col-sm-4 col-4 col-md-4 col-xl-4 col-lg-4" *ngFor="let price of priceList;">
+                                    <p><span>{{price.currencyCode}}</span> {{price.price}}</p>
+                                    <span>{{price.countryName}}</span>
+                                </div>
+                            </div>
+
+                            <div class="view">
+                                <button class="btn btn-price-view" (click) = "openPriceDialog()">
+                                    {{ 'SKU_MASTER.VIEW_ALL_COUNTRIES' | translate }}
+                                </button>
+
+                            </div>
+
+                        </div>
+                       
+                   </div>
+            </div>
+
+    </section>
+
+
+    <section class="mt30">
+
+
+             <div class="style-tabs sku-tabs mt30">
+
+               
+                <mat-tab-group>
+                    <mat-tab label="{{ 'SKU_MASTER.SKU' | translate }}"> 
+                        <div  class="tab-pane inner-tabs">
+
+                            <div class="row">
+                                <div class="col-md-4 style-main-view">
+                                 <h5>{{ 'SKU_MASTER.BRAND' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="brandd" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="brandd" #brandd>
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'SKU_MASTER.SUB_BRAND' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="subbrand" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="subbrand" #subbrand>
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'SKU_MASTER.COLLECTION' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="collection" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="collection" #collection>
+                                 </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 style-main-view">
+                                 <h5>{{ 'SKU_MASTER.ARMADA_COLLECTION' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="armadaCollection" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="armadaCollection" #armadaCollection>
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'SKU_MASTER.DIVISION' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="division" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="division" #division>
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'SKU_MASTER.PRODUCT_GROUP' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="productGroup" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="productGroup" #productGroup>
+                                 </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 style-main-view">
+                                 <h5>{{ 'SKU_MASTER.PRODUCT_SUB_GROUP' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="productSubGroup" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="productSubGroup" #productSubGroup>
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'SKU_MASTER.PURCHASE_PRICE' | translate }}</h5>
+                                 <p>
+                                    <input type="text" id="purchasePrice" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="purchasePrice" #purchasePrice>
+                                 </p>
+                                </div>
+                                <div class="col-md-4 style-main-view">
+                                <h5>{{ 'SKU_MASTER.PURCHASE_CURRENCY' | translate }}</h5>
+                                 <p><input type="text" id="purchaseCurrency" style="border: none;background: transparent;color: #00aaff;" readonly formControlName="purchaseCurrency" #purchaseCurrency></p>
+                                </div>
+                            </div>
+
+
+                       
+                        
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab label="{{ 'SKU_MASTER.STOCK' | translate }}"> 
+
+                        <div  class="tab-pane inner-tabs">
+                        
+                            <div class="table-responsive tabs-table color-table-responsive" id="ctr">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th>{{ 'SKU_MASTER.SKU_CODE' | translate }}</th>
+                                            <th>{{ 'SKU_MASTER.SKU_NAME' | translate }}</th>
+                                            <th>{{ 'SKU_MASTER.STOCK_QTY' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--<tr *ngFor = "let brand of brandList;">
+                                                        <td>
+                                                            <input type="checkbox" [(ngModel)]="brand.active" [ngModelOptions]="{standalone: true}">
+                                                            <label for="{{brand.id}}"></label>
+                                                        </td>
+                                                        <td>{{brand.brandCode}}</td>
+                                                        <td>{{brand.brandName}}</td>
+                                                    </tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </mat-tab>
+                    
+                 
+                </mat-tab-group>
+
+
+             </div>
+
+
+    </section>
+
+
+    </form>
+
+</section>

@@ -1,0 +1,180 @@
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../../home">{{ 'COMMON.HOME' | translate }}</a>
+                </li>
+                <li class="">
+                    <a routerLink="../../stockrequest">{{ 'STOCK_REQUEST.STOCK_REQUEST_MASTER' | translate }}</a>
+                </li>
+                <li class="breadcrumb-current-item">{{ 'COMMON.VIEW' | translate }}</li>
+            </ol>
+        </div>
+    </header>
+
+  
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row title-section-row">
+            <h4>{{ 'STOCK_REQUEST.VIEW_STOCK_REQUEST' | translate }}</h4>             
+        </div>
+
+
+   </section>
+    <!-- /Topbar -->
+    <form [formGroup]="myForm" novalidate>
+        <!-- Content -->
+        <section id="content" class="animated fadeIn title-bottom-section">
+            <div>
+                <!-- choose grid -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="barCode" autocomplete="off" readonly
+                                            formControlName="barCode" #barCode
+                                            class="gui-input floating-input" placeholder="SKU/BarCode">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_REQUEST.SKU_BARCODE' | translate }}</label>
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                       
+                                        <input type="text" name="fromstore" autocomplete="off" readonly
+                                            formControlName="fromstore" #fromstore
+                                               class="gui-input floating-input" placeholder="FromStore">
+                                               <span class="highlight"></span>
+                                               <label>{{ 'STOCK_REQUEST.FROMSTORE' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20 select-forms">
+                                    <label>{{ 'STOCK_REQUEST.TOWAREHOUSE' | translate }}</label>
+                                   
+                                        <select name="toWareHouse" formControlName="toWareHouse" #toWareHouse disabled
+                                            class="gui-input">
+                                            <option value="">Select ToWareHouse</option>
+                                            <option *ngFor="let item of wareHouseList" value="{{item.id}}">{{item.warehouseName}}</option>    </select>
+                                        <i class="arrow"></i>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="documentDate" autocomplete="off" readonly
+                                            formControlName="documentDate" #documentDate
+                                            class="gui-input floating-input" placeholder="Document Date">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_REQUEST.DOCUMENT_DATE' | translate }}</label>
+                                  
+                                </div>
+                                <div class="col-md-4 mb20 floating-form floating-label">
+                                                                        
+                                        <input type="text" name="documentNo" autocomplete="off" readonly
+                                            formControlName="documentNo" #documentNo
+                                            class="gui-input floating-input" placeholder="Document Number">
+                                            <span class="highlight"></span>
+                                            <label>{{ 'STOCK_REQUEST.DOCUMENT_NUMBER' | translate }}</label>
+                                    
+                                </div>
+                                <div class="col-md-4 mb20 select-forms">
+                                    <label>{{ 'STOCK_REQUEST.STATUS' | translate }}</label>
+                                    
+                                        <select name="status" formControlName="status" #status disabled
+                                            class="gui-input"
+                                            [ngClass]="{'red-border': myForm.controls['status'].invalid}">
+                                            <option value="">Select Status</option>
+                                            <option value="Open">Open</option>
+                                            <option value="Close">Close</option>                                            
+                                        </select>
+                                        <i class="fa fa-angle-down"></i>
+                                    
+                                </div>                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- choose grid -->
+                <!-- listing table -->
+                <div class="allcp-form theme-info">
+                    <div class="panel">
+                        <div class="panel-body country-table">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-dark">
+                                            <th class="">#</th>
+                                            <th class="">{{ 'STOCK_REQUEST.STYLECODE' | translate }}</th>
+                                            <th class="">{{ 'STOCK_REQUEST.BARCODE' | translate }}</th>
+                                            <th class="">{{ 'STOCK_REQUEST.SKU_NAME' | translate }}</th>
+                                            <th class="">{{ 'STOCK_REQUEST.SKU_CODE' | translate }}</th>
+                                            <th class="">{{ 'STOCK_REQUEST.BRAND' | translate }}</th>
+                                            <th class="">{{ 'STOCK_REQUEST.COLOR' | translate }}</th>
+                                            <th class="">{{ 'STOCK_REQUEST.SIZE' | translate }}</th>
+                                            <th class="">{{ 'STOCK_REQUEST.QUANTITY' | translate }}</th>
+                                            <th class="">{{ 'COMMON.REMARKS' | translate }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of stockrequestList; let i = index;">
+                                            <td>{{i+1}}</td>
+                                            <td>{{item.styleCode}}</td>
+                                            <td>{{item.barCode}}</td>
+                                            <td>{{item.skuName}}</td>
+                                            <td>{{item.skuCode}}</td>
+                                            <td>{{item.brand}}</td>
+                                            <td>{{item.color}}</td>
+                                            <td>{{item.size}}</td>
+                                            <td>{{item.quantity}}</td>
+                                            <td>{{item.remarks}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>                                
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb20 floating-form floating-label">
+                                               
+                            <input type="text" name="rem" autocomplete="off" readonly
+                                formControlName="rem" #rem
+                                   class="gui-input floating-input" placeholder="Remarks">
+                                   <span class="highlight"></span>
+                                   <label>{{ 'COMMON.REMARKS' | translate }}</label>
+                    </div>
+                    <div class="col-md-3 mb20"></div>
+                    <div class="col-md-3 mb20"></div>
+                    <div class="col-md-3 mb20">
+                        <label>{{ 'STOCK_REQUEST.TOTAL' | translate }}: </label>
+                                    <label class="field">
+                                    <input type="text" name="totalqty" autocomplete="off" readonly
+                                        formControlName="totalqty" #totalqty
+                                        class="gui-input" placeholder="">
+                                    </label>
+                    </div>
+                </div>
+                <div class="row default-forms">
+                   
+                   
+                  
+                    <div class="offset-md-5 col-md-2 mt10">
+                        <button type="submit" class="btn btn-lg btn-cancel btn-block common-button" (click)="close()"><i
+                                class="fa fa-remove"></i> Close</button>
+
+                    </div>
+                  
+                </div>
+            </div>
+        </section>
+        <!-- /Content -->
+    </form>
+</section>

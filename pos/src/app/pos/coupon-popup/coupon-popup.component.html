@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Redeem Coupon</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Enter Coupon Code</mat-label>
+        <input type="text" matInput [(ngModel)]="data.couponCode" >
+    </mat-form-field>
+    <!-- <mat-form-field>
+        <mat-label>Redeem Partial Amount</mat-label>
+        <input type="checkbox" [(ngModel)]="data.isPartialRedeem">
+    </mat-form-field> -->
+    <input type="checkbox" [(ngModel)]="data.isPartialRedeem"> Redeem Partial Amount
+    <mat-form-field *ngIf="data.isPartialRedeem">
+        <mat-label>Partial Redeem Amount</mat-label>
+        <input type="text" matInput [(ngModel)]="data.redeemAmount" >
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="primary">
+        <i class="fa fa-check-circle"></i> Redeem
+    </button>
+    <button mat-button (click)="onNoClick()" color="accent">
+        <i class="fa fa-close"></i> Cancel
+    </button>
+    <!-- <button mat-button [mat-dialog-close]="data" (click)="removeClick()" color="warn">
+        <i class="fa fa-trash"></i> Remove
+    </button> -->
+</div>

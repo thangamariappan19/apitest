@@ -1,0 +1,577 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/api.service';
+import { CommonService } from 'src/app/common.service';
+import { ConfirmService } from 'src/app/confirm/confirm.service';
+import { Router } from '@angular/router';
+import { MUserDetails } from 'src/app/models/m-user-details';
+import { MBinConfigMaster } from 'src/app/models/m-bin-config-master';
+import { MBinConfigDetails } from 'src/app/models/m-bin-config-details';
+
+@Component({
+  selector: 'app-bin-configuration-details',
+  templateUrl: './bin-configuration-details.component.html',
+  styleUrls: ['./bin-configuration-details.component.css']
+})
+export class BinConfigurationDetailsComponent implements OnInit {
+  myForm: FormGroup;
+  user_details: MUserDetails = null;
+  lblCode: any;
+  lblName: any;
+  binShow: boolean = false;
+  areaShow: boolean = false;
+  areanotShow: boolean = true;
+  notBinShow: boolean = true;
+  binConfig: Array<MBinConfigMaster>;
+  binConfigDetails: Array<MBinConfigDetails>;
+  tempBinConfigDetails: Array<MBinConfigDetails>;
+  storeBinConfigDetails: Array<MBinConfigDetails>;
+  binConfigDetailsRecord: MBinConfigDetails;
+  binBarcode: any;
+  checkDefaultBin: boolean = true;
+  stockShow:boolean = true;
+  salesShow:boolean = true;
+  sellingShow:boolean = true;
+
+  constructor(
+    private api: ApiService,
+    private common: CommonService,
+    private fb: FormBuilder,
+    private confirm: ConfirmService,
+    public router: Router
+  ) { this.createForm(); }
+
+  createForm() {
+    this.myForm = this.fb.group({
+      storeCode: [''],
+      levelID: ['', Validators.required],
+      subLevelCode: [''],
+      subLevelName: [''],
+      headContainerID: [''],
+      active: [true],
+      binNo: [''],
+      maxCapacity: [''],
+      defaultReceiveBin: [false],
+      defaultSellingBin: [false],
+      headContainerID1: [''],
+      active1: [true],
+      purchase: [''],
+      binBarcode: [''],
+      sadefaultReceiveBin: [false]
+    });
+    let temp_str: string = localStorage.getItem('user_details');
+    if (temp_str != null) {
+      this.user_details = JSON.parse(temp_str);
+    }
+    this.lblCode = 'Code';
+    this.lblName = 'Name';
+    this.binShow = false;
+    this.areaShow = false;
+    this.areanotShow = true;
+    this.notBinShow = true;
+    this.binConfig = new Array<MBinConfigMaster>();
+    this.binConfigDetails = new Array<MBinConfigDetails>();
+    this.tempBinConfigDetails = new Array<MBinConfigDetails>();
+    this.storeBinConfigDetails = new Array<MBinConfigDetails>();
+    this.myForm.get('storeCode').setValue(this.user_details.storeCode);
+    this.getBin();
+    //document.getElementById("purchase").setAttribute("hidden","true");
+  }
+
+  ngOnInit(): void {
+  }
+
+  getBin() {
+    this.common.showSpinner();
+    this.api.getAPI("BinLevel?id=" + this.user_details.storeID)
+      .subscribe((data) => {
+        setTimeout(() => {
+          if (data != null && data.statusCode != null && data.statusCode == 1) {
+            this.binConfig = data.binConfigMasterList;
+          } else {
+            let msg: string = data != null
+              && data.displayMessage != null
+              && data.displayMessage != "" ? data.displayMessage : "Failed to retrieve Data.";
+            this.common.showMessage('warn', msg);
+          }
+          this.common.hideSpinner();
+        }, this.common.time_out_delay);
+      });
+  }
+
+  getSubLevel() {
+    this.common.showSpinner();
+    this.api.getAPI("BinLevelDetails?id=" + this.user_details.storeID + "&LevelID=1")
+      .subscribe((data) => {
+        setTimeout(() => {
+          if (data != null && data.statusCode != null && data.statusCode == 1) {
+            this.tempBinConfigDetails = data.binSubLevelList;
+          } else {
+            let msg: string = data != null
+              && data.displayMessage != null
+              && data.displayMessage != "" ? data.displayMessage : "Failed to retrieve Data.";
+            this.common.showMessage('warn', msg);
+          }
+          this.common.hideSpinner();
+        }, this.common.time_out_delay);
+      });
+  }
+
+  BindData() {
+
+    let level = this.myForm.get('levelID').value;
+    let tempbin = this.binConfig.filter(x => x.levelNo == level);
+    let subcode = null;
+    let subname = null;
+    let header = null;
+    let capacity = 0;
+    let act = false;
+    let autocode = null;
+    let purchase = null;
+    let binBarcode = null;
+
+    if (tempbin[0].levelName.toUpperCase() == "BIN") {
+      subcode = this.myForm.get('binNo').value;
+      subname = null;
+      header = this.myForm.get('headContainerID1').value;
+      capacity = this.myForm.get('maxCapacity').value;
+      act = this.myForm.get('active1').value;
+      binBarcode = this.myForm.get('binBarcode').value;
+      let tempbinlevel = this.tempBinConfigDetails.filter(x => x.subLevelCode == header)
+      autocode = tempbinlevel[0].autoGeneratedCode + '-' + subcode;
+    }
+    else {
+      subcode = this.myForm.get('subLevelCode').value;
+      subname = this.myForm.get('subLevelName').value;
+      header = this.myForm.get('headContainerID').value;
+      purchase = this.myForm.get('purchase').value;
+      capacity = 0;
+      act = this.myForm.get('active').value;
+      if (level != 1) {
+        let tempbinlevel = this.tempBinConfigDetails.filter(x => x.subLevelCode == header)
+        if (tempbinlevel[0].autoGeneratedCode != null) {
+          autocode = tempbinlevel[0].autoGeneratedCode + '-' + subcode;
+        }
+
+      }
+      else {
+        autocode = subcode;
+      }
+
+    }
+    if (subcode != "" && subname != "") {
+      if (tempbin[0].levelName.toUpperCase() == "BIN") {
+        this.checkDefaultBin = true;
+        let stockrecbin = this.myForm.get('defaultReceiveBin').value;
+        let salesrecbin = this.myForm.get('sadefaultReceiveBin').value;
+        let recbin = this.myForm.get('defaultSellingBin').value;
+
+        this.api.getAPI("BinLevelDetails?id=" + this.user_details.storeID + "&LevelID=" + level)
+          .subscribe((data) => {
+            setTimeout(() => {
+              if (data != null && data.statusCode != null && data.statusCode == 1) {
+                this.storeBinConfigDetails = data.binSubLevelList;
+
+                if (this.storeBinConfigDetails.length >= 0) {
+                  let filter1 = this.storeBinConfigDetails.filter(x => x.defaultReceivingBin == true)
+                  let filter2 = this.storeBinConfigDetails.filter(x => x.defaultSalesReceivingBin == true)
+                  let filter3 = this.storeBinConfigDetails.filter(x => x.defaultSellingBin == true)
+
+                  if (filter1.length > 0) {
+                    if (filter1[0].defaultReceivingBin == stockrecbin) {
+                      this.checkDefaultBin = false;
+                    }
+                  }
+                  if (filter2.length > 0) {
+                    if (filter2[0].defaultSalesReceivingBin == salesrecbin) {
+                      this.checkDefaultBin = false;
+                    }
+                  }
+                  if (filter3.length > 0) {
+                    if (filter3[0].defaultSellingBin == recbin) {
+                      this.checkDefaultBin = false;
+                    }
+                  }
+                  if (this.checkDefaultBin == true) {
+                    let templogdata: MBinConfigDetails = {
+                      id: 0,
+                      autoGeneratedCode: autocode,
+                      levelID: level,
+                      levelName: tempbin[0].levelName,
+                      subLevelCode: subcode,
+                      subLevelName: subname,
+                      headerCode: header,
+                      maxCapacity: capacity,
+                      binType: null,
+                      defaultReceivingBin: stockrecbin,
+                      defaultSalesReceivingBin: salesrecbin,
+                      defaultSellingBin: recbin,
+                      storeID: this.user_details.storeID,
+                      storeCode: this.myForm.get('storeCode').value,
+                      active: act,
+                      purchase: purchase,
+                      binBarcode: binBarcode
+                    }
+                    this.binConfigDetails.push(templogdata);
+                  } else {
+                    this.common.showMessage('warn', 'Default Bin Already Exists');
+                  }
+                }
+              } else {
+                let templogdata: MBinConfigDetails = {
+                  id: 0,
+                  autoGeneratedCode: autocode,
+                  levelID: level,
+                  levelName: tempbin[0].levelName,
+                  subLevelCode: subcode,
+                  subLevelName: subname,
+                  headerCode: header,
+                  maxCapacity: capacity,
+                  binType: null,
+                  defaultReceivingBin: stockrecbin,
+                  defaultSalesReceivingBin: salesrecbin,
+                  defaultSellingBin: recbin,
+                  storeID: this.user_details.storeID,
+                  storeCode: this.myForm.get('storeCode').value,
+                  active: act,
+                  purchase: purchase,
+                  binBarcode: binBarcode
+                }
+                this.binConfigDetails.push(templogdata);
+                // let msg: string = data != null
+                //   && data.displayMessage != null
+                //   && data.displayMessage != "" ? data.displayMessage : "Failed to retrieve Data.";
+                // this.common.showMessage('warn', msg);
+              }
+              this.common.hideSpinner();
+            }, this.common.time_out_delay);
+          });
+      }
+      else {
+        let templogdata: MBinConfigDetails = {
+          id: 0,
+          autoGeneratedCode: autocode,
+          levelID: level,
+          levelName: tempbin[0].levelName,
+          subLevelCode: subcode,
+          subLevelName: subname,
+          headerCode: header,
+          maxCapacity: capacity,
+          binType: null,
+          defaultReceivingBin: this.myForm.get('defaultReceiveBin').value,
+          defaultSellingBin: this.myForm.get('defaultSellingBin').value,
+          storeID: this.user_details.storeID,
+          storeCode: this.myForm.get('storeCode').value,
+          purchase: purchase,
+          active: act
+        }
+        this.binConfigDetails.push(templogdata);
+      }
+    }
+    else {
+      this.common.showMessage('warn', "code or Name is Empty");
+    }
+    this.myForm.controls['subLevelCode'].setValue('');
+    this.myForm.controls['subLevelName'].setValue('');
+    //this.myForm.controls['headContainerID'].setValue('');
+    this.myForm.controls['active'].setValue(true);
+    this.myForm.controls['binNo'].setValue('');
+    this.myForm.controls['maxCapacity'].setValue('');
+    this.myForm.controls['defaultReceiveBin'].setValue(false);
+    this.myForm.controls['defaultSellingBin'].setValue(false);
+    this.myForm.controls['sadefaultReceiveBin'].setValue(false);
+    //this.myForm.controls['headContainerID1'].setValue('');
+    this.myForm.controls['active1'].setValue(true);
+    this.myForm.controls['binBarcode'].setValue('');
+  }
+
+  // BindData1() {
+
+  //   let level = this.myForm.get('levelID').value;
+  //   let tempbin = this.binConfig.filter(x => x.levelNo == level);
+  //   let subcode = null;
+  //   let subname = null;
+  //   let header = null;
+  //   let capacity = 0;
+  //   let act = false;
+  //   let autocode = null;
+  //   let purchase = null;
+  //   let binBarcode = null;
+
+  //   if (tempbin[0].levelName.toUpperCase() == "BIN") {
+  //     subcode = this.myForm.get('binNo').value;
+  //     subname = null;
+  //     header = this.myForm.get('headContainerID1').value;
+  //     capacity = this.myForm.get('maxCapacity').value;
+  //     act = this.myForm.get('active1').value;
+  //     binBarcode = this.myForm.get('binBarcode').value;
+  //     let tempbinlevel = this.tempBinConfigDetails.filter(x => x.subLevelCode == header)
+  //     autocode = tempbinlevel[0].autoGeneratedCode + '-' + subcode;
+  //   }
+  //   else {
+  //     subcode = this.myForm.get('subLevelCode').value;
+  //     subname = this.myForm.get('subLevelName').value;
+  //     header = this.myForm.get('headContainerID').value;
+  //     purchase = this.myForm.get('purchase').value;
+  //     capacity = 0;
+  //     act = this.myForm.get('active').value;
+  //     if (level != 1) {
+  //       let tempbinlevel = this.tempBinConfigDetails.filter(x => x.subLevelCode == header)
+  //       if (tempbinlevel[0].autoGeneratedCode != null) {
+  //         autocode = tempbinlevel[0].autoGeneratedCode + '-' + subcode;
+  //       }
+
+  //     }
+  //     else {
+  //       autocode = subcode;
+  //     }
+
+  //   }
+  //   if (subcode != "" && subname != "") {
+  //     this.checkDefaultBin = true;
+  //     let stockrecbin = this.myForm.get('defaultReceiveBin').value;
+  //     let salesrecbin = this.myForm.get('sadefaultReceiveBin').value;
+  //     let recbin = this.myForm.get('defaultSellingBin').value;
+
+  //     this.api.getAPI("BinLevelDetails?id=" + this.user_details.storeID + "&LevelID=" + level)
+  //       .subscribe((data) => {
+  //         setTimeout(() => {
+  //           if (data != null && data.statusCode != null && data.statusCode == 1) {
+  //             this.storeBinConfigDetails = data.binSubLevelList;
+
+  //             if (this.storeBinConfigDetails.length >= 0) {
+  //               let filter1 = this.storeBinConfigDetails.filter(x => x.defaultReceivingBin == true)
+  //               let filter2 = this.storeBinConfigDetails.filter(x => x.defaultSalesReceivingBin == true)
+  //               let filter3 = this.storeBinConfigDetails.filter(x => x.defaultSellingBin == true)
+
+  //               if (filter1.length > 0) {
+  //                 if (filter1[0].defaultReceivingBin == stockrecbin) {
+  //                   this.checkDefaultBin = false;
+  //                 }
+  //               }
+  //               if (filter2.length > 0) {
+  //                 if (filter2[0].defaultSalesReceivingBin == salesrecbin) {
+  //                   this.checkDefaultBin = false;
+  //                 }
+  //               }
+  //               if (filter3.length > 0) {
+  //                 if (filter3[0].defaultSellingBin == recbin) {
+  //                   this.checkDefaultBin = false;
+  //                 }
+  //               }
+  //               if (this.checkDefaultBin == true) {
+  //                 let templogdata: MBinConfigDetails = {
+  //                   id: 0,
+  //                   autoGeneratedCode: autocode,
+  //                   levelID: level,
+  //                   levelName: tempbin[0].levelName,
+  //                   subLevelCode: subcode,
+  //                   subLevelName: subname,
+  //                   headerCode: header,
+  //                   maxCapacity: capacity,
+  //                   binType: null,
+  //                   defaultReceivingBin: stockrecbin,
+  //                   defaultSalesReceivingBin: salesrecbin,
+  //                   defaultSellingBin: recbin,
+  //                   storeID: this.user_details.storeID,
+  //                   storeCode: this.myForm.get('storeCode').value,
+  //                   active: act,
+  //                   purchase: purchase,
+  //                   binBarcode: binBarcode
+  //                 }
+  //                 this.binConfigDetails.push(templogdata);
+  //               } else {
+  //                 this.common.showMessage('warn', 'Default Bin Already Exists');
+  //               }
+  //             }
+  //           } else {
+  //             let msg: string = data != null
+  //               && data.displayMessage != null
+  //               && data.displayMessage != "" ? data.displayMessage : "Failed to retrieve Data.";
+  //             this.common.showMessage('warn', msg);
+  //           }
+  //           this.common.hideSpinner();
+  //         }, this.common.time_out_delay);
+  //       });
+
+
+  //   }
+  //   else {
+  //     this.common.showMessage('warn', "code or Name is Empty");
+  //   }
+  //   this.myForm.controls['subLevelCode'].setValue('');
+  //   this.myForm.controls['subLevelName'].setValue('');
+  //   //this.myForm.controls['headContainerID'].setValue('');
+  //   this.myForm.controls['active'].setValue(true);
+  //   this.myForm.controls['binNo'].setValue('');
+  //   this.myForm.controls['maxCapacity'].setValue('');
+  //   this.myForm.controls['defaultReceiveBin'].setValue(false);
+  //   this.myForm.controls['defaultSellingBin'].setValue(false);
+  //   this.myForm.controls['sadefaultReceiveBin'].setValue(false);
+  //   //this.myForm.controls['headContainerID1'].setValue('');
+  //   this.myForm.controls['active1'].setValue(true);
+  //   this.myForm.controls['binBarcode'].setValue('');
+  // }
+
+  GetLevel() {
+    let level = this.myForm.get('levelID').value;
+    let tempbin = this.binConfig.filter(x => x.levelNo == level);
+    if (tempbin[0].levelName.toUpperCase() == "BIN") {
+      this.binShow = true;
+      this.notBinShow = false;
+    }
+    else {
+      this.binShow = false;
+      this.notBinShow = true;
+    }
+    if (tempbin[0].levelName.toUpperCase() == "AREA") {
+      this.areaShow = true;
+      this.areanotShow = false;
+    }
+    else {
+      this.areaShow = false;
+      this.areanotShow = true;
+    }
+
+    this.lblCode = tempbin[0].levelName + " Code";
+    this.lblName = tempbin[0].levelName + " Name";
+    if (level != 1) {
+      let levelnumber = level - 1;
+      this.common.showSpinner();
+      this.api.getAPI("BinLevelDetails?id=" + this.user_details.storeID + "&LevelID=" + levelnumber)
+        .subscribe((data) => {
+          setTimeout(() => {
+            if (data != null && data.statusCode != null && data.statusCode == 1) {
+              this.tempBinConfigDetails = data.binSubLevelList;
+            } else {
+              let msg: string = data != null
+                && data.displayMessage != null
+                && data.displayMessage != "" ? data.displayMessage : "Failed to retrieve Data.";
+              this.common.showMessage('warn', msg);
+            }
+            this.common.hideSpinner();
+          }, this.common.time_out_delay);
+        });
+
+    }
+  }
+  addSubBinDetails() {
+    if (this.binConfigDetails.length == 0) {
+      this.common.showMessage("warn", "Can not Save, Items invalid.");
+    } else {
+      this.binConfigDetailsRecord = new MBinConfigDetails();
+      this.binConfigDetailsRecord.binLevelDetailsList = this.binConfigDetails;
+
+      this.common.showSpinner();
+      this.api.postAPI("BinLevelDetails", this.binConfigDetailsRecord).subscribe((data) => {
+        //// .log(data);
+        if (data != null && data.statusCode != null && data.statusCode == 1) {
+          this.common.hideSpinner();
+          this.common.showMessage('success', data.displayMessage);
+          this.clearControls();
+        } else {
+          setTimeout(() => {
+            // .log(data);
+            this.common.hideSpinner();
+            this.common.showMessage('error', 'Failed to Save.');
+          }, this.common.time_out_delay);
+        }
+      });
+    }
+  }
+  GetExisting() {
+    this.binConfigDetails = new Array<MBinConfigDetails>();
+    let level = this.myForm.get('levelID').value;
+    let tempbin = this.binConfig.filter(x => x.levelNo == level);
+    let header = null;
+
+    if (tempbin[0].levelName.toUpperCase() == "BIN") {
+      header = this.myForm.get('headContainerID1').value;
+      let filter = this.tempBinConfigDetails.filter(x => x.subLevelCode == this.myForm.get('headContainerID1').value)
+      let purpose = filter[0].purchase;
+
+      if(purpose == "STOCK"){
+        // this.myForm.controls['defaultSellingBin'].disable();
+        // this.myForm.controls['sadefaultReceiveBin'].disable();
+        // this.myForm.controls['defaultReceiveBin'].enable();
+        this.stockShow = true;
+        this.salesShow = false;
+        this.sellingShow = false;
+      }else{
+        // this.myForm.controls['defaultSellingBin'].enable();
+        // this.myForm.controls['sadefaultReceiveBin'].enable();
+        // this.myForm.controls['defaultReceiveBin'].disable();
+        this.stockShow = false;
+        this.salesShow = true;
+        this.sellingShow = true;
+      }
+    }
+    else {
+      header = this.myForm.get('headContainerID').value;
+    }
+
+    //if (level != 1) {
+      let levelnumber = level;
+      this.common.showSpinner();
+      this.api.getAPI("BinLevelDetails?id=" + this.user_details.storeID + "&LevelID=" + levelnumber +"&Code="+header)
+        .subscribe((data) => {
+          setTimeout(() => {
+            if (data != null && data.statusCode != null && data.statusCode == 1) {
+              this.binConfigDetails = data.binSubLevelList;
+            } /*else {
+              let msg: string = data != null
+                && data.displayMessage != null
+                && data.displayMessage != "" ? data.displayMessage : "Failed to retrieve Data.";
+              this.common.showMessage('warn', msg);
+            }*/
+            this.common.hideSpinner();
+          }, this.common.time_out_delay);
+        });
+
+    //}
+  }
+  GetDefaultBin() {
+    if (this.myForm.get('defaultReceiveBin').value == true) {
+      this.myForm.get('sadefaultReceiveBin').setValue(false);
+      this.myForm.get('defaultSellingBin').setValue(false);
+    }
+    else if (this.myForm.get('sadefaultReceiveBin').value == true) {
+      this.myForm.get('defaultReceiveBin').setValue(false);
+      this.myForm.get('defaultSellingBin').setValue(false);
+    }
+    else if (this.myForm.get('defaultSellingBin').value == true) {
+      this.myForm.get('defaultReceiveBin').setValue(false);
+      this.myForm.get('sadefaultReceiveBin').setValue(false);
+    }
+  }
+  clearControls() {
+    this.myForm.controls['levelID'].setValue('');
+    this.myForm.controls['subLevelCode'].setValue('');
+    this.myForm.controls['subLevelName'].setValue('');
+    this.myForm.controls['headContainerID'].setValue('');
+    this.myForm.controls['active'].setValue(true);
+    this.myForm.controls['binNo'].setValue('');
+    this.myForm.controls['maxCapacity'].setValue('');
+    this.myForm.controls['defaultReceiveBin'].setValue(false);
+    this.myForm.controls['defaultSellingBin'].setValue(false);
+    this.myForm.controls['headContainerID1'].setValue('');
+    this.myForm.controls['active1'].setValue(true);
+    this.lblCode = 'Code';
+    this.lblName = 'Name';
+    this.binShow = false;
+    this.notBinShow = true;
+    //this.binConfig = new Array<MBinConfigMaster>();
+    this.binConfigDetails = new Array<MBinConfigDetails>();
+    this.tempBinConfigDetails = new Array<MBinConfigDetails>();
+  }
+  close() {
+    if (this.myForm.dirty) {
+      if (confirm("Are You Sure You want to Close the Form Without Saving?")) {
+        this.router.navigate(['home']);
+      }
+    }
+    else {
+      this.router.navigate(['home']);
+    }
+  }
+}

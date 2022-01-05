@@ -1,0 +1,176 @@
+<form [formGroup]="myForm" novalidate>
+    <section id="content_wrapper">
+    
+        <section class="grids-search grid-search-row allcp-form" style="margin-bottom: 10px;">
+    
+    
+            <div class="row title-section-row">
+                <h4>Inventory Counting Approval</h4>             
+            </div>
+        
+        
+        </section>
+        <mat-card>
+           
+        <mat-card-content class="report-card-content" style="padding-top: 40px;
+        background-color: #fff;">
+        <section id="content_wrapper report-forms" class="sales-content-wrapper" style="margin-left: 0px">
+         <div class="row allcp-form theme-info ">
+              
+        <div class="col-lg-3 col-md-3 col-sm-12 col-12 col-xl-3">
+            <div class="section select-forms">
+            <label class="field">Country</label>
+                <select name="countryID"  formControlName="countryID" #countryID class="gui-input" (change)="Onchangecountry(countryID.value)">
+                        <option *ngFor="let item of CountryList"  value="{{item.id}}">
+                            {{item.countryName}}</option>
+                </select>  
+                <i class="fa fa-angle-down report-select"></i>           
+            </div>         
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-12 col-xl-3">
+            <div class="section select-forms">
+            <label class="field">Store</label>
+                <select name="StoreID"  formControlName="StoreID" #StoreID class="gui-input" (change)="Onchangestore(StoreID.value)">
+                        <option *ngFor="let item of StoreList"  value="{{item.id}}">
+                            {{item.storeName}}</option>
+                </select>  
+                <i class="fa fa-angle-down report-select"></i>   
+            </div>        
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-12 col-xl-3">
+               <div class="section select-forms">
+               <label class="field">Document No</label>
+                    <select name="DocumentNo"  formControlName="DocumentNo" #DocumentNo class="gui-input" (change)="OnchangeDocumentDate(DocumentNo.value)">
+                        <option *ngFor="let item of DocumentList"  value="{{item.documentNo}}">
+                            {{item.documentNo}}</option>
+                    </select>  
+                    <i class="fa fa-angle-down"></i>           
+                </div>    
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-12 col-xl-3">
+            <div class="section floating-form floating-label">
+               <input type="text"  name="DocumentDate"
+                formControlName="DocumentDate" #DocumentDate class="gui-input floating-input"
+                placeholder="DocumentDate" value="{{selected_Date}}" readonly  autocomplete="off">
+                <span class="highlight"></span>
+                <label class="field">Document Date</label>
+            </div>
+        </div>
+ 
+        
+        
+        
+        <!-- <div class="col-lg-2 col-md-2 col-sm-12 col-12 col-xl-1 mt30 report-get">
+        
+            <button type="submit" (click)="viewreport()"
+                        class="btn btn-lg btn-success btn-block common-button"> <i class="fa fa-check-circle-o"></i> Get</button>
+             
+            </div> -->
+        
+        </div>
+        
+        </section>
+        
+        
+        </mat-card-content>
+    </mat-card><br>
+    <section id="content" class="animated fadeIn" style="margin-top: 20px;">
+        <div>
+          <div class="center-block">
+              <div class="allcp-form theme-info">
+                  <div class="panel">
+                      <div class="panel-body">
+                      
+                          <div class="table-responsive tabs-table color-table-responsive">
+                              
+                              
+                              <table class="table">
+                                  <thead>
+                                      <tr>
+                                          <th></th>
+                                          <th>Documents</th>
+                                          <th>Physical Count</th>
+                                          <th>System Count</th>
+                                          <th>Variance</th>
+                                      </tr>
+                                      <tr>
+                                        <th>SKU Code</th>
+                                        <th></th>
+                                        <th>Stock Qty</th>
+                                        <th>Stock Qty</th>
+                                        <th>Difference Qty</th>
+                                    </tr>
+                                  </thead>
+                                 <tbody *ngFor="let item of tableList">
+                                     
+                                     <tr>
+                                         <td></td>
+                                         <td>{{item.SheetName}}</td>
+                                         <td>{{item.PhysicalStock}}</td>
+                                         <td>{{item.stockQty}}</td>
+                                         <td>{{item.DifferenceQty}}</td>
+                                        </tr>
+                                      <tr>
+                                        <td>{{item.expando.skuCode}}</td>
+                                        <td></td>
+                                        <td>{{item.expando.systemQuantity}}</td>
+                                        <td>{{item.expando.systemQuantity}}</td>
+                                        <td>{{item.expando.systemQuantity}}</td>
+                                      </tr>
+                                     
+                                     
+                                 </tbody>
+                              </table>
+                                 
+                                      
+                            
+                              
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="allcp-form" style="width: 100%;
+      padding: 20px;">
+
+        <div class="section floating-form floating-label">
+            <input name="remarks"
+             class="gui-input floating-input" name="Remarks"
+             formControlName="Remarks" #Remarks
+             placeholder="Remarks" autocomplete="off">
+             
+             <span class="highlight"></span>
+             <label class="field">Remarks</label>
+         </div>
+
+      </div>
+
+
+      <div class="clearfix"></div>
+        <div class="row default-forms">
+               <div class="offset-md-3"></div>
+                                       <div class="col-md-2 mt10">
+                                            <button type="submit" class="btn btn-lg btn-success btn-block common-button"
+                                               (click)="BtnApprove_Click()"><i
+                                                    class="fa fa-check-circle"></i> Approval</button>
+                                         </div>
+                                       
+                                        <div class="col-md-2 mt10">
+                                            <button type="submit" class="btn btn-lg btn-cancel btn-block common-button"
+                                               (click)="BtnReject_Click()" ><i class="fa fa-remove"></i> Reject</button>
+                                        </div>
+
+                                        <div class="col-md-2 mt10">
+                                            <button type="clear" class="btn btn-lg btn-primary btn-block common-button"
+                                               (click)="BtnRefresh_Click()" ><i class="fa fa-refresh"></i> Reset</button>
+                                        </div>
+                                    
+             </div>
+
+
+</section>
+    </section>
+    </form>

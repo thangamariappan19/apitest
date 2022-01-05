@@ -1,0 +1,228 @@
+
+<section id="content_wrapper">
+    <!-- Topbar -->
+    <header id="topbar" class="alt">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-icon">
+                    <a routerLink="../home">
+                        <span class="fa fa-home"></span>
+                    </a>
+                </li>
+                <li class="breadcrumb-link">
+                    <a routerLink="../home">Home</a>
+                </li>
+                <li class="breadcrumb-current-item">Customer Master</li>
+            </ol>
+        </div>
+    </header>
+
+    <!-- <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <ul class="nav nav-list nav-list-topbar pull-left">
+                <li>Customer List
+                </li>
+            </ul>
+        </div>
+        <div class="topbar-right hidden-xs hidden-sm mt5 mr35">
+            <a routerLink="../CustomerAdd" class="btn btn-primary add-c btn-sm ml10" title="New Collection">
+                <span class="fa fa-plus pr5"></span> Create New</a>
+        </div>
+    </header> -->
+    <!-- /Topbar -->
+
+    <section class="grids-search grid-search-row allcp-form">
+
+
+        <div class="row search-section-row">
+
+            <div class="col-xl-4 col-lg-3 col-md-4 col-sm-8 col-8" style="padding-right: 0px; position: relative;
+            left: 10px; margin-top: 6px;">
+              <mat-form-field  appearance="outline">
+                <input [(ngModel)]="searchString" matInput   id="globalSearch" (keyup.enter)="search_click()"
+                     autocomplete="off">
+                    <button mat-button mat-icon-button matSuffix (click)="clear_search()" *ngIf="searchString">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 mt10" style="padding-left: 14px;
+         padding-right: 0px;">
+                <button type="button" (click)="search_click()"
+                    class="add-search btn btn-lg btn-primary btn-block common-button"> Search</button>
+            </div>
+
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 mt10" style="padding-right: 0px;">
+                <div class="switch-field">
+                    <input type="radio" id="radio-one" name="switch-active" value="yes" (change)="status_changed($event)" checked/>
+                    <label for="radio-one">ACTIVE</label>
+                    <input type="radio" id="radio-two" name="switch-active" value="no" (change)="status_changed($event)" />
+                    <label for="radio-two">INACTIVE</label>
+                </div>
+            </div>
+
+
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 m-action mt10">
+
+                <a routerLink="../CustomerAdd" class="btn btn-primary add-c btn-sm ml10" style="width: 100%;"
+                    title="New Customer">
+                    <span class="fa fa-plus pr5"></span> Create New</a>
+
+            </div>
+
+            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-2">
+
+                <p class="view-text">View</p>
+
+            </div>
+
+            <div class="col-xl-1 col-lg-2 col-md-2 col-sm-2 col-2 mt10" style="padding-left: 0px;">
+                <div class="view-field">
+                  <input type="radio" id="radio-one1" name="switch-one" value="yes" (change)="GridDisplay($event)" checked />
+                  <label for="radio-one1"><i class="fa fa-th-large"></i></label>
+                  <input type="radio" id="radio-two1" name="switch-one" value="no" (change)="GridDisplay($event)" />
+                  <label for="radio-two1"><i class="fa fa-list-ul"></i></label>
+                </div>
+              </div>
+        </div>
+    </section>
+
+<!--<form [formGroup]="myForm" novalidate>-->
+        <section id="content" class="animated fadeIn">
+            <div>
+                <div class="center-block">
+                    <div class="allcp-form theme-info">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <!-- grid card view-->
+                                <div class="row"  [hidden] ="isShow">
+                                    <div class="offset-xl-7 col-xl-1 offset-lg-6 col-lg-1 offset-md-4 col-md-2 offset-sm-3 col-sm-2">
+                                        <p class="abs show-text">Show</p>
+                                      </div>
+                                    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-7">
+                                    
+                                        
+                                       <mat-paginator [length]=recordCount [pageSize]="10"
+                                            [pageSizeOptions]="[5, 10, 25, 50, 100]"
+                                            (page)="CardVieweventEmitted($event)">
+                                        </mat-paginator>
+                                    </div>
+                                </div>
+                                <div class="row list-type-row" [hidden] ="isShowList" style="margin-bottom: 25px;">
+                                   
+                                    <div class="offset-sm-6 col-sm-3 offset-xl-10 col-xl-1 offset-lg-9 col-lg-1 offset-md-5 col-md-4">
+                                        <p class="show-text abs">Show</p>
+                                
+                                    </div>
+                                </div>
+
+                                <div class="row mt20" [hidden] ="isShow" >
+
+                                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" style="margin-bottom: 20px;" *ngFor="let customer of tblData; let i = index">
+                                        <div class="customer-item">
+                                            <div class="customer-image">
+                                                <img src="{{customer.customerImage}}">
+                                            </div>
+                                            <div class="customer-image-content">
+                                                <p>{{customer.customerName}} / <span>{{customer.customerCode}}</span></p>
+                                            </div>
+
+                                            <div class="customerlist-details">
+                                                <p class="font-small"><i class="fa fa-envelope email-icon"> </i>
+                                                    {{customer.email}}</p>
+                                                <p class="font-small"><i class="fa fa-mobile"> </i>{{customer.phoneNumber}}</p>
+                                                <p class="font-small"><i class="fa fa-phone"> </i>{{customer.alterPhoneNumber}}</p>
+                                            </div>
+
+                                            <div class="style-buttons">
+                                                <!--<button class="btn btn-style-edit"><i class="fa fa-edit"></i></button>
+                                                <button class="btn btn-style-view"><i class="fa fa-eye"></i></button>-->
+                                                <a routerLink="{{ '/CustomerEdit/' + customer.id.toString() }}" class="btn btn-style-edit">
+                                                    <i class="fa fa-edit"></i> </a>
+                                                    <a routerLink="{{ '/CustomerView/' + customer.id.toString() }}" class="btn btn-style-view">
+                                                      <i class="fa fa-eye"></i> </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- grid card view -->
+
+
+                                <div class="row mt20 style-ngx" [hidden] ="isShowList">
+                                    <ngx-table [configuration]="configuration" [data]="tblData" [columns]="columns"
+                                        #dataTable [noResultsTemplate]="noResultsTemplate" [pagination]="pagination"
+                                        (event)="eventEmitted($event)">
+                                        <ng-template let-item>
+                                            <td>
+                                                <div class="font-small" style="text-align: center;"><img
+                                                        src="{{item.customerImage}}" style="width: 45px;"></div>
+                                                <div class="font-small cust-name" style="font-weight: 800"><i
+                                                        class="fa fa-user name-icon"> </i> {{item.customerName}}</div>
+                                                <p class="active-status">Active 2 Weeks Ago</p>
+                                            </td>
+                                            <td>
+                                                <span class="font-small">{{item.customerCode}}</span>
+                                            </td>
+
+                                            <td>
+                                                <div class="font-small mail-bottom"><i
+                                                        class="fa fa-envelope email-icon"> </i> {{item.email}}</div><br>
+                                                <span class="font-small"><i class="fa fa-mobile"> </i>
+                                                    {{item.phoneNumber}}</span><br>
+                                                <span class="font-small"><i class="fa fa-phone"> </i>
+                                                    {{item.alterPhoneNumber}}</span>
+                                            </td>
+                                            <!--<td>
+                                                <div class="font-small"><i class="fa fa-bar-chart sales-icon"> </i>
+                                                    Total Sales - <span class="sales-amt">KD 34003.77</span></div><br>
+                                                <div class="font-small"><i class="fa fa-plus-circle profit-icon"> </i>
+                                                    Profit - <span class="profit-amt">KD 350.00</span></div>
+
+                                            </td>-->
+                                            <td>
+                                                <span class="font-small">{{item.customerGroupCode}}</span>
+                                            </td>
+
+                                            <td>
+                                                <span class="font-small">{{item.countryCode}}</span>
+                                            </td>
+
+                                            <td align="center">
+                                                <div class="circle"
+                                                    [ngStyle]="item.active ? {'background-image': 'linear-gradient(#68be7f 5%, #019531 )'} : {'background-image': 'linear-gradient(#ec756c 5%, #c31103 )'}">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <a routerLink="{{ '/CustomerEdit/' + item.id.toString() }}"
+                                                    class="btn btn-edits edit-color btn-sm ml10">
+                                                    EDIT
+                                                </a><br>
+
+                                                <a routerLink="{{ '/CustomerView/' + item.id.toString() }}" class="btn btn-edits view-color mt5 btn-sm ml10">
+                                                    VIEW
+                                                </a>
+                                            </td>
+                                            <!--  <td>
+                                            <a routerLink="{{ '/CustomerView/' + item.id.toString() }}"
+                                                class="btn btn-edits  btn-sm ml10">
+                                                <span class="fa fa-eye"></span>
+                                            </a>
+                                        </td>-->
+                                        </ng-template>
+                                    </ngx-table>
+                                    <ng-template #noResultsTemplate>
+                                        <td [attr.colspan]="5" class="no-results">
+                                            No data found :(
+                                        </td>
+                                    </ng-template>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!--</form>-->
+</section>
